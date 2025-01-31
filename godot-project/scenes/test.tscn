@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://oi5b5hicafhe"]
+
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_root_node.gd" id="1_inhea"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PPRootNode" type="Node" parent="."]
+script = ExtResource("1_inhea")
+game_id = "7803"
+pp_button_add_csproj_reference = null
