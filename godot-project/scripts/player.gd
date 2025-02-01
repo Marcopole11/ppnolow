@@ -4,9 +4,13 @@ extends Node3D
 var pp_root_node
 # create a variable to handle movement speed
 var speed = 5.0
+# create a variable for check if its moving
+var is_moving = false
 
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
+@onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
+@onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 
 # when the scene is loaded
 func _ready() -> void:
@@ -41,8 +45,15 @@ func _process(delta: float) -> void:
 
 	# move the player
 	var movement = input_direction * speed * delta
+	is_moving = movement.length() > 0.01
 	translate(movement)
-
+	
+	
+	
+	if is_moving:
+		headbob.play("headbob")
+	else:
+		headbob.pause()
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
@@ -63,3 +74,6 @@ func _input(event: InputEvent) -> void:
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+func play_step():
+	# stepgrass.pitch_scale = randf_range(.8,1.2)
+	stepgrass.play()
