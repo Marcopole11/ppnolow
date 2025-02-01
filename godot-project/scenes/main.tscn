@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://e1xvwg431y0w"]
+[gd_scene load_steps=4 format=3 uid="uid://e1xvwg431y0w"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_bkpr8"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_root_node.gd" id="1_y07hn"]
+[ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="3_u8upc"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_bkpr8")
@@ -9,3 +10,5 @@ script = ExtResource("1_bkpr8")
 [node name="PPRootNode" type="Node" parent="."]
 script = ExtResource("1_y07hn")
 game_id = "7833"
+
+[node name="player" parent="." instance=ExtResource("3_u8upc")]
