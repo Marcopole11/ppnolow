@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if(isRestoring):
 		isRestoring = stamina != 100
 	
-	if(canRestore):
+	if(canRestore and stamina < 100):
 		stamina = stamina + 0.5
 	
 	# get the raw input values
@@ -67,6 +67,8 @@ func _process(delta: float) -> void:
 		totalSpeed = speed
 		canRestore = true	
 	
+	
+	print(pause_menu)
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	translate(movement)
@@ -93,11 +95,16 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if Menusettings.pausemenu_state:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		
 	elif event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if Menusettings.pausemenu_state:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	if Input.MOUSE_MODE_CAPTURED:
+	if Input.MOUSE_MODE_CAPTURED and Menusettings.pausemenu_state:
 		if event is InputEventMouseMotion:
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.005)
