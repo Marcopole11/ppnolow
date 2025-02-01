@@ -12,14 +12,21 @@ var isRestoring = true
 # create a variable for check if its moving
 var is_moving = false
 
+var is_attacking : bool = false
+@export var stamina_attack_cap: int = 35
+ 
+
+
+
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
 @onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 @onready var pause_menu: Control = $pause_menu
-@onready var bar_stamina: ProgressBar = $bar_stamina
+@onready var bar_stamina: TextureProgressBar = $bar_stamina
 @onready var axe_animation: AnimationPlayer = $axe_animation
-@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D/axe_hitbox
+@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
+@onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axeswing
 
 # when the scene is loaded
 func _ready() -> void:
@@ -98,10 +105,13 @@ func _process(delta: float) -> void:
 		headbob.pause()
 	
 		
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+		is_attacking = true
 		axe_animation.play("attack_animation")
 		axe_hitbox.monitoring = true
-	
+		axeswing.pitch_scale = randf_range(.8,1.2)
+		axeswing.play()
+		stamina = stamina -stamina_attack_cap
 	
 	
 	# message the server to update the player's x and y positions
@@ -149,6 +159,7 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
 		axe_hitbox.monitoring = false
+		is_attacking=false
 
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
