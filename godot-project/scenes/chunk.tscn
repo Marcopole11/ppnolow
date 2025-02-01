@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf1rvrx7fuhff"]
+
+[ext_resource type="Script" path="res://scripts/chunk_update.gd" id="1_5fqyt"]
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_chunk_node.gd" id="2_dtwmc"]
+
+[node name="chunk" type="Node3D"]
+script = ExtResource("1_5fqyt")
+
+[node name="PPChunkNode" type="Node" parent="."]
+script = ExtResource("2_dtwmc")
+type = "chunk"

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://47g86k3flcse"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
+
+[node name="player" type="Node3D"]
+script = ExtResource("1_b67xe")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_ovxth")
+
+[node name="Neck" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
+
+[node name="PPEntityNode" type="Node" parent="."]
+script = ExtResource("1_kmgf1")
+type = "player"

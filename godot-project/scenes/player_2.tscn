@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3rby1jgfbyd8"]
+
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_woqlu"]
+[ext_resource type="Script" path="res://scripts/entity_movement.gd" id="2_80dwx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6trqo"]
+
+[node name="player2" type="Node3D"]
+
+[node name="PPEntityNode" type="Node" parent="."]
+script = ExtResource("1_woqlu")
+type = "player"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_6trqo")
+script = ExtResource("2_80dwx")

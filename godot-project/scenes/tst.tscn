@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://sm23jdcifof0"]
+
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kfw76"]
+[ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_vhasb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xhje1"]
+
+[node name="tst" type="Node3D"]
+script = ExtResource("1_vhasb")
+
+[node name="PPEntityNode" type="Node" parent="."]
+script = ExtResource("1_kfw76")
+type = "tst"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xhje1")
+skeleton = NodePath("../PPEntityNode")

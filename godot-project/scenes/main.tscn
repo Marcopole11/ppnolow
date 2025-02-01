@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://e1xvwg431y0w"]
+
+[ext_resource type="Script" path="res://scripts/root.gd" id="1_bkpr8"]
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_root_node.gd" id="1_y07hn"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_bkpr8")
+
+[node name="PPRootNode" type="Node" parent="."]
+script = ExtResource("1_y07hn")
+game_id = "7833"

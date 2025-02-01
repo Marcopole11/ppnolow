@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\polgi\\OneDrive\\Documents\\GitHub\\ppnolow\\godot-project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{421204AE-7B0E-42BE-BFAE-60200C99BC00}|Godot Project.csproj|c:\\users\\polgi\\onedrive\\documents\\github\\ppnolow\\godot-project\\addons\\planetary_processing\\sdknode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{421204AE-7B0E-42BE-BFAE-60200C99BC00}|Godot Project.csproj|solutionrelative:addons\\planetary_processing\\sdknode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SDKNode.cs",
+              "DocumentMoniker": "C:\\Users\\polgi\\OneDrive\\Documents\\GitHub\\ppnolow\\godot-project\\addons\\planetary_processing\\SDKNode.cs",
+              "RelativeDocumentMoniker": "addons\\planetary_processing\\SDKNode.cs",
+              "ToolTip": "C:\\Users\\polgi\\OneDrive\\Documents\\GitHub\\ppnolow\\godot-project\\addons\\planetary_processing\\SDKNode.cs",
+              "RelativeToolTip": "addons\\planetary_processing\\SDKNode.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAwwIkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T23:27:44.637Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
