@@ -16,6 +16,7 @@ var is_moving = false
 @onready var camera := $CharacterBody3D/Neck/Camera3D
 @onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
+@onready var pause_menu: Control = $pause_menu
 
 # when the scene is loaded
 func _ready() -> void:
@@ -70,12 +71,17 @@ func _process(delta: float) -> void:
 	is_moving = movement.length() > 0.01
 	translate(movement)
 	
+	if Input.is_action_just_pressed("pause_button"):
+		openmenu()
 	
-	
-	if is_moving:
+	if is_moving and Menusettings.headbob_enable:
 		headbob.play("headbob")
+	elif is_moving and not Menusettings.headbob_enable:
+		headbob.play("stepsounds")
 	else:
 		headbob.pause()
+		
+		
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
@@ -96,6 +102,15 @@ func _input(event: InputEvent) -> void:
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+
+func openmenu():
+	if Menusettings.pausemenu_state:
+		pause_menu.show()
+		
+	else:
+		pause_menu.hide()
+	Menusettings.pausemenu_state = !Menusettings.pausemenu_state
+
 
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)

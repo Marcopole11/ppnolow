@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=10 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
 [ext_resource type="AudioStream" uid="uid://01qvkmavy2ao" path="res://audio/FEETHmn-GRASS_AUDIOELK-Fs Grass Shoes Outdoors 01_AUDIOELK_AUDIOELK.wav" id="2_84cct"]
+[ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
 
@@ -54,10 +55,32 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_0425j"]
+resource_name = "headbob"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_step"
+}, {
+"args": [],
+"method": &"play_step"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjuvx"]
 _data = {
 "RESET": SubResource("Animation_rayom"),
-"headbob": SubResource("Animation_eslvi")
+"headbob": SubResource("Animation_eslvi"),
+"stepsounds": SubResource("Animation_0425j")
 }
 
 [node name="player" type="Node3D"]
@@ -79,7 +102,11 @@ libraries = {
 
 [node name="stepgrass" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 stream = ExtResource("2_84cct")
+bus = &"Sfx"
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_kmgf1")
 type = "player"
+
+[node name="pause_menu" parent="." instance=ExtResource("4_0ou1l")]
+visible = false

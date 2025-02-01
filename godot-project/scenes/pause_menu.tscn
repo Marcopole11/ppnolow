@@ -18,12 +18,12 @@ func _process(delta: float) -> void:
 
 func _on_button_quit_pressed() -> void:
 	get_tree().quit()
-
-
-
-
+	
 func _on_button_return_pressed() -> void:
 	Menusettings.pausemenu_state = false
+	
+func _on_headbob_checkbox_toggled(toggled_on: bool) -> void:
+	Menusettings.headbob_enable = !toggled_on
 "
 
 [node name="pause_menu" type="Control"]
@@ -103,5 +103,6 @@ text = "Quit to desktop
 "
 metadata/_edit_use_anchors_ = true
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/headbob_checkbox" to="." method="_on_headbob_checkbox_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/button_return" to="." method="_on_button_return_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/button_return/button_quit" to="." method="_on_button_quit_pressed"]
