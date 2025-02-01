@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=16 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_0jckr"]
 size = Vector3(0.1, 1.5, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v57j1"]
+points = PackedVector3Array(0.0599024, 0.756465, 0.0599024, -0.0564541, -0.756465, -0.0564541, -0.0564541, -0.756465, 0.0599024, -0.0564541, 0.756465, -0.0564541, 0.0599024, -0.756465, -0.0564541, 0.0599024, -0.756465, 0.0599024, -0.0564541, 0.756465, 0.0599024, 0.0599024, 0.756465, -0.0564541)
 
 [sub_resource type="Animation" id="Animation_rayom"]
 length = 0.001
@@ -230,8 +233,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 transform = Transform3D(0.144874, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144874, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Node3D"]
-transform = Transform3D(0.369736, 0.927179, 0.0602845, -0.923753, 0.373794, -0.0834115, -0.0998713, -0.0248477, 0.99469, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373794, -0.0834115, -0.0998714, -0.0248477, 0.99469, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
+
+[node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D/axe_hitbox"]
+transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 0, 3.72529e-09, 7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_v57j1")
 
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D"]
 libraries = {
@@ -263,4 +274,5 @@ libraries = {
 }
 autoplay = "idle_axe_animation"
 
+[connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="axe_animation" to="." method="_on_axe_animation_animation_finished"]

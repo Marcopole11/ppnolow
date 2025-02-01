@@ -19,6 +19,7 @@ var is_moving = false
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: ProgressBar = $bar_stamina
 @onready var axe_animation: AnimationPlayer = $axe_animation
+@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D/axe_hitbox
 
 # when the scene is loaded
 func _ready() -> void:
@@ -99,6 +100,7 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("attack"):
 		axe_animation.play("attack_animation")
+		axe_hitbox.monitoring = true
 	
 	
 	
@@ -146,3 +148,8 @@ func play_step():
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
+		axe_hitbox.monitoring = false
+
+func _on_axe_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("arbol"):
+		print("Tree hitted")
