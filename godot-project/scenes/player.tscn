@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=13 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -113,37 +113,8 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, -0.244084)]
 }
 
-[sub_resource type="Animation" id="Animation_e72bt"]
-resource_name = "Attack"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1.20148, -0.184258, -1.24483), Vector3(0.220984, -0.184258, -1.24483), Vector3(-0.858325, -0.184258, -1.24483)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-1.28824, 0, -0.244084), Vector3(-1.28824, 0, -0.244084), Vector3(-1.28824, 0.807843, -0.244084)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
 _data = {
-"Attack_animation": SubResource("Animation_e72bt"),
 "RESET": SubResource("Animation_7ww6s")
 }
 

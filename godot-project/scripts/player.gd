@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("attack"):
 		axe_animation.play("Attack_animation")
-	
+
 	
 	
 	# open pause menu on pressing pause key
