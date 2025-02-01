@@ -18,6 +18,7 @@ var is_moving = false
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: ProgressBar = $bar_stamina
+@onready var axe_animation: AnimationPlayer = $axe_animation
 
 # when the scene is loaded
 func _ready() -> void:
@@ -72,10 +73,14 @@ func _process(delta: float) -> void:
 		canRestore = true	
 	
 	
-	print(pause_menu)
+	
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	translate(movement)
+	
+	if Input.is_action_just_pressed("attack"):
+		axe_animation.play("Attack_animation")
+	
 	
 	
 	# open pause menu on pressing pause key

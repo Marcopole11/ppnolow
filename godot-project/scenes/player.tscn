@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=14 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
 [ext_resource type="AudioStream" uid="uid://01qvkmavy2ao" path="res://audio/FEETHmn-GRASS_AUDIOELK-Fs Grass Shoes Outdoors 01_AUDIOELK_AUDIOELK.wav" id="2_84cct"]
-[ext_resource type="PackedScene" uid="uid://cwc0hmc4esatj" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
+[ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0jckr"]
+size = Vector3(0.1, 1.5, 0.1)
 
 [sub_resource type="Animation" id="Animation_rayom"]
 length = 0.001
@@ -83,6 +86,67 @@ _data = {
 "stepsounds": SubResource("Animation_0425j")
 }
 
+[sub_resource type="Animation" id="Animation_7ww6s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.448904, -0.496787, -1.24483)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.244084)]
+}
+
+[sub_resource type="Animation" id="Animation_e72bt"]
+resource_name = "Attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.20148, -0.184258, -1.24483), Vector3(0.220984, -0.184258, -1.24483), Vector3(-0.858325, -0.184258, -1.24483)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.28824, 0, -0.244084), Vector3(-1.28824, 0, -0.244084), Vector3(-1.28824, 0.807843, -0.244084)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
+_data = {
+"Attack_animation": SubResource("Animation_e72bt"),
+"RESET": SubResource("Animation_7ww6s")
+}
+
 [node name="player" type="Node3D"]
 script = ExtResource("1_b67xe")
 
@@ -96,6 +160,12 @@ shape = SubResource("CapsuleShape3D_ovxth")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
 
+[node name="Node3D" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Node3D"]
+transform = Transform3D(0.970359, 0.241668, 0, -0.241668, 0.970359, 0, 0, 0, 1, 0.448904, -0.496787, -1.24483)
+mesh = SubResource("BoxMesh_0jckr")
+
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D"]
 libraries = {
 "": SubResource("AnimationLibrary_qjuvx")
@@ -103,6 +173,7 @@ libraries = {
 
 [node name="stepgrass" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 stream = ExtResource("2_84cct")
+bus = &"Sfx"
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_kmgf1")
@@ -112,5 +183,14 @@ type = "player"
 visible = false
 
 [node name="bar_stamina" type="ProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
 offset_right = 254.0
-offset_bottom = 27.0
+grow_vertical = 0
+
+[node name="axe_animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2oo7c")
+}
