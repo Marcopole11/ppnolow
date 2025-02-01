@@ -89,6 +89,7 @@ script = ExtResource("1_b67xe")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0.736554, 0)
 shape = SubResource("CapsuleShape3D_ovxth")
 
 [node name="Neck" type="Node3D" parent="CharacterBody3D"]
