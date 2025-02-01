@@ -78,8 +78,7 @@ func _process(delta: float) -> void:
 	is_moving = movement.length() > 0.01
 	translate(movement)
 	
-	if Input.is_action_just_pressed("attack"):
-		axe_animation.play("Attack_animation")
+	
 
 	
 	
@@ -90,12 +89,19 @@ func _process(delta: float) -> void:
 	# switch on and off headbob 
 	if is_moving and Menusettings.headbob_enable:
 		headbob.play("headbob")
+		
 	elif is_moving and not Menusettings.headbob_enable:
 		headbob.play("stepsounds")
+		
 	else:
 		headbob.pause()
+	
 		
-		
+	if Input.is_action_just_pressed("attack"):
+		axe_animation.play("attack_animation")
+	
+	
+	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
@@ -135,3 +141,8 @@ func openmenu():
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)
 	stepgrass.play()
+
+
+func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "attack_animation":
+		axe_animation.play("idle_axe_animation")

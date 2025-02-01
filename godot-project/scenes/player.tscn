@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=15 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -22,31 +22,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 2.68235, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_eslvi"]
 resource_name = "headbob"
 loop_mode = 1
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Neck/Camera3D:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.05, 0.35, 0), Vector3(0, 0, 0), Vector3(-0.05, 0.35, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.3, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -56,6 +44,18 @@ tracks/1/keys = {
 "args": [],
 "method": &"play_step"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Neck/Camera3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.68235, 0), Vector3(-0.2, 2.882, 0), Vector3(0, 2.68235, 0), Vector3(0.2, 2.882, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_0425j"]
@@ -91,19 +91,125 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:rotation")
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [Vector3(1.3, -0.481431, -1.245)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.42541, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ryp1e"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.233333, 0.5, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.471, -1.245), Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.491, -1.245)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.13291e-05, 0.103099, -0.244246)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_waixj"]
+resource_name = "attack_animation"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.3, -0.481431, -1.245)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0835086, 0.0605323, -1.18629)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.42541, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
 _data = {
-"RESET": SubResource("Animation_7ww6s")
+"RESET": SubResource("Animation_7ww6s"),
+"attack_animation": SubResource("Animation_waixj"),
+"idle_axe_animation": SubResource("Animation_ryp1e")
 }
 
 [node name="player" type="Node3D"]
@@ -118,11 +224,13 @@ shape = SubResource("CapsuleShape3D_ovxth")
 [node name="Neck" type="Node3D" parent="CharacterBody3D"]
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 
 [node name="Node3D" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
+transform = Transform3D(0.144874, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144874, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Node3D"]
-transform = Transform3D(0.965263, 0.240155, 0.102916, -0.241437, 0.970416, 0, -0.0998713, -0.0248477, 0.99469, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.369736, 0.927179, 0.0602845, -0.923753, 0.373794, -0.0834115, -0.0998713, -0.0248477, 0.99469, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
 
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D"]
@@ -153,3 +261,6 @@ grow_vertical = 0
 libraries = {
 "": SubResource("AnimationLibrary_2oo7c")
 }
+autoplay = "idle_axe_animation"
+
+[connection signal="animation_finished" from="axe_animation" to="." method="_on_axe_animation_animation_finished"]
