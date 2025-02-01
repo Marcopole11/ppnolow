@@ -17,6 +17,7 @@ var is_moving = false
 @onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 @onready var pause_menu: Control = $pause_menu
+@onready var bar_stamina: ProgressBar = $bar_stamina
 
 # when the scene is loaded
 func _ready() -> void:
@@ -45,6 +46,9 @@ func _process(delta: float) -> void:
 	
 	if(canRestore):
 		stamina = stamina + 0.5
+	$bar_stamina.value = stamina
+	
+	
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -71,9 +75,12 @@ func _process(delta: float) -> void:
 	is_moving = movement.length() > 0.01
 	translate(movement)
 	
+	
+	# open pause menu on pressing pause key
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
 	
+	# switch on and off headbob 
 	if is_moving and Menusettings.headbob_enable:
 		headbob.play("headbob")
 	elif is_moving and not Menusettings.headbob_enable:
@@ -102,6 +109,7 @@ func _input(event: InputEvent) -> void:
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+
 
 func openmenu():
 	if Menusettings.pausemenu_state:
