@@ -87,30 +87,18 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_7ww6s"]
-length = 0.001
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:position")
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.448904, -0.496787, -1.24483)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Node3D/MeshInstance3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, -0.244084)]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
@@ -134,7 +122,7 @@ shape = SubResource("CapsuleShape3D_ovxth")
 [node name="Node3D" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Node3D"]
-transform = Transform3D(0.970359, 0.241668, 0, -0.241668, 0.970359, 0, 0, 0, 1, 0.448904, -0.496787, -1.24483)
+transform = Transform3D(0.965263, 0.240155, 0.102916, -0.241437, 0.970416, 0, -0.0998713, -0.0248477, 0.99469, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
 
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D"]
