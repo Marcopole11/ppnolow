@@ -4,6 +4,11 @@ extends Node3D
 var pp_root_node
 # create a variable to handle movement speed
 var speed = 5.0
+var sprintSpeed = 10
+var totalSpeed = speed	
+var stamina = 100
+var canRestore = true
+var isRestoring = true
 # create a variable for check if its moving
 var is_moving = false
 
@@ -34,6 +39,12 @@ func _on_state_changed(state):
 		global_transform.origin = Vector3(state.x, state.z, -state.y)
 
 func _process(delta: float) -> void:
+	if(isRestoring):
+		isRestoring = stamina != 100
+	
+	if(canRestore):
+		stamina = stamina + 0.5
+	
 	# get the raw input values
 	var input_direction = Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -42,9 +53,20 @@ func _process(delta: float) -> void:
 	)
 	# calculate the input direction
 	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
-
+	
+	
+	
 	# move the player
-	var movement = input_direction * speed * delta
+	if(Input.is_action_pressed("sprint") and Input.is_action_pressed("move_forward") and !isRestoring):
+		totalSpeed = speed + sprintSpeed
+		stamina = stamina - 0.5
+		canRestore = false
+		isRestoring = stamina <= 0
+	else:
+		totalSpeed = speed
+		canRestore = true	
+	
+	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	translate(movement)
 	
@@ -62,7 +84,7 @@ func _process(delta: float) -> void:
 		"y": -movement[2], 
 		"z": 0,
 	})
-	
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -74,6 +96,7 @@ func _input(event: InputEvent) -> void:
 			neck.rotate_y(-event.relative.x*0.005)
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)
 	stepgrass.play()
