@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_woqlu"]
 [ext_resource type="Script" path="res://scripts/entity_movement.gd" id="2_80dwx"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_6trqo"]
+[ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="3_uh6io"]
 
 [node name="player2" type="Node3D"]
 
@@ -12,5 +11,6 @@ script = ExtResource("1_woqlu")
 type = "player"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_6trqo")
 script = ExtResource("2_80dwx")
+
+[node name="player" parent="." instance=ExtResource("3_uh6io")]
