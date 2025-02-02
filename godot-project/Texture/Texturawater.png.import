@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sepii4nj2x2t"
-path="res://.godot/imported/waterbar_progress.png-d3605c2d1906f5c8aabdd8a3ddb66be2.ctex"
+uid="uid://ce16ajakgjuon"
+path="res://.godot/imported/Texturawater.png-c363fa9368d53768ba265c3e4714bc7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texture/waterbar_progress.png"
-dest_files=["res://.godot/imported/waterbar_progress.png-d3605c2d1906f5c8aabdd8a3ddb66be2.ctex"]
+source_file="res://Texture/Texturawater.png"
+dest_files=["res://.godot/imported/Texturawater.png-c363fa9368d53768ba265c3e4714bc7c.ctex"]
 
 [params]
 

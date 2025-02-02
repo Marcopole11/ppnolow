@@ -17,6 +17,8 @@ var tool_inhand: int = 1
 var is_attacking : bool = false
 @export var stamina_attack_cap: int = 35
 
+var amount_wood: int
+var amount_water: int
 
 
 @onready var character_body_3d: CharacterBody3D = $CharacterBody3D
@@ -35,6 +37,8 @@ var is_attacking : bool = false
 @onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
 @onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
+@onready var bar_wood: TextureProgressBar = $bar_wood
+@onready var bar_water: TextureProgressBar = $bar_water
 
 
 # when the scene is loaded
@@ -140,11 +144,11 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
 		tool_inhand += 1
-		print(tool_inhand)
+		#print(tool_inhand)
 		is_attacking=false
 	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
 		tool_inhand -= 1
-		print(tool_inhand)
+		#print(tool_inhand)
 		is_attacking=false
 	
 	
@@ -213,6 +217,8 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
 		print("Tree hitted")
+		amount_wood += 1
+	$bar_wood.value = amount_wood
 
 
 func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
