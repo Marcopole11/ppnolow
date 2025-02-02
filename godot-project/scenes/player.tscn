@@ -475,9 +475,6 @@ monitoring = false
 transform = Transform3D(0.7528, -5.58794e-09, 4.47035e-07, 7.7486e-07, 2.70382, -1.19209e-06, 3.72529e-08, -2.23517e-08, 0.319524, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_jans1")
 
-[node name="taserattack" type="AudioStreamPlayer3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
-stream = ExtResource("4_m5efg")
-
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D/Neck"]
 root_node = NodePath("../..")
 libraries = {
@@ -512,6 +509,26 @@ fill_mode = 2
 texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("7_i5emr")
 metadata/_edit_use_anchors_ = true
+
+[node name="bar_wood" type="TextureProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -49.0
+offset_right = 59.0
+offset_bottom = -9.0
+grow_vertical = 0
+
+[node name="bar_water" type="TextureProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = -51.0
+offset_right = 67.0
+offset_bottom = -11.0
+grow_vertical = 0
 
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
