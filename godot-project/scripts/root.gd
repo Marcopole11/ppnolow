@@ -15,6 +15,7 @@ var car_scene = preload("res://scenes/car.tscn")
 var other_player_scene = preload("res://scenes/player_2.tscn")
 
 var chunk_scene = preload("res://scenes/chunk.tscn")
+var chunk_set_scene = preload("res://scenes/ChunkSet.tscn")
 
 # define all the scenes by their entity type, except the player character
 var scene_map = {
@@ -22,7 +23,7 @@ var scene_map = {
 	"tree": tree_scene,
 	"car": car_scene,
 	"player": other_player_scene,
-	"chunk": chunk_scene
+	"chunkset": chunk_scene
 }
 
 # when the scene is loaded

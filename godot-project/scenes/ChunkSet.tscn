@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccvcqilt6nvny"]
+
+[ext_resource type="Script" path="res://scripts/chunk_set.gd" id="1_jirm3"]
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_sefsi"]
+
+[node name="ChunkSet" type="Node3D"]
+script = ExtResource("1_jirm3")
+
+[node name="PPEntityNode" type="Node" parent="."]
+script = ExtResource("1_sefsi")
+type = "chunkset"
