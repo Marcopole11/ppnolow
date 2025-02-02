@@ -215,6 +215,8 @@ gravity = Vector3(0, 0, 0)
 [node name="Car" type="Area3D"]
 collision_layer = 3
 script = ExtResource("1_kbort")
+car_fuel = null
+car_water = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3448, 0)

@@ -85,7 +85,7 @@ text = "Sensitivity"
 layout_mode = 2
 min_value = 0.001
 max_value = 0.01
-step = 0.001
+step = 0.002
 value = 0.01
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
