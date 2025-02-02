@@ -3,9 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dowpmo7rojh5i" path="res://scenes/interactable.tscn" id="1_h7cw4"]
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_4pk2q"]
-size = Vector3(7, 7, 16)
+[ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_pyv1r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6d3oo"]
 size = Vector3(7, 7, 16)
@@ -13,13 +11,13 @@ size = Vector3(7, 7, 16)
 [node name="Car" type="Node3D"]
 script = ExtResource("1_kbort")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PrismMesh_4pk2q")
-
 [node name="Interactable" parent="." instance=ExtResource("1_h7cw4")]
 
 [node name="CollisionShape3D" parent="Interactable" index="0"]
 shape = SubResource("BoxShape3D_6d3oo")
+
+[node name="carro" parent="." instance=ExtResource("3_pyv1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60096, 0)
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("3_348wp")

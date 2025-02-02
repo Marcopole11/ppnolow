@@ -41,6 +41,8 @@ var amount_water: int
 @onready var bar_water: TextureProgressBar = $bar_water
 
 
+
+
 # when the scene is loaded
 func _ready() -> void:
 	# access the PPRootNode from the scene's node tree 
@@ -68,6 +70,8 @@ func _on_state_changed(state):
 	if diff_in_position > Vector3(1,1,1):
 		global_transform.origin = Vector3(state.x, state.z, -state.y)
 
+
+
 func _process(delta: float) -> void:
 	if(isRestoring):
 		isRestoring = stamina != 100
@@ -76,12 +80,8 @@ func _process(delta: float) -> void:
 		stamina = stamina + 0.5
 	$bar_stamina.value = stamina
 	
-	# get the distance between player and car
-	var car_scene = preload("res://scenes/car.tscn") 
-	var car_instance = car_scene.instantiate() 
-	get_parent().add_child(car_instance) 
-	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
-	# print(distancia)
+	
+	
 	
 	
 	# get the raw input values
