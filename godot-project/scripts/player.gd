@@ -11,22 +11,31 @@ var canRestore = true
 var isRestoring = true
 # create a variable for check if its moving
 var is_moving = false
-
+#variable related to tools
+var tool_inhand: int = 1
+# variables related to attack
 var is_attacking : bool = false
 @export var stamina_attack_cap: int = 35
- 
 
 
 
+@onready var character_body_3d: CharacterBody3D = $CharacterBody3D
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
-@onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
+@onready var headbob: AnimationPlayer = $CharacterBody3D/Neck/headbob
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: TextureProgressBar = $bar_stamina
-@onready var axe_animation: AnimationPlayer = $axe_animation
+@onready var axe_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/Axe/axe_animation
 @onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
 @onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axeswing
+@onready var axe: Node3D = $CharacterBody3D/Neck/Camera3D/Axe
+@onready var taser: Node3D = $CharacterBody3D/Neck/Camera3D/taser
+@onready var taser_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/taser/taser_animation
+@onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
+@onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
+@onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
+
 
 # when the scene is loaded
 func _ready() -> void:
@@ -57,6 +66,12 @@ func _process(delta: float) -> void:
 		stamina = stamina + 0.5
 	$bar_stamina.value = stamina
 	
+	# get the distance between player and car
+	var car_scene = preload("res://scenes/car.tscn") 
+	var car_instance = car_scene.instantiate() 
+	get_parent().add_child(car_instance) 
+	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
+	# print(distancia)
 	
 	
 	# get the raw input values
@@ -105,7 +120,7 @@ func _process(delta: float) -> void:
 		headbob.pause()
 	
 		
-	if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+	if tool_inhand == 1 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
 		is_attacking = true
 		axe_animation.play("attack_animation")
 		axe_hitbox.monitoring = true
@@ -113,6 +128,40 @@ func _process(delta: float) -> void:
 		axeswing.play()
 		stamina = stamina -stamina_attack_cap
 	
+	if tool_inhand == 2 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+		is_attacking = true
+		taser_animation.play("taser_attack")
+		taser_hitbox.monitoring = true
+		taserattack.pitch_scale = randf_range(.8,1.2)
+		taserattack.play()
+		stamina = stamina -stamina_attack_cap
+		
+	
+	
+	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
+		tool_inhand += 1
+		print(tool_inhand)
+		is_attacking=false
+	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
+		tool_inhand -= 1
+		print(tool_inhand)
+		is_attacking=false
+	
+	
+	
+	match tool_inhand:
+		1:
+			axe.show()
+			taser.hide()
+			waterpump.hide()
+		2:
+			axe.hide()
+			taser.show()
+			waterpump.hide()
+		3:
+			axe.hide()
+			taser.hide()
+			waterpump.show()
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
@@ -164,3 +213,17 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
 		print("Tree hitted")
+
+
+func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "taser_attack":
+		taser_animation.play("reset")
+		taser_animation.play("idle_taser")
+		taser_hitbox.monitoring = false
+		is_attacking=false
+		taserattack.stop()
+
+
+func _on_taser_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("gato"):
+		print("enemy hitted")
