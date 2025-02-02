@@ -395,6 +395,10 @@ shape = SubResource("CapsuleShape3D_ovxth")
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 
+[node name="Interactarea" type="Area3D" parent="CharacterBody3D/Neck/Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/Interactarea"]
+
 [node name="InteractRay" type="RayCast3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132685, -0.00106335, -0.0256251)
 target_position = Vector3(0, 0, -3)

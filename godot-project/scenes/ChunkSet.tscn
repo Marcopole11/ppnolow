@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccvcqilt6nvny"]
+
+[ext_resource type="Script" path="res://scripts/chunk_set.gd" id="1_jirm3"]
+[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_sefsi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h3d1x"]
+
+[node name="ChunkSet" type="Node3D"]
+script = ExtResource("1_jirm3")
+
+[node name="PPEntityNode" type="Node" parent="."]
+script = ExtResource("1_sefsi")
+type = "chunkset"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_h3d1x")
+
+[connection signal="state_changed" from="PPEntityNode" to="." method="_on_pp_entity_node_state_changed"]
