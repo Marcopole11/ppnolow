@@ -406,7 +406,7 @@ transform = Transform3D(0.144875, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144875, 0,
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
-transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834113, -0.0998713, -0.0248477, 0.994689, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834114, -0.0998713, -0.0248477, 0.994689, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
 
 [node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]
