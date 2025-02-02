@@ -7,8 +7,11 @@ var speed:int = 5
 var sprintSpeed:int = 10
 var totalSpeed:int = speed	
 var stamina:float = 100
+var maxstamina:float = 100
+var staminarate:float = 0.5
 var canRestore:bool = true
-var isRestoring:bool = true
+var isRestoring:bool = false
+
 # create a variable for check if its moving
 var is_moving:bool = false
 #variable related to tools
@@ -39,6 +42,7 @@ var player_water:int = 0
 @onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
 @onready var bar_wood: TextureProgressBar = $bar_wood
 @onready var bar_water: TextureProgressBar = $bar_water
+@onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
 
 
 
@@ -73,12 +77,13 @@ func _on_state_changed(state):
 
 
 func _process(delta: float) -> void:
-	if(isRestoring):
-		isRestoring = stamina != 100
-	
-	if(canRestore and stamina < 100):
-		stamina = stamina + 0.5
-	$bar_stamina.value = stamina	
+	openmenu()
+	axeattack()
+	stunattack()
+	swaptool()
+	headbobhandle()
+	staminahandle()
+	checkinteracteable()
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -106,68 +111,6 @@ func _process(delta: float) -> void:
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	translate(movement)
-	
-	
-
-	
-	
-	# open pause menu on pressing pause key
-	if Input.is_action_just_pressed("pause_button"):
-		openmenu()
-	
-	# switch on and off headbob 
-	if is_moving and Menusettings.headbob_enable:
-		headbob.play("headbob")
-		
-	elif is_moving and not Menusettings.headbob_enable:
-		headbob.play("stepsounds")
-		
-	else:
-		headbob.pause()
-	
-		
-	if tool_inhand == 1 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-		is_attacking = true
-		axe_animation.play("attack_animation")
-		axe_hitbox.monitoring = true
-		axeswing.pitch_scale = randf_range(.8,1.2)
-		axeswing.play()
-		stamina = stamina -stamina_attack_cap
-	
-	if tool_inhand == 2 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-		is_attacking = true
-		taser_animation.play("taser_attack")
-		taser_hitbox.monitoring = true
-		taserattack.pitch_scale = randf_range(.8,1.2)
-		taserattack.play()
-		stamina = stamina -stamina_attack_cap
-		
-	
-	
-	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
-		tool_inhand += 1
-		#print(tool_inhand)
-		is_attacking=false
-	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
-		tool_inhand -= 1
-		#print(tool_inhand)
-		is_attacking=false
-	
-	
-	
-	match tool_inhand:
-		1:
-			axe.show()
-			taser.hide()
-			waterpump.hide()
-		2:
-			axe.hide()
-			taser.show()
-			waterpump.hide()
-		3:
-			axe.hide()
-			taser.hide()
-			waterpump.show()
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
@@ -203,34 +146,69 @@ func _input(event: InputEvent) -> void:
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
+#handles stamina stat and value in bar
+func staminahandle():
+	if(isRestoring):
+		isRestoring = stamina != maxstamina+0.1
+	if(canRestore and stamina < maxstamina): 
+		stamina = stamina + staminarate
+	$bar_stamina.value = stamina	
 
+
+
+#handles menu in game
 func openmenu():
-	if Menusettings.pausemenu_state:
-		pause_menu.show()
-		
-	else:
-		pause_menu.hide()
+	if Input.is_action_just_pressed("pause_button"):
+		if Menusettings.pausemenu_state:
+			pause_menu.show()
+		else:
+			pause_menu.hide()
 	Menusettings.pausemenu_state = !Menusettings.pausemenu_state
 
-
+#handles headbob and config of it
+func headbobhandle():
+	if is_moving and Menusettings.headbob_enable:
+		headbob.play("headbob")
+		
+	elif is_moving and not Menusettings.headbob_enable:
+		headbob.play("stepsounds")
+		
+	else:
+		headbob.pause()
+# made for being called later in the headbob animation so the steps are on time
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)
 	stepgrass.play()
 
-
+#handles axe attacks
+func axeattack():
+	if tool_inhand == 1 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+		is_attacking = true
+		axe_animation.play("attack_animation")
+		axe_hitbox.monitoring = true
+		axeswing.pitch_scale = randf_range(.8,1.2)
+		axeswing.play()
+		stamina = stamina -stamina_attack_cap
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
 		axe_hitbox.monitoring = false
 		is_attacking=false
-
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
 		print("Tree hitted")
 		player_wood += 1
 	$bar_wood.value = player_wood
 
-
+# handle stun weapon with enemies
+func stunattack():
+	if tool_inhand == 2 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+			is_attacking = true
+			taser_animation.play("taser_attack")
+			taser_hitbox.monitoring = true
+			taserattack.pitch_scale = randf_range(.8,1.2)
+			taserattack.play()
+			stamina = stamina -stamina_attack_cap
 func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "taser_attack":
 		taser_animation.play("reset")
@@ -238,8 +216,36 @@ func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
 		taser_hitbox.monitoring = false
 		is_attacking=false
 		taserattack.stop()
-
-
 func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("gato"):
 		print("enemy hitted")
+		
+
+#handles tool selection
+func swaptool() -> void:
+		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
+			tool_inhand += 1
+			#print(tool_inhand)
+			is_attacking=false
+		if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
+			tool_inhand -= 1
+			#print(tool_inhand)
+			is_attacking=false
+		match tool_inhand:
+			1:
+				axe.show()
+				taser.hide()
+				waterpump.hide()
+			2:
+				axe.hide()
+				taser.show()
+				waterpump.hide()
+			3:
+				axe.hide()
+				taser.hide()
+				waterpump.show()
+
+func checkinteracteable():
+	if interact_ray.
+		print(interact_ray.get_collider())
+		
