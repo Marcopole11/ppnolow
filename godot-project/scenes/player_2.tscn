@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3rby1jgfbyd8"]
 
+[ext_resource type="Script" path="res://scripts/other_players.gd" id="1_qj4bx"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_woqlu"]
-[ext_resource type="Script" path="res://scripts/entity_movement.gd" id="2_80dwx"]
 [ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="3_uh6io"]
 [ext_resource type="Script" path="res://scripts/playerColor.gd" id="4_5u0em"]
 
 [node name="player2" type="Node3D"]
-script = ExtResource("2_80dwx")
+script = ExtResource("1_qj4bx")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_woqlu")
