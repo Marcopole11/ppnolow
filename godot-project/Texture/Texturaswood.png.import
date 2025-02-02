@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx3ikr6a3bhdy"
-path="res://.godot/imported/woodbar_progress.png-84474af04e451f01601623158dbf7ee8.ctex"
+uid="uid://dtymjkt5stucn"
+path="res://.godot/imported/Texturaswood.png-00813bd1084f8e72bec3b67f8321be7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texture/woodbar_progress.png"
-dest_files=["res://.godot/imported/woodbar_progress.png-84474af04e451f01601623158dbf7ee8.ctex"]
+source_file="res://Texture/Texturaswood.png"
+dest_files=["res://.godot/imported/Texturaswood.png-00813bd1084f8e72bec3b67f8321be7e.ctex"]
 
 [params]
 
