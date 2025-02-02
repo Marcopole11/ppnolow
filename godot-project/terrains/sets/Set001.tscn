@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvm4g6c6v7a6s"]
+
+[ext_resource type="PackedScene" uid="uid://djydtx8o37lri" path="res://terrains/elements/pathTile.tscn" id="1_1hmky"]
+[ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="2_f4fik"]
+
+[node name="Set001" type="Node3D"]
+
+[node name="path1" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -30)
+
+[node name="path2" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -10)
+
+[node name="path3" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 10)
+
+[node name="path4" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 30)
+
+[node name="path5" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, -30)
+
+[node name="path6" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, -10)
+
+[node name="path7" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, 10)
+
+[node name="path8" parent="." instance=ExtResource("1_1hmky")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, 30)
+
+[node name="floor1" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -30)
+
+[node name="floor2" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -10)
+
+[node name="floor3" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 10)
+
+[node name="floor4" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 30)
+
+[node name="floor13" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -30, 0, -30)
+
+[node name="floor14" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -30, 0, -10)
+
+[node name="floor15" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -30, 0, 10)
+
+[node name="floor16" parent="." instance=ExtResource("2_f4fik")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -30, 0, 30)

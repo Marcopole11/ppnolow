@@ -58,7 +58,7 @@ type = "tree"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77607, 0)
 
 [node name="small tree" type="MeshInstance3D" parent="tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.430629, -0.82377, 0.172481)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.430629, -0.82377, 0.253752)
 mesh = SubResource("ArrayMesh_7bkre")
 skeleton = NodePath("")
 
