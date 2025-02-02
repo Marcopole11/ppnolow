@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://3qh75gl021vh"]
+[gd_scene load_steps=5 format=3 uid="uid://3qh75gl021vh"]
 
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_8ekux"]
 [ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_se41r"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_45xrq"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xlepx"]
+points = PackedVector3Array(-0.214183, -0.948028, -0.451129, 0.0227317, 0.952146, 0.498887, 0.171488, 0.951995, 0.469018, -0.125934, 0.952684, -0.483291, 0.499663, -0.953674, -0.00688883, -0.387646, -0.93796, 0.315653, -0.483292, 0.952686, -0.12593, 0.375097, 0.940128, -0.329816, 0.171488, -0.951995, 0.469018, 0.140783, -0.945485, -0.479579, 0.469014, 0.952011, 0.171499, -0.387646, 0.93796, 0.315653, -0.483292, -0.952686, -0.12593, -0.183511, -0.943076, 0.464698, 0.407412, -0.946994, 0.288983, 0.375097, -0.940128, -0.329816, -0.395154, 0.955761, -0.305523, -0.479555, 0.945437, 0.14088, 0.464698, 0.943099, -0.183512, 0.140783, 0.945485, -0.479579, -0.243203, 0.945955, 0.436491, -0.479555, -0.945437, 0.14088, 0.288971, 0.946988, 0.407421, -0.395154, -0.955761, -0.305523, -0.0069906, -0.953641, 0.499658, 0.499663, 0.953674, -0.00688883, -0.271948, 0.943071, -0.419217, 0.464698, -0.943099, -0.183512, -0.125934, -0.952684, -0.483291, 0.315648, 0.937973, -0.387651, 0.469014, -0.952011, 0.171499, 0.407412, 0.946994, 0.288983)
 
 [node name="tree" type="Node3D"]
 script = ExtResource("1_se41r")
@@ -12,5 +15,12 @@ script = ExtResource("1_se41r")
 script = ExtResource("1_8ekux")
 type = "tree"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="tree" type="Area3D" parent="." groups=["arbol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77607, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tree"]
 mesh = SubResource("CylinderMesh_45xrq")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree"]
+shape = SubResource("ConvexPolygonShape3D_xlepx")

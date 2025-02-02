@@ -12,13 +12,21 @@ var isRestoring = true
 # create a variable for check if its moving
 var is_moving = false
 
+var is_attacking : bool = false
+@export var stamina_attack_cap: int = 35
+ 
+
+
+
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
 @onready var headbob: AnimationPlayer = $CharacterBody3D/headbob
 @onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
 @onready var pause_menu: Control = $pause_menu
-@onready var bar_stamina: ProgressBar = $bar_stamina
+@onready var bar_stamina: TextureProgressBar = $bar_stamina
 @onready var axe_animation: AnimationPlayer = $axe_animation
+@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
+@onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axeswing
 
 # when the scene is loaded
 func _ready() -> void:
@@ -78,8 +86,7 @@ func _process(delta: float) -> void:
 	is_moving = movement.length() > 0.01
 	translate(movement)
 	
-	if Input.is_action_just_pressed("attack"):
-		axe_animation.play("Attack_animation")
+	
 
 	
 	
@@ -90,12 +97,23 @@ func _process(delta: float) -> void:
 	# switch on and off headbob 
 	if is_moving and Menusettings.headbob_enable:
 		headbob.play("headbob")
+		
 	elif is_moving and not Menusettings.headbob_enable:
 		headbob.play("stepsounds")
+		
 	else:
 		headbob.pause()
+	
 		
-		
+	if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+		is_attacking = true
+		axe_animation.play("attack_animation")
+		axe_hitbox.monitoring = true
+		axeswing.pitch_scale = randf_range(.8,1.2)
+		axeswing.play()
+		stamina = stamina -stamina_attack_cap
+	
+	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
@@ -135,3 +153,14 @@ func openmenu():
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)
 	stepgrass.play()
+
+
+func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "attack_animation":
+		axe_animation.play("idle_axe_animation")
+		axe_hitbox.monitoring = false
+		is_attacking=false
+
+func _on_axe_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("arbol"):
+		print("Tree hitted")
