@@ -6,13 +6,13 @@
 [ext_resource type="Script" path="res://scripts/playerColor.gd" id="4_5u0em"]
 
 [node name="player2" type="Node3D"]
+script = ExtResource("2_80dwx")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_woqlu")
 type = "player"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-script = ExtResource("2_80dwx")
 
 [node name="player" parent="." node_paths=PackedStringArray("playerLegs", "playerTorso", "playerGoogles") instance=ExtResource("3_uh6io")]
 script = ExtResource("4_5u0em")
