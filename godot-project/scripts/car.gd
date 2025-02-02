@@ -18,7 +18,6 @@ func _ready() -> void:
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta

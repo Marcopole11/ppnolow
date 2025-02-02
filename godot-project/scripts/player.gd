@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 	swaptool()
 	headbobhandle()
 	staminahandle()
-
+	print(Menusettings.mousesen)
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -144,8 +144,8 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.MOUSE_MODE_CAPTURED and Menusettings.pausemenu_state:
 		if event is InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x*0.005)
-			camera.rotate_x(-event.relative.y*0.005)
+			neck.rotate_y(-event.relative.x*Menusettings.mousesen)
+			camera.rotate_x(-event.relative.y*Menusettings.mousesen)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 #handles stamina stat and value in bar
