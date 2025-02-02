@@ -28,7 +28,6 @@ func _ready() -> void:
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
@@ -42,13 +41,6 @@ func interact(delta: float, strength: float):
 		"z": current_position[2],
   	}})
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func interact(delta: float, strength: float):
-	var entity_node = self.get_node_or_null('PPEntityNode')
-	var test = entity_node.get_me
-	var movement = Vector3(0,0,strength) * pushForce * delta
-	print("moving")
-	translate(movement)
 
 func _on_state_changed(state):
 	# set the entity's position, using the server's values
