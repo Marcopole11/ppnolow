@@ -77,7 +77,9 @@ func _on_state_changed(state):
 
 
 func _process(delta: float) -> void:
-	openmenu()
+	if Input.is_action_just_pressed("pause_button"):
+		openmenu()
+		
 	axeattack()
 	stunattack()
 	swaptool()
@@ -149,20 +151,19 @@ func _input(event: InputEvent) -> void:
 #handles stamina stat and value in bar
 func staminahandle():
 	if(isRestoring):
-		isRestoring = stamina != maxstamina+0.1
+		isRestoring = stamina != maxstamina
 	if(canRestore and stamina < maxstamina): 
 		stamina = stamina + staminarate
 	$bar_stamina.value = stamina	
 
-
-
 #handles menu in game
 func openmenu():
-	if Input.is_action_just_pressed("pause_button"):
-		if Menusettings.pausemenu_state:
-			pause_menu.show()
-		else:
-			pause_menu.hide()
+	if Menusettings.pausemenu_state:
+		pause_menu.show()
+		print("menu")
+	else:
+		pause_menu.hide()
+		print("nomenu")
 	Menusettings.pausemenu_state = !Menusettings.pausemenu_state
 
 #handles headbob and config of it
