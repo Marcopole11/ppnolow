@@ -23,7 +23,7 @@ var scene_map = {
 	"tree": tree_scene,
 	"car": car_scene,
 	"player": other_player_scene,
-	"chunkset": chunk_scene
+	"chunkset": chunk_set_scene
 }
 
 # when the scene is loaded
