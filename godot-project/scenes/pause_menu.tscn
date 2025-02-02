@@ -71,7 +71,7 @@ bus_name = "Sfx"
 
 [node name="headbob_checkbox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Disable camera check"
+text = "Disable camera shake"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
