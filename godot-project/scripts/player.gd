@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 	swaptool()
 	headbobhandle()
 	staminahandle()
-	checkinteracteable()
+
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -245,7 +245,5 @@ func swaptool() -> void:
 				taser.hide()
 				waterpump.show()
 
-func checkinteracteable():
-	if interact_ray.
-		print(interact_ray.get_collider())
+
 		

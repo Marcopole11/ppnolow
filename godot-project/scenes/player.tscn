@@ -383,7 +383,6 @@ _data = {
 
 [node name="player" type="Node3D"]
 script = ExtResource("1_b67xe")
-stamina_attack_cap = null
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
