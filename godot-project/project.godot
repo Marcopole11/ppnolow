@@ -30,6 +30,7 @@ enabled=PackedStringArray("res://addons/planetary_processing/plugin.cfg")
 [global_group]
 
 arbol=""
+gato=""
 
 [input]
 

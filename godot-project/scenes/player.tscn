@@ -149,7 +149,7 @@ _data = {
 
 [sub_resource type="BoxMesh" id="BoxMesh_feo4b"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig0dg"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dqbx4"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [sub_resource type="Animation" id="Animation_x0chq"]
@@ -403,14 +403,13 @@ shape = SubResource("BoxShape3D_05bp6")
 
 [node name="Axe" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.144875, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144875, 0, 0, 0)
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
-transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834115, -0.0998714, -0.0248476, 0.99469, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834115, -0.0998714, -0.0248476, 0.994689, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
 
 [node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+transform = Transform3D(1.14174, 0, 1.11759e-08, 0, 1.22358, -2.23517e-08, 3.72529e-09, 0, 1.19474, 0, 0, 0)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
@@ -437,12 +436,12 @@ transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533797, 0.0953738,
 mesh = SubResource("BoxMesh_feo4b")
 
 [node name="taser_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D"]
-transform = Transform3D(5, 0, 0, 0, 10, 0, 0, 0, 3.33333, -5.09405, 8.87695, 5.39441)
+transform = Transform3D(1.32837, 0, -2.02656e-06, -3.57628e-07, 0.369847, 1.19209e-06, -2.08616e-07, 2.42144e-08, 3.12965, 0, 0, 0)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox"]
-transform = Transform3D(0.2, 0, 0, 0, 0.067, 0, 0, 0, 0.8, 1.01881, -0.887695, -1.87808)
-shape = SubResource("ConvexPolygonShape3D_ig0dg")
+transform = Transform3D(1, 0, -5.96046e-08, -4.47035e-08, 1, 0, -1.49012e-08, 7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_dqbx4")
 
 [node name="taser_animation" type="AnimationPlayer" parent="CharacterBody3D/Neck/Camera3D/taser"]
 root_node = NodePath("../../../../..")
@@ -491,4 +490,5 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
+[connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox" to="." method="_on_taser_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]

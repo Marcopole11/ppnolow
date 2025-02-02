@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 	var car_instance = car_scene.instantiate() 
 	get_parent().add_child(car_instance) 
 	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
-	print(distancia)
+	# print(distancia)
 	
 	
 	# get the raw input values
@@ -218,3 +218,8 @@ func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
 		taser_hitbox.monitoring = false
 		is_attacking=false
 		taserattack.stop()
+
+
+func _on_taser_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("gato"):
+		print("enemy hitted")
