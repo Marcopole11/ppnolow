@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=24 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
 [ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_ja2rn"]
+[ext_resource type="Shader" path="res://scenes/utlineshader.gdshader" id="4_k7m2g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4vuy8"]
 size = Vector3(7, 7, 16)
@@ -10,12 +11,11 @@ size = Vector3(7, 7, 16)
 [sub_resource type="PrismMesh" id="PrismMesh_8kndm"]
 size = Vector3(7, 7, 16)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vf1n"]
-cull_mode = 1
-depth_draw_mode = 1
-emission_enabled = true
-emission = Color(1, 0, 0.137255, 1)
-emission_energy_multiplier = 1.9
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyoag"]
+render_priority = 0
+shader = ExtResource("4_k7m2g")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ae2ok"]
 resource_name = "brass"
@@ -55,6 +55,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i4lbn")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jd75n"]
+points = PackedVector3Array(0.0114086, -0.673474, -0.415756, -0.00492289, -0.673531, -0.432764, -0.0194315, -0.673531, 0.423318, 0.125689, -0.383223, 0.437957, -0.0339571, -0.0058971, 0.336209, 0.140214, -0.368697, -0.490957, -0.0339571, -0.0204228, -0.345655, 0.0821287, -0.0929828, 0.379764, 0.038637, -0.673531, 0.234643, 0.0821287, -0.600903, -0.46186, 0.0966714, -0.13656, -0.418306, 0.125689, -0.28168, 0.437957, -0.00242004, -0.00638998, -0.318061, 0.0821287, -0.557326, 0.437957, 0.0821287, -0.354172, -0.490957, -0.0194315, -0.673531, -0.0409574, 0.140214, -0.310731, -0.490957, -0.00492289, -0.600903, 0.437957, 0.0966714, -0.557326, -0.374843, 0.00958572, -0.0785254, 0.379764, 0.0129786, -0.0185147, 0.307947, 0.0531286, -0.659006, -0.447403, 0.038637, -0.528275, -0.476409, 0.0966714, -0.13656, 0.394312, 0.038637, -0.659006, 0.423318, 0.038637, -0.122034, -0.418306, 0.0821287, -0.296206, 0.437957, 0.125689, -0.441189, -0.447403, -0.0339571, -0.0349484, -0.345655, 0.125689, -0.267154, 0.423318, 0.125689, -0.397749, 0.292655, -0.0339571, -0.0058971, -0.331198)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fpksf"]
 animation = &"RESET"
@@ -229,22 +232,27 @@ type = "car"
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.82002, -0.699938)
 
 [node name="Cube_002" parent="carro" index="8"]
-transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0.0273857, -0.14, 2.921)
+transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0.0297151, -0.14, 2.921)
 
 [node name="Cube_001" parent="carro" index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579449, 0.133449, 0.469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.581792, 0.135792, 0.469)
 
-[node name="Cube_001" type="MeshInstance3D" parent="carro/Cube_001" index="0"]
-transform = Transform3D(0.979278, -0.03762, 0, 0.03762, 0.979278, 0, 0, 0, 0.98, 0, 0, 0)
+[node name="Cube_001" type="MeshInstance3D" parent="carro/Cube_001" index="0" groups=["interactuable"]]
+transform = Transform3D(0.999263, -0.0383878, 0, 0.0383878, 0.999263, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-material_override = SubResource("StandardMaterial3D_4vf1n")
-transparency = 0.83
-cast_shadow = 0
+material_override = SubResource("ShaderMaterial_tyoag")
 mesh = SubResource("ArrayMesh_uqb6s")
 skeleton = NodePath("")
 
+[node name="puerta2" type="Area3D" parent="carro/Cube_001" index="1"]
+transform = Transform3D(2.83175, 0, 0, 0, -34.5262, 0, 0, 0, 90.924, 0.165553, -0.358989, 0)
+
+[node name="puerta" type="CollisionShape3D" parent="carro/Cube_001/puerta2"]
+transform = Transform3D(0.353138, 0, 0, 0, -0.0138097, 0, 0, 0, 0.0109021, -0.0592292, -0.00492759, 0)
+shape = SubResource("ConvexPolygonShape3D_jd75n")
+
 [node name="Cube" parent="carro" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00855065, -0.00855065, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00620833, -0.00620833, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="carro"]
 tree_root = SubResource("AnimationNodeBlendTree_cnm7i")

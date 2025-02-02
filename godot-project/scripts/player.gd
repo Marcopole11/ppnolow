@@ -42,6 +42,7 @@ var player_water:int = 0
 @onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
 @onready var bar_wood: TextureProgressBar = $bar_wood
 @onready var bar_water: TextureProgressBar = $bar_water
+@onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
 
 
 
@@ -82,6 +83,7 @@ func _process(delta: float) -> void:
 	swaptool()
 	headbobhandle()
 	staminahandle()
+	checkinteracteable()
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -242,3 +244,8 @@ func swaptool() -> void:
 				axe.hide()
 				taser.hide()
 				waterpump.show()
+
+func checkinteracteable():
+	if interact_ray.
+		print(interact_ray.get_collider())
+		

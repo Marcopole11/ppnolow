@@ -4,7 +4,9 @@ var obstacle: bool = false
 var lid_open: bool
 @export var car_fuel: int = 0
 @export var car_water:int = 0
- 
+
+@onready var animation_tree: AnimationTree = $carro/AnimationTree
+
 
 
 var pp_root_node
