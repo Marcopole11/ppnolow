@@ -19,7 +19,7 @@ var is_attacking : bool = false
 
 
 
-
+@onready var character_body_3d: CharacterBody3D = $CharacterBody3D
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
 @onready var headbob: AnimationPlayer = $CharacterBody3D/Neck/headbob
@@ -34,6 +34,7 @@ var is_attacking : bool = false
 @onready var taser_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/taser/taser_animation
 @onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
 @onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
+
 
 # when the scene is loaded
 func _ready() -> void:
@@ -64,6 +65,12 @@ func _process(delta: float) -> void:
 		stamina = stamina + 0.5
 	$bar_stamina.value = stamina
 	
+	# get the distance between player and car
+	var car_scene = preload("res://scenes/car.tscn") 
+	var car_instance = car_scene.instantiate() 
+	get_parent().add_child(car_instance) 
+	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
+	print(distancia)
 	
 	
 	# get the raw input values
@@ -148,6 +155,9 @@ func _process(delta: float) -> void:
 		2:
 			axe.hide()
 			taser.show()
+		3:
+			axe.hide()
+			taser.hide()
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
