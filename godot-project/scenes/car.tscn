@@ -1,13 +1,167 @@
-[gd_scene load_steps=5 format=3 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=18 format=3 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
+[ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_ja2rn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4vuy8"]
 size = Vector3(7, 7, 16)
 
 [sub_resource type="PrismMesh" id="PrismMesh_8kndm"]
 size = Vector3(7, 7, 16)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fpksf"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ujn70"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fg6ns"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i74mq"]
+animation = &"open_lid"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_a1uhu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cnm7i"]
+graph_offset = Vector2(-415.809, 34.8134)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_fpksf")
+nodes/Animation/position = Vector2(-100, 0)
+"nodes/Blend open lid/node" = SubResource("AnimationNodeAdd2_ujn70")
+"nodes/Blend open lid/position" = Vector2(460, 140)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_fg6ns")
+nodes/Idle/position = Vector2(-100, 140)
+"nodes/Open lid/node" = SubResource("AnimationNodeAnimation_i74mq")
+"nodes/Open lid/position" = Vector2(-100, 280)
+nodes/output/position = Vector2(680, 140)
+nodes/shake/node = SubResource("AnimationNodeBlend2_a1uhu")
+nodes/shake/position = Vector2(180, 40)
+node_connections = [&"Blend open lid", 0, &"shake", &"Blend open lid", 1, &"Open lid", &"output", 0, &"Blend open lid", &"shake", 0, &"Animation", &"shake", 1, &"Idle"]
+
+[sub_resource type="Animation" id="Animation_1r4hv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_001:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.588, 0.142, 0.469)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cube_002:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0358889, -0.14, 2.921)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cube_001:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iam5k"]
+resource_name = "moving"
+length = 0.139
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.02, -0.02, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_001:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.588, 0.142, 0.469), Vector3(0.568, 0.122, 0.469)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cube_002:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.0358889, -0.14, 2.921), Vector3(0.016, -0.14, 2.921)]
+}
+
+[sub_resource type="Animation" id="Animation_kb3s5"]
+resource_name = "open_lid"
+length = 0.3667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_001:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.91986)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bbg7i"]
+_data = {
+"RESET": SubResource("Animation_1r4hv"),
+"idle": SubResource("Animation_iam5k"),
+"open_lid": SubResource("Animation_kb3s5")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mum0w"]
+angle_min = -60.0
+angle_max = 120.0
+spread = 25.482
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nf8rm"]
 
 [node name="Area3D" type="Area3D"]
 collision_layer = 3
@@ -17,8 +171,84 @@ script = ExtResource("1_kbort")
 shape = SubResource("BoxShape3D_4vuy8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PrismMesh_8kndm")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("3_348wp")
 type = "Area3D"
+
+[node name="carro" parent="." instance=ExtResource("3_ja2rn")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.48409, -15.3297)
+
+[node name="Cube_002" parent="carro" index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0.0339938, -0.14, 2.921)
+
+[node name="Cube_001" parent="carro" index="9"]
+transform = Transform3D(0.999263, -0.0383878, 0, 0.0383878, 0.999263, 0, 0, 0, 1, 0.586094, 0.140094, 0.469)
+
+[node name="Cube" parent="carro" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00190568, -0.00190568, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="carro"]
+tree_root = SubResource("AnimationNodeBlendTree_cnm7i")
+anim_player = NodePath("car_animation")
+"parameters/Blend open lid/add_amount" = 0.02
+parameters/shake/blend_amount = 0.43
+
+[node name="car_animation" type="AnimationPlayer" parent="carro/AnimationTree"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_bbg7i")
+}
+
+[node name="OmniLight3D" type="OmniLight3D" parent="carro"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219523, -0.394791, 0.446883)
+light_color = Color(1, 0.434811, 0.366139, 1)
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="carro"]
+transform = Transform3D(0.333333, 0, 0, 0, -0.331203, 0.0376246, 0, -0.0376246, -0.331203, 0.0229513, -0.0728462, 3.25061)
+shadow_enabled = true
+spot_range = 3.47439
+spot_angle = 81.612
+
+[node name="SpotLight3D" type="SpotLight3D" parent="carro/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 0.954204, 0.299157, 0, -0.299157, 0.954204, 0, 0.0528086, -0.184275)
+shadow_enabled = true
+spot_range = 47.106
+spot_attenuation = -0.82
+spot_angle = 32.3859
+
+[node name="OmniLight3D" type="OmniLight3D" parent="carro/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.131336, -0.458294)
+omni_range = 3.11497
+omni_attenuation = -1.286
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="carro"]
+transform = Transform3D(-0.04348, -0.994398, -0.0963452, 0.999055, -0.0432772, -0.00419305, 1.13397e-09, -0.0964364, 0.995339, -0.0169668, 1.49835, -0.640321)
+visibility_range_fade_mode = 1
+amount = 15
+lifetime = 1.94
+preprocess = 3.0
+explosiveness = 0.23
+randomness = 0.29
+collision_base_size = 0.0
+trail_lifetime = 1.61
+process_material = SubResource("ParticleProcessMaterial_mum0w")
+draw_pass_1 = SubResource("SphereMesh_nf8rm")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="carro"]
+transform = Transform3D(-0.04348, -0.994398, -0.0963452, 0.999055, -0.0432772, -0.00419305, 1.13397e-09, -0.0964364, 0.995339, -0.0169668, 1.1953, 0.131134)
+visibility_range_fade_mode = 1
+amount = 15
+lifetime = 1.94
+preprocess = 3.0
+explosiveness = 0.23
+randomness = 0.29
+collision_base_size = 0.0
+trail_lifetime = 1.61
+process_material = SubResource("ParticleProcessMaterial_mum0w")
+draw_pass_1 = SubResource("SphereMesh_nf8rm")
+
+[editable path="carro"]
