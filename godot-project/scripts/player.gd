@@ -170,6 +170,7 @@ func _process(delta: float) -> void:
 		"x": movement[0],
 		"y": -movement[2], 
 		"z": 0,
+		"rotation":neck.rotation.y
 	})
 
 func _input(event: InputEvent) -> void:
