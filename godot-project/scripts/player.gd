@@ -78,15 +78,7 @@ func _process(delta: float) -> void:
 	
 	if(canRestore and stamina < 100):
 		stamina = stamina + 0.5
-	$bar_stamina.value = stamina
-	
-	# get the distance between player and car
-	var car_scene = preload("res://scenes/car.tscn") 
-	var car_instance = car_scene.instantiate() 
-	get_parent().add_child(car_instance) 
-	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
-	#print(distancia)
-	
+	$bar_stamina.value = stamina	
 	
 	# get the raw input values
 	var input_direction = Vector3(
