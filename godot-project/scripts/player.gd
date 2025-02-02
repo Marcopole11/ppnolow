@@ -34,6 +34,7 @@ var is_attacking : bool = false
 @onready var taser_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/taser/taser_animation
 @onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
 @onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
+@onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
 
 
 # when the scene is loaded
@@ -152,12 +153,15 @@ func _process(delta: float) -> void:
 		1:
 			axe.show()
 			taser.hide()
+			waterpump.hide()
 		2:
 			axe.hide()
 			taser.show()
+			waterpump.hide()
 		3:
 			axe.hide()
 			taser.hide()
+			waterpump.show()
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
