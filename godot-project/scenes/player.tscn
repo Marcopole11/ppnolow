@@ -1,9 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=30 format=3 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
 [ext_resource type="AudioStream" uid="uid://01qvkmavy2ao" path="res://audio/FEETHmn-GRASS_AUDIOELK-Fs Grass Shoes Outdoors 01_AUDIOELK_AUDIOELK.wav" id="2_84cct"]
-[ext_resource type="PackedScene" path="res://scenes/player_interactor.tscn" id="2_q0du3"]
 [ext_resource type="AudioStream" uid="uid://b6fgwsetflfl8" path="res://audio/axe-slash-1-106748.mp3" id="2_tdb4p"]
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 [ext_resource type="AudioStream" uid="uid://dio8iskfjkea7" path="res://audio/Electric Fence Startup Test.ogg" id="4_m5efg"]
@@ -13,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://ce16ajakgjuon" path="res://Texture/Texturawater.png" id="11_5twbf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_05bp6"]
-size = Vector3(2.32272, 3.52057, 11.9161)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0jckr"]
 size = Vector3(0.1, 1.5, 0.1)
@@ -399,21 +395,18 @@ shape = SubResource("CapsuleShape3D_ovxth")
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 
-[node name="PlayerInteractor" parent="CharacterBody3D/Neck/Camera3D" instance=ExtResource("2_q0du3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01911, -2.79794, -0.281726)
-collision_layer = 2
-collision_mask = 1
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/PlayerInteractor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26, -5.081)
-shape = SubResource("BoxShape3D_05bp6")
+[node name="InteractRay" type="RayCast3D" parent="CharacterBody3D/Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132685, -0.00106335, -0.0256251)
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+collide_with_areas = true
 
 [node name="Axe" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.144875, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144875, 0, 0, 0)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
-transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834114, -0.0998714, -0.0248477, 0.994689, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.369737, 0.927179, 0.0602845, -0.923753, 0.373795, -0.0834114, -0.0998713, -0.0248477, 0.994689, 1.3, -0.481431, -1.245)
 mesh = SubResource("BoxMesh_0jckr")
 
 [node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]

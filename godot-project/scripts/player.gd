@@ -41,6 +41,8 @@ var amount_water: int
 @onready var bar_water: TextureProgressBar = $bar_water
 
 
+
+
 # when the scene is loaded
 func _ready() -> void:
 	# access the PPRootNode from the scene's node tree 
@@ -68,21 +70,15 @@ func _on_state_changed(state):
 	if diff_in_position > Vector3(1,1,1):
 		global_transform.origin = Vector3(state.x, state.z, -state.y)
 
+
+
 func _process(delta: float) -> void:
 	if(isRestoring):
 		isRestoring = stamina != 100
 	
 	if(canRestore and stamina < 100):
 		stamina = stamina + 0.5
-	$bar_stamina.value = stamina
-	
-	# get the distance between player and car
-	var car_scene = preload("res://scenes/car.tscn") 
-	var car_instance = car_scene.instantiate() 
-	get_parent().add_child(car_instance) 
-	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
-	# print(distancia)
-	
+	$bar_stamina.value = stamina	
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -182,6 +178,13 @@ func _process(delta: float) -> void:
 		"z": 0,
 		"rotation":neck.rotation.y
 	});
+
+func _physics_process(delta: float) -> void:
+	if $CharacterBody3D/Neck/Camera3D/InteractRay.is_colliding():
+		var target = $CharacterBody3D/Neck/Camera3D/InteractRay.get_collider()
+		if target != null and target.has_method("interact"):
+			if Input.is_action_pressed("interact"):
+				target.interact(delta, Input.get_action_strength("interact"))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

@@ -1,34 +1,23 @@
-# entity_movement.gd script
+extends "res://scripts/entity_movement.gd"
 
-# extend the functionality of your root node (here Node3D)
-extends Node3D
+var pp_root_node
 
 var pushForce = 5
-# when the scene is loaded
-func _ready():
-	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
-	if pp_entity_node:
-		pp_entity_node.state_changed.connect(_on_state_changed)
-	else:
-		print("PPEntityNode not found")
 
-func _on_state_changed(state):
-	# set the entity's position, using the server's values
-	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
-	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	global_transform.origin = Vector3(state.x, state.z, -state.y) 
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 
 
-func _on_interactable_focused(interactor: Interactor) -> void:
-	print("focused")
-
-
-func _on_interactable_interacted(interactor: Interactor, delta: float) -> void:
-	var movement = Vector3(0,0,1) * pushForce * delta
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func interact(delta: float, strength: float):
+	var movement = Vector3(0,0,strength) * pushForce * delta
 	print("moving")
 	translate(movement)
-
-
-func _on_interactable_unfocused(interactor: Interactor) -> void:
-	print("unfocused")
+	var current_position = global_transform.origin
+	pp_root_node.message({
+		"x": current_position[0],
+		"y": current_position[1],
+		"z": current_position[2],
+		"threedee": true
+  	})
