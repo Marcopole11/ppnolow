@@ -12,7 +12,7 @@ func _ready():
 	playerGoogles.mesh = playerGoogles.mesh.duplicate();
 	var newCoth:Material = playerLegs.mesh.surface_get_material(0).duplicate();
 	var newBright:Material = playerLegs.mesh.surface_get_material(1).duplicate();
-	var charColor:Color = Color(randf()/5 , randf()/4, randf()/4, 1);
+	var charColor:Color = Color(randf()/4 , randf()/4, randf()/4, 1);
 	newCoth.albedo_color = Color(charColor.r+0.3,charColor.g+0.3,charColor.b+0.3,1);
 	newBright.albedo_color = Color(charColor.r*5,charColor.g*5,charColor.b*5,1);
 	playerLegs.mesh.surface_set_material(0,newCoth);

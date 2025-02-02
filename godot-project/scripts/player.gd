@@ -48,7 +48,13 @@ func _ready() -> void:
 	assert(pp_root_node, "PPRootNode not found") 
 	
 	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
+	var pp_entity_node= get_node_or_null("PPEntityNode");
+	pp_root_node.message({"color": {
+		"r": randf()/4,
+		"g": randf()/4, 
+		"b": randf()/4
+	}});
+	
 	if pp_entity_node:
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
@@ -175,7 +181,7 @@ func _process(delta: float) -> void:
 		"y": -movement[2], 
 		"z": 0,
 		"rotation":neck.rotation.y
-	})
+	});
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
