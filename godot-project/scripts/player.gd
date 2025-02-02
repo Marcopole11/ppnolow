@@ -41,6 +41,8 @@ var amount_water: int
 @onready var bar_water: TextureProgressBar = $bar_water
 
 
+
+
 # when the scene is loaded
 func _ready() -> void:
 	# access the PPRootNode from the scene's node tree 
@@ -48,7 +50,13 @@ func _ready() -> void:
 	assert(pp_root_node, "PPRootNode not found") 
 	
 	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
+	var pp_entity_node= get_node_or_null("PPEntityNode");
+	pp_root_node.message({"color": {
+		"r": randf()/4,
+		"g": randf()/4, 
+		"b": randf()/4
+	}});
+	
 	if pp_entity_node:
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
@@ -61,6 +69,8 @@ func _on_state_changed(state):
 	var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	if diff_in_position > Vector3(1,1,1):
 		global_transform.origin = Vector3(state.x, state.z, -state.y)
+
+
 
 func _process(delta: float) -> void:
 	if(isRestoring):
@@ -175,7 +185,7 @@ func _process(delta: float) -> void:
 		"y": -movement[2], 
 		"z": 0,
 		"rotation":neck.rotation.y
-	})
+	});
 
 func _physics_process(delta: float) -> void:
 	if $CharacterBody3D/Neck/Camera3D/InteractRay.is_colliding():

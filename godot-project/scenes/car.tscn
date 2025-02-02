@@ -19,6 +19,9 @@ shape = SubResource("BoxShape3D_4vuy8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PrismMesh_8kndm")
 
+[node name="carro" parent="." instance=ExtResource("3_pyv1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60096, 0)
+
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("3_348wp")
 type = "Area3D"

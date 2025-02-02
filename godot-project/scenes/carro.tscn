@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://1y0jj3ilvq7g"]
+
+[ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="1_m5d1d"]
+
+[node name="carro" instance=ExtResource("1_m5d1d")]
+
+[node name="Cube_001" parent="." index="9"]
+transform = Transform3D(-0.16682, -0.985987, 0, 0.985987, -0.16682, 0, 0, 0, 1, 0.58779, 0.141625, 0.468698)
