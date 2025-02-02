@@ -3,22 +3,22 @@ extends Node3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed = 5.0
-var sprintSpeed = 10
-var totalSpeed = speed	
-var stamina = 100
-var canRestore = true
-var isRestoring = true
+var speed:int = 5
+var sprintSpeed:int = 10
+var totalSpeed:int = speed	
+var stamina:float = 100
+var canRestore:bool = true
+var isRestoring:bool = true
 # create a variable for check if its moving
-var is_moving = false
+var is_moving:bool = false
 #variable related to tools
-var tool_inhand: int = 1
+var tool_inhand:int = 1
 # variables related to attack
 var is_attacking : bool = false
-@export var stamina_attack_cap: int = 35
+@export var stamina_attack_cap:int = 35
 
-var amount_wood: int
-var amount_water: int
+var player_wood:int = 0
+var player_water:int = 0
 
 
 @onready var character_body_3d: CharacterBody3D = $CharacterBody3D
@@ -227,8 +227,8 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
 		print("Tree hitted")
-		amount_wood += 1
-	$bar_wood.value = amount_wood
+		player_wood += 1
+	$bar_wood.value = player_wood
 
 
 func _on_taser_animation_animation_finished(anim_name: StringName) -> void:

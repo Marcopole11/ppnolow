@@ -1,5 +1,12 @@
 extends "res://scripts/entity_movement.gd"
 
+var obstacle: bool = false
+var lid_open: bool = false
+@export var car_fuel: int = 0
+@export var car_water:int = 0
+ 
+
+
 var pp_root_node
 
 var pushForce = 5

@@ -9,7 +9,7 @@ extends Node3D
 @export var playerTorso:MeshInstance3D;
 @export var playerGoogles:MeshInstance3D;
 
-var definedG = 0.25;
+var definedG:float = 0.25;
 var newCoth:Material;
 var newBright:Material;
 
