@@ -6,10 +6,11 @@ var cached_closest: Interactable
 
 func _ready() -> void:
 	controller = player
-
+	
 func _physics_process(_delta: float) -> void:
 	var new_closest: Interactable = get_closest_interactable()
 	if new_closest != cached_closest:
+		print("working")
 		if is_instance_valid(cached_closest):
 			unfocus(cached_closest)
 		if new_closest:

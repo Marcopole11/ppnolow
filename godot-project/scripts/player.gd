@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 	var car_instance = car_scene.instantiate() 
 	get_parent().add_child(car_instance) 
 	var distancia:int = car_instance.global_transform.origin.distance_to(character_body_3d.global_transform.origin)
-	# print(distancia)
+	#print(distancia)
 	
 	
 	# get the raw input values
@@ -176,6 +176,13 @@ func _process(delta: float) -> void:
 		"z": 0,
 		"rotation":neck.rotation.y
 	})
+
+func _physics_process(delta: float) -> void:
+	if $CharacterBody3D/Neck/Camera3D/InteractRay.is_colliding():
+		var target = $CharacterBody3D/Neck/Camera3D/InteractRay.get_collider()
+		if target != null and target.has_method("interact"):
+			if Input.is_action_pressed("interact"):
+				target.interact(delta, Input.get_action_strength("interact"))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

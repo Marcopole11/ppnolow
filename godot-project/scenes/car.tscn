@@ -1,32 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=5 format=3 uid="uid://by1xajmtjokfw"]
 
-[ext_resource type="PackedScene" uid="uid://dowpmo7rojh5i" path="res://scenes/interactable.tscn" id="1_h7cw4"]
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_4pk2q"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vuy8"]
 size = Vector3(7, 7, 16)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6d3oo"]
+[sub_resource type="PrismMesh" id="PrismMesh_8kndm"]
 size = Vector3(7, 7, 16)
 
-[node name="Car" type="Node3D"]
+[node name="Area3D" type="Area3D"]
+collision_layer = 3
 script = ExtResource("1_kbort")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_4vuy8")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PrismMesh_4pk2q")
-
-[node name="Interactable" parent="." instance=ExtResource("1_h7cw4")]
-
-[node name="CollisionShape3D" parent="Interactable" index="0"]
-shape = SubResource("BoxShape3D_6d3oo")
+mesh = SubResource("PrismMesh_8kndm")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("3_348wp")
-type = "Car"
-
-[connection signal="focused" from="Interactable" to="." method="_on_interactable_focused"]
-[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
-[connection signal="unfocused" from="Interactable" to="." method="_on_interactable_unfocused"]
-
-[editable path="Interactable"]
+type = "Area3D"
