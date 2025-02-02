@@ -7,8 +7,11 @@ var speed:int = 5
 var sprintSpeed:int = 10
 var totalSpeed:int = speed	
 var stamina:float = 100
+var maxstamina:float = 100
+var staminarate:float = 0.5
 var canRestore:bool = true
-var isRestoring:bool = true
+var isRestoring:bool = false
+
 # create a variable for check if its moving
 var is_moving:bool = false
 #variable related to tools
@@ -73,12 +76,12 @@ func _on_state_changed(state):
 
 
 func _process(delta: float) -> void:
-	if(isRestoring):
-		isRestoring = stamina != 100
-	
-	if(canRestore and stamina < 100):
-		stamina = stamina + 0.5
-	$bar_stamina.value = stamina	
+	openmenu()
+	axeattack()
+	stunattack()
+	swaptool()
+	headbobhandle()
+	staminahandle()
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -106,30 +109,6 @@ func _process(delta: float) -> void:
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	translate(movement)
-	
-	
-
-	
-	
-	# open pause menu on pressing pause key
-	
-	
-	# switch on and off headbob 
-	if is_moving and Menusettings.headbob_enable:
-		headbob.play("headbob")
-		
-	elif is_moving and not Menusettings.headbob_enable:
-		headbob.play("stepsounds")
-		
-	else:
-		headbob.pause()
-	
-		
-	
-	
-	
-	
-
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
@@ -165,6 +144,16 @@ func _input(event: InputEvent) -> void:
 			camera.rotate_x(-event.relative.y*0.005)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
+#handles stamina stat and value in bar
+func staminahandle():
+	if(isRestoring):
+		isRestoring = stamina != maxstamina+0.1
+	if(canRestore and stamina < maxstamina): 
+		stamina = stamina + staminarate
+	$bar_stamina.value = stamina	
+
+
+
 #handles menu in game
 func openmenu():
 	if Input.is_action_just_pressed("pause_button"):
@@ -174,6 +163,17 @@ func openmenu():
 			pause_menu.hide()
 	Menusettings.pausemenu_state = !Menusettings.pausemenu_state
 
+#handles headbob and config of it
+func headbobhandle():
+	if is_moving and Menusettings.headbob_enable:
+		headbob.play("headbob")
+		
+	elif is_moving and not Menusettings.headbob_enable:
+		headbob.play("stepsounds")
+		
+	else:
+		headbob.pause()
+# made for being called later in the headbob animation so the steps are on time
 func play_step():
 	# stepgrass.pitch_scale = randf_range(.8,1.2)
 	stepgrass.play()
