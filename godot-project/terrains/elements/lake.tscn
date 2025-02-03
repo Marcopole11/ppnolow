@@ -79,7 +79,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_edkx3")
 
-[node name="lake2" type="MeshInstance3D"]
+[node name="lake1" type="MeshInstance3D"]
 transform = Transform3D(0.128536, 0, -0.824408, 0, 0.834368, 0, 0.824408, 0, 0.128536, 0, 1.252, 0)
 mesh = SubResource("ArrayMesh_gaj5o")
 skeleton = NodePath("")

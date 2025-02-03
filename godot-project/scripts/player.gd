@@ -3,7 +3,7 @@ extends Node3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:int = 5
+var speed:int = 50
 var sprintSpeed:int = 10
 var totalSpeed:int = speed	
 var stamina:float = 100
