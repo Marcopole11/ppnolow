@@ -1073,7 +1073,7 @@ _data = {
 "stepsounds": SubResource("Animation_0425j")
 }
 
-[node name="player" type="Node3D"]
+[node name="player" type="Node3D" groups=["player"]]
 script = ExtResource("1_b67xe")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["player"]]

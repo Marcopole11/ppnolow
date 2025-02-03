@@ -24,6 +24,8 @@ var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
 
+
+
 @onready var character_body_3d: CharacterBody3D = $CharacterBody3D
 @onready var neck := $CharacterBody3D/Neck
 @onready var camera := $CharacterBody3D/Neck/Camera3D
@@ -87,7 +89,6 @@ func _on_state_changed(state):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
-	
 	waterpumphandle()
 	axeattack()
 	stunattack()
@@ -258,7 +259,7 @@ func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		print("water pumped")
 		fillingwater_player = true
-		speed=0.3
+		speed=0.7
 func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		fillingwater_player = false

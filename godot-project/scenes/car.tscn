@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=25 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
@@ -126,6 +126,27 @@ gravity = Vector3(0, 0, 0)
 
 [sub_resource type="SphereMesh" id="SphereMesh_nf8rm"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1uyl"]
+radius = 72.8159
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i6bnd"]
+radius = 47.9884
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ayoxk"]
+radius = 99.1431
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uuqrh"]
+radius = 128.313
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vk3jq"]
+radius = 153.18
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_joxt7"]
+radius = 181.744
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_spp7a"]
+radius = 213.328
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvpdt"]
 size = Vector3(2.91251, 5.29794, 2.64606)
 
@@ -222,16 +243,43 @@ enable_node_path = NodePath("../carro")
 
 [node name="distancia1" type="Area3D" parent="Node3D"]
 transform = Transform3D(0.214039, 0, 0, 0, 0.401726, 0, 0, 0, 0.303432, 0, 0, 0)
+visible = false
 
 [node name="Collider1" type="CollisionShape3D" parent="Node3D/distancia1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_s1uyl")
 
-[node name="Area3D" type="Area3D" parent="Node3D/distancia1"]
+[node name="area 2" type="Area3D" parent="Node3D/distancia1"]
 
-[node name="Area3D2" type="Area3D" parent="Node3D/distancia1"]
+[node name="colider2" type="CollisionShape3D" parent="Node3D/distancia1/area 2"]
+shape = SubResource("SphereShape3D_i6bnd")
 
-[node name="Area3D3" type="Area3D" parent="Node3D/distancia1"]
+[node name="area3" type="Area3D" parent="Node3D/distancia1"]
+
+[node name="collider3" type="CollisionShape3D" parent="Node3D/distancia1/area3"]
+shape = SubResource("SphereShape3D_ayoxk")
+
+[node name="area4" type="Area3D" parent="Node3D/distancia1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="collider4" type="CollisionShape3D" parent="Node3D/distancia1/area4"]
+shape = SubResource("SphereShape3D_uuqrh")
+
+[node name="area5" type="Area3D" parent="Node3D/distancia1"]
+
+[node name="collider5" type="CollisionShape3D" parent="Node3D/distancia1/area5"]
+shape = SubResource("SphereShape3D_vk3jq")
+
+[node name="area6" type="Area3D" parent="Node3D/distancia1"]
+
+[node name="collider6" type="CollisionShape3D" parent="Node3D/distancia1/area6"]
+shape = SubResource("SphereShape3D_joxt7")
+
+[node name="area7" type="Area3D" parent="Node3D/distancia1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="collider7" type="CollisionShape3D" parent="Node3D/distancia1/area7"]
+shape = SubResource("SphereShape3D_spp7a")
 
 [node name="caldera_detector" type="Area3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5342, 0, 0)
@@ -249,8 +297,13 @@ shape = SubResource("BoxShape3D_vvpdt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
 
-[connection signal="body_entered" from="Node3D/distancia1" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Node3D/distancia1" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1" to="." method="_on_distancia_1_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area 2" to="." method="_on_area_2_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area3" to="." method="_on_area_3_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area4" to="." method="_on_area_4_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area5" to="." method="_on_area_5_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area6" to="." method="_on_area_6_body_exited"]
+[connection signal="body_exited" from="Node3D/distancia1/area7" to="." method="_on_area_7_body_exited"]
 [connection signal="body_entered" from="Node3D/caldera_detector" to="." method="_on_caldera_detector_body_entered"]
 [connection signal="body_entered" from="Node3D/calderaagua_detector2" to="." method="_on_calderaagua_detector_2_body_entered"]
 [connection signal="body_exited" from="Node3D/calderaagua_detector2" to="." method="_on_calderaagua_detector_2_body_exited"]
