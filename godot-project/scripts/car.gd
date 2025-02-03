@@ -7,8 +7,8 @@ var obstacle: bool = false
 var lid_open: bool
 var lid_selected:bool = false
 @export var car_fuel: int = 0
-@export var car_water:int = 0
-
+@export var car_water:float = 1.0
+var car_water_indicator:int = 0
 
 @onready var caldera_detector: Area3D = $Node3D/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/calderaagua_detector2
@@ -37,7 +37,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	match car_water:
+	car_water_indicator = round(car_water)
+	match car_water_indicator:
 		0:
 			waterlvl_001.hide()
 			waterlvl_002.hide()
