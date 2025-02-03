@@ -5,15 +5,15 @@ extends Area3D
 
 var obstacle: bool = false
 var lid_open: bool
+var lid_selected:bool = false
 @export var car_fuel: int = 0
 @export var car_water:int = 0
 
 @onready var animation_tree: AnimationTree = $carro/AnimationTree
-
-
+@onready var outline: MeshInstance3D = $carro/Cube_001/Cube_001
+@onready var cube_001: MeshInstance3D = $carro/Cube_001
 
 var pp_root_node
-
 var pushForce = 5
 
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +28,6 @@ func _ready() -> void:
 		print("PPEntityNode not found")
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
@@ -41,7 +40,6 @@ func interact(delta: float, strength: float):
 		"y": current_position[1],
 		"z": 0 - current_position[2],
   	}})
-
 
 func _on_state_changed(state):
 	# set the entity's position, using the server's valuesw

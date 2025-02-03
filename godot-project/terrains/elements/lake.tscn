@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cgwf6t4kj4b1q"]
+[gd_scene load_steps=8 format=4 uid="uid://cgwf6t4kj4b1q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp75s"]
 resource_name = "ROCK"
@@ -79,12 +79,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_edkx3")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v68x8"]
+points = PackedVector3Array(-2.25609, 0.0337857, 1.23239, -0.498911, -0.0337857, -2.48339, -0.498911, 0.0337857, -2.48339, 2.06849, -0.0337857, -0.591253, 2.06849, 0.0337857, -0.861499, 0.784576, -0.0337857, 1.70604, -2.25609, -0.0337857, 1.09748, 0.784576, 0.0337857, 1.70604, -1.58005, 0.0337857, -1.33433, 1.86572, -0.0337857, -1.40199, -1.37729, -0.0337857, 1.70604, -1.24225, -0.0337857, -2.01015, 1.86572, 0.0337857, -1.40199, -1.37729, 0.0337857, 1.70604, -0.295721, -0.0337857, -2.48339, -1.64778, -0.0337857, -1.13175, 2.06849, 0.0337857, -0.591253, -1.24225, 0.0337857, -2.01015, -0.295721, 0.0337857, -2.48339, -2.18836, -0.0337857, 1.30047, -2.25609, 0.0337857, 1.09748, 2.06849, -0.0337857, -0.861499, -1.64778, 0.0337857, -1.13175, -2.18836, 0.0337857, 1.30047, -1.58005, -0.0337857, -1.33433, 1.93303, -0.0337857, -1.26707, -0.836715, 0.0337857, -2.28039, -2.25609, -0.0337857, 1.23239, 1.93303, 0.0337857, -1.26707, -0.836715, -0.0337857, -2.28039)
+
 [node name="lake1" type="MeshInstance3D"]
 transform = Transform3D(0.128536, 0, -0.824408, 0, 0.834368, 0, 0.824408, 0, 0.128536, 0, 1.252, 0)
 mesh = SubResource("ArrayMesh_gaj5o")
 skeleton = NodePath("")
 
-[node name="water" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.621501, 0, 3.98621, 0, 4.03437, 0, -3.98621, 0, 0.621502, 6.99733, -0.605694, 1.81793)
+[node name="water" type="Area3D" parent="." groups=["pond"]]
+transform = Transform3D(0.621501, 0, 3.98621, 0, 4.03437, 0, -3.98621, 0, 0.621502, 6.99733, 0.141075, 1.81793)
+
+[node name="water_mesh" type="MeshInstance3D" parent="water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47035e-08, -0.192489, 4.76837e-07)
 mesh = SubResource("ArrayMesh_vwtlv")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47035e-08, -0.192489, 4.76837e-07)
+shape = SubResource("ConvexPolygonShape3D_v68x8")

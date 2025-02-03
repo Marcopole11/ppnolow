@@ -86,3 +86,5 @@ skeleton = NodePath("")
 transform = Transform3D(-0.530024, 0.905589, 1.55576, -1.31794, -1.29991, 0.30766, 1.22617, -1.00575, 1.00318, -1.4016, 9.08257, -3.53132)
 mesh = SubResource("ArrayMesh_26dng")
 skeleton = NodePath("")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
