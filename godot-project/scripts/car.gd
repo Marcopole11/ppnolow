@@ -3,6 +3,9 @@
 # extend the functionality of your root node (here Node3D)
 extends Area3D
 
+var en_caldera:bool = false
+
+
 var obstacle: bool = false
 var lid_open: bool
 var lid_selected:bool = false
@@ -37,6 +40,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	addwatertocar()
 	car_water_indicator = round(car_water)
 	match car_water_indicator:
 		0:
@@ -98,3 +102,17 @@ func _on_caldera_detector_body_entered(body: Node3D) -> void:
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("caldera de agua")
+		en_caldera = true
+		
+func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		print("fuera caldera de agua")
+		en_caldera = false
+func addwatertocar():
+	if Input.is_action_just_pressed("interact") and en_caldera:
+			car_water +=1
+			print("added water")
+
+func movecar():
+	if car_water > 0 and car_fuel > 0:
+		pass
