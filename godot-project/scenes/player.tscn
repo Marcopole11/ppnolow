@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=71 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
 [ext_resource type="Texture2D" uid="uid://dtymjkt5stucn" path="res://Texture/Texturaswood.png" id="10_0wqcs"]
-[ext_resource type="Texture2D" uid="uid://ce16ajakgjuon" path="res://Texture/Texturawater.png" id="11_5twbf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
 
@@ -554,6 +553,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_dopp3"]
 resource_name = "use"
+length = 1.6025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -564,7 +564,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.3, 0.0122296, 0), Vector3(-0.3, 0.353052, -1.00907)]
+"values": [Vector3(-0.3, 0.0122296, 0), Vector3(-0.3, -0.155139, -0.67245)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -576,21 +576,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 1.0472, 0), Vector3(-0.299042, 1.13432, -0.563288)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"succwater"
-}]
+"values": [Vector3(0, 1.0472, 0), Vector3(0, 1.0472, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2hn1n"]
@@ -1109,6 +1095,7 @@ collide_with_areas = true
 
 [node name="Axe" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
 transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
@@ -1163,7 +1150,6 @@ stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
-visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1176,7 +1162,7 @@ mesh = SubResource("ArrayMesh_ccnbs")
 skeleton = NodePath("")
 
 [node name="waterTankBarfiller" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar"]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_80s8p")
 mesh = SubResource("ArrayMesh_ccnbs")
 skeleton = NodePath("")
@@ -1304,24 +1290,10 @@ fill_mode = 3
 texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("10_0wqcs")
 
-[node name="bar_water" type="TextureProgressBar" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 37.0
-offset_top = -242.0
-offset_right = 201.0
-offset_bottom = 1222.0
-grow_vertical = 0
-scale = Vector2(0.060578, 0.158602)
-max_value = 5.0
-fill_mode = 3
-texture_under = ExtResource("6_0c70t")
-texture_progress = ExtResource("11_5twbf")
-
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox" to="." method="_on_taser_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
+[connection signal="area_exited" from="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_exited"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/waterpump/pump_animation" to="." method="_on_pump_animation_animation_finished"]
