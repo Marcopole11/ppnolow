@@ -77,13 +77,15 @@ func _on_state_changed(state):
 
 
 func _process(delta: float) -> void:
-	openmenu()
+	if Input.is_action_just_pressed("pause_button"):
+		openmenu()
+		
 	axeattack()
 	stunattack()
 	swaptool()
 	headbobhandle()
 	staminahandle()
-
+	print(Menusettings.mousesen)
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -142,27 +144,26 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.MOUSE_MODE_CAPTURED and Menusettings.pausemenu_state:
 		if event is InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x*0.005)
-			camera.rotate_x(-event.relative.y*0.005)
+			neck.rotate_y(-event.relative.x*Menusettings.mousesen)
+			camera.rotate_x(-event.relative.y*Menusettings.mousesen)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 #handles stamina stat and value in bar
 func staminahandle():
 	if(isRestoring):
-		isRestoring = stamina != maxstamina+0.1
+		isRestoring = stamina != maxstamina
 	if(canRestore and stamina < maxstamina): 
 		stamina = stamina + staminarate
 	$bar_stamina.value = stamina	
 
-
-
 #handles menu in game
 func openmenu():
-	if Input.is_action_just_pressed("pause_button"):
-		if Menusettings.pausemenu_state:
-			pause_menu.show()
-		else:
-			pause_menu.hide()
+	if Menusettings.pausemenu_state:
+		pause_menu.show()
+		print("menu")
+	else:
+		pause_menu.hide()
+		print("nomenu")
 	Menusettings.pausemenu_state = !Menusettings.pausemenu_state
 
 #handles headbob and config of it
