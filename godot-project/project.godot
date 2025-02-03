@@ -32,7 +32,6 @@ enabled=PackedStringArray("res://addons/planetary_processing/plugin.cfg")
 arbol=""
 gato=""
 pond=""
-interactuable=""
 
 [input]
 

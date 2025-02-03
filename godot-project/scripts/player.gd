@@ -1,9 +1,8 @@
 extends Node3D
-
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:int = 50
+var speed:int = 5
 var sprintSpeed:int = 10
 var totalSpeed:int = speed	
 var stamina:float = 100
@@ -43,12 +42,17 @@ var player_water:int = 0
 @onready var bar_wood: TextureProgressBar = $bar_wood
 @onready var bar_water: TextureProgressBar = $bar_water
 @onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
+@onready var waterpump_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/waterpump/MeshInstance3D/waterpump_hitbox
+@onready var pump_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/waterpump/pump_animation
 
 
 
 
 # when the scene is loaded
 func _ready() -> void:
+	add_to_group("player")
+
+
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 	assert(pp_root_node, "PPRootNode not found") 
@@ -65,6 +69,7 @@ func _ready() -> void:
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
 		print("PPEntityNode not found")
+
 		
 func _on_state_changed(state):
 	# sync the player's position, using the server's values
@@ -79,13 +84,14 @@ func _on_state_changed(state):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
-		
+	
+	waterpumphandle()
 	axeattack()
 	stunattack()
 	swaptool()
 	headbobhandle()
 	staminahandle()
-	print(Menusettings.mousesen)
+
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -221,7 +227,30 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("gato"):
 		print("enemy hitted")
 		
+		
+func waterpumphandle():
+	if tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+			is_attacking = true
+			pump_animation.play("use")
+			waterpump_hitbox.monitoring = true
+			taserattack.pitch_scale = randf_range(.8,1.2)
+			taserattack.play()
+			stamina = stamina -stamina_attack_cap
 
+func _on_pump_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name== "use":
+		pump_animation.play("idle")
+		waterpump_hitbox.monitoring = false
+		is_attacking=false
+
+func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("pond"):
+		print("water pumped")
+		player_water += 1
+		$bar_water.value= player_water
+	
+		
+		
 #handles tool selection
 func swaptool() -> void:
 		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
@@ -245,6 +274,7 @@ func swaptool() -> void:
 				axe.hide()
 				taser.hide()
 				waterpump.show()
+
 
 
 		
