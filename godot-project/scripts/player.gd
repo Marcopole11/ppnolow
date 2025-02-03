@@ -31,9 +31,9 @@ var player_water:int = 0
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: TextureProgressBar = $bar_stamina
 @onready var axe_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/Axe/axe_animation
-@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
-@onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axeswing
 @onready var axe: Node3D = $CharacterBody3D/Neck/Camera3D/Axe
+@onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/axeswing
+@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
 @onready var taser: Node3D = $CharacterBody3D/Neck/Camera3D/taser
 @onready var taser_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/taser/taser_animation
 @onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
@@ -42,8 +42,12 @@ var player_water:int = 0
 @onready var bar_wood: TextureProgressBar = $bar_wood
 @onready var bar_water: TextureProgressBar = $bar_water
 @onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
-@onready var waterpump_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/waterpump/MeshInstance3D/waterpump_hitbox
+@onready var waterpump_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
 @onready var pump_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/waterpump/pump_animation
+@onready var water_tank_barfiller: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
+@onready var pumpwater: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpwater
+@onready var pumpair: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpair
+@onready var frequencymetter: Node3D = $CharacterBody3D/Neck/Camera3D/frequencymetter
 
 
 
@@ -91,7 +95,6 @@ func _process(delta: float) -> void:
 	swaptool()
 	headbobhandle()
 	staminahandle()
-
 	
 	# get the raw input values
 	var input_direction = Vector3(
@@ -232,28 +235,33 @@ func waterpumphandle():
 	if tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
 			is_attacking = true
 			pump_animation.play("use")
+			pumpwater.play()
 			waterpump_hitbox.monitoring = true
-			taserattack.pitch_scale = randf_range(.8,1.2)
-			taserattack.play()
-			stamina = stamina -stamina_attack_cap
+			
 
 func _on_pump_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name== "use":
 		pump_animation.play("idle")
 		waterpump_hitbox.monitoring = false
 		is_attacking=false
-
+		print("use animation")
+		pumpwater.stop()
+		
+	
 func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("pond"):
 		print("water pumped")
-		player_water += 1
+		player_water = 5
 		$bar_water.value= player_water
-	
 		
-		
+func succwater():
+	if player_water == 5:
+		water_tank_barfiller.show()
+	elif player_water == 0:
+		water_tank_barfiller.hide() 
 #handles tool selection
 func swaptool() -> void:
-		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3:
+		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4:
 			tool_inhand += 1
 			#print(tool_inhand)
 			is_attacking=false
@@ -266,15 +274,20 @@ func swaptool() -> void:
 				axe.show()
 				taser.hide()
 				waterpump.hide()
+				frequencymetter.hide()
 			2:
 				axe.hide()
 				taser.show()
 				waterpump.hide()
+				frequencymetter.hide()
 			3:
 				axe.hide()
 				taser.hide()
 				waterpump.show()
-
-
-
+				frequencymetter.hide()
+			4: 	
+				frequencymetter.show()
+				taser.hide()
+				waterpump.hide()
+				axe.hide()
 		

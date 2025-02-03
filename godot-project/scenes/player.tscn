@@ -1,10 +1,11 @@
-[gd_scene load_steps=68 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=72 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
 [ext_resource type="AudioStream" uid="uid://01qvkmavy2ao" path="res://audio/FEETHmn-GRASS_AUDIOELK-Fs Grass Shoes Outdoors 01_AUDIOELK_AUDIOELK.wav" id="2_84cct"]
 [ext_resource type="AudioStream" uid="uid://b6fgwsetflfl8" path="res://audio/axe-slash-1-106748.mp3" id="2_tdb4p"]
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
+[ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
 [ext_resource type="AudioStream" uid="uid://dio8iskfjkea7" path="res://audio/Electric Fence Startup Test.ogg" id="4_m5efg"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
@@ -109,22 +110,78 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hvr7a")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v57j1"]
-points = PackedVector3Array(0.0599024, 0.756465, 0.0599024, -0.0564541, -0.756465, -0.0564541, -0.0564541, -0.756465, 0.0599024, -0.0564541, 0.756465, -0.0564541, 0.0599024, -0.756465, -0.0564541, 0.0599024, -0.756465, 0.0599024, -0.0564541, 0.756465, 0.0599024, 0.0599024, 0.756465, -0.0564541)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bnja"]
+points = PackedVector3Array(1.31567, 0.0484763, 0.315734, -2.9493, -0.0191922, -0.801427, -3.11892, -0.0530597, -0.598292, -3.32218, 0.0823437, 0.654292, -2.98342, -0.0869271, 0.688067, 1.45118, -0.0869271, -0.022662, 1.24792, 0.0823437, -0.022662, -3.18667, 0.0823437, -0.53058, -3.25442, -0.0869271, -0.36122, 1.34931, -0.0869271, 0.315734, -2.91567, -0.0191922, 0.857427, -3.32218, -0.0869271, 0.654292, 1.38342, 0.0823437, 0.248022, -2.9493, 0.0484763, 0.82349, -2.91567, 0.0484763, -0.699778, -3.38993, 0.0484763, 0.755778, 1.38342, 0.0484763, -0.022662, -2.8138, 0.0823437, 0.688067, -3.25442, 0.0823437, -0.36122, 1.51893, -0.0869271, 0.180148, 1.28156, -0.0869271, -0.056599, 1.45118, 0.0823437, 0.0786619, -3.15256, -0.0191922, 0.857427, -2.91567, -0.0530597, 0.789715, 1.28156, -0.0191922, -0.056599, -2.9493, -0.0530597, -0.598292, -3.05117, -0.0869271, -0.36122, 1.34931, -0.0191922, 0.315734, 0.908684, -0.0869271, -0.0903736, -3.05117, 0.0484763, -0.699778, -3.18667, -0.0530597, -0.53058, -3.32218, -0.0869271, 0.518869)
 
 [sub_resource type="Animation" id="Animation_7ww6s"]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D:position")
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1.3, -0.481431, -1.245)]
+"values": [Vector3(0, 1.42541, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.473715, -0.474713, -0.901513)]
+}
+
+[sub_resource type="Animation" id="Animation_waixj"]
+resource_name = "attack_animation"
+length = 0.4015
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0585064, -3.10665, -0.405869), Vector3(-0.0585064, -0.831943, -0.405869)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.47397, -0.49284, -0.901948), Vector3(-0.0842986, -0.49284, -0.901948)]
+}
+
+[sub_resource type="Animation" id="Animation_ryp1e"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.473715, -0.474713, -0.901513), Vector3(0.474, -0.495, -0.902)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -136,99 +193,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.42541, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_waixj"]
-resource_name = "attack_animation"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.3, -0.481431, -1.245)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.0835086, 0.0605323, -1.18629)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:rotation")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(-2, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.42541, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ryp1e"]
-resource_name = "new_animation"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.233333, 0.5, 0.766667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.471, -1.245), Vector3(1.3, -0.481431, -1.245), Vector3(1.3, -0.491, -1.245)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(4.13291e-05, 0.103099, -0.244246)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(-4.03662e-09, -3.07345, -1.43782)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
@@ -525,7 +490,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_j3x3h")
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_iv1op"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80s8p"]
+albedo_color = Color(0.424762, 0.606788, 1, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jans1"]
 points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
@@ -544,6 +510,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-0.3, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.0472, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_tacip"]
 resource_name = "idle"
@@ -561,9 +539,59 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-0.3, 0, 0), Vector3(-0.3, 0.02, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.0472, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_dopp3"]
 resource_name = "use"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.3, 0.0122296, 0), Vector3(-0.3, 0.353052, -1.00907)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.0472, 0), Vector3(-0.299042, 1.13432, -0.563288)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"succwater"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2hn1n"]
 _data = {
@@ -946,6 +974,43 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b06an")
 
+[sub_resource type="Animation" id="Animation_l7q3u"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.3, 0, 0), Vector3(-0.3, 0.02, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6emil"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjlq6"]
+_data = {
+"RESET": SubResource("Animation_6emil"),
+"idle": SubResource("Animation_l7q3u")
+}
+
 [sub_resource type="Animation" id="Animation_rayom"]
 length = 0.001
 tracks/0/type = "value"
@@ -1043,25 +1108,19 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Axe" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
-transform = Transform3D(0.144875, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144875, 0, 0, 0)
-visible = false
+transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
-transform = Transform3D(0.965166, 0.240545, 0.102916, -0.241825, 0.97032, -4.13141e-05, -0.0998718, -0.0248479, 0.994689, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
 mesh = SubResource("ArrayMesh_ryk4c")
 
 [node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]
-transform = Transform3D(1.14174, 0, 1.11759e-08, 0, 1.22358, -2.23517e-08, 3.72529e-09, 0, 1.19474, 0, 0, 0)
+transform = Transform3D(0.04053, -1.2191, 0.092915, -1.13771, -0.0504289, -0.0874167, 0.0868928, -0.0916438, -1.18791, -0.0139101, -0.00391805, 0.14038)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
-transform = Transform3D(2, -5.55111e-17, -7.45058e-09, 0, 2, -1.49012e-08, 7.45058e-09, 1.49012e-08, 2, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_v57j1")
-
-[node name="axeswing" type="AudioStreamPlayer3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]
-stream = ExtResource("2_tdb4p")
-volume_db = 32.0
-bus = &"Sfx"
+transform = Transform3D(0.0310916, -0.872763, 0.0666574, -0.814282, -0.0336834, -0.0612122, 0.0650938, -0.061242, -0.832217, -0.0123444, -0.00286579, 0.117492)
+shape = SubResource("ConvexPolygonShape3D_5bnja")
 
 [node name="axe_animation" type="AnimationPlayer" parent="CharacterBody3D/Neck/Camera3D/Axe"]
 root_node = NodePath("../../../../..")
@@ -1069,6 +1128,12 @@ libraries = {
 "": SubResource("AnimationLibrary_2oo7c")
 }
 autoplay = "idle_axe_animation"
+
+[node name="axeswing" type="AudioStreamPlayer3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
+transform = Transform3D(-0.197398, -0.979201, -0.0468898, -0.975355, 0.200983, -0.0910381, 0.0985687, 0.0277635, -0.994743, 1.3, -0.481431, -1.10388)
+stream = ExtResource("2_tdb4p")
+volume_db = 32.0
+bus = &"Sfx"
 
 [node name="taser" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 0, 0, 0)
@@ -1098,6 +1163,7 @@ stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
+visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1109,16 +1175,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243207, 0, 0.000454187)
 mesh = SubResource("ArrayMesh_ccnbs")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
-transform = Transform3D(0.495688, -0.0699697, -0.321647, 0.165833, 0.223033, -0.0850267, 0.335929, -0.00685611, 0.516587, 1.80735, -0.684723, -0.0128509)
+[node name="waterTankBarfiller" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar"]
 visible = false
-mesh = SubResource("CapsuleMesh_iv1op")
+material_override = SubResource("StandardMaterial3D_80s8p")
+mesh = SubResource("ArrayMesh_ccnbs")
+skeleton = NodePath("")
 
-[node name="waterpump_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/MeshInstance3D"]
-transform = Transform3D(1.32837, 0, -2.02656e-06, -3.57628e-07, 0.369847, 1.19209e-06, -2.08616e-07, 2.42144e-08, 3.12965, 0, 0, 0)
+[node name="waterpump_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2"]
+transform = Transform3D(0.0900769, -0.0149259, -1.88249, 0.220288, 0.0824881, -0.266104, 0.790302, -0.0212913, 0.288733, -0.0236304, -0.120767, -0.0122709)
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/MeshInstance3D/waterpump_hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox"]
 transform = Transform3D(1, -3.08791e-06, -2.96915e-08, 1.0293e-06, 3, 4.96e-09, 4.94858e-08, -2.48002e-08, 0.6, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_jans1")
 
@@ -1126,13 +1193,18 @@ shape = SubResource("ConvexPolygonShape3D_jans1")
 libraries = {
 "": SubResource("AnimationLibrary_2hn1n")
 }
+autoplay = "idle"
+
+[node name="pumpwater" type="AudioStreamPlayer3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
+stream = ExtResource("4_a65o0")
+bus = &"Sfx"
 
 [node name="frequencymetter" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
 visible = false
 
 [node name="frequencyMetter2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/frequencymetter"]
-transform = Transform3D(0.74129, -0.0833058, 0.665997, 0.0941529, 0.995363, 0.0197073, -0.66455, 0.0480966, 0.745695, 1.9315, -0.574654, 0.0419816)
+transform = Transform3D(-0.668444, -0.181791, -0.721206, -0.194181, 0.978694, -0.0667213, 0.717969, 0.0954445, -0.689502, 1.9315, -0.574654, 0.0419816)
 mesh = SubResource("ArrayMesh_22n0j")
 skeleton = NodePath("")
 
@@ -1175,6 +1247,12 @@ skeleton = NodePath("")
 [node name="frequencyPoint_R" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2"]
 mesh = SubResource("ArrayMesh_qejbs")
 skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Neck/Camera3D/frequencymetter"]
+libraries = {
+"": SubResource("AnimationLibrary_cjlq6")
+}
+autoplay = "idle"
 
 [node name="headbob" type="AnimationPlayer" parent="CharacterBody3D/Neck"]
 root_node = NodePath("../..")
@@ -1245,5 +1323,5 @@ texture_progress = ExtResource("11_5twbf")
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox" to="." method="_on_taser_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]
-[connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/waterpump/MeshInstance3D/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
+[connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/waterpump/pump_animation" to="." method="_on_pump_animation_animation_finished"]

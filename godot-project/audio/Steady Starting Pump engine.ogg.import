@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://h114y5i4v68o"
+path="res://.godot/imported/Steady Starting Pump engine.ogg-fa388d32f94814b977af15e14ad6432b.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Steady Starting Pump engine.ogg"
+dest_files=["res://.godot/imported/Steady Starting Pump engine.ogg-fa388d32f94814b977af15e14ad6432b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
