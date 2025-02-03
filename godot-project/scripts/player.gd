@@ -2,7 +2,7 @@ extends Node3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:int = 5
+var speed:float = 5
 var sprintSpeed:int = 10
 var totalSpeed:int = speed	
 var stamina:float = 100
@@ -20,7 +20,10 @@ var is_attacking : bool = false
 @export var stamina_attack_cap:int = 35
 
 var player_wood:int = 0
-var player_water:int = 0
+var player_water:float = 0
+var fillingwater_player: bool = false
+var waterpumpsound:bool =false
+
 
 
 @onready var character_body_3d: CharacterBody3D = $CharacterBody3D
@@ -40,13 +43,11 @@ var player_water:int = 0
 @onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
 @onready var bar_wood: TextureProgressBar = $bar_wood
-@onready var bar_water: TextureProgressBar = $bar_water
 @onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
 @onready var waterpump_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
 @onready var pump_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/waterpump/pump_animation
 @onready var water_tank_barfiller: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
 @onready var pumpwater: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpwater
-@onready var pumpair: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpair
 @onready var frequencymetter: Node3D = $CharacterBody3D/Neck/Camera3D/frequencymetter
 
 
@@ -88,7 +89,6 @@ func _on_state_changed(state):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
-	
 	waterpumphandle()
 	axeattack()
 	stunattack()
@@ -233,34 +233,41 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 		
 		
 func waterpumphandle():
-	if tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-			is_attacking = true
-			pump_animation.play("use")
-			pumpwater.play()
-			waterpump_hitbox.monitoring = true
-			pp_root_node.message({"action": 15});
-			
-
-func _on_pump_animation_animation_finished(anim_name: StringName) -> void:
-	if anim_name== "use":
-		pump_animation.play("idle")
+	water_tank_barfiller.scale.x = player_water * 0.2
+	if fillingwater_player and player_water < 5: player_water += 0.1
+	
+	if Input.is_action_just_released("attack"):
+		pump_animation.stop()
+		waterpumpsound = false
 		waterpump_hitbox.monitoring = false
 		is_attacking=false
-		print("use animation")
+		fillingwater_player = false
 		pumpwater.stop()
+		pump_animation.play("idle")
+		speed=5
+	if tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state:
+		is_attacking = true
+		pump_animation.play("use")
+		waterpumpsound = true
+		waterpump_hitbox.monitoring = true
+		speed=1
+		pp_root_node.message({"action": 15});
+
+	if waterpumpsound and !pumpwater.playing:
+		pumpwater.play()
 		
 	
 func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("pond"):
+	if area.is_in_group("pond") and is_attacking:
 		print("water pumped")
-		player_water = 5
-		$bar_water.value= player_water
 		
-func succwater():
-	if player_water == 5:
-		water_tank_barfiller.show()
-	elif player_water == 0:
-		water_tank_barfiller.hide() 
+		fillingwater_player = true
+		speed=0.7
+func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
+	if area.is_in_group("pond") and is_attacking:
+		fillingwater_player = false
+
+	 
 #handles tool selection
 func swaptool() -> void:
 		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4:
