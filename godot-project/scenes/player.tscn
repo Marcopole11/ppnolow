@@ -1047,7 +1047,7 @@ transform = Transform3D(0.144875, 0, 0.98945, 0, 1, 0, -0.98945, 0, 0.144875, 0,
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/Axe"]
-transform = Transform3D(0.965166, 0.240545, 0.102916, -0.241825, 0.97032, -4.13291e-05, -0.0998718, -0.0248479, 0.994689, 1.3, -0.481431, -1.245)
+transform = Transform3D(0.965166, 0.240545, 0.102916, -0.241825, 0.97032, -4.13144e-05, -0.0998718, -0.0248479, 0.994689, 1.3, -0.481431, -1.245)
 mesh = SubResource("ArrayMesh_ryk4c")
 
 [node name="axe_hitbox" type="Area3D" parent="CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D"]
@@ -1100,7 +1100,7 @@ stream = ExtResource("4_m5efg")
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
 
 [node name="waterTank2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
-transform = Transform3D(-0.702415, 0, -0.71177, 0, 1, 0, 0.71177, 0, -0.702415, 1.83205, -0.563956, -0.022795)
+transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
 mesh = SubResource("ArrayMesh_n210x")
 skeleton = NodePath("")
 
