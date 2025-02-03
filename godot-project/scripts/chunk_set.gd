@@ -35,4 +35,3 @@ func _on_pp_entity_node_state_changed(new_state):
 			terrain.rotation.y = deg_to_rad(180);
 		add_child(terrain);
 		placed = true;
-		print(new_state);

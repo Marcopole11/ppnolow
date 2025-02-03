@@ -199,6 +199,7 @@ func axeattack():
 		axeswing.pitch_scale = randf_range(.8,1.2)
 		axeswing.play()
 		stamina = stamina -stamina_attack_cap
+		pp_root_node.message({"action": 25});
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
@@ -237,6 +238,7 @@ func waterpumphandle():
 			pump_animation.play("use")
 			pumpwater.play()
 			waterpump_hitbox.monitoring = true
+			pp_root_node.message({"action": 15});
 			
 
 func _on_pump_animation_animation_finished(anim_name: StringName) -> void:
@@ -265,10 +267,12 @@ func swaptool() -> void:
 			tool_inhand += 1
 			#print(tool_inhand)
 			is_attacking=false
+			pp_root_node.message({"tool": tool_inhand});
 		if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
 			tool_inhand -= 1
 			#print(tool_inhand)
 			is_attacking=false
+			pp_root_node.message({"tool": tool_inhand});
 		match tool_inhand:
 			1:
 				axe.show()
