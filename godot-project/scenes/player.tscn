@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=71 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=72 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
 [ext_resource type="Texture2D" uid="uid://dtymjkt5stucn" path="res://Texture/Texturaswood.png" id="10_0wqcs"]
+[ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="10_q4k41"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovxth"]
 
@@ -961,6 +961,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b06an")
 
+[sub_resource type="Animation" id="Animation_l7q3u"]
+resource_name = "idle"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -969,11 +971,13 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.3, 0, 0), Vector3(-0.3, 0.02, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_6emil"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -982,6 +986,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-0.3, 0, 0)]
@@ -1038,7 +1043,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 2.68235, 0), Vector3(-0.2, 2.882, 0), Vector3(0, 2.68235, 0), Vector3(0.2, 2.882, 0)]
+"values": [Vector3(0, 4.937, 0), Vector3(-0.2, 5.177, 0), Vector3(0, 4.937, 0), Vector3(0.2, 5.247, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_0425j"]
@@ -1145,7 +1150,7 @@ autoplay = "idle_taser"
 stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
+transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
 
 [node name="waterTank2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1271,6 +1276,10 @@ texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("7_i5emr")
 metadata/_edit_use_anchors_ = true
 
+[node name="player" parent="." instance=ExtResource("10_q4k41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48211, 0)
+visible = false
+
 [node name="bar_wood" type="TextureProgressBar" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
@@ -1291,4 +1300,5 @@ texture_progress = ExtResource("10_0wqcs")
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox" to="." method="_on_taser_hitbox_area_entered"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]
 [connection signal="area_entered" from="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
+[connection signal="area_exited" from="CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_exited"]
 [connection signal="animation_finished" from="CharacterBody3D/Neck/Camera3D/waterpump/pump_animation" to="." method="_on_pump_animation_animation_finished"]

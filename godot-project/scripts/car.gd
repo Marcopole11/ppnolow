@@ -23,7 +23,7 @@ var car_water_indicator:int = 0
 
 var player = null
 var distance:float
-
+var areadistance = [30,50,80,120]
 var pp_root_node
 var pushForce = 5
 
@@ -76,8 +76,11 @@ func _process(delta: float) -> void:
 		if checkarraysize.size() > 0:
 			player = checkarraysize[0]
 	if player != null:
-		var distancia = global_position.distance_to(player.global_position)
-		print(distancia)
+		distance = global_position.distance_to(player.global_position)
+	
+	#print(areanum(distance))
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
@@ -120,7 +123,10 @@ func movecar():
 	if car_water > 0 and car_fuel > 0:
 		pass
 
-
+func areanum(distancia):
+	for i in range(areadistance.size()):
+		if distancia < areadistance[i]:
+			return i;
 
 
 
