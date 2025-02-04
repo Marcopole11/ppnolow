@@ -76,9 +76,9 @@ func _process(delta: float) -> void:
 		if checkarraysize.size() > 0:
 			player = checkarraysize[0]
 	if player != null:
-		distance = global_position.distance_to(player.global_position)
-	
-	#print(areanum(distance))
+		Menusettings.distance = global_position.distance_to(player.global_position)
+	#print(Menusettings.distance)
+	#print(areanum(Menusettings))
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -123,36 +123,10 @@ func movecar():
 	if car_water > 0 and car_fuel > 0:
 		pass
 
-func areanum(distancia):
+func areanum(x):
 	for i in range(areadistance.size()):
-		if distancia < areadistance[i]:
+		if x < areadistance[i]:
 			return i;
 
 
-
-func _on_distancia_1_body_exited(body: Node3D) -> void:
 	print("distance 2")
-
-
-func _on_area_2_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_3_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_4_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_5_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_6_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_7_body_exited(body: Node3D) -> void:
-	pass # Replace with function body.

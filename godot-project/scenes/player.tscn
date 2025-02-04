@@ -961,6 +961,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b06an")
 
+[sub_resource type="Animation" id="Animation_6emil"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_l7q3u"]
 resource_name = "idle"
 loop_mode = 1
@@ -975,21 +990,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.3, 0, 0), Vector3(-0.3, 0.02, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_6emil"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.3, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjlq6"]
@@ -1151,6 +1151,7 @@ stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
 transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
+visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1187,11 +1188,11 @@ stream = ExtResource("4_a65o0")
 bus = &"Sfx"
 
 [node name="frequencymetter" type="Node3D" parent="CharacterBody3D/Neck/Camera3D"]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.3, 0, 0)
+transform = Transform3D(0.5, 0, 0.866025, 0.0235462, 0.99963, -0.0135944, -0.865705, 0.0271889, 0.499815, -0.3, 0, 0)
 visible = false
 
 [node name="frequencyMetter2" type="MeshInstance3D" parent="CharacterBody3D/Neck/Camera3D/frequencymetter"]
-transform = Transform3D(-0.668444, -0.181791, -0.721206, -0.194181, 0.978694, -0.0667213, 0.717969, 0.0954445, -0.689502, 1.9315, -0.574654, 0.0419816)
+transform = Transform3D(-0.252683, -0.967494, -0.0103711, -0.92372, 0.244411, -0.294972, 0.287918, -0.064954, -0.955451, 1.9315, -0.574654, 0.0419817)
 mesh = SubResource("ArrayMesh_22n0j")
 skeleton = NodePath("")
 
