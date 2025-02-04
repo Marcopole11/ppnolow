@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=17 format=3 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
@@ -9,6 +9,19 @@ data = PackedVector3Array(0.8835, 0.1498, 1.5663, 0.7118, -0.4949, 2.2444, 0.883
 
 [sub_resource type="PrismMesh" id="PrismMesh_cfux2"]
 size = Vector3(7, 7, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygm08"]
+size = Vector3(2.91251, 5.29794, 2.64606)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bd7id"]
+angle_min = -60.0
+angle_max = 120.0
+spread = 25.482
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1jmb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
 albedo_color = Color(1, 0, 0, 1)
@@ -22,45 +35,199 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bd7id"]
-angle_min = -60.0
-angle_max = 120.0
-spread = 25.482
-initial_velocity_min = 1.0
-initial_velocity_max = 2.0
-gravity = Vector3(0, 0, 0)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2k0e5"]
+graph_offset = Vector2(-447.075, 22.4985)
 
-[sub_resource type="SphereMesh" id="SphereMesh_v1jmb"]
+[sub_resource type="Animation" id="Animation_cp3j7"]
+resource_name = "car_shake"
+length = 0.257
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro/carro:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("carro/foco:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.140426, 2.92126), Vector3(0, -0.0885884, 2.92126)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("carro/Caldera:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.58779, 0.141625, 0.468698), Vector3(0.58779, 0.193462, 0.468698)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("carro/waterlvl_001:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("carro/waterlvl_003:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("carro/waterlvl_004:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("carro/waterlvl_002:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
+}
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8g8nu"]
-radius = 72.8159
+[sub_resource type="Animation" id="Animation_ynb1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro/carro:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("carro/foco:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.140426, 2.92126)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("carro/Caldera:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.58779, 0.141625, 0.468698)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("carro/waterlvl_001:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("carro/waterlvl_003:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("carro/waterlvl_004:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("carro/waterlvl_002:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0392416, 0)]
+}
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sx5dl"]
-radius = 47.9884
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_m3ppi"]
-radius = 99.1431
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_dw00g"]
-radius = 128.313
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_rbl6a"]
-radius = 153.18
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ar7pr"]
-radius = 181.744
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_iwxt0"]
-radius = 213.328
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ygm08"]
-size = Vector3(2.91251, 5.29794, 2.64606)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hk3q6"]
+_data = {
+"RESET": SubResource("Animation_ynb1b"),
+"car_shake": SubResource("Animation_cp3j7")
+}
 
 [node name="StaticBody3D" type="StaticBody3D"]
+transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 0, 0.53966, 0)
+collision_layer = 3
 script = ExtResource("1_kbort")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
+visible = false
 shape = SubResource("ConcavePolygonShape3D_7xo40")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -76,43 +243,47 @@ type = "car"
 [node name="carro" parent="Node3D" instance=ExtResource("3_ja2rn")]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
 
-[node name="waterlvl_001" parent="Node3D/carro" index="11"]
-material_override = SubResource("StandardMaterial3D_6pv0p")
+[node name="foco" parent="Node3D/carro" index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0, -0.140426, 2.92126)
 
-[node name="waterlvl_002" parent="Node3D/carro" index="12"]
-material_override = SubResource("StandardMaterial3D_5oeop")
-
-[node name="waterlvl_003" parent="Node3D/carro" index="13"]
-material_override = SubResource("StandardMaterial3D_gvcsg")
-
-[node name="waterlvl_004" parent="Node3D/carro" index="14"]
-material_override = SubResource("StandardMaterial3D_d6cvv")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504903, 2.68835, 0.327893)
-light_color = Color(1, 0.434811, 0.366139, 1)
-shadow_enabled = true
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, -0.993609, 0.112874, 0, -0.112874, -0.993609, 0.052788, 3.42882, 6.77647)
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco" index="0"]
+transform = Transform3D(0.278655, 0, 0, 0, -0.249256, 0.0797594, 0, -0.0797372, -0.249521, 0.0229513, -0.0467405, 0.326509)
 shadow_enabled = true
 spot_range = 3.47439
 spot_angle = 81.612
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/SpotLight3D"]
-transform = Transform3D(1, 0, 0, 0, 0.954204, 0.299157, 0, -0.299157, 0.954204, 0, 0.0528086, -0.184275)
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 0.977124, 0.212672, 0, -0.212672, 0.977124, 0, 0.0528088, -0.184275)
 shadow_enabled = true
-spot_range = 47.106
+spot_range = 109.134
 spot_attenuation = -0.82
 spot_angle = 32.3859
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/SpotLight3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/carro/foco/SpotLight3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, 0, 1, 0, -0.482744, -1.06729)
 omni_range = 2.35081
 omni_attenuation = -1.286
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(-0.100004, -2.28712, -0.221594, 2.29783, -0.0995376, -0.00964401, 2.60813e-09, -0.221804, 2.28928, -0.0390236, 7.04257, -2.17268)
+[node name="Caldera" parent="Node3D/carro" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58779, 0.141625, 0.468698)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/carro/Caldera" index="0"]
+transform = Transform3D(0.278655, 0, 0, 0, 0.261696, 0, 0, 0, 0.261962, -0.368267, -0.553672, -0.0218149)
+light_color = Color(1, 0.434811, 0.366139, 1)
+shadow_enabled = true
+
+[node name="carro" parent="Node3D/carro" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="caldera_detector" type="Area3D" parent="Node3D/carro/carro" index="0"]
+transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, 1.53661, -1.56873, 0.304321)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/caldera_detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302601, 2.21225, 0.329741)
+shape = SubResource("BoxShape3D_ygm08")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D/carro/carro" index="1"]
+transform = Transform3D(-0.04348, -0.9944, -0.0963452, 0.999057, -0.0432772, -0.00419305, 1.13397e-09, -0.0964365, 0.995339, -0.0169668, 1.47381, -0.640323)
 visibility_range_fade_mode = 1
 amount = 15
 lifetime = 1.94
@@ -124,8 +295,8 @@ trail_lifetime = 1.61
 process_material = SubResource("ParticleProcessMaterial_bd7id")
 draw_pass_1 = SubResource("SphereMesh_v1jmb")
 
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(-0.100004, -2.28712, -0.221594, 2.29783, -0.0995376, -0.00964401, 2.60813e-09, -0.221804, 2.28928, -0.0390236, 6.34556, -0.39833)
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D/carro/carro" index="2"]
+transform = Transform3D(-0.04348, -0.9944, -0.0963452, 0.999057, -0.0432772, -0.00419305, 1.13397e-09, -0.0964365, 0.995339, -0.0169668, 1.17076, 0.131134)
 visibility_range_fade_mode = 1
 amount = 15
 lifetime = 1.94
@@ -136,63 +307,43 @@ collision_base_size = 0.0
 trail_lifetime = 1.61
 process_material = SubResource("ParticleProcessMaterial_bd7id")
 draw_pass_1 = SubResource("SphereMesh_v1jmb")
+
+[node name="calderaagua_detector2" type="Area3D" parent="Node3D/carro/carro" index="3"]
+transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, -1.23102, -1.57822, 0.304321)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/calderaagua_detector2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643817, 2.21225, 0.329741)
+shape = SubResource("BoxShape3D_ygm08")
+
+[node name="waterlvl_001" parent="Node3D/carro" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6pv0p")
+
+[node name="waterlvl_002" parent="Node3D/carro" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5oeop")
+
+[node name="waterlvl_003" parent="Node3D/carro" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gvcsg")
+
+[node name="waterlvl_004" parent="Node3D/carro" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_d6cvv")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
 aabb = AABB(-1, -1, -1, 2, 6, 2)
 enable_node_path = NodePath("../carro")
 
-[node name="distancia1" type="Area3D" parent="Node3D"]
-transform = Transform3D(0.214039, 0, 0, 0, 0.401726, 0, 0, 0, 0.303432, 0, 0, 0)
-visible = false
+[node name="AnimationTree" type="AnimationTree" parent="Node3D"]
+tree_root = SubResource("AnimationNodeBlendTree_2k0e5")
+anim_player = NodePath("Car_animations")
 
-[node name="Collider1" type="CollisionShape3D" parent="Node3D/distancia1"]
-shape = SubResource("SphereShape3D_8g8nu")
-
-[node name="area 2" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="colider2" type="CollisionShape3D" parent="Node3D/distancia1/area 2"]
-shape = SubResource("SphereShape3D_sx5dl")
-
-[node name="area3" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="collider3" type="CollisionShape3D" parent="Node3D/distancia1/area3"]
-shape = SubResource("SphereShape3D_m3ppi")
-
-[node name="area4" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="collider4" type="CollisionShape3D" parent="Node3D/distancia1/area4"]
-shape = SubResource("SphereShape3D_dw00g")
-
-[node name="area5" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="collider5" type="CollisionShape3D" parent="Node3D/distancia1/area5"]
-shape = SubResource("SphereShape3D_rbl6a")
-
-[node name="area6" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="collider6" type="CollisionShape3D" parent="Node3D/distancia1/area6"]
-shape = SubResource("SphereShape3D_ar7pr")
-
-[node name="area7" type="Area3D" parent="Node3D/distancia1"]
-
-[node name="collider7" type="CollisionShape3D" parent="Node3D/distancia1/area7"]
-shape = SubResource("SphereShape3D_iwxt0")
-
-[node name="caldera_detector" type="Area3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5342, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/caldera_detector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302601, 2.21225, 0.329741)
-shape = SubResource("BoxShape3D_ygm08")
-
-[node name="calderaagua_detector2" type="Area3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83134, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/calderaagua_detector2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643817, 2.21225, 0.329741)
-shape = SubResource("BoxShape3D_ygm08")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
+[node name="Car_animations" type="AnimationPlayer" parent="Node3D/AnimationTree"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_hk3q6")
+}
 
 [editable path="Node3D/carro"]

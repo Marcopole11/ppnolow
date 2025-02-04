@@ -1128,7 +1128,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 9.24431e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
@@ -1155,6 +1155,7 @@ visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
+gi_mode = 0
 mesh = SubResource("ArrayMesh_t86ew")
 skeleton = NodePath("")
 
@@ -1192,6 +1193,7 @@ transform = Transform3D(0.5, 0, 0.866025, 0.0235462, 0.99963, -0.0135944, -0.865
 
 [node name="frequencyMetter2" type="MeshInstance3D" parent="Neck/Camera3D/frequencymetter"]
 transform = Transform3D(-0.252683, -0.967494, -0.0103711, -0.92372, 0.244411, -0.294972, 0.287918, -0.064954, -0.955451, 1.9315, -0.574654, 0.0419817)
+gi_mode = 0
 mesh = SubResource("ArrayMesh_pqlvi")
 skeleton = NodePath("")
 
@@ -1241,6 +1243,10 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="player" parent="Neck/Camera3D" instance=ExtResource("10_q4k41")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.45489, 0.987144)
+visible = false
+
 [node name="headbob" type="AnimationPlayer" parent="Neck"]
 root_node = NodePath("../..")
 libraries = {
@@ -1275,10 +1281,6 @@ fill_mode = 2
 texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("7_i5emr")
 metadata/_edit_use_anchors_ = true
-
-[node name="player" parent="." instance=ExtResource("10_q4k41")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48211, 0)
-visible = false
 
 [node name="bar_wood" type="TextureProgressBar" parent="."]
 anchors_preset = 2

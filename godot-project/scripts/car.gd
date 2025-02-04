@@ -5,14 +5,13 @@ extends StaticBody3D
 
 var en_caldera:bool = false
 
-
+var car_is_on:bool
 var obstacle: bool = false
 var lid_open: bool
 var lid_selected:bool = false
 @export var car_fuel: int = 0
 @export var car_water:float = 1.0
 var car_water_indicator:int = 0
-
 @onready var caldera_detector: Area3D = $Node3D/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/calderaagua_detector2
 @onready var distancia_1: Area3D = $Node3D/distancia1
@@ -42,6 +41,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	interact(delta,0)
 	addwatertocar()
 	car_water_indicator = round(car_water)
 	match car_water_indicator:
@@ -97,17 +97,24 @@ func _on_state_changed(state):
 	# set the entity's position, using the server's valuesw
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	global_transform.origin = Vector3(state.x, state.z, -state.y);
-
+	var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
+	if diff_in_position > Vector3(1,1,1):
+		global_transform.origin = Vector3(state.x, state.z, -state.y)
+		
 func _on_caldera_detector_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("caldera")
-	
+		if Input.is_action_just_pressed("interact"):
+			print("fuel in car",car_fuel)
+			
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("caldera de agua")
 		en_caldera = true
-	
+		if Input.is_action_just_pressed("interact"):
+			print("water in car",car_water)
+			car_water += 1
+			car_water_indicator +=1
 func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("fuera caldera de agua")
