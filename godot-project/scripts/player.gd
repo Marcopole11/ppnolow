@@ -340,11 +340,8 @@ func swaptool() -> void:
 		
 func freqmetterhandle():
 	var freqmetter_step = edgemap_distance/8
-	#var area= Menusettings.distance/freqmetter_step
-	var area = 1
-	print(round(area))
-	
-	match round(area):
+	var area:int= round(Menusettings.distance/freqmetter_step)
+	match area:
 		1:
 			frequency_point_001.show()
 			frequency_point_002.hide()
