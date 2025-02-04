@@ -2,8 +2,8 @@ extends CharacterBody3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:float = 5
-var sprintSpeed:int = 10
+var speed:float = 50
+var sprintSpeed:int = 200
 var totalSpeed:int = speed	
 var stamina:float = 100
 var maxstamina:float = 100
@@ -78,10 +78,18 @@ func _ready() -> void:
 	
 	# connect to the state_changed signal from pp_entity_node
 	var pp_entity_node= get_node_or_null("PPEntityNode");
-	pp_root_node.message({"color": {
-		"r": randf()/4,
-		"g": randf()/4, 
-		"b": randf()/4
+	if ServerStore.colorR == 0:
+		ServerStore.colorR = randf()/4;
+		ServerStore.colorG = randf()/4;
+		ServerStore.colorB = randf()/4;
+	pp_root_node.message({
+		"x": ServerStore.posX,
+		"y": ServerStore.posY,
+		"dimension": "game",
+		"color": {
+			"r": ServerStore.colorR,
+			"g": ServerStore.colorG, 
+			"b": ServerStore.colorB
 	}});
 	
 	if pp_entity_node:
@@ -94,11 +102,24 @@ func _on_state_changed(state):
 	# sync the player's position, using the server's values
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
-	if diff_in_position > Vector3(1,1,1):
-		global_transform.origin = Vector3(state.x, state.z, -state.y)
-
-
+	## var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
+	## if diff_in_position > Vector3(1,1,1):
+	##	global_transform.origin = Vector3(state.x, state.z, -state.y)
+	print(state)
+	#if ServerStore._checkPingNum(state.data.pingnum):
+	#	_server_failed(state)
+	if ServerStore._newPingNumCheck():
+		pass
+	
+	 
+func _server_failed(state):
+	ServerStore.posX = state.x
+	ServerStore.posY = state.y
+	ServerStore.colorR = state.color.r
+	ServerStore.colorG = state.color.g
+	ServerStore.colorB = state.color.b
+	get_tree().change_scene_to_file("res://scenes/main.tscn");
+	pass
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause_button"):
