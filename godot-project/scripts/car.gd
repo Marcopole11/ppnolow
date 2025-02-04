@@ -9,16 +9,14 @@ var car_is_on:bool
 var obstacle: bool = false
 var lid_open: bool
 var lid_selected:bool = false
-@export var car_fuel: int = 0
-@export var car_water:float = 1.0
 var car_water_indicator:int = 0
-@onready var caldera_detector: Area3D = $Node3D/caldera_detector
-@onready var calderaagua_detector_2: Area3D = $Node3D/calderaagua_detector2
-@onready var distancia_1: Area3D = $Node3D/distancia1
+@onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
+@onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
 @onready var waterlvl_001: MeshInstance3D = $Node3D/carro/waterlvl_001
 @onready var waterlvl_002: MeshInstance3D = $Node3D/carro/waterlvl_002
 @onready var waterlvl_003: MeshInstance3D = $Node3D/carro/waterlvl_003
 @onready var waterlvl_004: MeshInstance3D = $Node3D/carro/waterlvl_004
+@onready var car_animations: AnimationPlayer = $Node3D/AnimationTree/Car_animations
 
 var player = null
 var distance:float
@@ -41,9 +39,20 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	interact(delta,0)
-	addwatertocar()
-	car_water_indicator = round(car_water)
+	watertank_car_indicator()
+	
+	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
+		interact(delta,0)
+		car_animations.play("shake")
+	
+
+func fill_car_watertank():
+	if ServerStore.car_isfilling:
+		ServerStore.car_water += 0.01
+		print("llenandocoche ",ServerStore.car_water)
+
+func watertank_car_indicator():
+	car_water_indicator = round(ServerStore.car_water)
 	match car_water_indicator:
 		0:
 			waterlvl_001.hide()
@@ -78,8 +87,6 @@ func _process(delta: float) -> void:
 	if player != null:
 		Menusettings.distance = global_position.distance_to(player.global_position)
 	
-	
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
@@ -100,31 +107,21 @@ func _on_state_changed(state):
 	var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	if diff_in_position > Vector3(1,1,1):
 		global_transform.origin = Vector3(state.x, state.z, -state.y)
-		
-func _on_caldera_detector_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		print("caldera")
-		if Input.is_action_just_pressed("interact"):
-			print("fuel in car",car_fuel)
-			
+
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("caldera de agua")
-		en_caldera = true
-		if Input.is_action_just_pressed("interact"):
-			print("water in car",car_water)
-			car_water += 1
-			car_water_indicator +=1
+		ServerStore.is_in_watertank = true
+func _on_caldera_detector_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		print("caldera")
+		ServerStore.is_in_fuel = true
+
+func _on_caldera_detector_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		print("fuera caldera")
+		ServerStore.is_in_fuel = false
 func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("fuera caldera de agua")
-		en_caldera = false
-	
-func addwatertocar():
-	if Input.is_action_just_pressed("interact") and en_caldera:
-			car_water +=1
-			print("added water")
-	
-func movecar():
-	if car_water > 0 and car_fuel > 0:
-		pass
+		ServerStore.is_in_watertank = false

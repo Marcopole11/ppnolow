@@ -1,5 +1,12 @@
 extends Node
 
+var is_in_fuel:bool
+var is_in_watertank:bool
+var car_water:float
+var car_fuel:int
+var car_isfilling:bool = false
+
+
 var lobby_id: int
 
 var posX: float = 0;

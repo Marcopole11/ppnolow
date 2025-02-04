@@ -25,7 +25,6 @@ var fillingwater_player: bool = false
 var waterpumpsound:bool =false
 
 var edgemap_distance:int = 240
-
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var headbob: AnimationPlayer = $Neck/headbob
@@ -105,7 +104,7 @@ func _on_state_changed(state):
 	## var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	## if diff_in_position > Vector3(1,1,1):
 	##	global_transform.origin = Vector3(state.x, state.z, -state.y)
-	print(state)
+	#print(state)
 	#if ServerStore._checkPingNum(state.data.pingnum):
 	#	_server_failed(state)
 	if ServerStore._newPingNumCheck():
@@ -228,6 +227,11 @@ func play_step():
 
 #handles axe attacks
 func axeattack():
+	if ServerStore.is_in_fuel and ServerStore.car_fuel < 5 and Input.is_action_just_pressed("interact"):
+		ServerStore.car_fuel +=1
+		player_wood -= 1
+		print("combustible en el coche ",ServerStore.car_fuel)
+		$bar_wood.value = player_wood
 	if tool_inhand == 1 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
 		is_attacking = true
 		axe_animation.play("attack_animation")
@@ -266,12 +270,21 @@ func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
 func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("gato"):
 		print("enemy hitted")
-		
-		
+
 func waterpumphandle():
-	water_tank_barfiller.scale.x = player_water * 0.2
-	if fillingwater_player and player_water < 5: player_water += 0.1
+	if player_water == 0.0:
+		ServerStore.car_isfilling = false
 	
+	water_tank_barfiller.scale.x = player_water * 0.2
+	if fillingwater_player and player_water < 5: player_water += 0.1 
+	if Input.is_action_just_pressed("attack"):
+		print(ServerStore.is_in_watertank)
+		print (player_water > 0.0)
+	if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player_water > 0.0:
+		ServerStore.car_isfilling = true
+		is_attacking = true
+		waterpump.hide()
+
 	if Input.is_action_just_released("attack"):
 		pump_animation.stop()
 		waterpumpsound = false
@@ -281,7 +294,9 @@ func waterpumphandle():
 		pumpwater.stop()
 		pump_animation.play("idle")
 		speed=5
-	if tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state:
+		ServerStore.car_isfilling = false
+		waterpump.show()
+	if !ServerStore.is_in_watertank and tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state:
 		is_attacking = true
 		pump_animation.play("use")
 		waterpumpsound = true
@@ -291,8 +306,6 @@ func waterpumphandle():
 
 	if waterpumpsound and !pumpwater.playing:
 		pumpwater.play()
-		
-	
 func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		print("water pumped")
@@ -303,10 +316,9 @@ func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		fillingwater_player = false
 
-	 
 #handles tool selection
 func swaptool() -> void:
-		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4:
+		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4 and !is_attacking:
 			tool_inhand += 1
 			#print(tool_inhand)
 			is_attacking=false
@@ -337,7 +349,7 @@ func swaptool() -> void:
 				taser.hide()
 				waterpump.hide()
 				axe.hide()
-		
+
 func freqmetterhandle():
 	var freqmetter_step = edgemap_distance/8
 	var area:int= round(Menusettings.distance/freqmetter_step)
