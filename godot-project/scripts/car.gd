@@ -1,7 +1,7 @@
 # entity_movement.gd script
 
 # extend the functionality of your root node (here Node3D)
-extends Area3D
+extends StaticBody3D
 
 var en_caldera:bool = false
 
@@ -44,32 +44,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	addwatertocar()
 	car_water_indicator = round(car_water)
-	match car_water_indicator:
-		0:
-			waterlvl_001.hide()
-			waterlvl_002.hide()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		1:
-			waterlvl_001.show()
-			waterlvl_002.hide()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		2:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		3:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.show()
-			waterlvl_004.hide()
-		4:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.show()
-			waterlvl_004.show()
+	#match car_water_indicator:
+		#0:
+			#waterlvl_001.hide()
+			#waterlvl_002.hide()
+			#waterlvl_003.hide()
+			#waterlvl_004.hide()
+		#1:
+			#waterlvl_001.show()
+			#waterlvl_002.hide()
+			#waterlvl_003.hide()
+			#waterlvl_004.hide()
+		#2:
+			#waterlvl_001.show()
+			#waterlvl_002.show()
+			#waterlvl_003.hide()
+			#waterlvl_004.hide()
+		#3:
+			#waterlvl_001.show()
+			#waterlvl_002.show()
+			#waterlvl_003.show()
+			#waterlvl_004.hide()
+		#4:
+			#waterlvl_001.show()
+			#waterlvl_002.show()
+			#waterlvl_003.show()
+			#waterlvl_004.show()
 
 	if player == null:
 		var checkarraysize = get_tree().get_nodes_in_group("player") if get_tree() else []
