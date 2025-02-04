@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 			player = checkarraysize[0]
 	if player != null:
 		Menusettings.distance = global_position.distance_to(player.global_position)
-	print(Menusettings.distance)
+	
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
