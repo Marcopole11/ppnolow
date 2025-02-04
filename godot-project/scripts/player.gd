@@ -105,23 +105,23 @@ func _on_state_changed(state):
 	## var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	## if diff_in_position > Vector3(1,1,1):
 	##	global_transform.origin = Vector3(state.x, state.z, -state.y)
-	print(state)
-	#if ServerStore._checkPingNum(state.data.pingnum):
-	#	_server_failed(state)
-	if ServerStore._newPingNumCheck():
-		pass
-	
-	 
-func _server_failed(state):
+	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
 	ServerStore.posY = state.y
-	ServerStore.colorR = state.color.r
-	ServerStore.colorG = state.color.g
-	ServerStore.colorB = state.color.b
+	ServerStore.colorR = state.data.color.r
+	ServerStore.colorG = state.data.color.g
+	ServerStore.colorB = state.data.color.b
+	 
+func _server_failed():
 	get_tree().change_scene_to_file("res://scenes/main.tscn");
 	pass
 
 func _process(delta: float) -> void:
+	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+		_server_failed();
+	if ServerStore._newPingNumCheck():
+		pp_root_node.message({"pingnum": ServerStore.PingNum});
+	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
 	waterpumphandle()
