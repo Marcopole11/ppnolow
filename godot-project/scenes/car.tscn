@@ -246,7 +246,6 @@ transform = Transform3D(0.214039, 0, 0, 0, 0.401726, 0, 0, 0, 0.303432, 0, 0, 0)
 visible = false
 
 [node name="Collider1" type="CollisionShape3D" parent="Node3D/distancia1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_s1uyl")
 
 [node name="area 2" type="Area3D" parent="Node3D/distancia1"]
@@ -260,7 +259,6 @@ shape = SubResource("SphereShape3D_i6bnd")
 shape = SubResource("SphereShape3D_ayoxk")
 
 [node name="area4" type="Area3D" parent="Node3D/distancia1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="collider4" type="CollisionShape3D" parent="Node3D/distancia1/area4"]
 shape = SubResource("SphereShape3D_uuqrh")
@@ -276,7 +274,6 @@ shape = SubResource("SphereShape3D_vk3jq")
 shape = SubResource("SphereShape3D_joxt7")
 
 [node name="area7" type="Area3D" parent="Node3D/distancia1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="collider7" type="CollisionShape3D" parent="Node3D/distancia1/area7"]
 shape = SubResource("SphereShape3D_spp7a")

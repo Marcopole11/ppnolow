@@ -24,7 +24,7 @@ var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
 
-
+var edgemap_distance:int = 240
 
 @onready var character_body_3d: CharacterBody3D = $CharacterBody3D
 @onready var neck := $CharacterBody3D/Neck
@@ -49,6 +49,14 @@ var waterpumpsound:bool =false
 @onready var water_tank_barfiller: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
 @onready var pumpwater: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpwater
 @onready var frequencymetter: Node3D = $CharacterBody3D/Neck/Camera3D/frequencymetter
+@onready var frequency_point_001: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_001
+@onready var frequency_point_002: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_002
+@onready var frequency_point_003: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_003
+@onready var frequency_point_004: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_004
+@onready var frequency_point_005: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_005
+@onready var frequency_point_006: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_006
+@onready var frequency_point_007: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_007
+@onready var frequency_point_008: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_008
 
 
 
@@ -56,7 +64,14 @@ var waterpumpsound:bool =false
 # when the scene is loaded
 func _ready() -> void:
 	add_to_group("player")
-
+	frequency_point_001.hide()
+	frequency_point_002.hide()
+	frequency_point_003.hide()
+	frequency_point_004.hide()
+	frequency_point_005.hide()
+	frequency_point_006.hide()
+	frequency_point_007.hide()
+	frequency_point_008.hide()
 
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
@@ -95,7 +110,7 @@ func _process(delta: float) -> void:
 	swaptool()
 	headbobhandle()
 	staminahandle()
-	
+	freqmetterhandle()
 	# get the raw input values
 	var input_direction = Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -302,3 +317,81 @@ func swaptool() -> void:
 				waterpump.hide()
 				axe.hide()
 		
+func freqmetterhandle():
+	var freqmetter_step = edgemap_distance/8
+	var area= Menusettings.distance/freqmetter_step
+	print(round(area))
+	
+	match round(area):
+		1:
+			frequency_point_001.show()
+			frequency_point_002.hide()
+			frequency_point_003.hide()
+			frequency_point_004.hide()
+			frequency_point_005.hide()
+			frequency_point_006.hide()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		2:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.hide()
+			frequency_point_004.hide()
+			frequency_point_005.hide()
+			frequency_point_006.hide()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		3:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.hide()
+			frequency_point_005.hide()
+			frequency_point_006.hide()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		4:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.show()
+			frequency_point_005.hide()
+			frequency_point_006.hide()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		5:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.show()
+			frequency_point_005.show()
+			frequency_point_006.hide()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		6:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.show()
+			frequency_point_005.show()
+			frequency_point_006.show()
+			frequency_point_007.hide()
+			frequency_point_008.hide()
+		7:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.show()
+			frequency_point_005.show()
+			frequency_point_006.show()
+			frequency_point_007.show()
+			frequency_point_008.hide()
+		8:
+			frequency_point_001.show()
+			frequency_point_002.show()
+			frequency_point_003.show()
+			frequency_point_004.show()
+			frequency_point_005.show()
+			frequency_point_006.show()
+			frequency_point_007.show()
+			frequency_point_008.show()
