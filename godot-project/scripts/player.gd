@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
@@ -26,37 +26,36 @@ var waterpumpsound:bool =false
 
 var edgemap_distance:int = 240
 
-@onready var character_body_3d: CharacterBody3D = $CharacterBody3D
-@onready var neck := $CharacterBody3D/Neck
-@onready var camera := $CharacterBody3D/Neck/Camera3D
-@onready var headbob: AnimationPlayer = $CharacterBody3D/Neck/headbob
-@onready var stepgrass: AudioStreamPlayer3D = $CharacterBody3D/stepgrass
+@onready var neck := $Neck
+@onready var camera := $Neck/Camera3D
+@onready var headbob: AnimationPlayer = $Neck/headbob
+@onready var stepgrass: AudioStreamPlayer3D = $stepgrass
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: TextureProgressBar = $bar_stamina
-@onready var axe_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/Axe/axe_animation
-@onready var axe: Node3D = $CharacterBody3D/Neck/Camera3D/Axe
-@onready var axeswing: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/Axe/axeswing
-@onready var axe_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
-@onready var taser: Node3D = $CharacterBody3D/Neck/Camera3D/taser
-@onready var taser_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/taser/taser_animation
-@onready var taser_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
-@onready var taserattack: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/taser/taserattack
-@onready var waterpump: Node3D = $CharacterBody3D/Neck/Camera3D/waterpump
+@onready var axe_animation: AnimationPlayer = $Neck/Camera3D/Axe/axe_animation
+@onready var axe: Node3D = $Neck/Camera3D/Axe
+@onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
+@onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
+@onready var taser: Node3D = $Neck/Camera3D/taser
+@onready var taser_animation: AnimationPlayer = $Neck/Camera3D/taser/taser_animation
+@onready var taser_hitbox: Area3D = $Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
+@onready var taserattack: AudioStreamPlayer3D = $Neck/Camera3D/taser/taserattack
+@onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 @onready var bar_wood: TextureProgressBar = $bar_wood
-@onready var interact_ray: RayCast3D = $CharacterBody3D/Neck/Camera3D/InteractRay
-@onready var waterpump_hitbox: Area3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
-@onready var pump_animation: AnimationPlayer = $CharacterBody3D/Neck/Camera3D/waterpump/pump_animation
-@onready var water_tank_barfiller: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
-@onready var pumpwater: AudioStreamPlayer3D = $CharacterBody3D/Neck/Camera3D/waterpump/pumpwater
-@onready var frequencymetter: Node3D = $CharacterBody3D/Neck/Camera3D/frequencymetter
-@onready var frequency_point_001: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_001
-@onready var frequency_point_002: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_002
-@onready var frequency_point_003: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_003
-@onready var frequency_point_004: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_004
-@onready var frequency_point_005: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_005
-@onready var frequency_point_006: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_006
-@onready var frequency_point_007: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_007
-@onready var frequency_point_008: MeshInstance3D = $CharacterBody3D/Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_008
+@onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
+@onready var waterpump_hitbox: Area3D = $Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
+@onready var pump_animation: AnimationPlayer = $Neck/Camera3D/waterpump/pump_animation
+@onready var water_tank_barfiller: MeshInstance3D = $Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
+@onready var pumpwater: AudioStreamPlayer3D = $Neck/Camera3D/waterpump/pumpwater
+@onready var frequencymetter: Node3D = $Neck/Camera3D/frequencymetter
+@onready var frequency_point_001: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_001
+@onready var frequency_point_002: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_002
+@onready var frequency_point_003: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_003
+@onready var frequency_point_004: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_004
+@onready var frequency_point_005: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_005
+@onready var frequency_point_006: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_006
+@onready var frequency_point_007: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_007
+@onready var frequency_point_008: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_008
 
 
 
@@ -136,21 +135,22 @@ func _process(delta: float) -> void:
 	
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
-	translate(movement)
+	var collide = move_and_collide(movement)
 	
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	pp_root_node.message({
-		"x": movement[0],
-		"y": -movement[2], 
-		"z": 0,
-		"rotation":neck.rotation.y
-	});
+	if !collide:
+		pp_root_node.message({
+			"x": movement[0],
+			"y": -movement[2], 
+			"z": 0,
+			"rotation":neck.rotation.y
+		});
 
 func _physics_process(delta: float) -> void:
-	if $CharacterBody3D/Neck/Camera3D/InteractRay.is_colliding():
-		var target = $CharacterBody3D/Neck/Camera3D/InteractRay.get_collider()
+	if $Neck/Camera3D/InteractRay.is_colliding():
+		var target = $Neck/Camera3D/InteractRay.get_collider()
 		if target != null and target.has_method("interact"):
 			if Input.is_action_pressed("interact"):
 				target.interact(delta, Input.get_action_strength("interact"))
@@ -319,7 +319,8 @@ func swaptool() -> void:
 		
 func freqmetterhandle():
 	var freqmetter_step = edgemap_distance/8
-	var area= Menusettings.distance/freqmetter_step
+	#var area= Menusettings.distance/freqmetter_step
+	var area = 1
 	print(round(area))
 	
 	match round(area):

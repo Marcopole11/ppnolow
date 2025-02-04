@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
 [ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_ja2rn"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4vuy8"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_85j3d"]
 size = Vector3(7, 7, 16)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_janhg"]
@@ -59,7 +59,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_n210x"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_q8m1c"]
 resource_name = "items_Cylinder"
 _surfaces = [{
 "aabb": AABB(-0.425388, -0.214147, -0.306243, 0.792406, 0.309875, 0.611048),
@@ -101,22 +101,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hg7qe")
 
-[sub_resource type="PrismMesh" id="PrismMesh_8kndm"]
+[sub_resource type="PrismMesh" id="PrismMesh_cfux2"]
 size = Vector3(7, 7, 16)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5xm2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ct5ug"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
 albedo_color = Color(1, 0.498039, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6en8y"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc1ek"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mum0w"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bd7id"]
 angle_min = -60.0
 angle_max = 120.0
 spread = 25.482
@@ -124,47 +124,47 @@ initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 0, 0)
 
-[sub_resource type="SphereMesh" id="SphereMesh_nf8rm"]
+[sub_resource type="SphereMesh" id="SphereMesh_v1jmb"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_s1uyl"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_8g8nu"]
 radius = 72.8159
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_i6bnd"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_sx5dl"]
 radius = 47.9884
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ayoxk"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_m3ppi"]
 radius = 99.1431
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_uuqrh"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_dw00g"]
 radius = 128.313
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vk3jq"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_rbl6a"]
 radius = 153.18
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_joxt7"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ar7pr"]
 radius = 181.744
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_spp7a"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_iwxt0"]
 radius = 213.328
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vvpdt"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygm08"]
 size = Vector3(2.91251, 5.29794, 2.64606)
 
-[node name="Car" type="Area3D"]
+[node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_kbort")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3448, 0)
-shape = SubResource("BoxShape3D_4vuy8")
+shape = SubResource("BoxShape3D_85j3d")
 
 [node name="waterTank2" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-5.88884e-08, -0.78, -6.81898e-08, -0.78, 5.88884e-08, 6.81898e-08, -6.81898e-08, 6.81898e-08, -0.78, -1.91879, -0.416909, 0.0320153)
-mesh = SubResource("ArrayMesh_n210x")
+mesh = SubResource("ArrayMesh_q8m1c")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
-mesh = SubResource("PrismMesh_8kndm")
+mesh = SubResource("PrismMesh_cfux2")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("3_348wp")
@@ -176,16 +176,16 @@ type = "car"
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
 
 [node name="waterlvl_001" parent="Node3D/carro" index="11"]
-material_override = SubResource("StandardMaterial3D_d5xm2")
+material_override = SubResource("StandardMaterial3D_6pv0p")
 
 [node name="waterlvl_002" parent="Node3D/carro" index="12"]
-material_override = SubResource("StandardMaterial3D_ct5ug")
+material_override = SubResource("StandardMaterial3D_5oeop")
 
 [node name="waterlvl_003" parent="Node3D/carro" index="13"]
-material_override = SubResource("StandardMaterial3D_6en8y")
+material_override = SubResource("StandardMaterial3D_gvcsg")
 
 [node name="waterlvl_004" parent="Node3D/carro" index="14"]
-material_override = SubResource("StandardMaterial3D_oc1ek")
+material_override = SubResource("StandardMaterial3D_d6cvv")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504903, 2.68835, 0.327893)
@@ -220,8 +220,8 @@ explosiveness = 0.23
 randomness = 0.29
 collision_base_size = 0.0
 trail_lifetime = 1.61
-process_material = SubResource("ParticleProcessMaterial_mum0w")
-draw_pass_1 = SubResource("SphereMesh_nf8rm")
+process_material = SubResource("ParticleProcessMaterial_bd7id")
+draw_pass_1 = SubResource("SphereMesh_v1jmb")
 
 [node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D"]
 transform = Transform3D(-0.100004, -2.28712, -0.221594, 2.29783, -0.0995376, -0.00964401, 2.60813e-09, -0.221804, 2.28928, -0.0390236, 6.34556, -0.39833)
@@ -233,8 +233,8 @@ explosiveness = 0.23
 randomness = 0.29
 collision_base_size = 0.0
 trail_lifetime = 1.61
-process_material = SubResource("ParticleProcessMaterial_mum0w")
-draw_pass_1 = SubResource("SphereMesh_nf8rm")
+process_material = SubResource("ParticleProcessMaterial_bd7id")
+draw_pass_1 = SubResource("SphereMesh_v1jmb")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
@@ -246,63 +246,52 @@ transform = Transform3D(0.214039, 0, 0, 0, 0.401726, 0, 0, 0, 0.303432, 0, 0, 0)
 visible = false
 
 [node name="Collider1" type="CollisionShape3D" parent="Node3D/distancia1"]
-shape = SubResource("SphereShape3D_s1uyl")
+shape = SubResource("SphereShape3D_8g8nu")
 
 [node name="area 2" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="colider2" type="CollisionShape3D" parent="Node3D/distancia1/area 2"]
-shape = SubResource("SphereShape3D_i6bnd")
+shape = SubResource("SphereShape3D_sx5dl")
 
 [node name="area3" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="collider3" type="CollisionShape3D" parent="Node3D/distancia1/area3"]
-shape = SubResource("SphereShape3D_ayoxk")
+shape = SubResource("SphereShape3D_m3ppi")
 
 [node name="area4" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="collider4" type="CollisionShape3D" parent="Node3D/distancia1/area4"]
-shape = SubResource("SphereShape3D_uuqrh")
+shape = SubResource("SphereShape3D_dw00g")
 
 [node name="area5" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="collider5" type="CollisionShape3D" parent="Node3D/distancia1/area5"]
-shape = SubResource("SphereShape3D_vk3jq")
+shape = SubResource("SphereShape3D_rbl6a")
 
 [node name="area6" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="collider6" type="CollisionShape3D" parent="Node3D/distancia1/area6"]
-shape = SubResource("SphereShape3D_joxt7")
+shape = SubResource("SphereShape3D_ar7pr")
 
 [node name="area7" type="Area3D" parent="Node3D/distancia1"]
 
 [node name="collider7" type="CollisionShape3D" parent="Node3D/distancia1/area7"]
-shape = SubResource("SphereShape3D_spp7a")
+shape = SubResource("SphereShape3D_iwxt0")
 
 [node name="caldera_detector" type="Area3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5342, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/caldera_detector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302601, 2.21225, 0.329741)
-shape = SubResource("BoxShape3D_vvpdt")
+shape = SubResource("BoxShape3D_ygm08")
 
 [node name="calderaagua_detector2" type="Area3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83134, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/calderaagua_detector2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643817, 2.21225, 0.329741)
-shape = SubResource("BoxShape3D_vvpdt")
+shape = SubResource("BoxShape3D_ygm08")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
-
-[connection signal="body_exited" from="Node3D/distancia1" to="." method="_on_distancia_1_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area 2" to="." method="_on_area_2_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area3" to="." method="_on_area_3_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area4" to="." method="_on_area_4_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area5" to="." method="_on_area_5_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area6" to="." method="_on_area_6_body_exited"]
-[connection signal="body_exited" from="Node3D/distancia1/area7" to="." method="_on_area_7_body_exited"]
-[connection signal="body_entered" from="Node3D/caldera_detector" to="." method="_on_caldera_detector_body_entered"]
-[connection signal="body_entered" from="Node3D/calderaagua_detector2" to="." method="_on_calderaagua_detector_2_body_entered"]
-[connection signal="body_exited" from="Node3D/calderaagua_detector2" to="." method="_on_calderaagua_detector_2_body_exited"]
 
 [editable path="Node3D/carro"]
