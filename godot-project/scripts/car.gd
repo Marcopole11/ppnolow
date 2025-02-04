@@ -44,32 +44,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	addwatertocar()
 	car_water_indicator = round(car_water)
-	#match car_water_indicator:
-		#0:
-			#waterlvl_001.hide()
-			#waterlvl_002.hide()
-			#waterlvl_003.hide()
-			#waterlvl_004.hide()
-		#1:
-			#waterlvl_001.show()
-			#waterlvl_002.hide()
-			#waterlvl_003.hide()
-			#waterlvl_004.hide()
-		#2:
-			#waterlvl_001.show()
-			#waterlvl_002.show()
-			#waterlvl_003.hide()
-			#waterlvl_004.hide()
-		#3:
-			#waterlvl_001.show()
-			#waterlvl_002.show()
-			#waterlvl_003.show()
-			#waterlvl_004.hide()
-		#4:
-			#waterlvl_001.show()
-			#waterlvl_002.show()
-			#waterlvl_003.show()
-			#waterlvl_004.show()
+	match car_water_indicator:
+		0:
+			waterlvl_001.hide()
+			waterlvl_002.hide()
+			waterlvl_003.hide()
+			waterlvl_004.hide()
+		1:
+			waterlvl_001.show()
+			waterlvl_002.hide()
+			waterlvl_003.hide()
+			waterlvl_004.hide()
+		2:
+			waterlvl_001.show()
+			waterlvl_002.show()
+			waterlvl_003.hide()
+			waterlvl_004.hide()
+		3:
+			waterlvl_001.show()
+			waterlvl_002.show()
+			waterlvl_003.show()
+			waterlvl_004.hide()
+		4:
+			waterlvl_001.show()
+			waterlvl_002.show()
+			waterlvl_003.show()
+			waterlvl_004.show()
 
 	if player == null:
 		var checkarraysize = get_tree().get_nodes_in_group("player") if get_tree() else []
@@ -77,8 +77,7 @@ func _process(delta: float) -> void:
 			player = checkarraysize[0]
 	if player != null:
 		Menusettings.distance = global_position.distance_to(player.global_position)
-	#print(Menusettings.distance)
-	#print(areanum(Menusettings))
+	print(Menusettings.distance)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -122,11 +121,3 @@ func addwatertocar():
 func movecar():
 	if car_water > 0 and car_fuel > 0:
 		pass
-
-func areanum(x):
-	for i in range(areadistance.size()):
-		if x < areadistance[i]:
-			return i;
-
-
-	print("distance 2")
