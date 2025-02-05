@@ -53,7 +53,8 @@ func fill_car_watertank():
 		print("llenandocoche ",ServerStore.car_water)
 	if ServerStore.car_water > 4.00:
 		ServerStore.car_isfilling = false
-		
+	
+	
 func watertank_car_indicator():
 	car_water_indicator = round(ServerStore.car_water)
 	match car_water_indicator:
@@ -110,6 +111,9 @@ func _on_state_changed(state):
 	##var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	##if diff_in_position > Vector3(1,1,1):
 	global_transform.origin = Vector3(state.x, state.z, -state.y)
+	ServerStore.car_water = state.data.water;
+	ServerStore.car_fuel = state.data.fuel;
+	ServerStore.car_isfilling = state.data.filling.water > 0;
 
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
