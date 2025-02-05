@@ -378,7 +378,7 @@ cull_mode = 2
 albedo_color = Color(0.253327, 0.221771, 0.201879, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hg7qe"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uiby2"]
 _surfaces = [{
 "aabb": AABB(-0.425388, -0.214147, -0.306243, 0.792406, 0.309875, 0.611048),
 "format": 34359742465,
@@ -452,7 +452,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("LgiXvv6Hnj2cKAk+LgiXvv6Hnj2cKAk+ypyavk6MmT32ugW+ypyavk6MmT32ugW+ZMzZvtANzTwiZ9s9ZMzZvtANzTwiZ9s9ZMzZvuANzTxQWd69ZMzZvuANzTxQWd69PFJ1PgKInj1kiBU+PFJ1PgKInj1kiBU+PFJ1PlKMmT24GhK+PFJ1PlKMmT24GhK+1kuMvnTjcz2Ewuc91kuMvnTjcz2Ewuc91kuMvnTjcz2Ewuc91kuMvnzjcz3KtOq91kuMvnzjcz3KtOq91kuMvnzjcz3KtOq9isLEvijVeTy/Ubk9isLEvijVeTy/Ubk9isLEvjjVeTz4Q7y9isLEvjjVeTz4Q7y9FHBRPnzjcz1xsPw9FHBRPnzjcz1xsPw9FHBRPnzjcz1xsPw9FHBRPoTjcz2pov+9FHBRPoTjcz2pov+9FHBRPoTjcz2pov+9sLq8/v///79MOVT1////v1OBHsL///8/C3a2tv///z+cmGHn////v0w5VPX///+/nJhh5////78Ldra2////P7C6vP7///+/hVbp1v///79TgR7C////P4VW6db///+//3////9//7+wurz+////v0w5VPX///+//3////9//79TgR7C////Pwt2trb///8/nJhh5////79MOVT1////v5yYYef///+/C3a2tv///z//f////3//v7C6vP7///+/hVbp1v///7//f////3//v1OBHsL///8/hVbp1v///78=")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_hg7qe")
+shadow_mesh = SubResource("ArrayMesh_uiby2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1g6d"]
 resource_name = "focus"
@@ -460,7 +460,7 @@ cull_mode = 2
 albedo_color = Color(0.906332, 0.887143, 0.698423, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_j3x3h"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_d0tfo"]
 _surfaces = [{
 "aabb": AABB(-0.523, -2.23517e-08, -0.1, 0.523, 0.07, 0.2),
 "format": 34896613377,
@@ -490,7 +490,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAP///78AAAAA////vwAAAAD//1TVAAD//////78AAP///////wAA/////1TVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD//wAA//8AAP//AAD//wAA//8AAFTV//8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/////wAAAAD/v///AAAAAFTV/////wAA////////AAD///////8AAFTV/////wAA/39U1VTV//////9//79U1VTV/7//vwAA/39U1VTV/7//v/9//79U1VTV/////wAA/3+qKqoq//////9//7+qKqoq/7//vwAA/3+qKqoq/7//v/9//7+qKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_j3x3h")
+shadow_mesh = SubResource("ArrayMesh_d0tfo")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_escus"]
 albedo_color = Color(0.424762, 0.606788, 1, 1)
@@ -1151,7 +1151,6 @@ stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
-visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1190,6 +1189,7 @@ bus = &"Sfx"
 
 [node name="frequencymetter" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.5, 0, 0.866025, 0.0235462, 0.99963, -0.0135944, -0.865705, 0.0271889, 0.499815, -0.3, 0, 0)
+visible = false
 
 [node name="frequencyMetter2" type="MeshInstance3D" parent="Neck/Camera3D/frequencymetter"]
 transform = Transform3D(-0.252683, -0.967494, -0.0103711, -0.92372, 0.244411, -0.294972, 0.287918, -0.064954, -0.955451, 1.9315, -0.574654, 0.0419817)

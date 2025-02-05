@@ -101,9 +101,9 @@ func _on_state_changed(state):
 	# sync the player's position, using the server's values
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	## var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
-	## if diff_in_position > Vector3(1,1,1):
-	##	global_transform.origin = Vector3(state.x, state.z, -state.y)
+	# var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
+	# if diff_in_position > Vector3(1,1,1):
+	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
 
 	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
@@ -118,10 +118,10 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-	#if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-		#_server_failed();
-	#if ServerStore._newPingNumCheck():
-		#pp_root_node.message({"pingnum": ServerStore.PingNum});
+	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+		_server_failed();
+	if ServerStore._newPingNumCheck():
+		pp_root_node.message({"pingnum": ServerStore.PingNum});
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
