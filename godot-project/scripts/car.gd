@@ -17,6 +17,8 @@ var car_water_indicator:int = 0
 @onready var waterlvl_003: MeshInstance3D = $Node3D/carro/waterlvl_003
 @onready var waterlvl_004: MeshInstance3D = $Node3D/carro/waterlvl_004
 @onready var car_animations: AnimationPlayer = $Node3D/AnimationTree/Car_animations
+@onready var car_animtree: AnimationTree = $Node3D/car_animtree
+
 
 var player = null
 var distance:float
@@ -51,6 +53,7 @@ func fill_car_watertank():
 		print("llenandocoche ",ServerStore.car_water)
 	if ServerStore.car_water > 4.00:
 		ServerStore.car_isfilling = false
+		
 func watertank_car_indicator():
 	car_water_indicator = round(ServerStore.car_water)
 	match car_water_indicator:

@@ -105,13 +105,14 @@ func _on_state_changed(state):
 	# if diff_in_position > Vector3(1,1,1):
 	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
 
-	ServerStore.ServerPingNum = state.data.pingnum;
-	ServerStore.posX = state.x
-	ServerStore.posY = state.y
-
-	ServerStore.colorR = state.data.color.r
-	ServerStore.colorG = state.data.color.g
-	ServerStore.colorB = state.data.color.b
+	#ServerStore.ServerPingNum = state.data.pingnum;
+	#ServerStore.posX = state.x
+	#ServerStore.posY = state.y
+#
+	#ServerStore.colorR = state.data.color.r
+	#ServerStore.colorG = state.data.color.g
+	#ServerStore.colorB = state.data.color.b
+	pass
 	 
 func _server_failed():
 	get_tree().change_scene_to_file("res://scenes/main.tscn");
@@ -229,19 +230,20 @@ func play_step():
 
 #handles axe attacks
 func axeattack():
-	if ServerStore.is_in_fuel and ServerStore.car_fuel < 5 and Input.is_action_just_pressed("interact"):
-		ServerStore.car_fuel +=1
-		player_wood -= 1
-		print("combustible en el coche ",ServerStore.car_fuel)
-		$bar_wood.value = player_wood
-	if tool_inhand == 1 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-		is_attacking = true
-		axe_animation.play("attack_animation")
-		axe_hitbox.monitoring = true
-		axeswing.pitch_scale = randf_range(.8,1.2)
-		axeswing.play()
-		stamina = stamina -stamina_attack_cap
-		pp_root_node.message({"action": 25});
+	if tool_inhand == 1:
+		if ServerStore.is_in_fuel and ServerStore.car_fuel < 5 and Input.is_action_just_pressed("interact"):
+			ServerStore.car_fuel +=1
+			player_wood -= 1
+			print("combustible en el coche ",ServerStore.car_fuel)
+			$bar_wood.value = player_wood
+		if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+			is_attacking = true
+			axe_animation.play("attack_animation")
+			axe_hitbox.monitoring = true
+			axeswing.pitch_scale = randf_range(.8,1.2)
+			axeswing.play()
+			stamina = stamina -stamina_attack_cap
+			pp_root_node.message({"action": 25});
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
@@ -275,45 +277,44 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 
 
 func waterpumphandle():
-	if player_water == 0.0 or ServerStore.car_water < 4 :
-		ServerStore.car_isfilling = false
-	
-	water_tank_barfiller.scale.x = player_water * 0.2
-	if fillingwater_player and player_water <5.0:
-		player_water += 0.1
-	if Input.is_action_just_pressed("attack"):
-		print(ServerStore.is_in_watertank)
-		print (player_water > 0.0)
-	if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player_water > 0.0:
-		ServerStore.car_isfilling = true
-		is_attacking = true
-		waterpump.hide()
+	if tool_inhand == 3:
+		water_tank_barfiller.scale.x = player_water * 0.2
+		if fillingwater_player and player_water <5.0:
+			player_water += 0.15
+		if Input.is_action_just_pressed("attack"):
+			print(ServerStore.is_in_watertank)
+			print (player_water > 0.0)
+		if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player_water > 0.0:
+			ServerStore.car_isfilling = true
+			is_attacking = true
+			waterpump.hide()
+			
+		if Input.is_action_just_pressed("attack") and Menusettings.pausemenu_state and !ServerStore.is_in_watertank:
+			is_attacking = true
+			pump_animation.play("use")
+			waterpumpsound = true
+			waterpump_hitbox.monitoring = true
+			speed=5
+			pp_root_node.message({"action": 15});
 
-	if Input.is_action_just_released("attack"):
-		pump_animation.stop()
-		waterpumpsound = false
-		waterpump_hitbox.monitoring = false
-		is_attacking=false
-		fillingwater_player = false
-		pumpwater.stop()
-		pump_animation.play("idle")
-		speed=5
-		ServerStore.car_isfilling = false
-		waterpump.show()
-	if !ServerStore.is_in_watertank and tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state:
-		is_attacking = true
-		pump_animation.play("use")
-		waterpumpsound = true
-		waterpump_hitbox.monitoring = true
-		speed=5
-		pp_root_node.message({"action": 15});
-
-	if waterpumpsound and !pumpwater.playing:
-		pumpwater.play()
+		if Input.is_action_just_released("attack"):
+			waterpumpsound = false
+			is_attacking=false
+			fillingwater_player = false
+			waterpump_hitbox.monitoring = false
+			ServerStore.car_isfilling = false
+			pump_animation.stop()
+			pumpwater.stop()
+			pump_animation.play("idle")
+			waterpump.show()
+			speed = 5
+			
+		if waterpumpsound and !pumpwater.playing:
+			pumpwater.play()
+			
 func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		print("water pumped")
-		
 		fillingwater_player = true
 		speed=0.7
 func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
@@ -358,81 +359,83 @@ func swaptool() -> void:
 				axe.hide()
 
 func freqmetterhandle():
-	var freqmetter_step = edgemap_distance/8
-	var area:int= round(Menusettings.distance/freqmetter_step)
-	match area:
-		1:
-			frequency_point_001.show()
-			frequency_point_002.hide()
-			frequency_point_003.hide()
-			frequency_point_004.hide()
-			frequency_point_005.hide()
-			frequency_point_006.hide()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		2:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.hide()
-			frequency_point_004.hide()
-			frequency_point_005.hide()
-			frequency_point_006.hide()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		3:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.hide()
-			frequency_point_005.hide()
-			frequency_point_006.hide()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		4:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.show()
-			frequency_point_005.hide()
-			frequency_point_006.hide()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		5:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.show()
-			frequency_point_005.show()
-			frequency_point_006.hide()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		6:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.show()
-			frequency_point_005.show()
-			frequency_point_006.show()
-			frequency_point_007.hide()
-			frequency_point_008.hide()
-		7:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.show()
-			frequency_point_005.show()
-			frequency_point_006.show()
-			frequency_point_007.show()
-			frequency_point_008.hide()
-		8:
-			frequency_point_001.show()
-			frequency_point_002.show()
-			frequency_point_003.show()
-			frequency_point_004.show()
-			frequency_point_005.show()
-			frequency_point_006.show()
-			frequency_point_007.show()
-			frequency_point_008.show()
+	var area:int
+	if tool_inhand == 4:
+		var freqmetter_step = edgemap_distance/8
+		area= round(Menusettings.distance/freqmetter_step)
+		match area:
+			1:
+				frequency_point_001.show()
+				frequency_point_002.hide()
+				frequency_point_003.hide()
+				frequency_point_004.hide()
+				frequency_point_005.hide()
+				frequency_point_006.hide()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			2:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.hide()
+				frequency_point_004.hide()
+				frequency_point_005.hide()
+				frequency_point_006.hide()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			3:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.hide()
+				frequency_point_005.hide()
+				frequency_point_006.hide()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			4:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.show()
+				frequency_point_005.hide()
+				frequency_point_006.hide()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			5:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.show()
+				frequency_point_005.show()
+				frequency_point_006.hide()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			6:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.show()
+				frequency_point_005.show()
+				frequency_point_006.show()
+				frequency_point_007.hide()
+				frequency_point_008.hide()
+			7:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.show()
+				frequency_point_005.show()
+				frequency_point_006.show()
+				frequency_point_007.show()
+				frequency_point_008.hide()
+			8:
+				frequency_point_001.show()
+				frequency_point_002.show()
+				frequency_point_003.show()
+				frequency_point_004.show()
+				frequency_point_005.show()
+				frequency_point_006.show()
+				frequency_point_007.show()
+				frequency_point_008.show()
 
 
 
