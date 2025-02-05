@@ -275,11 +275,12 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 
 
 func waterpumphandle():
-	if player_water == 0.0:
+	if player_water == 0.0 or ServerStore.car_water < 4 :
 		ServerStore.car_isfilling = false
 	
 	water_tank_barfiller.scale.x = player_water * 0.2
-
+	if fillingwater_player and player_water <5.0:
+		player_water += 0.1
 	if Input.is_action_just_pressed("attack"):
 		print(ServerStore.is_in_watertank)
 		print (player_water > 0.0)
@@ -304,7 +305,7 @@ func waterpumphandle():
 		pump_animation.play("use")
 		waterpumpsound = true
 		waterpump_hitbox.monitoring = true
-		speed=1
+		speed=5
 		pp_root_node.message({"action": 15});
 
 	if waterpumpsound and !pumpwater.playing:
