@@ -285,7 +285,6 @@ func waterpumphandle():
 			print(ServerStore.is_in_watertank)
 			print (player_water > 0.0)
 		if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player_water > 0.0:
-			ServerStore.car_isfilling = true
 			is_attacking = true
 			waterpump.hide()
 			
@@ -302,7 +301,6 @@ func waterpumphandle():
 			is_attacking=false
 			fillingwater_player = false
 			waterpump_hitbox.monitoring = false
-			ServerStore.car_isfilling = false
 			pump_animation.stop()
 			pumpwater.stop()
 			pump_animation.play("idle")
@@ -349,7 +347,7 @@ func swaptool() -> void:
 			3:
 				axe.hide()
 				taser.hide()
-				if !ServerStore.car_isfilling:
+				if !(ServerStore.car_filling_water > 0):
 					waterpump.show()
 				frequencymetter.hide()
 			4: 	

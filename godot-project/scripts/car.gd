@@ -42,21 +42,26 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	watertank_car_indicator()
-	fill_car_watertank()
 	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
 		interact(delta,0)
 		car_animations.play("shake")
-
-
-func fill_car_watertank():
-	if ServerStore.car_isfilling:
-		ServerStore.car_water += 0.01
+	if ServerStore.car_filling_water > 0:
 		print("llenandocoche ",ServerStore.car_water)
 		watertank_car_mesh.show
 		car_animtree.set("parameters/TimeSeek/seek_request", 0.0)
+
+func fill_car_watertank(playerwater):
+	if ServerStore.car_water >= 4:
+		print("car tank is full")
+		return playerwater;
+	elif ServerStore.car_water+playerwater > 4:
+		pp_root_node.message({"fillWater": ServerStore.car_water+playerwater-4})
+	else:
+		pp_root_node.message({"fillWater": playerwater})
 		
-	if ServerStore.car_water > 4.00:
-		ServerStore.car_isfilling = false
+	
+		
+	
 	
 	
 func watertank_car_indicator():
@@ -115,9 +120,13 @@ func _on_state_changed(state):
 	##var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	##if diff_in_position > Vector3(1,1,1):
 	global_transform.origin = Vector3(state.x, state.z, -state.y)
+	ServerStore.car_wood = state.data.wood;
 	ServerStore.car_water = state.data.water;
 	ServerStore.car_fuel = state.data.fuel;
-	ServerStore.car_isfilling = state.data.filling.water > 0;
+	ServerStore.car_filling_water = state.data.filling.water > 0;
+	ServerStore.car_filling_water = state.data.filling.fuel > 0;
+	ServerStore.car_hot = state.data.hot;
+	ServerStore.car_rescue = state.data.rescue;
 
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):

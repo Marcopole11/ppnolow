@@ -1,14 +1,22 @@
 extends Node
 
+
+# no sincronizadas
 var is_in_fuel:bool
 var is_in_watertank:bool
-var car_water:float
-var car_fuel:int
-var car_isfilling:bool = false
 
 
+# output del server (read only)
+var car_wood:int = 0;
+var car_water:float = 0;
+var car_fuel:float = 0;
+var car_filling_water:float = 0;
+var car_filling_fuel:float = 0;
+var car_hot:int = 0;
+var car_rescue:String = "safe";
+
+# guardado para caida/reconexión
 var lobby_id: int
-
 var posX: float = 0;
 var posY: float = 0;
 
