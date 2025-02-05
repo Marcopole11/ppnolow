@@ -18,6 +18,7 @@ var car_water_indicator:int = 0
 @onready var waterlvl_004: MeshInstance3D = $Node3D/carro/waterlvl_004
 @onready var car_animations: AnimationPlayer = $Node3D/AnimationTree/Car_animations
 @onready var car_animtree: AnimationTree = $Node3D/car_animtree
+@onready var watertank_car_mesh: MeshInstance3D = $Node3D/carro/carro/waterTank2
 
 
 var player = null
@@ -45,12 +46,15 @@ func _process(delta: float) -> void:
 	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
 		interact(delta,0)
 		car_animations.play("shake")
-	
+
 
 func fill_car_watertank():
 	if ServerStore.car_isfilling:
-		ServerStore.car_water += 0.11
+		ServerStore.car_water += 0.01
 		print("llenandocoche ",ServerStore.car_water)
+		watertank_car_mesh.show
+		car_animtree.set("parameters/TimeSeek/seek_request", 0.0)
+		
 	if ServerStore.car_water > 4.00:
 		ServerStore.car_isfilling = false
 		
