@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	watertank_car_indicator()
-	
+	fill_car_watertank()
 	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
 		interact(delta,0)
 		car_animations.play("shake")
@@ -47,9 +47,10 @@ func _process(delta: float) -> void:
 
 func fill_car_watertank():
 	if ServerStore.car_isfilling:
-		ServerStore.car_water += 0.01
+		ServerStore.car_water += 0.11
 		print("llenandocoche ",ServerStore.car_water)
-
+	if ServerStore.car_water > 4.00:
+		ServerStore.car_isfilling = false
 func watertank_car_indicator():
 	car_water_indicator = round(ServerStore.car_water)
 	match car_water_indicator:
