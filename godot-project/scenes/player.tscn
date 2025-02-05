@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=74 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://dio8iskfjkea7" path="res://audio/Electric Fence Startup Test.ogg" id="4_m5efg"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
-[ext_resource type="Texture2D" uid="uid://dtymjkt5stucn" path="res://Texture/Texturaswood.png" id="10_0wqcs"]
 [ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="10_q4k41"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_upy28"]
@@ -1000,6 +999,12 @@ _data = {
 "idle": SubResource("Animation_l7q3u")
 }
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0b5lh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_io8y2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cnok2"]
+
 [sub_resource type="Animation" id="Animation_rayom"]
 length = 0.001
 tracks/0/type = "value"
@@ -1128,7 +1133,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 8.56158e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
@@ -1245,6 +1250,20 @@ autoplay = "idle"
 
 [node name="player" parent="Neck/Camera3D" instance=ExtResource("10_q4k41")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.45489, 0.987144)
+visible = false
+
+[node name="Tronco1" type="MeshInstance3D" parent="Neck/Camera3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.46893, -1.09678, -1.29944)
+mesh = SubResource("CapsuleMesh_0b5lh")
+skeleton = NodePath("../Axe")
+
+[node name="Tronco2" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.720567, 0, 0)
+mesh = SubResource("CapsuleMesh_io8y2")
+
+[node name="Tronco3" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1/Tronco2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.759852, 0, 0)
+mesh = SubResource("CapsuleMesh_cnok2")
 
 [node name="headbob" type="AnimationPlayer" parent="Neck"]
 root_node = NodePath("../..")
@@ -1264,37 +1283,24 @@ type = "player"
 visible = false
 
 [node name="bar_stamina" type="TextureProgressBar" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -10.0
-offset_right = 172.0
-offset_bottom = 1454.0
-grow_vertical = 0
+offset_left = 177.0
+offset_top = 644.0
+offset_right = 341.0
+offset_bottom = 1460.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.57087
 scale = Vector2(0.0477288, -0.189402)
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 8
 value = 100.0
-fill_mode = 2
+fill_mode = 7
 texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("7_i5emr")
-metadata/_edit_use_anchors_ = true
-
-[node name="bar_wood" type="TextureProgressBar" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = -242.0
-offset_right = 186.0
-offset_bottom = 1222.0
-grow_vertical = 0
-scale = Vector2(0.060578, 0.158602)
-max_value = 5.0
-fill_mode = 3
-texture_under = ExtResource("6_0c70t")
-texture_progress = ExtResource("10_0wqcs")
 
 [connection signal="area_entered" from="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
