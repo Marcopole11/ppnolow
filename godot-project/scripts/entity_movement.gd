@@ -1,7 +1,9 @@
 # entity_movement.gd script
-
 # extend the functionality of your root node (here Node3D)
 extends Node3D
+
+@onready var tree_anim: AnimationPlayer = $tree/tree_anim
+@onready var tree: Area3D = $tree
 
 # when the scene is loaded
 func _ready():
@@ -17,3 +19,11 @@ func _on_state_changed(state):
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
 	global_transform.origin = Vector3(state.x, state.z, -state.y) 
+
+
+
+func _on_tree_area_entered(area: Area3D) -> void:
+	if area.is_in_group("axe"):
+		print("Nos pegan :(")
+		tree_anim.play("hit")
+		tree.hide()

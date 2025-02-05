@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://3qh75gl021vh"]
+[gd_scene load_steps=10 format=4 uid="uid://3qh75gl021vh"]
 
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_8ekux"]
 [ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_se41r"]
@@ -45,6 +45,43 @@ shadow_mesh = SubResource("ArrayMesh_j2f1a")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yic4h"]
 points = PackedVector3Array(-0.586372, -0.501987, -1.06057, 2.29302, 7.60654, 3.70596, 1.64495, 5.35384, -3.71174, -0.0285425, 6.749, -0.781886, 1.92344, 1.03208, -0.223784, -1.42354, -0.501987, 0.332844, 2.90027, 8.28307, 2.98254, -0.0285425, -0.641766, 1.03029, 1.08627, 6.60922, 3.4013, 2.48169, 5.49362, -1.33925, 1.22594, 5.6334, -3.71174, 2.90027, 7.72483, 3.26196, 1.22594, 0.195156, -0.502467, -1.28387, -0.223305, -0.223784, -0.447126, -0.501987, 1.16963, 2.3416, 8.14329, 3.4013, 2.3416, 7.44614, 3.82006, 2.48169, 7.02768, -0.363125, 0.807355, -0.641766, 0.0541611, 0.111126, 5.49362, -1.75801, -0.0285425, 6.749, -0.502467, -0.168211, -0.501987, -1.06057, -1.42354, -0.223305, 0.332844, 2.62093, 7.44614, 3.54064, 2.62093, 6.88791, -0.363125, 1.08627, 6.33054, 3.4013, 1.22594, 5.7723, -3.57166, 2.48169, 5.21494, -1.06057, 0.111126, 6.88791, -0.502467, -0.0285425, 6.19076, -1.19991, -1.42354, -0.223305, 0.0541611, 1.22594, 5.35384, -3.71174)
 
+[sub_resource type="Animation" id="Animation_o5q5q"]
+resource_name = "hit"
+length = 0.144
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.160254, -0.0185977, -0.116039), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o00kl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.160254, -0.0185977, -0.116039)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pw54"]
+_data = {
+"RESET": SubResource("Animation_o00kl"),
+"hit": SubResource("Animation_o5q5q")
+}
+
 [node name="tree" type="Node3D"]
 script = ExtResource("1_se41r")
 
@@ -53,13 +90,20 @@ script = ExtResource("1_8ekux")
 type = "tree"
 
 [node name="tree" type="Area3D" parent="." groups=["arbol"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77607, 0)
+transform = Transform3D(0.993447, 0.112812, -0.0183584, -0.114296, 0.980548, -0.159569, -1.86265e-09, 0.160622, 0.987016, 0, 0, 0)
+collision_mask = 2
 
 [node name="small tree" type="MeshInstance3D" parent="tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.430629, -0.82377, 0.253752)
 mesh = SubResource("ArrayMesh_7bkre")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tree"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.430629, -0.82377, 0.253752)
 shape = SubResource("ConvexPolygonShape3D_yic4h")
+
+[node name="tree_anim" type="AnimationPlayer" parent="tree"]
+libraries = {
+"": SubResource("AnimationLibrary_3pw54")
+}
+
+[connection signal="area_entered" from="tree" to="." method="_on_tree_area_entered"]

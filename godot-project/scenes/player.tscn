@@ -1100,15 +1100,15 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Axe" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
-visible = false
+transform = Transform3D(0.421165, 0.21392, -0.516583, -0.275899, 0.642031, 0.0409311, 0.486313, 0.17898, 0.470602, -0.0842986, -0.49284, -0.901948)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/Axe"]
 transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
 mesh = SubResource("ArrayMesh_tt8bg")
 
-[node name="axe_hitbox" type="Area3D" parent="Neck/Camera3D/Axe/MeshInstance3D"]
+[node name="axe_hitbox" type="Area3D" parent="Neck/Camera3D/Axe/MeshInstance3D" groups=["axe"]]
 transform = Transform3D(0.04053, -1.2191, 0.092915, -1.13771, -0.0504289, -0.0874167, 0.0868928, -0.0916438, -1.18791, -0.0139101, -0.00391805, 0.14038)
+collision_layer = 3
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
@@ -1133,7 +1133,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 8.66865e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]

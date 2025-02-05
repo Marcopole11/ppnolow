@@ -57,7 +57,6 @@ var edgemap_distance:int = 240
 @onready var tronco_1: MeshInstance3D = $Neck/Camera3D/Tronco1
 @onready var tronco_2: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2
 @onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
-@onready var bar_staminaanex: TextureProgressBar = $bar_stamina/bar_stamina
 
 
 
@@ -73,7 +72,7 @@ func _ready() -> void:
 	frequency_point_006.hide()
 	frequency_point_007.hide()
 	frequency_point_008.hide()
-
+	
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 	assert(pp_root_node, "PPRootNode not found") 
@@ -126,6 +125,7 @@ func _process(delta: float) -> void:
 	# 	_server_failed();
 	# if ServerStore._newPingNumCheck():
 	# 	pp_root_node.message({"pingnum": ServerStore.PingNum});
+	print(axe_hitbox.collision_layer)
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
@@ -242,6 +242,7 @@ func axeattack():
 			is_attacking = true
 			axe_animation.play("attack_animation")
 			axe_hitbox.monitoring = true
+			axe_hitbox.set_collision_layer_value(2,true)
 			axeswing.pitch_scale = randf_range(.8,1.2)
 			axeswing.play()
 			stamina = stamina -stamina_attack_cap
@@ -251,6 +252,7 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 		axe_animation.play("idle_axe_animation")
 		axe_hitbox.monitoring = false
 		is_attacking=false
+		axe_hitbox.set_collision_layer_value(2,false)
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol"):
 		print("Tree hitted")
