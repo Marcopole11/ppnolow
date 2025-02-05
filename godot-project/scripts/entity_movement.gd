@@ -4,7 +4,7 @@ extends Node3D
 
 @onready var tree_anim: AnimationPlayer = $tree/tree_anim
 @onready var tree: Area3D = $tree
-
+var treehp:int = 3
 # when the scene is loaded
 func _ready():
 	# connect to the state_changed signal from pp_entity_node
@@ -24,6 +24,10 @@ func _on_state_changed(state):
 
 func _on_tree_area_entered(area: Area3D) -> void:
 	if area.is_in_group("axe"):
-		print("Nos pegan :(")
-		tree_anim.play("hit")
-		tree.hide()
+		if treehp > 0:
+			tree_anim.play("hit")
+			treehp -= 1
+		print("Nos pegan :( ",treehp)
+		if treehp == 0:
+			tree_anim.play("tree_down")
+			tree.set_collision_layer_value(2,false)

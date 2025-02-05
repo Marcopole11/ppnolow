@@ -125,7 +125,7 @@ func _process(delta: float) -> void:
 	# 	_server_failed();
 	# if ServerStore._newPingNumCheck():
 	# 	pp_root_node.message({"pingnum": ServerStore.PingNum});
-	print(axe_hitbox.collision_layer)
+	
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
