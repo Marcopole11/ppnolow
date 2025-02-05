@@ -118,10 +118,10 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-		_server_failed();
-	if ServerStore._newPingNumCheck():
-		pp_root_node.message({"pingnum": ServerStore.PingNum});
+	# if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+	# 	_server_failed();
+	# if ServerStore._newPingNumCheck():
+	# 	pp_root_node.message({"pingnum": ServerStore.PingNum});
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
