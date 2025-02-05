@@ -118,10 +118,10 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-		_server_failed();
-	if ServerStore._newPingNumCheck():
-		pp_root_node.message({"pingnum": ServerStore.PingNum});
+	#if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+		#_server_failed();
+	#if ServerStore._newPingNumCheck():
+		#pp_root_node.message({"pingnum": ServerStore.PingNum});
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
@@ -297,7 +297,6 @@ func waterpumphandle():
 		pumpwater.stop()
 		pump_animation.play("idle")
 		speed=5
-	
 		ServerStore.car_isfilling = false
 		waterpump.show()
 	if !ServerStore.is_in_watertank and tool_inhand == 3 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state:
@@ -333,6 +332,7 @@ func swaptool() -> void:
 			#print(tool_inhand)
 			is_attacking=false
 			pp_root_node.message({"tool": tool_inhand});
+		
 		match tool_inhand:
 			1:
 				axe.show()
@@ -347,7 +347,8 @@ func swaptool() -> void:
 			3:
 				axe.hide()
 				taser.hide()
-				waterpump.show()
+				if !ServerStore.car_isfilling:
+					waterpump.show()
 				frequencymetter.hide()
 			4: 	
 				frequencymetter.show()
@@ -431,3 +432,7 @@ func freqmetterhandle():
 			frequency_point_006.show()
 			frequency_point_007.show()
 			frequency_point_008.show()
+
+
+
+	

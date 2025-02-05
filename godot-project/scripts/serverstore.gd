@@ -21,7 +21,7 @@ var PingNum: int = 0;
 var PingNumFails: int = 0;
 
 func _checkPingNum(serverPing:int):
-	print(str(PingNum)+" "+str(serverPing))
+	#print(str(PingNum)+" "+str(serverPing))
 	if PingNum > 5+serverPing:
 		PingNumFails+=1;
 		if PingNumFails == 20:

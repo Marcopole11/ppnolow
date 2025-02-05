@@ -20,7 +20,6 @@ var car_water_indicator:int = 0
 
 var player = null
 var distance:float
-var areadistance = [30,50,80,120]
 var pp_root_node
 var pushForce = 5
 

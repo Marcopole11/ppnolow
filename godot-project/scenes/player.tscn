@@ -1245,7 +1245,6 @@ autoplay = "idle"
 
 [node name="player" parent="Neck/Camera3D" instance=ExtResource("10_q4k41")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.45489, 0.987144)
-visible = false
 
 [node name="headbob" type="AnimationPlayer" parent="Neck"]
 root_node = NodePath("../..")
