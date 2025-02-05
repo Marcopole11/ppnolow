@@ -55,9 +55,12 @@ func fill_car_watertank(playerwater):
 		print("car tank is full")
 		return playerwater;
 	elif ServerStore.car_water+playerwater > 4:
-		pp_root_node.message({"fillWater": ServerStore.car_water+playerwater-4})
+		var sendwater = ServerStore.car_water+playerwater-4;
+		pp_root_node.message({"fillWater": sendwater})
+		return playerwater - sendwater;
 	else:
 		pp_root_node.message({"fillWater": playerwater})
+		return 0;
 		
 	
 		
