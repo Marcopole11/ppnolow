@@ -385,6 +385,22 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_yslvr"]
+resource_name = "puerta cldera"
+length = 0.379
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro/Caldera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.353045), Vector3(0, 0, 0), Vector3(0, 0, 0.158319), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6dvyk"]
 resource_name = "waterpump_insert"
 tracks/0/type = "value"
@@ -410,22 +426,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.0312905, -3.13255, -0.993558), Vector3(-0.0217821, -3.11737, -1.55055)]
-}
-
-[sub_resource type="Animation" id="Animation_yslvr"]
-resource_name = "puerta cldera"
-length = 0.379
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carro/Caldera:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0.353045), Vector3(0, 0, 0), Vector3(0, 0, 0.158319), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk3q6"]

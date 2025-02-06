@@ -34,7 +34,9 @@ func _on_pp_entity_node_state_changed(new_state):
 				if setnum > 1 and new_state.y > 0:
 					setnum = 2;
 				var terrain:Node3D = terrainSets[setnum].instantiate();
-				if new_state.x < 0:
+				if new_state.x < 30:
+					terrain.rotation.y = deg_to_rad(180);
+				elif new_state.x < 60 and x == 0:
 					terrain.rotation.y = deg_to_rad(180);
 				add_child(terrain);
 				terrain.position.x = x*80;

@@ -629,26 +629,41 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Skeleton3D" parent="player/Armature" index="0"]
 bones/3/rotation = Quaternion(-0.5, -0.5, 0.5, -0.5)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(-0.5, 0.5, 0.5, -0.5)
+bones/12/rotation = Quaternion(-2.66925e-08, -2.66925e-08, -0.707107, 0.707107)
 bones/13/rotation = Quaternion(0.0346207, -0.0702365, -0.609786, 0.788688)
 bones/14/rotation = Quaternion(0.199451, 0.0803325, -0.0541196, 0.975109)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0.00609528, 0.000425887, -0.0757945, 0.997105)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-2.66925e-08, 2.66925e-08, 0.707107, 0.707107)
 bones/17/rotation = Quaternion(0.27523, 0.429576, 0.666595, 0.543473)
 bones/18/rotation = Quaternion(0.562119, -0.17146, -0.0159669, 0.808931)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(0.00609528, -0.000425887, 0.0757945, 0.997105)
+bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(-0.128494, -0.206044, 0.021969, 0.969821)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(0.0717428, 1.78095e-14, 1.71048e-08, 0.997423)
+bones/21/scale = Vector3(1, 1, 1)
 bones/23/rotation = Quaternion(0.644394, 0.29113, 0.644394, -0.29113)
 bones/24/rotation = Quaternion(-0.385865, 0.0746327, 0.160411, 0.905432)
 bones/25/rotation = Quaternion(-1.77467e-08, 1.1884e-07, 0.0243204, 0.999704)
+bones/25/scale = Vector3(1, 1, 1)
 bones/26/rotation = Quaternion(-3.59643e-08, -2.20227e-07, -0.724095, 0.689701)
 bones/27/rotation = Quaternion(0.644394, -0.29113, -0.644394, -0.29113)
 bones/28/rotation = Quaternion(-0.407074, 0.0616776, 0.136519, 0.901027)
 bones/29/rotation = Quaternion(-1.8567e-08, -1.19053e-07, -0.0243204, 0.999704)
+bones/29/scale = Vector3(1, 1, 1)
 bones/30/rotation = Quaternion(-3.68915e-08, 2.2111e-07, 0.724095, 0.689701)
 
 [node name="Cube_002" parent="player/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.914126, -0.0477721, -0.402605, 0.0955628, 0.990442, 0.0994548, 0.394006, -0.129388, 0.909955, 0.0715941, 0.0143239, 0.193909)
+transform = Transform3D(0.914126, -0.0477721, -0.402606, 0.095563, 0.990442, 0.099455, 0.394007, -0.129389, 0.909954, 0.0715941, 0.0143238, 0.193909)
 
 [node name="holdingItem" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.983536, 0.0764702, 0.163733, 0.175702, 0.616495, 0.767504, -0.0422494, 0.783636, -0.619781, -0.527673, 1.60863, 1.30685)
+transform = Transform3D(-0.983536, 0.0764705, 0.163733, 0.175702, 0.616496, 0.767503, -0.0422494, 0.783636, -0.619782, -0.527673, 1.60863, 1.30685)
 bone_name = "hand_R"
 bone_idx = 19
 
@@ -714,7 +729,7 @@ skeleton = NodePath("")
 mesh = SubResource("ArrayMesh_qejbs")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" parent="player" index="2"]
-blend_times = [&"Idle animation", &"hit", 0.5, &"Idle animation", &"show", 0.5, &"Idle animation", &"walking", 0.5, &"Idle animation", &"walking2", 0.5, &"hit", &"Idle animation", 0.5, &"hit", &"hit", 0.5, &"hit", &"show", 0.5, &"hit", &"walking", 0.5, &"hit", &"walking2", 0.5, &"show", &"Idle animation", 0.5, &"show", &"hit", 0.5, &"show", &"walking", 0.5, &"show", &"walking2", 0.5, &"walking", &"Idle animation", 0.5, &"walking", &"hit", 0.5, &"walking", &"show", 0.5, &"walking", &"walking", 0.5, &"walking", &"walking2", 0.5, &"walking2", &"Idle animation", 0.5, &"walking2", &"hit", 0.5, &"walking2", &"show", 0.5, &"walking2", &"walking", 0.5, &"walking2", &"walking2", 0.5]
+[node name="AnimationPlayer" parent="player" index="1"]
+blend_times = [&"Idle animation", &"hit", 0.5, &"Idle animation", &"show", 0.5, &"Idle animation", &"walking", 0.5, &"Idle animation", &"walkshow", 0.5, &"hit", &"Idle animation", 0.5, &"hit", &"hit", 0.5, &"hit", &"show", 0.5, &"hit", &"walking", 0.5, &"hit", &"walkshow", 0.5, &"show", &"Idle animation", 0.5, &"show", &"hit", 0.5, &"show", &"walking", 0.5, &"show", &"walkshow", 0.5, &"walking", &"Idle animation", 0.5, &"walking", &"hit", 0.5, &"walking", &"show", 0.5, &"walking", &"walking", 0.5, &"walking", &"walkshow", 0.5, &"walkshow", &"Idle animation", 0.5, &"walkshow", &"hit", 0.5, &"walkshow", &"show", 0.5, &"walkshow", &"walking", 0.5, &"walkshow", &"walkshow", 0.5]
 
 [editable path="player"]

@@ -81,7 +81,7 @@ func _on_state_changed(state):
 		nextplaying = "hit";
 	elif moving>0:
 		if tool == 4 or (actionActive and tool == 3):
-			nextplaying = "walking2";
+			nextplaying = "walkshow";
 		else:
 			nextplaying = "walking";
 	else:
