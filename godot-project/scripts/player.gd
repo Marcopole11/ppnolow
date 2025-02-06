@@ -19,7 +19,8 @@ var tool_inhand:int = 1
 var is_attacking : bool = false
 @export var stamina_attack_cap:int = 35
 
-var player_wood:int = 0
+
+var player_wood:int = 1
 var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
@@ -40,7 +41,7 @@ var edgemap_distance:int = 240
 @onready var taser_hitbox: Area3D = $Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
 @onready var taserattack: AudioStreamPlayer3D = $Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
-@onready var bar_wood: TextureProgressBar = $bar_wood
+
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
 @onready var waterpump_hitbox: Area3D = $Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
 @onready var pump_animation: AnimationPlayer = $Neck/Camera3D/waterpump/pump_animation
@@ -55,6 +56,9 @@ var edgemap_distance:int = 240
 @onready var frequency_point_006: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_006
 @onready var frequency_point_007: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_007
 @onready var frequency_point_008: MeshInstance3D = $Neck/Camera3D/frequencymetter/frequencyMetter2/frequencyPoint_008
+@onready var tronco_1: MeshInstance3D = $Neck/Camera3D/Tronco1
+@onready var tronco_2: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2
+@onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
 
 
 
@@ -70,7 +74,7 @@ func _ready() -> void:
 	frequency_point_006.hide()
 	frequency_point_007.hide()
 	frequency_point_008.hide()
-
+	
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 	assert(pp_root_node, "PPRootNode not found") 
@@ -106,6 +110,7 @@ func _on_state_changed(state):
 	# if diff_in_position > Vector3(1,1,1):
 	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
 
+
 	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
 	ServerStore.posY = state.y
@@ -120,6 +125,7 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
+
 	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
 		pp_root_node.authenticate_player("","")
 		print("--- forced reautenticate")
@@ -127,8 +133,10 @@ func _process(delta: float) -> void:
 	if ServerStore._newPingNumCheck():
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
 	
+	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()
+	woodindicator()
 	waterpumphandle()
 	axeattack()
 	stunattack()
@@ -175,11 +183,21 @@ func _process(delta: float) -> void:
 		});
 
 func _physics_process(delta: float) -> void:
-	if $Neck/Camera3D/InteractRay.is_colliding():
-		var target = $Neck/Camera3D/InteractRay.get_collider()
+
+	if interact_ray.is_colliding():
+		var target = interact_ray.get_collider()
+		print(target.to_string())
+		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
-			if Input.is_action_pressed("interact"):
-				target.interact(delta, Input.get_action_strength("interact"))
+
+			if Input.is_action_just_pressed("interact"):
+				var pp_entity_node= get_node_or_null("PPEntityNode");
+				if tool_inhand == 3 and test == "calderaagua_detector2":
+					player_water = target.interact(player_water)
+				elif test == "caldera_detector" and player_wood > 0:
+					player_wood = target.interact(player_wood)
+					
+					
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -205,7 +223,6 @@ func staminahandle():
 	if(canRestore and stamina < maxstamina): 
 		stamina = stamina + staminarate
 	$bar_stamina.value = stamina	
-
 #handles menu in game
 func openmenu():
 	if Menusettings.pausemenu_state:
@@ -234,15 +251,12 @@ func play_step():
 #handles axe attacks
 func axeattack():
 	if tool_inhand == 1:
-		if ServerStore.is_in_fuel and ServerStore.car_fuel < 5 and Input.is_action_just_pressed("interact"):
-			ServerStore.car_fuel +=1
-			player_wood -= 1
-			print("combustible en el coche ",ServerStore.car_fuel)
-			$bar_wood.value = player_wood
+
 		if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
 			is_attacking = true
 			axe_animation.play("attack_animation")
 			axe_hitbox.monitoring = true
+			axe_hitbox.set_collision_layer_value(2,true)
 			axeswing.pitch_scale = randf_range(.8,1.2)
 			axeswing.play()
 			stamina = stamina -stamina_attack_cap
@@ -252,11 +266,31 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 		axe_animation.play("idle_axe_animation")
 		axe_hitbox.monitoring = false
 		is_attacking=false
+		axe_hitbox.set_collision_layer_value(2,false)
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("arbol"):
+
+	if area.is_in_group("arbol") and player_wood <3:
 		print("Tree hitted")
 		player_wood += 1
-	$bar_wood.value = player_wood
+
+func woodindicator():
+	match player_wood:
+		0:
+			tronco_1.hide()
+			tronco_2.hide()
+			tronco_3.hide()
+		1:
+			tronco_1.show()
+			tronco_2.hide()
+			tronco_3.hide()
+		2:
+			tronco_1.show()
+			tronco_2.show()
+			tronco_3.hide()
+		3:
+			tronco_1.show()
+			tronco_2.show()
+			tronco_3.show()
 
 # handle stun weapon with enemies
 func stunattack():
@@ -277,7 +311,7 @@ func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
 func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("gato"):
 		print("enemy hitted")
-
+		
 
 func waterpumphandle():
 	if tool_inhand == 3:
@@ -361,11 +395,17 @@ func swaptool() -> void:
 
 func freqmetterhandle():
 	var area:int
+	var cardistance:float
+	
 	if tool_inhand == 4:
+		cardistance = (pow((ServerStore.posY - 40),2) +pow((ServerStore.posX - 0),2))/100
+		print("distancetocar ",cardistance)
 		var freqmetter_step = edgemap_distance/8
-		area= round(Menusettings.distance/freqmetter_step)
+
+		area= round(cardistance/freqmetter_step)
 		match area:
-			1:
+
+			8:
 				frequency_point_001.show()
 				frequency_point_002.hide()
 				frequency_point_003.hide()
@@ -374,7 +414,8 @@ func freqmetterhandle():
 				frequency_point_006.hide()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			2:
+
+			7:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.hide()
@@ -383,7 +424,8 @@ func freqmetterhandle():
 				frequency_point_006.hide()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			3:
+
+			6:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
@@ -392,7 +434,8 @@ func freqmetterhandle():
 				frequency_point_006.hide()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			4:
+
+			5:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
@@ -401,7 +444,8 @@ func freqmetterhandle():
 				frequency_point_006.hide()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			5:
+
+			4:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
@@ -410,7 +454,8 @@ func freqmetterhandle():
 				frequency_point_006.hide()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			6:
+
+			3:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
@@ -419,7 +464,8 @@ func freqmetterhandle():
 				frequency_point_006.show()
 				frequency_point_007.hide()
 				frequency_point_008.hide()
-			7:
+
+			2:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
@@ -428,7 +474,8 @@ func freqmetterhandle():
 				frequency_point_006.show()
 				frequency_point_007.show()
 				frequency_point_008.hide()
-			8:
+
+			1:
 				frequency_point_001.show()
 				frequency_point_002.show()
 				frequency_point_003.show()
