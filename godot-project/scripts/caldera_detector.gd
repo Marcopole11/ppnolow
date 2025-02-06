@@ -23,3 +23,6 @@ func interact(fuel: int):
 	audiocaldera.play()
 	car_animations.play("put_wood")
 	return fuel - 1
+	
+func sonido():
+	audiocaldera.play()
