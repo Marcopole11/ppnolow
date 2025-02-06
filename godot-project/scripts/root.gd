@@ -13,6 +13,8 @@ var tst_scene = preload("res://scenes/tst.tscn")
 var tree_scene = preload("res://scenes/tree.tscn")
 var car_scene = preload("res://scenes/car.tscn")
 var other_player_scene = preload("res://scenes/player_2.tscn")
+var lobby_scene = preload("res://scenes/lobby.tscn")
+
 
 var chunk_scene = preload("res://scenes/chunk.tscn")
 var chunk_set_scene = preload("res://scenes/ChunkSet.tscn")
@@ -24,7 +26,7 @@ var scene_map = {
 	"car": car_scene,
 	"player": other_player_scene,
 	"chunkset": chunk_set_scene,
-	"lobby": tree_scene
+	"lobby": lobby_scene
 }
 
 # when the scene is loaded

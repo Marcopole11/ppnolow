@@ -178,7 +178,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
-		print(target.to_string())
+		#print(target.to_string())
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
 			if Input.is_action_just_pressed("interact"):
@@ -386,7 +386,7 @@ func freqmetterhandle():
 	var cardistance:float
 	
 	if tool_inhand == 4:
-		cardistance = (pow((ServerStore.posY - 40),2) +pow((ServerStore.posX - 0),2))/100
+		cardistance = sqrt(pow((ServerStore.posY - ServerStore.posY_car),2) +pow((ServerStore.posX - 200),2))
 		print("distancetocar ",cardistance)
 		var freqmetter_step = edgemap_distance/8
 		area= round(cardistance/freqmetter_step)

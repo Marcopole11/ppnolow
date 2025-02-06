@@ -15,11 +15,11 @@ func _ready():
 func _on_state_changed(state):
 	pass
 
-func _on_pp_entity_node_2_state_changed(new_state):
-	if !placed:
-		var setnum = new_state.data.set;
-		if new_state.x < 0:
-			terrain.rotation.y = deg_to_rad(180);
-		add_child(terrain);
-		placed = true;
-	pass # Replace with function body.
+#func _on_pp_entity_node_2_state_changed(new_state):
+	#if !placed:
+		#var setnum = new_state.data.set;
+		#if new_state.x < 0:
+			#terrain.rotation.y = deg_to_rad(180);
+		#add_child(terrain);
+		#placed = true;
+	#pass # Replace with function body.

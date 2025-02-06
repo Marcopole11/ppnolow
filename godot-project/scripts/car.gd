@@ -22,7 +22,6 @@ var car_water_indicator:int = 0
 
 
 var player = null
-var distance:float
 var pp_root_node
 var pushForce = 5
 
@@ -85,13 +84,7 @@ func watertank_car_indicator():
 			waterlvl_003.show()
 			waterlvl_004.show()
 
-	if player == null:
-		var checkarraysize = get_tree().get_nodes_in_group("player") if get_tree() else []
-		if checkarraysize.size() > 0:
-			player = checkarraysize[0]
-	if player != null:
-		Menusettings.distance = global_position.distance_to(player.global_position)
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta

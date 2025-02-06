@@ -1101,7 +1101,7 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Axe" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(0.421165, 0.21392, -0.516583, -0.275899, 0.642031, 0.0409314, 0.486313, 0.17898, 0.470602, -0.0842986, -0.49284, -0.901948)
+transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/Axe"]
 transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
@@ -1134,7 +1134,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 8.77572e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 8.88279e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
@@ -1286,16 +1286,17 @@ type = "player"
 visible = false
 
 [node name="bar_stamina" type="TextureProgressBar" parent="."]
-anchors_preset = 13
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 177.0
-offset_top = 644.0
-offset_right = 341.0
-offset_bottom = 1460.0
+offset_left = 94.0
+offset_top = 34.0
+offset_right = 258.0
+offset_bottom = 1498.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 rotation = -1.57087
 scale = Vector2(0.0477288, -0.189402)
 size_flags_horizontal = 4

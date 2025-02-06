@@ -24,7 +24,9 @@ func _on_state_changed(state):
 
 
 func _on_pp_entity_node_state_changed(new_state):
+	placed = true
 	if !placed:
+	
 		var setnum = new_state.data.set;
 		if setnum >= terrainSets.size():
 			setnum = 2;

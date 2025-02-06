@@ -42,5 +42,8 @@ shadow_mesh = SubResource("ArrayMesh_qwba8")
 
 [node name="floor2" type="MeshInstance3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
 mesh = SubResource("ArrayMesh_jy2ir")
 skeleton = NodePath("")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]

@@ -84,6 +84,7 @@ points = PackedVector3Array(-2.25609, 0.0337857, 1.23239, -0.498911, -0.0337857,
 
 [node name="lake1" type="MeshInstance3D"]
 transform = Transform3D(0.128536, 0, -0.824408, 0, 0.834368, 0, 0.824408, 0, 0.128536, 0, 1.252, 0)
+visible = false
 mesh = SubResource("ArrayMesh_gaj5o")
 skeleton = NodePath("")
 
@@ -98,3 +99,5 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="water"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47035e-08, -0.192489, 4.76837e-07)
 shape = SubResource("ConvexPolygonShape3D_v68x8")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
