@@ -196,7 +196,7 @@ func _physics_process(delta: float) -> void:
 					player_water = target.interact(player_water)
 				elif test == "caldera_detector" and player_wood > 0:
 					player_wood = target.interact(player_wood)
-					
+					player_wood += 1
 					
 
 func _input(event: InputEvent) -> void:

@@ -1444,6 +1444,7 @@ bus = &"Sfx"
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_kmgf1")
+type = "CharacterBody3D"
 
 [node name="pause_menu" parent="." instance=ExtResource("4_0ou1l")]
 visible = false
