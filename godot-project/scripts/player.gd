@@ -96,6 +96,7 @@ func _ready() -> void:
 	else:
 		print("PPEntityNode not found")
 
+	pp_entity_node.multiplayer
 		
 func _on_state_changed(state):
 	# sync the player's position, using the server's values
@@ -105,13 +106,13 @@ func _on_state_changed(state):
 	# if diff_in_position > Vector3(1,1,1):
 	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
 
-	#ServerStore.ServerPingNum = state.data.pingnum;
-	#ServerStore.posX = state.x
-	#ServerStore.posY = state.y
-#
-	#ServerStore.colorR = state.data.color.r
-	#ServerStore.colorG = state.data.color.g
-	#ServerStore.colorB = state.data.color.b
+	ServerStore.ServerPingNum = state.data.pingnum;
+	ServerStore.posX = state.x
+	ServerStore.posY = state.y
+
+	ServerStore.colorR = state.data.color.r
+	ServerStore.colorG = state.data.color.g
+	ServerStore.colorB = state.data.color.b
 	pass
 	 
 func _server_failed():
@@ -119,10 +120,12 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-	# if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-	# 	_server_failed();
-	# if ServerStore._newPingNumCheck():
-	# 	pp_root_node.message({"pingnum": ServerStore.PingNum});
+	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+		pp_root_node.authenticate_player("","")
+		print("--- forced reautenticate")
+		#_server_failed();
+	if ServerStore._newPingNumCheck():
+		pp_root_node.message({"pingnum": ServerStore.PingNum});
 	
 	if Input.is_action_just_pressed("pause_button"):
 		openmenu()

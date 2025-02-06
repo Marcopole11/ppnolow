@@ -21,3 +21,7 @@ game_id = "7833"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_agl5h")
+
+[connection signal="player_connected" from="PPRootNode" to="." method="_on_pp_root_node_player_connected"]
+[connection signal="player_disconnected" from="PPRootNode" to="." method="_on_pp_root_node_player_disconnected"]
+[connection signal="player_unauthenticated" from="PPRootNode" to="." method="_on_pp_root_node_player_unauthenticated"]

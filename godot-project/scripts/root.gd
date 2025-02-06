@@ -43,6 +43,7 @@ func _ready():
 	pp_root_node.remove_chunk.connect(_on_remove_chunk)
 	
 	pp_root_node.authenticate_player("","")
+	
 
 # create a new player instance, and add it as a child node
 func _on_new_player_entity(entity_id, state):
@@ -150,3 +151,20 @@ func _on_remove_chunk(chunk_id):
 			return
 	  
 	print('Chunk ' + chunk_id + ' not found to remove')
+
+
+func _on_pp_root_node_player_connected():
+	print("----- Player connected")
+	pass # Replace with function body.
+
+
+
+func _on_pp_root_node_player_disconnected():
+	print("----- Player disconnected")
+	pp_root_node.authenticate_player("","")
+	pass # Replace with function body.
+
+
+func _on_pp_root_node_player_unauthenticated():
+	print("----- Player unloged")
+	pass # Replace with function body.
