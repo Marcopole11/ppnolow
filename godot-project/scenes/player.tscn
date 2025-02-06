@@ -171,6 +171,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ryp1e"]
 resource_name = "new_animation"
+length = 0.6735
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -179,10 +180,10 @@ tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/Axe:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.473715, -0.474713, -0.901513), Vector3(0.474, -0.495, -0.902)]
+"values": [Vector3(0.473715, -0.474713, -1.28633), Vector3(0.473715, -0.523825, -1.28633)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1112,7 +1113,7 @@ collision_layer = 3
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
-transform = Transform3D(0.0310916, -0.872763, 0.0666574, -0.814282, -0.0336834, -0.0612122, 0.0650938, -0.061242, -0.832217, -0.0123444, -0.00286579, 0.117492)
+transform = Transform3D(0.0882044, -1.45581, 0.100283, -2.31005, -0.0561856, -0.0920908, 0.184665, -0.102155, -1.25203, -0.0123444, -0.00286555, 0.117491)
 shape = SubResource("ConvexPolygonShape3D_v0c87")
 
 [node name="axe_animation" type="AnimationPlayer" parent="Neck/Camera3D/Axe"]
@@ -1156,6 +1157,7 @@ stream = ExtResource("4_m5efg")
 
 [node name="waterpump" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
+visible = false
 
 [node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump"]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -1254,6 +1256,7 @@ visible = false
 
 [node name="Tronco1" type="MeshInstance3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.46893, -1.09678, -1.29944)
+visible = false
 mesh = SubResource("CapsuleMesh_0b5lh")
 skeleton = NodePath("../Axe")
 

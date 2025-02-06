@@ -258,7 +258,7 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 		is_attacking=false
 		axe_hitbox.set_collision_layer_value(2,false)
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("arbol"):
+	if area.is_in_group("arbol") and player_wood <3:
 		print("Tree hitted")
 		player_wood += 1
 func woodindicator():
