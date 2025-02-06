@@ -84,7 +84,6 @@ points = PackedVector3Array(-2.25609, 0.0337857, 1.23239, -0.498911, -0.0337857,
 
 [node name="lake1" type="MeshInstance3D"]
 transform = Transform3D(0.128536, 0, -0.824408, 0, 0.834368, 0, 0.824408, 0, 0.128536, 0, 1.252, 0)
-visible = false
 mesh = SubResource("ArrayMesh_gaj5o")
 skeleton = NodePath("")
 

@@ -358,47 +358,46 @@ func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
 
 #handles tool selection
 func swaptool() -> void:
-
-		if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4 and !is_attacking:
-			tool_inhand += 1
-			#print(tool_inhand)
-			is_attacking=false
-			pp_root_node.message({"tool": tool_inhand});
-		if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
-			tool_inhand -= 1
-			#print(tool_inhand)
-			is_attacking=false
-			pp_root_node.message({"tool": tool_inhand});
-		
-		match tool_inhand:
-			1:
-				axe.show()
-				taser.hide()
-				waterpump.hide()
-				frequencymetter.hide()
-			2:
-				axe.hide()
-				taser.show()
-				waterpump.hide()
-				frequencymetter.hide()
-			3:
-				axe.hide()
-				taser.hide()
-				if !(ServerStore.car_filling_water > 0):
-					waterpump.show()
-				frequencymetter.hide()
-			4: 	
-				frequencymetter.show()
-				taser.hide()
-				waterpump.hide()
-				axe.hide()
+	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4 and !is_attacking:
+		tool_inhand += 1
+		#print(tool_inhand)
+		is_attacking=false
+		pp_root_node.message({"tool": tool_inhand});
+	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
+		tool_inhand -= 1
+		#print(tool_inhand)
+		is_attacking=false
+		pp_root_node.message({"tool": tool_inhand});
+	
+	match tool_inhand:
+		1:
+			axe.show()
+			taser.hide()
+			waterpump.hide()
+			frequencymetter.hide()
+		2:
+			axe.hide()
+			taser.show()
+			waterpump.hide()
+			frequencymetter.hide()
+		3:
+			axe.hide()
+			taser.hide()
+			if !(ServerStore.car_filling_water > 0):
+				waterpump.show()
+			frequencymetter.hide()
+		4: 	
+			frequencymetter.show()
+			taser.hide()
+			waterpump.hide()
+			axe.hide()
 
 func freqmetterhandle():
 	var area:int
 	var cardistance:float
 	
 	if tool_inhand == 4:
-		cardistance = sqrt(pow((ServerStore.posY - ServerStore.posY_car),2) +pow((ServerStore.posX - 200),2))
+		cardistance = sqrt(pow((ServerStore.posY - ServerStore.posY_car),2) +pow((ServerStore.posX - 120),2))
 		print("distancetocar ",cardistance)
 		var freqmetter_step = edgemap_distance/8
 
@@ -484,7 +483,3 @@ func freqmetterhandle():
 				frequency_point_006.show()
 				frequency_point_007.show()
 				frequency_point_008.show()
-
-
-
-	

@@ -70,7 +70,6 @@ shadow_mesh = SubResource("ArrayMesh_t8hxg")
 
 [node name="path2" type="MeshInstance3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-visible = false
 mesh = SubResource("ArrayMesh_wh66n")
 skeleton = NodePath("")
 
