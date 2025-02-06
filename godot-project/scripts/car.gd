@@ -45,23 +45,11 @@ func _process(delta: float) -> void:
 	
 	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
 		interact(delta,0)
-		car_animations.play("shake")
+		car_animations.play("car_shake")
 	if ServerStore.car_filling_water > 0:
 		print("llenandocoche ",ServerStore.car_water)
 		watertank_car_mesh.show
-		
 
-func fill_car_watertank(playerwater):
-	if ServerStore.car_water >= 4:
-		print("car tank is full")
-		return playerwater;
-	elif ServerStore.car_water+playerwater > 4:
-		var sendwater = ServerStore.car_water+playerwater-4;
-		pp_root_node.message({"fillWater": sendwater})
-		return playerwater - sendwater;
-	else:
-		pp_root_node.message({"fillWater": playerwater})
-		return 0;
 		
 	
 		

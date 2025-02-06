@@ -19,7 +19,7 @@ var tool_inhand:int = 1
 var is_attacking : bool = false
 @export var stamina_attack_cap:int = 35
 
-var player_wood:int = 0
+var player_wood:int = 1
 var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
@@ -176,11 +176,19 @@ func _process(delta: float) -> void:
 		});
 
 func _physics_process(delta: float) -> void:
-	if $Neck/Camera3D/InteractRay.is_colliding():
-		var target = $Neck/Camera3D/InteractRay.get_collider()
+	if interact_ray.is_colliding():
+		var target = interact_ray.get_collider()
+		print(target.to_string())
+		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
-			if Input.is_action_pressed("interact"):
-				target.interact(delta, Input.get_action_strength("interact"))
+			if Input.is_action_just_pressed("interact"):
+				var pp_entity_node= get_node_or_null("PPEntityNode");
+				if tool_inhand == 3 and test == "calderaagua_detector2":
+					player_water = target.interact(player_water)
+				elif test == "caldera_detector" and player_wood > 0:
+					player_wood = target.interact(player_wood)
+					
+					
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -234,10 +242,6 @@ func play_step():
 #handles axe attacks
 func axeattack():
 	if tool_inhand == 1:
-		if ServerStore.is_in_fuel and ServerStore.car_fuel < 5 and Input.is_action_just_pressed("interact"):
-			ServerStore.car_fuel +=1
-			player_wood -= 1
-			print("combustible en el coche ",ServerStore.car_fuel)
 		if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
 			is_attacking = true
 			axe_animation.play("attack_animation")
