@@ -43,10 +43,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qwba8")
 
 [node name="GrassTile" type="MeshInstance3D"]
+visible = false
 
 [node name="terrain" parent="." instance=ExtResource("1_xjyoa")]
 
 [node name="floor" parent="terrain" index="0"]
 mesh = SubResource("ArrayMesh_jy2ir")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
 
 [editable path="terrain"]

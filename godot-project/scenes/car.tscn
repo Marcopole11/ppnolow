@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=29 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
@@ -385,22 +385,6 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0.0518376, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_yslvr"]
-resource_name = "puerta cldera"
-length = 0.379
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carro/Caldera:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.785398)]
-}
-
 [sub_resource type="Animation" id="Animation_6dvyk"]
 resource_name = "waterpump_insert"
 tracks/0/type = "value"
@@ -428,49 +412,29 @@ tracks/1/keys = {
 "values": [Vector3(-0.0312905, -3.13255, -0.993558), Vector3(-0.0217821, -3.11737, -1.55055)]
 }
 
+[sub_resource type="Animation" id="Animation_yslvr"]
+resource_name = "puerta cldera"
+length = 0.379
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro/Caldera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.353045), Vector3(0, 0, 0), Vector3(0, 0, 0.158319), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk3q6"]
 _data = {
 "RESET": SubResource("Animation_ynb1b"),
 "car_shake": SubResource("Animation_cp3j7"),
-"lid_caldera": SubResource("Animation_yslvr"),
+"put_wood": SubResource("Animation_yslvr"),
 "waterpump_insert": SubResource("Animation_6dvyk")
 }
-
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_65okt"]
-
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_g5qvs"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbjfx"]
-animation = &"lid_caldera"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqeuv"]
-animation = &"waterpump_insert"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8a4e3"]
-animation = &"car_shake"
-
-[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_gbbxq"]
-
-[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_au4qx"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2k0e5"]
-graph_offset = Vector2(92.4636, -66.8951)
-nodes/Add2/node = SubResource("AnimationNodeAdd2_g5qvs")
-nodes/Add2/position = Vector2(480, -80)
-"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_65okt")
-"nodes/Add2 2/position" = Vector2(80, -60)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_8a4e3")
-nodes/Animation/position = Vector2(-480, -60)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_tbjfx")
-"nodes/Animation 2/position" = Vector2(-480, 240)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_cqeuv")
-"nodes/Animation 3/position" = Vector2(-80, 300)
-nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_au4qx")
-nodes/TimeSeek/position = Vector2(180, 300)
-"nodes/TimeSeek 2/node" = SubResource("AnimationNodeTimeSeek_gbbxq")
-"nodes/TimeSeek 2/position" = Vector2(-260, 200)
-nodes/output/position = Vector2(900, 60)
-node_connections = [&"Add2", 0, &"Add2 2", &"Add2", 1, &"TimeSeek", &"Add2 2", 0, &"Animation", &"Add2 2", 1, &"TimeSeek 2", &"TimeSeek", 0, &"Animation 3", &"TimeSeek 2", 0, &"Animation 2", &"output", 0, &"Add2"]
 
 [node name="StaticBody3D" type="StaticBody3D"]
 transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 0, 0.53966, 0)
@@ -530,6 +494,8 @@ script = ExtResource("4_n4ktf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/caldera_detector"]
 transform = Transform3D(1, 0, 0, 0, 1.00004, 0, 0, 0, 1.00004, -1.28262, 2.94561, 0.329742)
 shape = SubResource("BoxShape3D_ygm08")
+
+[node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/caldera_detector"]
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D/carro/carro" index="1"]
 transform = Transform3D(-0.04348, -0.9944, -0.0963452, 0.999057, -0.0432772, -0.00419305, 1.13397e-09, -0.0964365, 0.995339, -0.0169668, 1.47381, -0.640323)
@@ -612,14 +578,6 @@ enable_node_path = NodePath("../carro")
 libraries = {
 "": SubResource("AnimationLibrary_hk3q6")
 }
-
-[node name="car_animtree" type="AnimationTree" parent="Node3D"]
-tree_root = SubResource("AnimationNodeBlendTree_2k0e5")
-anim_player = NodePath("../Car_animations")
-parameters/Add2/add_amount = 1.0
-"parameters/Add2 2/add_amount" = 1.0
-parameters/TimeSeek/seek_request = -1.0
-"parameters/TimeSeek 2/seek_request" = -1.0
 
 [connection signal="body_entered" from="Node3D/carro/carro/caldera_detector" to="." method="_on_caldera_detector_body_entered"]
 [connection signal="body_exited" from="Node3D/carro/carro/caldera_detector" to="." method="_on_caldera_detector_body_exited"]

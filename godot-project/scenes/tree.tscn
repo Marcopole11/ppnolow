@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://3qh75gl021vh"]
 
+[ext_resource type="Script" path="res://scripts/arbol.gd" id="1_5vajs"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_8ekux"]
-[ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_se41r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhny5"]
 resource_name = "madera"
@@ -100,7 +100,7 @@ _data = {
 }
 
 [node name="tree" type="Node3D"]
-script = ExtResource("1_se41r")
+script = ExtResource("1_5vajs")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_8ekux")

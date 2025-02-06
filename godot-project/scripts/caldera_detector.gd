@@ -1,6 +1,8 @@
 extends Area3D
 
 var pp_root_node
+@onready var car_animations: AnimationPlayer = $"../../../Car_animations"
+@onready var audiocaldera: AudioStreamPlayer3D = $audiocaldera
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,4 +19,7 @@ func interact(fuel: int):
 	var current_position = global_transform.origin
 	pp_root_node.message({"ID": pp_entity_node.entity_id,
 	"fuel": fuel})
+	print("webo")
+	audiocaldera.play()
+	car_animations.play("put_wood")
 	return fuel - 1
