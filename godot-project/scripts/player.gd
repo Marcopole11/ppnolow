@@ -2,8 +2,8 @@ extends CharacterBody3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:float = 50
-var sprintSpeed:int = 200
+var speed:float = 20
+var sprintSpeed:int = 30
 var totalSpeed:int = speed	
 var stamina:float = 100
 var maxstamina:float = 100
@@ -330,7 +330,7 @@ func waterpumphandle():
 			pump_animation.play("use")
 			waterpumpsound = true
 			waterpump_hitbox.monitoring = true
-			speed=5
+			speed=1
 			pp_root_node.message({"action": 15});
 
 		if Input.is_action_just_released("attack"):
@@ -342,7 +342,7 @@ func waterpumphandle():
 			pumpwater.stop()
 			pump_animation.play("idle")
 			waterpump.show()
-			speed = 5
+			speed = 20
 			
 		if waterpumpsound and !pumpwater.playing:
 			pumpwater.play()
