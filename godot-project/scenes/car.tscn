@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=42 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=43 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
