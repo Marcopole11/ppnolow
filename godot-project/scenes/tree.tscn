@@ -24,7 +24,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7bkre"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_klxnm"]
 resource_name = "terrain_Plane_002"
 _surfaces = [{
 "aabb": AABB(-1.3538, -0.572904, -3.64199, 4.22605, 8.78711, 7.35766),
@@ -42,7 +42,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_j2f1a")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yic4h"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bwdws"]
 points = PackedVector3Array(-0.586372, -0.501987, -1.06057, 2.29302, 7.60654, 3.70596, 1.64495, 5.35384, -3.71174, -0.0285425, 6.749, -0.781886, 1.92344, 1.03208, -0.223784, -1.42354, -0.501987, 0.332844, 2.90027, 8.28307, 2.98254, -0.0285425, -0.641766, 1.03029, 1.08627, 6.60922, 3.4013, 2.48169, 5.49362, -1.33925, 1.22594, 5.6334, -3.71174, 2.90027, 7.72483, 3.26196, 1.22594, 0.195156, -0.502467, -1.28387, -0.223305, -0.223784, -0.447126, -0.501987, 1.16963, 2.3416, 8.14329, 3.4013, 2.3416, 7.44614, 3.82006, 2.48169, 7.02768, -0.363125, 0.807355, -0.641766, 0.0541611, 0.111126, 5.49362, -1.75801, -0.0285425, 6.749, -0.502467, -0.168211, -0.501987, -1.06057, -1.42354, -0.223305, 0.332844, 2.62093, 7.44614, 3.54064, 2.62093, 6.88791, -0.363125, 1.08627, 6.33054, 3.4013, 1.22594, 5.7723, -3.57166, 2.48169, 5.21494, -1.06057, 0.111126, 6.88791, -0.502467, -0.0285425, 6.19076, -1.19991, -1.42354, -0.223305, 0.0541611, 1.22594, 5.35384, -3.71174)
 
 [sub_resource type="Animation" id="Animation_o00kl"]
@@ -99,28 +99,36 @@ _data = {
 "tree_down": SubResource("Animation_o66ny")
 }
 
-[node name="tree" type="Node3D"]
+[node name="tree" type="StaticBody3D"]
+transform = Transform3D(0.993447, 0.112811, -0.0183583, -0.114295, 0.980548, -0.159569, 6.14673e-08, 0.160622, 0.987016, 0, 0, 0)
+collision_mask = 4
 script = ExtResource("1_5vajs")
+
+[node name="small tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 2.42239e-09, -7.98089e-10, 1.07199e-08, 1, 5.96046e-08, 4.40657e-09, 0, 1, 0.00616767, -0.0184983, 0.00338714)
+mesh = SubResource("ArrayMesh_klxnm")
+skeleton = NodePath("")
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_8ekux")
 type = "tree"
 
-[node name="tree" type="Area3D" parent="." groups=["arbol"]]
-transform = Transform3D(0.993447, 0.112811, -0.0183583, -0.114295, 0.980548, -0.159569, 6.14673e-08, 0.160622, 0.987016, 0, 0, 0)
-collision_mask = 2
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 2.42239e-09, -2.66073e-09, 2.88493e-09, 1, 4.47035e-08, 3.90686e-09, 0, 1, -0.430629, -0.82377, 0.253752)
+shape = SubResource("ConvexPolygonShape3D_bwdws")
 
-[node name="small tree" type="MeshInstance3D" parent="tree"]
-mesh = SubResource("ArrayMesh_7bkre")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.430629, -0.82377, 0.253752)
-shape = SubResource("ConvexPolygonShape3D_yic4h")
-
-[node name="tree_anim" type="AnimationPlayer" parent="tree"]
+[node name="tree_anim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3pw54")
 }
 
+[node name="tree" type="Area3D" parent="." groups=["arbol"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree"]
+transform = Transform3D(1, 2.42239e-09, -2.66073e-09, 2.88493e-09, 1, 4.47035e-08, 3.90686e-09, 0, 1, -0.430629, -0.82377, 0.253752)
+shape = SubResource("ConvexPolygonShape3D_bwdws")
+
 [connection signal="area_entered" from="tree" to="." method="_on_tree_area_entered"]
+[connection signal="body_entered" from="tree" to="." method="_on_tree_body_entered"]
