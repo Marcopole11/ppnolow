@@ -175,14 +175,14 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.03312, 0)
 
 [node name="EyeMesh" type="MeshInstance3D" parent="Base/Eye"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
 
 [node name="miniEye" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, 0, 1.08156, -0.461338)
 
-[node name="miniEyeMesh" type="MeshInstance3D" parent="Base/miniEye"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.98023e-08, 2.38419e-07, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -190,7 +190,7 @@ skeleton = NodePath("")
 [node name="miniEye2" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, -0.337126, 1.08156, -0.366056)
 
-[node name="miniEye2Mesh" type="MeshInstance3D" parent="Base/miniEye2"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -198,7 +198,7 @@ skeleton = NodePath("")
 [node name="miniEye3" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, -0.112491, 1.08156, 0.493601)
 
-[node name="miniEye3Mesh" type="MeshInstance3D" parent="Base/miniEye3"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -206,7 +206,7 @@ skeleton = NodePath("")
 [node name="miniEye4" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, -0.505109, 1.08156, -0.0678274)
 
-[node name="miniEye4Mesh" type="MeshInstance3D" parent="Base/miniEye4"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye4"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -214,7 +214,7 @@ skeleton = NodePath("")
 [node name="miniEye5" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, -0.387356, 1.08156, 0.254776)
 
-[node name="miniEye5Mesh" type="MeshInstance3D" parent="Base/miniEye5"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye5"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -222,7 +222,7 @@ skeleton = NodePath("")
 [node name="miniEye6" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, 0.243107, 1.03077, 0.436479)
 
-[node name="miniEye6Mesh" type="MeshInstance3D" parent="Base/miniEye6"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye6"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 4.76837e-07)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -230,7 +230,7 @@ skeleton = NodePath("")
 [node name="miniEye7" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, 0.490709, 1.03077, 0.185915)
 
-[node name="miniEye7Mesh" type="MeshInstance3D" parent="Base/miniEye7"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye7"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.38419e-07, 4.76837e-07)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -238,7 +238,7 @@ skeleton = NodePath("")
 [node name="miniEye8" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, 0.490709, 1.03077, -0.112929)
 
-[node name="miniEye8Mesh" type="MeshInstance3D" parent="Base/miniEye8"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye8"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 5.96046e-08, 4.76837e-07)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
@@ -246,7 +246,7 @@ skeleton = NodePath("")
 [node name="miniEye9" type="Node3D" parent="Base"]
 transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.199177, 0.318635, 1.03077, -0.386969)
 
-[node name="miniEye9Mesh" type="MeshInstance3D" parent="Base/miniEye9"]
+[node name="EyeMesh" type="MeshInstance3D" parent="Base/miniEye9"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.38419e-07, 4.76837e-07)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
