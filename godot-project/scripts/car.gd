@@ -47,14 +47,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	watertank_car_indicator()
-	
-	if ServerStore.car_hot > 0:
+	print(ServerStore.car_hot,"  ",ServerStore.car_fuel,"  ",(ServerStore.car_hot as float)/100)
+	if ServerStore.car_hot > 20:
 		interact(delta,0)
 		car_animations.play("car_shake")
 		gpu_particles_3d_1.show()
 		gpu_particles_3d_2.show()
-		spinwheel(ServerStore.car_hot)
-	if ServerStore.car_hot < 0:
+		spinwheel(ServerStore.car_hot,4150)
+	if ServerStore.car_hot < 20:
 		car_animations.stop()
 		gpu_particles_3d_1.hide()
 		gpu_particles_3d_2.hide()
@@ -139,8 +139,9 @@ func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("fuera caldera de agua")
 		ServerStore.is_in_watertank = false
-func spinwheel(speed):
-	rueda_bl.rotate_x(-speed/100)
-	rueda_br.rotate_x(-speed/100)
-	rueda_tl.rotate_x(-speed/100)
-	rueda_tr.rotate_x(-speed/100)
+func spinwheel(speed:float,divspeed):
+	rueda_bl.rotate_x(speed/divspeed)
+	rueda_br.rotate_x(speed/divspeed)
+	rueda_tl.rotate_x(speed/divspeed)
+	rueda_tr.rotate_x(speed/divspeed)
+	

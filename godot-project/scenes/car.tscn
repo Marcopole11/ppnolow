@@ -836,6 +836,7 @@ shadow_enabled = true
 
 [node name="Pulpo2" type="MeshInstance3D" parent="Node3D/carro/carro" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
+visible = false
 mesh = SubResource("ArrayMesh_wah3g")
 skeleton = NodePath("")
 

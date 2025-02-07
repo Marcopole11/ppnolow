@@ -194,7 +194,7 @@ func _physics_process(delta: float) -> void:
 				var pp_entity_node= get_node_or_null("PPEntityNode");
 				if tool_inhand == 3 and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
-				elif test == "caldera_detector" and player_wood > 0:
+				elif test == "caldera_detector" and player_wood > 0 and ServerStore.car_fuel < 3:
 					player_wood = target.interact(player_wood)
 					
 					

@@ -1286,7 +1286,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 7.45058e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
