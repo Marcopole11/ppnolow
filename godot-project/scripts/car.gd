@@ -18,6 +18,12 @@ var car_water_indicator:int = 0
 @onready var waterlvl_004: MeshInstance3D = $Node3D/carro/waterlvl_004
 @onready var car_animations: AnimationPlayer = $Node3D/Car_animations
 @onready var watertank_car_mesh: MeshInstance3D = $Node3D/carro/carro/waterTank2
+@onready var rueda_br: MeshInstance3D = $Node3D/carro/Rueda_BR_001
+@onready var rueda_bl: MeshInstance3D = $Node3D/carro/Rueda_BL
+@onready var rueda_tr: MeshInstance3D = $Node3D/carro/Rueda_TR
+@onready var rueda_tl: MeshInstance3D = $Node3D/carro/Rueda_TL
+@onready var gpu_particles_3d_1: GPUParticles3D = $Node3D/carro/carro/GPUParticles3D2
+@onready var gpu_particles_3d_2: GPUParticles3D = $Node3D/carro/carro/GPUParticles3D3
 
 
 
@@ -42,13 +48,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	watertank_car_indicator()
 	
-	if ServerStore.car_water > 0 and ServerStore.car_fuel > 0:
+	if ServerStore.car_hot > 0:
 		interact(delta,0)
 		car_animations.play("car_shake")
-	if ServerStore.car_filling_water > 0:
-		print("llenandocoche ",ServerStore.car_water)
-		watertank_car_mesh.show
-
+		gpu_particles_3d_1.show()
+		gpu_particles_3d_2.show()
+		spinwheel(ServerStore.car_hot)
+	if ServerStore.car_hot < 0:
+		car_animations.stop()
+		gpu_particles_3d_1.hide()
+		gpu_particles_3d_2.hide()
 		
 	
 		
@@ -130,3 +139,8 @@ func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		print("fuera caldera de agua")
 		ServerStore.is_in_watertank = false
+func spinwheel(speed):
+	rueda_bl.rotate_x(speed)
+	rueda_br.rotate_x(speed)
+	rueda_tl.rotate_x(speed)
+	rueda_tr.rotate_x(speed)
