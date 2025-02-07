@@ -161,6 +161,18 @@ shadow_mesh = SubResource("ArrayMesh_j3x3h")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkc8l"]
 albedo_color = Color(0.424762, 0.606788, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
+albedo_color = Color(1, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
+albedo_color = Color(0, 1, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ijkj"]
 resource_name = "Material.001"
 cull_mode = 2
@@ -360,18 +372,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3kl12")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
-albedo_color = Color(1, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
-albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ynb1b"]
 length = 0.001
@@ -772,6 +772,19 @@ transform = Transform3D(0.278655, 0, 0, 0, 0.261697, 0, 0, 0, 0.261961, 0.219523
 light_color = Color(1, 0.434811, 0.366139, 1)
 shadow_enabled = true
 
+[node name="waterlvl_001" parent="Node3D/carro" index="11"]
+material_override = SubResource("StandardMaterial3D_6pv0p")
+
+[node name="waterlvl_002" parent="Node3D/carro" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0392416, 0)
+material_override = SubResource("StandardMaterial3D_5oeop")
+
+[node name="waterlvl_003" parent="Node3D/carro" index="13"]
+material_override = SubResource("StandardMaterial3D_gvcsg")
+
+[node name="waterlvl_004" parent="Node3D/carro" index="14"]
+material_override = SubResource("StandardMaterial3D_d6cvv")
+
 [node name="Pulpo2" type="MeshInstance3D" parent="Node3D/carro"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
 mesh = SubResource("ArrayMesh_wah3g")
@@ -796,19 +809,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.513416, -3.05948, 0.530818)
 mesh = SubResource("ArrayMesh_ex5ld")
 skeleton = NodePath("")
-
-[node name="waterlvl_001" parent="Node3D/carro" index="12"]
-material_override = SubResource("StandardMaterial3D_6pv0p")
-
-[node name="waterlvl_002" parent="Node3D/carro" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0392416, 0)
-material_override = SubResource("StandardMaterial3D_5oeop")
-
-[node name="waterlvl_003" parent="Node3D/carro" index="14"]
-material_override = SubResource("StandardMaterial3D_gvcsg")
-
-[node name="waterlvl_004" parent="Node3D/carro" index="15"]
-material_override = SubResource("StandardMaterial3D_d6cvv")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)

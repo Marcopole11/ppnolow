@@ -196,7 +196,7 @@ func _physics_process(delta: float) -> void:
 					player_water = target.interact(player_water)
 				elif test == "caldera_detector" and player_wood > 0:
 					player_wood = target.interact(player_wood)
-					player_wood += 1
+					
 					
 
 func _input(event: InputEvent) -> void:
@@ -256,7 +256,7 @@ func axeattack():
 			is_attacking = true
 			axe_animation.play("attack_animation")
 			axe_hitbox.monitoring = true
-			axe_hitbox.set_collision_layer_value(2,true)
+			axe_hitbox.set_collision_layer_value(3,true)
 			axeswing.pitch_scale = randf_range(.8,1.2)
 			axeswing.play()
 			stamina = stamina -stamina_attack_cap
@@ -266,11 +266,10 @@ func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 		axe_animation.play("idle_axe_animation")
 		axe_hitbox.monitoring = false
 		is_attacking=false
-		axe_hitbox.set_collision_layer_value(2,false)
+		axe_hitbox.set_collision_layer_value(3,false)
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
-
 	if area.is_in_group("arbol") and player_wood <3:
-		print("Tree hitted")
+		print("Tree hit")
 		player_wood += 1
 
 func woodindicator():

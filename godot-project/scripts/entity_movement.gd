@@ -2,8 +2,6 @@
 # extend the functionality of your root node (here Node3D)
 extends Node3D
 var pp_root_node
-@onready var tree_anim: AnimationPlayer = $tree/tree_anim
-@onready var tree: Area3D = $tree
 
 var treehp:int = 3
 # when the scene is loaded
