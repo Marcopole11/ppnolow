@@ -315,8 +315,8 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 func waterpumphandle():
 	if tool_inhand == 3:
 		water_tank_barfiller.scale.x = player_water * 0.2
-		if fillingwater_player and player_water <5.0:
-			player_water += 0.15
+		if fillingwater_player and player_water <1.0:
+			player_water += 0.05
 		if Input.is_action_just_pressed("attack"):
 			print(ServerStore.is_in_watertank)
 			print (player_water > 0.0)

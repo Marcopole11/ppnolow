@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=45 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
@@ -160,18 +160,6 @@ shadow_mesh = SubResource("ArrayMesh_j3x3h")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkc8l"]
 albedo_color = Color(0.424762, 0.606788, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
-albedo_color = Color(1, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
-albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ijkj"]
 resource_name = "Material.001"
@@ -372,6 +360,80 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3kl12")
+
+[sub_resource type="Animation" id="Animation_t53fc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PulpoAlaDer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.255813, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PulpoAlaIzq:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uxc4m"]
+resource_name = "new_animation"
+length = 0.213
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PulpoAlaIzq:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.436332, 0), Vector3(0, 0, 0), Vector3(0, -0.523599, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PulpoAlaDer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.436332, 0), Vector3(0, 0, 0), Vector3(0, 0.523599, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p3wyr"]
+_data = {
+"RESET": SubResource("Animation_t53fc"),
+"wings": SubResource("Animation_uxc4m")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
+albedo_color = Color(1, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
+albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ynb1b"]
 length = 0.001
@@ -746,7 +808,7 @@ collision_mask = 2
 script = ExtResource("4_syip1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/calderaagua_detector2"]
-transform = Transform3D(1, 0, 0, 0, 1.00002, 0, 0, 0, 1.00002, 0.502986, 3.12447, 0.329741)
+transform = Transform3D(1, 0, 0, 0, 1.00002, 0, 0, 0, 1.00002, 1.61113, 3.12447, 0.329741)
 shape = SubResource("BoxShape3D_ygm08")
 
 [node name="waterTank2" type="MeshInstance3D" parent="Node3D/carro/carro" index="4"]
@@ -772,6 +834,36 @@ transform = Transform3D(0.278655, 0, 0, 0, 0.261697, 0, 0, 0, 0.261961, 0.219523
 light_color = Color(1, 0.434811, 0.366139, 1)
 shadow_enabled = true
 
+[node name="Pulpo2" type="MeshInstance3D" parent="Node3D/carro/carro" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
+mesh = SubResource("ArrayMesh_wah3g")
+skeleton = NodePath("")
+
+[node name="PulpoAlaDer" type="MeshInstance3D" parent="Node3D/carro/carro/Pulpo2"]
+transform = Transform3D(0.967458, 0, 0.253032, 0, 1, 0, -0.253032, 0, 0.967458, 0.69696, 1.84028, -2.09611)
+mesh = SubResource("ArrayMesh_dug4i")
+skeleton = NodePath("")
+
+[node name="PulpoAlaDerPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Pulpo2/PulpoAlaDer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.483355, -2.93549, 0.494307)
+mesh = SubResource("ArrayMesh_4iypw")
+skeleton = NodePath("")
+
+[node name="PulpoAlaIzq" type="MeshInstance3D" parent="Node3D/carro/carro/Pulpo2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299812, 1.96426, -2.13262)
+mesh = SubResource("ArrayMesh_awqge")
+skeleton = NodePath("")
+
+[node name="PulpoAlaIzqPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Pulpo2/PulpoAlaIzq"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.513416, -3.05948, 0.530818)
+mesh = SubResource("ArrayMesh_ex5ld")
+skeleton = NodePath("")
+
+[node name="Pulpo_animations" type="AnimationPlayer" parent="Node3D/carro/carro/Pulpo2"]
+libraries = {
+"": SubResource("AnimationLibrary_p3wyr")
+}
+
 [node name="waterlvl_001" parent="Node3D/carro" index="11"]
 material_override = SubResource("StandardMaterial3D_6pv0p")
 
@@ -784,31 +876,6 @@ material_override = SubResource("StandardMaterial3D_gvcsg")
 
 [node name="waterlvl_004" parent="Node3D/carro" index="14"]
 material_override = SubResource("StandardMaterial3D_d6cvv")
-
-[node name="Pulpo2" type="MeshInstance3D" parent="Node3D/carro"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
-mesh = SubResource("ArrayMesh_wah3g")
-skeleton = NodePath("")
-
-[node name="PulpoAlaDer" type="MeshInstance3D" parent="Node3D/carro/Pulpo2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69696, 1.84028, -2.09611)
-mesh = SubResource("ArrayMesh_dug4i")
-skeleton = NodePath("")
-
-[node name="PulpoAlaDerPiel" type="MeshInstance3D" parent="Node3D/carro/Pulpo2/PulpoAlaDer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.483355, -2.93549, 0.494307)
-mesh = SubResource("ArrayMesh_4iypw")
-skeleton = NodePath("")
-
-[node name="PulpoAlaIzq" type="MeshInstance3D" parent="Node3D/carro/Pulpo2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299812, 1.96426, -2.13262)
-mesh = SubResource("ArrayMesh_awqge")
-skeleton = NodePath("")
-
-[node name="PulpoAlaIzqPiel" type="MeshInstance3D" parent="Node3D/carro/Pulpo2/PulpoAlaIzq"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.513416, -3.05948, 0.530818)
-mesh = SubResource("ArrayMesh_ex5ld")
-skeleton = NodePath("")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)

@@ -140,7 +140,7 @@ func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
 		print("fuera caldera de agua")
 		ServerStore.is_in_watertank = false
 func spinwheel(speed):
-	rueda_bl.rotate_x(speed)
-	rueda_br.rotate_x(speed)
-	rueda_tl.rotate_x(speed)
-	rueda_tr.rotate_x(speed)
+	rueda_bl.rotate_x(-speed/100)
+	rueda_br.rotate_x(-speed/100)
+	rueda_tl.rotate_x(-speed/100)
+	rueda_tr.rotate_x(-speed/100)
