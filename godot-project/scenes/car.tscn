@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene load_steps=61 format=4 uid="uid://by1xajmtjokfw"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
@@ -808,18 +808,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2mbyo")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pv0p"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oeop"]
-albedo_color = Color(1, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvcsg"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6cvv"]
-albedo_color = Color(0, 1, 0, 1)
-
 [sub_resource type="Animation" id="Animation_ynb1b"]
 length = 0.001
 loop_mode = 1
@@ -1372,18 +1360,6 @@ transform = Transform3D(0.307936, -0.11251, 0.944731, -0.422151, 0.873723, 0.241
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
-
-[node name="waterlvl_001" parent="Node3D/carro" index="11"]
-material_override = SubResource("StandardMaterial3D_6pv0p")
-
-[node name="waterlvl_002" parent="Node3D/carro" index="12"]
-material_override = SubResource("StandardMaterial3D_5oeop")
-
-[node name="waterlvl_003" parent="Node3D/carro" index="13"]
-material_override = SubResource("StandardMaterial3D_gvcsg")
-
-[node name="waterlvl_004" parent="Node3D/carro" index="14"]
-material_override = SubResource("StandardMaterial3D_d6cvv")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
