@@ -18,7 +18,7 @@ var car_posY:float = 80
 
 
 # guardado para caida/reconexión
-var lobby_id: int
+var lobby_id: String = "";
 var posX: float = 0;
 var posY: float = 0;
 

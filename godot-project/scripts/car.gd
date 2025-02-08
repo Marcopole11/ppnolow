@@ -120,6 +120,8 @@ func _on_state_changed(state):
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
 	##var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	##if diff_in_position > Vector3(1,1,1):
+	#print(state)
+	
 	global_transform.origin = Vector3(state.x, state.z, -state.y)
 	ServerStore.car_wood = state.data.wood;
 	ServerStore.car_water = state.data.water;
@@ -128,6 +130,7 @@ func _on_state_changed(state):
 	ServerStore.car_filling_water = state.data.filling.fuel > 0;
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.car_rescue = state.data.rescue;
+	ServerStore.lobby_id = state.data.lobby;
 
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):

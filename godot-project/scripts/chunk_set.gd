@@ -25,7 +25,6 @@ func _on_state_changed(state):
 
 func _on_pp_entity_node_state_changed(new_state):
 	if !placed:
-		print(new_state.data.sets)
 		for x in 3:
 			for y in 3:
 				var setnum = new_state.data.sets["r"+str(x)]["r"+str(y)];

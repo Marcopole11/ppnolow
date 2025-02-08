@@ -14,6 +14,8 @@ func _ready():
 	
 func _on_state_changed(state):
 	pass
+	
+
 
 #func _on_pp_entity_node_2_state_changed(new_state):
 	#if !placed:
