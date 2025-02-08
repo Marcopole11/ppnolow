@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://orml0fq755bi"]
+[gd_scene load_steps=25 format=4 uid="uid://orml0fq755bi"]
 
 [ext_resource type="Script" path="res://scripts/mainmenu.gd" id="1_qctb0"]
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="2_ar02b"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_l1l70"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="3_wdpl7"]
 [ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="5_ntfw6"]
+[ext_resource type="PackedScene" uid="uid://dsdebbqfr00p4" path="res://scenes/entities/mantis.tscn" id="7_5xm63"]
 
 [sub_resource type="Environment" id="Environment_gt6k1"]
 background_color = Color(2.76962e-05, 0.00208671, 0.0461248, 1)
@@ -666,5 +667,7 @@ skeleton = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_p3wyr")
 }
+
+[node name="Mantis" parent="Node3D" instance=ExtResource("7_5xm63")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
