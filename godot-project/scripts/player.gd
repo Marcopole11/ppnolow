@@ -59,6 +59,7 @@ var edgemap_distance:int = 240
 # when the scene is loaded
 func _ready() -> void:
 	add_to_group("player")
+	ServerStore.playerModel = self
 	
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
@@ -94,8 +95,6 @@ func _on_state_changed(state):
 	# var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	# if diff_in_position > Vector3(1,1,1):
 	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
-	print(ServerStore.lobby_id)
-	print(state)
 
 	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
@@ -104,6 +103,8 @@ func _on_state_changed(state):
 	ServerStore.colorR = state.data.color.r
 	ServerStore.colorG = state.data.color.g
 	ServerStore.colorB = state.data.color.b
+	ServerStore.car_posY = state.data.car_posY
+	ServerStore.car_rescue = state.data.car_rescue
 	pass
 	 
 func _server_failed():
@@ -120,6 +121,7 @@ func _process(delta: float) -> void:
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
 		if ServerStore.lobby_id != "":
 			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
+			
 	
 	
 	
@@ -138,7 +140,6 @@ func _process(delta: float) -> void:
 	else:
 		velocity.y = 0
 		
-	print(velocity.y)
 	# get the raw input values
 	var input_direction = Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -193,8 +194,6 @@ func _physics_process(delta: float) -> void:
 					player_wood = target.interact(player_wood)
 				elif test == "madera_detector":
 					player_wood = target.interact(player_wood)
-					
-					
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -251,6 +250,7 @@ func axeattack():
 	if tool_inhand == 1:
 
 		if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
+			print(ServerStore.car_posY)
 			is_attacking = true
 			axe_animation.play("attack_animation")
 			axe_hitbox.monitoring = true
@@ -400,5 +400,6 @@ func swaptool() -> void:
 			axe.hide()
 
 func dead(killer: String):
+	ServerStore.playerModel = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/gameover.tscn")

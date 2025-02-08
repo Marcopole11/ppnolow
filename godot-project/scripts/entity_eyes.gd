@@ -1,6 +1,6 @@
 extends Node3D
 
-var player:Node3D = null
+#var player:Node3D = null
 @export var eyes:Array[Node3D]
 # Called when the node enters the scene tree for the first time.
 
@@ -16,14 +16,13 @@ func _ready():
 	pass # Replace with function body.
 	
 func _physics_process(delta):
-	if player == null:
-		var playergroup = get_tree().get_nodes_in_group("player");
-		if playergroup.size() > 0:
-			player = playergroup[0]
-	else:
+	#var playergroup = get_tree().get_nodes_in_group("player");
+	#if playergroup.size() > 1:
+	#	player = playergroup[0]
+	if ServerStore.playerModel != null:
 		var tall = 4;
 		for eye in range(eyes.size()):
-			eyes[eye].look_at(player.position+Vector3(0,tall,0))
+			eyes[eye].look_at(ServerStore.playerModel.position+Vector3(0,tall,0))
 			var eyemesh:Node3D = eyes[eye].get_node("EyeMesh")
 			eyemesh.rotation = Vector3(rad_to_deg(0),
 				babyStep(eyemesh.rotation.y,eyesJobY[eye]),

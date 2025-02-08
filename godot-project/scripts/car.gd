@@ -129,7 +129,6 @@ func _on_state_changed(state):
 	ServerStore.car_filling_water = state.data.filling.water > 0;
 	ServerStore.car_filling_water = state.data.filling.fuel > 0;
 	ServerStore.car_hot = state.data.hot;
-	ServerStore.car_rescue = state.data.rescue;
 	ServerStore.lobby_id = state.data.lobby;
 
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:

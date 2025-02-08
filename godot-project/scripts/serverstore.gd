@@ -30,6 +30,8 @@ var ServerPingNum: int = 0;
 var PingNum: int = 0;
 var PingNumFails: int = 0;
 
+var playerModel: Node3D = null
+
 func _checkPingNum(serverPing:int):
 	#print(str(PingNum)+" "+str(serverPing))
 	if PingNum > 5+serverPing:
