@@ -14,11 +14,11 @@ var car_filling_water:float = 0;
 var car_filling_fuel:float = 0;
 var car_hot:int = 0;
 var car_rescue:String = "safe";
-var posY_car:float = 80
+var car_posY:float = 80
 
 
 # guardado para caida/reconexión
-var lobby_id: int
+var lobby_id: String = "";
 var posX: float = 0;
 var posY: float = 0;
 

@@ -110,7 +110,8 @@ func _on_state_changed(state):
 	# var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	# if diff_in_position > Vector3(1,1,1):
 	#	global_transform.origin = Vector3(state.x, state.z, -state.y)
-
+	print(ServerStore.lobby_id)
+	print(state)
 
 	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
@@ -133,6 +134,8 @@ func _process(delta: float) -> void:
 		#_server_failed();
 	if ServerStore._newPingNumCheck():
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
+		if ServerStore.lobby_id != "":
+			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
 	
 	
 	if Input.is_action_just_pressed("pause_button"):
@@ -163,6 +166,7 @@ func _process(delta: float) -> void:
 	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
 	
 	
+	
 	# move the player
 	if(Input.is_action_pressed("sprint") and Input.is_action_pressed("move_forward") and !isRestoring):
 		totalSpeed = speed + sprintSpeed
@@ -171,7 +175,7 @@ func _process(delta: float) -> void:
 		isRestoring = stamina <= 0
 	else:
 		totalSpeed = speed
-		canRestore = true
+		canRestore = true	
 	
 	
 	
@@ -374,7 +378,6 @@ func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
 func _on_waterpump_hitbox_body_exited(body: Node3D) -> void:
 	if body.is_in_group("pond") and is_attacking:
 		fillingwater_player = false
-
 
 #handles tool selection
 func swaptool() -> void:

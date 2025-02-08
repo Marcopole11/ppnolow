@@ -76,7 +76,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	supply_indicator(waterlvl,ServerStore.car_water)
 	supply_indicator(woodPile,ServerStore.car_wood)
-	print(ServerStore.car_hot,"  ",ServerStore.car_fuel,"  ",(ServerStore.car_hot as float)/100)
 	if ServerStore.car_hot > 20:
 		interact(delta,0)
 		car_animations.play("car_shake")
@@ -125,6 +124,8 @@ func _on_state_changed(state):
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
 	##var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
 	##if diff_in_position > Vector3(1,1,1):
+	#print(state)
+	
 	global_transform.origin = Vector3(state.x, state.z, -state.y)
 	ServerStore.car_wood = state.data.wood;
 	ServerStore.car_water = state.data.water;
@@ -133,6 +134,7 @@ func _on_state_changed(state):
 	ServerStore.car_filling_water = state.data.filling.fuel > 0;
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.car_rescue = state.data.rescue;
+	ServerStore.lobby_id = state.data.lobby;
 
 func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
