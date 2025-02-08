@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://buuytb752kt18"]
+
+[ext_resource type="Script" path="res://scripts/mainmenu.gd" id="1_qctb0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qctb0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 488.0
+offset_right = 609.0
+offset_bottom = 528.0
+scale = Vector2(1.36915, 1.26499)
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

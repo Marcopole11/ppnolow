@@ -68,3 +68,8 @@ func randomSpot(old:int):
 		return 90
 	return rot
 	
+
+
+func _on_atk_area_body_entered(target: Node3D) -> void:
+	if target.has_method("dead"):
+		target.dead("Eyes")

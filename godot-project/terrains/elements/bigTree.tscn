@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dplyxmtpppox6"]
+[gd_scene load_steps=8 format=4 uid="uid://dplyxmtpppox6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhny5"]
 resource_name = "madera"
@@ -77,6 +77,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7mcb7")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0pgeq"]
+points = PackedVector3Array(-2.75908, 7.20907, -1.29483, 3.98558, 9.11072, 0.433453, 1.73642, -1.09318, -0.602956, 1.73642, 9.97648, -4.75418, -2.0679, -1.09318, -0.429756, -3.27888, 8.24603, -0.0833545, -0.337825, -1.09318, 2.33587, -0.511331, -1.09318, -2.15897, -1.37601, 7.38027, 2.68227, -1.7216, 7.90038, -3.19724, 1.73642, -1.09318, 0.606654, 2.2548, 8.59277, 4.75881, -2.0679, -1.09318, 0.606654, 2.6011, 8.24603, 4.75881, 3.98558, 8.59277, 0.0870524, 1.21803, 9.97648, -4.40778, 1.73642, 9.62974, -4.75418, -3.10538, 8.41832, -0.0833545, 0.353351, -1.09318, -1.8135, 0.007763, -1.09318, 2.33587, 3.98558, 8.59277, 0.433453, 1.56291, 9.45637, -4.75418, -3.27888, 7.90038, -0.429756, 2.2548, 8.24603, 4.75881, -0.165031, -1.09318, -2.15897, -1.8944, 7.20907, -2.85084, 1.73642, 9.97648, -4.23458, -1.37601, 7.20907, 2.68227, 1.21803, 9.97648, -4.58098, -1.6198, 8.22321, -3.04026, -1.02971, -1.09318, -1.6403, -3.27888, 8.07375, -0.0833545)
+
 [node name="big tree2" type="MeshInstance3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.102, 0)
 mesh = SubResource("ArrayMesh_w70r4")
@@ -87,4 +90,7 @@ transform = Transform3D(-0.530024, 0.905589, 1.55576, -1.31794, -1.29991, 0.3076
 mesh = SubResource("ArrayMesh_26dng")
 skeleton = NodePath("")
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0pgeq")

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="2_5cemc"]
 [ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="3_ilxal"]
 
-[node name="Set001" type="Node3D"]
+[node name="StaticBody3D" type="StaticBody3D"]
 
 [node name="path1" parent="." instance=ExtResource("1_yox1w")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -30)

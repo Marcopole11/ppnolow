@@ -10,6 +10,7 @@ var maxstamina:float = 100
 var staminarate:float = 0.5
 var canRestore:bool = true
 var isRestoring:bool = false
+var gravity = 1
 
 # create a variable for check if its moving
 var is_moving:bool = false
@@ -144,6 +145,14 @@ func _process(delta: float) -> void:
 	headbobhandle()
 	staminahandle()
 	freqmetterhandle()
+	
+	move_and_slide()
+	if !is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = 0
+		
+	print(velocity.y)
 	# get the raw input values
 	var input_direction = Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -154,7 +163,6 @@ func _process(delta: float) -> void:
 	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
 	
 	
-	
 	# move the player
 	if(Input.is_action_pressed("sprint") and Input.is_action_pressed("move_forward") and !isRestoring):
 		totalSpeed = speed + sprintSpeed
@@ -163,7 +171,7 @@ func _process(delta: float) -> void:
 		isRestoring = stamina <= 0
 	else:
 		totalSpeed = speed
-		canRestore = true	
+		canRestore = true
 	
 	
 	
@@ -178,7 +186,7 @@ func _process(delta: float) -> void:
 		pp_root_node.message({
 			"x": movement[0],
 			"y": -movement[2], 
-			"z": 0,
+			"z": movement[1],
 			"rotation":neck.rotation.y
 		});
 
@@ -353,9 +361,20 @@ func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 		print("water pumped")
 		fillingwater_player = true
 		speed=0.7
+		
+func _on_waterpump_hitbox_body_entered(body: Node3D) -> void:
+	if body.is_in_group("pond") and is_attacking:
+		print("water pumped")
+		fillingwater_player = true
+		speed=0.7
+	pass # Replace with function body.
 func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
 	if area.is_in_group("pond") and is_attacking:
 		fillingwater_player = false
+func _on_waterpump_hitbox_body_exited(body: Node3D) -> void:
+	if body.is_in_group("pond") and is_attacking:
+		fillingwater_player = false
+
 
 #handles tool selection
 func swaptool() -> void:
@@ -392,6 +411,10 @@ func swaptool() -> void:
 			taser.hide()
 			waterpump.hide()
 			axe.hide()
+
+func dead(killer: String):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 
 func freqmetterhandle():
 	var area:int

@@ -14,6 +14,7 @@ volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.169245, 0.169245, 0.169245, 1)
 
 [node name="main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.502)
 script = ExtResource("1_bkpr8")
 
 [node name="Eyes" parent="." instance=ExtResource("2_e8pi1")]
