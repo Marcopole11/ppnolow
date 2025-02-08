@@ -9,13 +9,10 @@ var car_is_on:bool
 var obstacle: bool = false
 var lid_open: bool
 var lid_selected:bool = false
-var car_water_indicator:int = 0
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
-@onready var waterlvl_001: MeshInstance3D = $Node3D/carro/waterlvl_001
-@onready var waterlvl_002: MeshInstance3D = $Node3D/carro/waterlvl_002
-@onready var waterlvl_003: MeshInstance3D = $Node3D/carro/waterlvl_003
-@onready var waterlvl_004: MeshInstance3D = $Node3D/carro/waterlvl_004
+
+
 @onready var car_animations: AnimationPlayer = $Node3D/Car_animations
 @onready var watertank_car_mesh: MeshInstance3D = $Node3D/carro/carro/waterTank2
 @onready var rueda_br: MeshInstance3D = $Node3D/carro/Rueda_BR_001
@@ -24,8 +21,39 @@ var car_water_indicator:int = 0
 @onready var rueda_tl: MeshInstance3D = $Node3D/carro/Rueda_TL
 @onready var gpu_particles_3d_1: GPUParticles3D = $Node3D/carro/carro/GPUParticles3D2
 @onready var gpu_particles_3d_2: GPUParticles3D = $Node3D/carro/carro/GPUParticles3D3
+@onready var carroMesh: MeshInstance3D = $Node3D/carro/carro
+@onready var calderalight:OmniLight3D = $Node3D/carro/carro/caldera/luzCaldera
+@onready var calderaFire:GPUParticles3D = $Node3D/carro/carro/caldera/fuegoCaldera
 
+@onready var waterlvl:Array[MeshInstance3D] = [
+	$Node3D/carro/waterlvl_001,
+	$Node3D/carro/waterlvl_002,
+	$Node3D/carro/waterlvl_003,
+	$Node3D/carro/waterlvl_004]
+	
+@onready var woodPile:Array[MeshInstance3D] = [
+	$Node3D/carro/carro/wood,
+	$Node3D/carro/carro/wood/wood2,
+	$Node3D/carro/carro/wood/wood3,
+	$Node3D/carro/carro/wood/wood4,
+	$Node3D/carro/carro/wood/wood5,
+	$Node3D/carro/carro/wood/wood6,
+	$Node3D/carro/carro/wood/wood7,
+	$Node3D/carro/carro/wood/wood8,
+	$Node3D/carro/carro/wood/wood9,
+	$Node3D/carro/carro/wood/wood10,
+	$Node3D/carro/carro/wood/wood11,
+	$Node3D/carro/carro/wood/wood12,
+	$Node3D/carro/carro/wood/wood13,
+	$Node3D/carro/carro/wood/wood14,
+	$Node3D/carro/carro/wood/wood15]
+	
+@onready var fuelPile:Array[MeshInstance3D] = [
+	$Node3D/carro/carro/fuel,
+	$Node3D/carro/carro/fuel/fuel2,
+	$Node3D/carro/carro/fuel/fuel3]
 
+var calderaMaterial:Material
 
 var player = null
 var pp_root_node
@@ -37,16 +65,17 @@ func _ready() -> void:
 	var pp_entity_node= get_node_or_null("PPEntityNode")
 	if pp_entity_node:
 		var test = pp_entity_node.get_property_list()
-		
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
 		print("PPEntityNode not found")
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
+	calderaMaterial=carroMesh.mesh.surface_get_material(4).duplicate()
+	carroMesh.mesh.surface_set_material(4,calderaMaterial)
+	calderaMaterial.set("emission_energy_multiplier",0)
 	
-	
-
 func _process(delta: float) -> void:
-	watertank_car_indicator()
+	supply_indicator(waterlvl,ServerStore.car_water)
+	supply_indicator(woodPile,ServerStore.car_wood)
 	print(ServerStore.car_hot,"  ",ServerStore.car_fuel,"  ",(ServerStore.car_hot as float)/100)
 	if ServerStore.car_hot > 20:
 		interact(delta,0)
@@ -58,40 +87,23 @@ func _process(delta: float) -> void:
 		car_animations.stop()
 		gpu_particles_3d_1.hide()
 		gpu_particles_3d_2.hide()
-		
+	calderaMaterial.set("emission_energy_multiplier",(ServerStore.car_hot as float)/100)
+	calderalight.set("light_energy",(ServerStore.car_hot as float)/40)
+	if ServerStore.car_fuel>0:
+		calderaFire.emitting = ServerStore.car_hot/8
+		supply_indicator(fuelPile,ServerStore.car_fuel+1)
+	else:
+		calderaFire.emitting = 0
+		supply_indicator(fuelPile,0)
 	
-		
-	
-	
-	
-func watertank_car_indicator():
-	car_water_indicator = round(ServerStore.car_water)
-	match car_water_indicator:
-		0:
-			waterlvl_001.hide()
-			waterlvl_002.hide()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		1:
-			waterlvl_001.show()
-			waterlvl_002.hide()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		2:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.hide()
-			waterlvl_004.hide()
-		3:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.show()
-			waterlvl_004.hide()
-		4:
-			waterlvl_001.show()
-			waterlvl_002.show()
-			waterlvl_003.show()
-			waterlvl_004.show()
+func supply_indicator(supply:Array[MeshInstance3D],server_value):
+	var current_lvl = round(server_value)
+	if current_lvl>supply.size()+1:
+		current_lvl=supply.size()+1
+	for lvl in range(current_lvl):
+		supply[lvl-1].show()
+	for lvl in range(current_lvl-1,supply.size()):
+		supply[lvl].hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

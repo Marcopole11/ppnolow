@@ -20,8 +20,8 @@ var is_attacking : bool = false
 @export var stamina_attack_cap:int = 35
 
 
-var player_wood:int = 1
-var player_water:float = 0
+var player_wood:int = 3
+var player_water:float = 2
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
 
@@ -186,7 +186,7 @@ func _physics_process(delta: float) -> void:
 
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
-		#print(target.to_string())
+		print(target.to_string())
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
 
@@ -195,6 +195,8 @@ func _physics_process(delta: float) -> void:
 				if tool_inhand == 3 and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
 				elif test == "caldera_detector" and player_wood > 0 and ServerStore.car_fuel < 3:
+					player_wood = target.interact(player_wood)
+				elif test == "madera_detector":
 					player_wood = target.interact(player_wood)
 					
 					
