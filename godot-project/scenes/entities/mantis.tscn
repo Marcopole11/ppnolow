@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://dsdebbqfr00p4"]
-
-[ext_resource type="Script" path="res://scripts/mantis.gd" id="1_pub8p"]
+[gd_scene load_steps=5 format=4 uid="uid://dsdebbqfr00p4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hcff"]
 resource_name = "Material.001"
@@ -163,7 +161,6 @@ bind/35/bone = -1
 bind/35/pose = Transform3D(-1.77636e-15, 7.10543e-15, 1, 1, 1.70446e-22, 2.39881e-08, 2.00014e-23, 1, -1.12598e-08, -20.5864, -3.75496, 2.16897e-07)
 
 [node name="Mantis" type="Node3D"]
-script = ExtResource("1_pub8p")
 
 [node name="mantisArmature3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.13408)

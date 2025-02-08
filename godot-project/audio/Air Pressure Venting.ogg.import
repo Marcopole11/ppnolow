@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://des0hp2y0b7eb"
+path="res://.godot/imported/Air Pressure Venting.ogg-6f63f16533c88207c27cb4a60dc64bd9.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Air Pressure Venting.ogg"
+dest_files=["res://.godot/imported/Air Pressure Venting.ogg-6f63f16533c88207c27cb4a60dc64bd9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

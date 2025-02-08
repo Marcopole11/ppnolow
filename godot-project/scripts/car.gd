@@ -100,7 +100,6 @@ func supply_indicator(supply:Array[MeshInstance3D],server_value):
 	for lvl in range(current_lvl-1,supply.size()):
 		supply[lvl].hide()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
@@ -131,23 +130,7 @@ func _on_state_changed(state):
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.lobby_id = state.data.lobby;
 
-func _on_calderaagua_detector_2_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		print("caldera de agua")
-		ServerStore.is_in_watertank = true
-func _on_caldera_detector_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		print("caldera")
-		ServerStore.is_in_fuel = true
 
-func _on_caldera_detector_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		print("fuera caldera")
-		ServerStore.is_in_fuel = false
-func _on_calderaagua_detector_2_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		print("fuera caldera de agua")
-		ServerStore.is_in_watertank = false
 func spinwheel(speed:float,divspeed):
 	rueda_bl.rotate_x(speed/divspeed)
 	rueda_br.rotate_x(speed/divspeed)
