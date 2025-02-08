@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://sm23jdcifof0"]
+[gd_scene load_steps=6 format=3 uid="uid://sm23jdcifof0"]
 
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kfw76"]
 [ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_vhasb"]
+[ext_resource type="PackedScene" uid="uid://dsdebbqfr00p4" path="res://scenes/entities/mantis.tscn" id="3_86h3u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_xhje1"]
 
@@ -23,3 +24,6 @@ skeleton = NodePath("../../PPEntityNode")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("ConvexPolygonShape3D_si0c2")
+
+[node name="Mantis" parent="." instance=ExtResource("3_86h3u")]
+script = null
