@@ -48,7 +48,7 @@ emission_enabled = true
 emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 0.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_soacx"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_f1bhj"]
 _surfaces = [{
 "aabb": AABB(-0.890093, -1.2267, -2.57846, 1.78019, 1.87862, 5.63633),
 "format": 34896613377,
@@ -163,7 +163,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("W8P//5LjVPVbw///kuN4//zK/wQC/b39/Mr/BAL9v/97xMf8TivtznvEx/xOK3j/NtHMAGoRXMU20cwAahG//9XlSdM/8qn51eVJ0z/yVPVG/HOE///Z/0b8c4T//6n5L+NyM73/vf0v43Izvf/Z/4DoLc1OFfXFgOgtzU4V7c7//4F+JAD1xf//gX4kAGTALujhLdgFZMAu6OEt2AVcxQAApTKY/739AAClMpj/2f8AAKUymP///wAAMgTd/L39AAAyBN38//8AADIE3fy//wAAMv9t41T1AAAy/23jeP8AADL/beP//wAA+vspK+3OAAD6+ykreP8AAPr7KSv//wAAAABFEf//AAAAAEURXMUAAAAARRG//wAAFC2zBf//AAAULbMFZMAAABQtswVcxQAAfdIa8qn5AAB90hryVPUAAH3SGvL//wAApoPa/9n/AACmg9r/qfkAAKaD2v///wAAYMwpFfXFAABgzCkV7c4AAGDMKRX//wAAtX0AAPXFAAC1fQAA//8AALV9AABkwHvEx/xOK73cUz5ly71/i0AKwZ0+3L+UAFxuome9f4tAaI5JkNy/lADxPRbFUz5lyxTA+j/xPRbFCsGdPhTA+j8ucT5vXG6iZy5xPm9hhZOFYYWThWiOSZAKwZ0+FMD6P/+//38KwZ0+/7//f9y/lABTPmXLvX+LQP+//39cbqJnvX+LQP+//3//v/9/aI5JkNy/lAD/v/9/YYWThWiOSZDxPRbFUz5ly/+//38UwPo/8T0Wxf+//38ucT5vXG6iZ/+//38ucT5v/7//f2GFk4XgaKhn")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_soacx")
+shadow_mesh = SubResource("ArrayMesh_f1bhj")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xyede"]
 size = Vector3(1.74719, 1.97184, 1.15517)
@@ -606,6 +606,70 @@ tracks/5/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_1k3e7"]
+resource_name = "fly away"
+length = 6.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.56667, 2.46667, 6.5),
+"transitions": PackedFloat32Array(-1.5, -2, 2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.14, 0.141992), Vector3(0, 4, -10), Vector3(0, 5, -9), Vector3(0, 9, -20.128), Vector3(0, 40, -80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9, 1.56667, 2.46667, 2.9, 3.36667, 3.8, 4.26667, 4.7, 5.16667, 5.6, 6.06667, 6.5),
+"transitions": PackedFloat32Array(1.5, 0.5, -2, -2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 3.14159), Vector3(-0.15708, 0, 6.28319), Vector3(0.785398, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PulpoAlaIzq:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.666667, 0.9, 1.1, 1.4, 1.56667, 1.8, 2, 2.3, 2.46667, 2.7, 2.9, 3.2, 3.36667, 3.6, 3.8, 4.1, 4.26667, 4.5, 4.7, 5, 5.16667, 5.4, 5.6, 5.9, 6.06667, 6.3, 6.5),
+"transitions": PackedFloat32Array(1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1),
+"update": 0,
+"values": [Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, 0.523599, 1.22173), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PulpoAlaDer:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.666667, 0.9, 1.1, 1.4, 1.56667, 1.8, 2, 2.3, 2.46667, 2.7, 2.9, 3.2, 3.36667, 3.6, 3.8, 4.1, 4.26667, 4.5, 4.7, 5, 5.16667, 5.4, 5.6, 5.9, 6.06667, 6.3, 6.5),
+"transitions": PackedFloat32Array(1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1),
+"update": 0,
+"values": [Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, -0.523599, -1.22173), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 6.4, 6.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
 [sub_resource type="Animation" id="Animation_uxc4m"]
 resource_name = "new_animation"
 length = 1.8
@@ -669,70 +733,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_1k3e7"]
-resource_name = "fly away"
-length = 6.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.56667, 2.46667, 6.5),
-"transitions": PackedFloat32Array(-1.5, -2, 2, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.14, 0.141992), Vector3(0, 4, -10), Vector3(0, 5, -9), Vector3(0, 9, -20.128), Vector3(0, 40, -80)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.9, 1.56667, 2.46667, 2.9, 3.36667, 3.8, 4.26667, 4.7, 5.16667, 5.6, 6.06667, 6.5),
-"transitions": PackedFloat32Array(1.5, 0.5, -2, -2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 3.14159), Vector3(-0.15708, 0, 6.28319), Vector3(0.785398, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319), Vector3(0.349066, 0, 6.28319), Vector3(0.0872665, 0, 6.28319)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PulpoAlaIzq:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.666667, 0.9, 1.1, 1.4, 1.56667, 1.8, 2, 2.3, 2.46667, 2.7, 2.9, 3.2, 3.36667, 3.6, 3.8, 4.1, 4.26667, 4.5, 4.7, 5, 5.16667, 5.4, 5.6, 5.9, 6.06667, 6.3, 6.5),
-"transitions": PackedFloat32Array(1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1),
-"update": 0,
-"values": [Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, 0.523599, 1.22173), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173), Vector3(0.698132, -0.523599, 1.22173), Vector3(-0.349066, 0.0244346, 0.523599), Vector3(0, 0.436332, 0), Vector3(0.698132, -0.523599, 1.22173)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PulpoAlaDer:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.666667, 0.9, 1.1, 1.4, 1.56667, 1.8, 2, 2.3, 2.46667, 2.7, 2.9, 3.2, 3.36667, 3.6, 3.8, 4.1, 4.26667, 4.5, 4.7, 5, 5.16667, 5.4, 5.6, 5.9, 6.06667, 6.3, 6.5),
-"transitions": PackedFloat32Array(1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1, 1, 0.450625, 0.554785, 1),
-"update": 0,
-"values": [Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, -0.523599, -1.22173), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173), Vector3(0.698132, 0.523599, -1.22173), Vector3(-0.349066, -0.0244346, -0.523599), Vector3(0, -0.436332, 0), Vector3(0.698132, 0.523599, -1.22173)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 6.4, 6.46667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p3wyr"]
@@ -961,6 +961,63 @@ tracks/2/keys = {
 "values": [Vector3(0.58779, 0.141625, 0.468698), Vector3(0.58779, 0.193462, 0.468698)]
 }
 
+[sub_resource type="Animation" id="Animation_dj00w"]
+resource_name = "drop"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.466667, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 1),
+"update": 0,
+"values": [Vector3(-0.244346, 0, -0.0174533), Vector3(0, 0, 0), Vector3(0.0174533, 0.0174533, -0.0698132), Vector3(0, 0, 0), Vector3(0, 0, 0.0174533), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("carro:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.466667, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 1),
+"update": 0,
+"values": [Vector3(0, 2.06002, -1.16104), Vector3(0, 0, -0.3), Vector3(0.1, 0.6, -0.089), Vector3(0, 0, -0.07), Vector3(-0.02, 0.2, -0.035), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7k8sa"]
+resource_name = "fly"
+length = 1.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carro:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1, 1.5, 1.8, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.06002, -1.16104), Vector3(0, 1.57635, -0.926848), Vector3(0, 1.57635, -0.926848), Vector3(0, 2.06002, -1.16104), Vector3(0, 2.06002, -1.16104), Vector3(0, 1.57635, -0.926848)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("carro:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1, 1.5, 1.8, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.244346, 0, -0.0174533), Vector3(-0.15708, 0, 0.0174533), Vector3(-0.15708, 0, -0.020944), Vector3(-0.244346, 0, 0.00872665), Vector3(-0.244346, 0, -0.0174533), Vector3(-0.15708, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_yslvr"]
 resource_name = "puerta cldera"
 length = 0.499
@@ -1016,63 +1073,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.16023, -0.127666, 0.322451), Vector3(-0.892311, -0.263362, 0.322451)]
-}
-
-[sub_resource type="Animation" id="Animation_7k8sa"]
-resource_name = "fly"
-length = 1.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carro:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667, 1, 1.5, 1.8, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 2.06002, -1.16104), Vector3(0, 1.57635, -0.926848), Vector3(0, 1.57635, -0.926848), Vector3(0, 2.06002, -1.16104), Vector3(0, 2.06002, -1.16104), Vector3(0, 1.57635, -0.926848)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("carro:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.466667, 1, 1.5, 1.8, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.244346, 0, -0.0174533), Vector3(-0.15708, 0, 0.0174533), Vector3(-0.15708, 0, -0.020944), Vector3(-0.244346, 0, 0.00872665), Vector3(-0.244346, 0, -0.0174533), Vector3(-0.15708, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_dj00w"]
-resource_name = "drop"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carro:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.466667, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 1),
-"update": 0,
-"values": [Vector3(-0.244346, 0, -0.0174533), Vector3(0, 0, 0), Vector3(0.0174533, 0.0174533, -0.0698132), Vector3(0, 0, 0), Vector3(0, 0, 0.0174533), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("carro:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.466667, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 1),
-"update": 0,
-"values": [Vector3(0, 2.06002, -1.16104), Vector3(0, 0, -0.3), Vector3(0.1, 0.6, -0.089), Vector3(0, 0, -0.07), Vector3(-0.02, 0.2, -0.035), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk3q6"]
@@ -1360,11 +1360,6 @@ transform = Transform3D(0.307936, -0.11251, 0.944731, -0.422151, 0.873723, 0.241
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
-
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
-transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
-aabb = AABB(-1, -1, -1, 2, 6, 2)
-enable_node_path = NodePath("../carro")
 
 [node name="Car_animations" type="AnimationPlayer" parent="Node3D"]
 libraries = {

@@ -3,12 +3,15 @@
 # extend the functionality of your root node (here Node3D)
 extends StaticBody3D
 
-var en_caldera:bool = false
-
-var car_is_on:bool
 var obstacle: bool = false
-var lid_open: bool
-var lid_selected:bool = false
+var calderaMaterial:Material
+var player = null
+var pp_root_node
+var pushForce:float = 5
+
+#variables del pulpo
+var pulpoaway:bool
+
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
 
@@ -24,13 +27,11 @@ var lid_selected:bool = false
 @onready var carroMesh: MeshInstance3D = $Node3D/carro/carro
 @onready var calderalight:OmniLight3D = $Node3D/carro/carro/caldera/luzCaldera
 @onready var calderaFire:GPUParticles3D = $Node3D/carro/carro/caldera/fuegoCaldera
-
 @onready var waterlvl:Array[MeshInstance3D] = [
 	$Node3D/carro/waterlvl_001,
 	$Node3D/carro/waterlvl_002,
 	$Node3D/carro/waterlvl_003,
 	$Node3D/carro/waterlvl_004]
-	
 @onready var woodPile:Array[MeshInstance3D] = [
 	$Node3D/carro/carro/wood,
 	$Node3D/carro/carro/wood/wood2,
@@ -47,17 +48,12 @@ var lid_selected:bool = false
 	$Node3D/carro/carro/wood/wood13,
 	$Node3D/carro/carro/wood/wood14,
 	$Node3D/carro/carro/wood/wood15]
-	
 @onready var fuelPile:Array[MeshInstance3D] = [
 	$Node3D/carro/carro/fuel,
 	$Node3D/carro/carro/fuel/fuel2,
 	$Node3D/carro/carro/fuel/fuel3]
+@onready var pulpo_animations: AnimationPlayer = $Node3D/carro/carro/Pulpo/Pulpo_animations
 
-var calderaMaterial:Material
-
-var player = null
-var pp_root_node
-var pushForce = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -76,7 +72,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	supply_indicator(waterlvl,ServerStore.car_water)
 	supply_indicator(woodPile,ServerStore.car_wood)
-	print(ServerStore.car_hot,"  ",ServerStore.car_fuel,"  ",(ServerStore.car_hot as float)/100)
 	if ServerStore.car_hot > 20:
 		interact(delta,0)
 		car_animations.play("car_shake")
@@ -95,7 +90,7 @@ func _process(delta: float) -> void:
 	else:
 		calderaFire.emitting = 0
 		supply_indicator(fuelPile,0)
-	
+	pulpoattack()
 func supply_indicator(supply:Array[MeshInstance3D],server_value):
 	var current_lvl = round(server_value)
 	if current_lvl>supply.size()+1:
@@ -157,3 +152,7 @@ func spinwheel(speed:float,divspeed):
 	rueda_tl.rotate_x(speed/divspeed)
 	rueda_tr.rotate_x(speed/divspeed)
 	
+func pulpoattack():
+	if ServerStore.car_rescue == "safe" and pulpoaway:
+		pulpo_animations.play("fly away")
+		pulpoaway = true
