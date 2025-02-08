@@ -22,7 +22,7 @@ var is_attacking : bool = false
 
 
 var player_wood:int = 3
-var player_water:float = 2
+var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
 
@@ -312,9 +312,9 @@ func _on_taser_hitbox_area_entered(area: Area3D) -> void:
 
 func waterpumphandle():
 	if tool_inhand == 3:
-		water_tank_barfiller.scale.x = player_water * 0.2
+		water_tank_barfiller.scale.x = player_water
 		if fillingwater_player and player_water <1.0:
-			player_water += 0.05
+			player_water += 0.01
 		if Input.is_action_just_pressed("attack"):
 			print(ServerStore.is_in_watertank)
 			print (player_water > 0.0)
@@ -357,10 +357,10 @@ func _on_waterpump_hitbox_body_entered(body: Node3D) -> void:
 		speed=0.7
 	pass # Replace with function body.
 func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
-	if area.is_in_group("pond") and is_attacking:
+	if area.is_in_group("pond") and !is_attacking:
 		fillingwater_player = false
 func _on_waterpump_hitbox_body_exited(body: Node3D) -> void:
-	if body.is_in_group("pond") and is_attacking:
+	if body.is_in_group("pond") and !is_attacking:
 		fillingwater_player = false
 
 #handles tool selection

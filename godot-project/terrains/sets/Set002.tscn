@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="2_g4oyh"]
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="Set002" type="Node3D"]
 
 [node name="floor1" parent="." instance=ExtResource("2_g4oyh")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -30)
