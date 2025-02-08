@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dp64b0tn6y44u"]
+[gd_scene load_steps=11 format=4 uid="uid://dp64b0tn6y44u"]
 
 [ext_resource type="Script" path="res://scripts/entity_eyes.gd" id="1_flmg2"]
 
@@ -162,6 +162,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1gltq")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xnpix"]
+height = 7.65529
+radius = 4.07258
+
 [node name="Eyes" type="Node3D" node_paths=PackedStringArray("eyes")]
 script = ExtResource("1_flmg2")
 eyes = [NodePath("Base/Eye"), NodePath("Base/miniEye"), NodePath("Base/miniEye2"), NodePath("Base/miniEye3"), NodePath("Base/miniEye4"), NodePath("Base/miniEye5"), NodePath("Base/miniEye6"), NodePath("Base/miniEye7"), NodePath("Base/miniEye8"), NodePath("Base/miniEye9")]
@@ -250,3 +254,11 @@ transform = Transform3D(0.199177, 0, -0.0181265, 0, 0.2, 0, 0.0181265, 0, 0.1991
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.38419e-07, 4.76837e-07)
 mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
+
+[node name="AtkArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AtkArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85888, 0)
+shape = SubResource("CylinderShape3D_xnpix")
+
+[connection signal="body_entered" from="AtkArea" to="." method="_on_atk_area_body_entered"]

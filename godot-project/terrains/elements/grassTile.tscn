@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://cdanebebsx27n"]
+[gd_scene load_steps=5 format=4 uid="uid://cdanebebsx27n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lh5hj"]
 resource_name = "cesped"
@@ -40,9 +40,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qwba8")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ixwux"]
+size = Vector3(10.9944, 0.680727, 10.9915)
+
 [node name="floor2" type="MeshInstance3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_jy2ir")
 skeleton = NodePath("")
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_interpolation_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00190115, -0.662555, 0.00101471)
+shape = SubResource("BoxShape3D_ixwux")

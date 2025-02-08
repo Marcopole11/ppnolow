@@ -98,5 +98,3 @@ transform = Transform3D(-1.96788, 0, 0.983593, 0, 2.2, 0, -0.983593, 0, -1.96788
 
 [node name="lake1" parent="." instance=ExtResource("3_1r1m8")]
 transform = Transform3D(0.128536, 0, -0.824408, 0, 0.834368, 0, 0.824408, 0, 0.128536, -12, 1.252, -27)
-
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]

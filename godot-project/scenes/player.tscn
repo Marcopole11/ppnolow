@@ -1234,6 +1234,9 @@ _data = {
 }
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442576, 0)
+collision_layer = 17
+collision_mask = 17
 script = ExtResource("1_b67xe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["player"]]
@@ -1286,7 +1289,7 @@ transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 7.45058e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
+transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
 mesh = SubResource("BoxMesh_ngd1i")
 
 [node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
@@ -1330,6 +1333,8 @@ skeleton = NodePath("")
 
 [node name="waterpump_hitbox" type="Area3D" parent="Neck/Camera3D/waterpump/waterTank2"]
 transform = Transform3D(0.0900769, -0.0149259, -1.88249, 0.220288, 0.0824881, -0.266104, 0.790302, -0.0212913, 0.288733, -0.0236304, -0.120767, -0.0122709)
+collision_layer = 8
+collision_mask = 8
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox"]
@@ -1478,3 +1483,5 @@ texture_progress = ExtResource("7_i5emr")
 [connection signal="animation_finished" from="Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]
 [connection signal="area_entered" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
 [connection signal="area_exited" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_exited"]
+[connection signal="body_entered" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_body_entered"]
+[connection signal="body_exited" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_body_exited"]

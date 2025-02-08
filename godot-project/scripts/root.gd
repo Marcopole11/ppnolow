@@ -9,6 +9,9 @@ var pp_root_node
 # preload all the scenes for use by this script
 var player_scene = preload("res://scenes/player.tscn")
 
+var chunk_scene = preload("res://scenes/chunk.tscn")
+var chunk_set_scene = preload("res://scenes/ChunkSet.tscn")
+
 var tst_scene = preload("res://scenes/tst.tscn")
 var tree_scene = preload("res://scenes/tree.tscn")
 var car_scene = preload("res://scenes/car.tscn")
@@ -16,8 +19,7 @@ var other_player_scene = preload("res://scenes/player_2.tscn")
 var lobby_scene = preload("res://scenes/lobby.tscn")
 
 
-var chunk_scene = preload("res://scenes/chunk.tscn")
-var chunk_set_scene = preload("res://scenes/ChunkSet.tscn")
+
 
 # define all the scenes by their entity type, except the player character
 var scene_map = {
@@ -34,15 +36,14 @@ func _ready():
 	# access the PPRootNode from the scene's node tree
 	pp_root_node = get_tree().current_scene.get_node_or_null('PPRootNode')
 	assert(pp_root_node, "PPRootNode not found") 
-
+	await pp_root_node.new_player_entity.connect(_on_new_player_entity)
 	# using signals from the PPRootNode,
-	# trigger functions for entity spawning/despawning/positioning 
-	pp_root_node.new_player_entity.connect(_on_new_player_entity)
+	# trigger functions for entity spawning/despawning/positioning
+	pp_root_node.new_chunk.connect(_on_new_chunk)
+	pp_root_node.remove_chunk.connect(_on_remove_chunk) 
+	
 	pp_root_node.new_entity.connect(_on_new_entity)
 	pp_root_node.remove_entity.connect(_on_remove_entity)
-	
-	pp_root_node.new_chunk.connect(_on_new_chunk)
-	pp_root_node.remove_chunk.connect(_on_remove_chunk)
 	
 	pp_root_node.authenticate_player("","")
 	

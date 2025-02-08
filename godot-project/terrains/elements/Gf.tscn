@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://bp2b3k6b7ujo4"]
+[gd_scene load_steps=5 format=4 uid="uid://bugb2u6e1630q"]
 
 [ext_resource type="PackedScene" uid="uid://b2171yo6mf8dk" path="res://models/terrain.glb" id="1_xjyoa"]
 
@@ -49,6 +49,9 @@ visible = false
 
 [node name="floor" parent="terrain" index="0"]
 mesh = SubResource("ArrayMesh_jy2ir")
+
+[node name="leaves" parent="terrain/big tree" index="0"]
+transform = Transform3D(-0.530023, 0.905588, 1.55576, -1.31794, -1.29991, 0.307661, 1.22617, -1.00575, 1.00318, -1.4016, 9.08257, -3.53132)
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
 

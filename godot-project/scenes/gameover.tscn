@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://brbr7jyofxg7o"]
+
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_wdb5n"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wdb5n")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_right = 87.0
+offset_bottom = 23.0
+scale = Vector2(13.24, 6.2)
+text = "GAY LOVER"
+
+[node name="MainMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 502.0
+offset_right = 624.0
+offset_bottom = 533.0
+scale = Vector2(1.37312, 1.56965)
+text = "MAIN MENU"
+
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
