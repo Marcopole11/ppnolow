@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="1_qpxir"]
 [ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="2_hr4de"]
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="Set003" type="Node3D"]
 
 [node name="floor1" parent="." instance=ExtResource("1_qpxir")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -30)
