@@ -37,10 +37,6 @@ var edgemap_distance:int = 240
 @onready var axe: Node3D = $Neck/Camera3D/Axe
 @onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
 @onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
-@onready var taser: Node3D = $Neck/Camera3D/taser
-@onready var taser_animation: AnimationPlayer = $Neck/Camera3D/taser/taser_animation
-@onready var taser_hitbox: Area3D = $Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
-@onready var taserattack: AudioStreamPlayer3D = $Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
@@ -105,7 +101,7 @@ func _on_state_changed(state):
 	ServerStore.colorB = state.data.color.b
 	#ServerStore.car_posY = state.data.car_posY
 	#ServerStore.car_rescue = state.data.car_rescue
-	#print(str(state.data.win)+" "+str(state.data.game))
+	print(str(state.data.win)+" "+str(state.data.game))
 	match state.data.win:
 		1:
 			win()
@@ -126,6 +122,7 @@ func _process(delta: float) -> void:
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
 		if ServerStore.lobby_id != "":
 			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
+			print("lobbyMessage")
 	
 	
 	

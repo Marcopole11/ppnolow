@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 
 func freq_indicator(supply:Array[MeshInstance3D],server_value):
 	var current_lvl:int = round((edgemap_distance-cardistance)/freqmetter_step)
+	if current_lvl < 0:
+		current_lvl = 0;
 	#print(cardistance," ",current_lvl)
 	if current_lvl>supply.size()+1:
 		current_lvl=supply.size()+1

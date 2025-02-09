@@ -1,6 +1,6 @@
 extends Control
-@onready var label: Label = $MarginContainer/Label
-@onready var label_2: Label = $MarginContainer/Label2
+@onready var label: Label = $MarginContainer/VBoxContainer/Label
+@onready var label_2: Label = $MarginContainer/VBoxContainer/Label2
 @onready var mantis_walk: AnimationPlayer = $mantis_walk
 var randomizer:int
 

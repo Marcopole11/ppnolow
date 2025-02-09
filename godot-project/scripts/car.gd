@@ -95,6 +95,7 @@ func _process(delta: float) -> void:
 		supply_indicator(fuelPile,0)
 	pulpoattack()
 	
+	
 	var pp_entity_node= get_node_or_null("PPEntityNode")
 	if Input.is_key_pressed(KEY_7):
 		print("all win")
@@ -145,6 +146,11 @@ func _on_state_changed(state):
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.lobby_id = state.data.lobby;
 	ServerStore.car_rescue = state.data.rescue;
+	print(state.data)
+	if(state.data.win == 1):
+		win()
+	elif (state.data.win == 2):
+		dead("pulpo")
 
 
 func spinwheel(speed:float,divspeed):
@@ -178,3 +184,14 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 func _on_car_animations_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "drop":
 		carro_caida.play()
+
+
+func dead(killer: String):
+	ServerStore.playerModel = null
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+
+func win():
+	ServerStore.playerModel = null
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().change_scene_to_file("res://scenes/winScreen.tscn")
