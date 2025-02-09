@@ -171,6 +171,7 @@ func pulpoattack():
 		pulpoaway = false
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
+	pp_entity_node= get_node_or_null("PPEntityNode")
 	if area.is_in_group("axe"):
 		pp_root_node.message({"ID": pp_entity_node.entity_id,"rescue": "rescue"})
 

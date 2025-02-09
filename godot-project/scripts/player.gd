@@ -37,10 +37,6 @@ var edgemap_distance:int = 240
 @onready var axe: Node3D = $Neck/Camera3D/Axe
 @onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
 @onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
-@onready var taser: Node3D = $Neck/Camera3D/taser
-@onready var taser_animation: AnimationPlayer = $Neck/Camera3D/taser/taser_animation
-@onready var taser_hitbox: Area3D = $Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
-@onready var taserattack: AudioStreamPlayer3D = $Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
@@ -259,6 +255,9 @@ func axeattack():
 			axe_animation.play("attack_animation")
 			axe_hitbox.monitoring = true
 			axe_hitbox.set_collision_layer_value(3,true)
+			axe_hitbox.set_collision_layer_value(6,true)
+			axe_hitbox.set_collision_mask_value(3,true)
+			axe_hitbox.set_collision_mask_value(6,true)
 			axeswing.pitch_scale = randf_range(.8,1.2)
 			axeswing.play()
 			stamina = stamina -stamina_attack_cap
@@ -266,10 +265,12 @@ func axeattack():
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
-		axe_hitbox.set_collision_layer_value(3,false)
 		axe_hitbox.monitoring = false
 		is_attacking=false
 		axe_hitbox.set_collision_layer_value(3,false)
+		axe_hitbox.set_collision_layer_value(6,false)
+		axe_hitbox.set_collision_mask_value(3,false)
+		axe_hitbox.set_collision_mask_value(6,false)
 func _on_axe_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("arbol") and player_wood <3:
 		print("Tree hit")
