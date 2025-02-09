@@ -61,11 +61,11 @@ func _on_state_changed(state):
 				items.get_child(0).show()
 				items.get_child(1).hide()
 				items.get_child(2).hide()
-			3:
+			2:
 				items.get_child(0).hide()
 				items.get_child(1).show()
 				items.get_child(2).hide()
-			4:
+			3:
 				items.get_child(0).hide()
 				items.get_child(1).hide()
 				items.get_child(2).show()
@@ -80,12 +80,12 @@ func _on_state_changed(state):
 	if actionActive and tool == 1:
 		nextplaying = "hit";
 	elif moving>0:
-		if tool == 4 or (actionActive and tool == 3):
+		if tool > 2 or (actionActive and tool == 2):
 			nextplaying = "walkshow";
 		else:
 			nextplaying = "walking";
 	else:
-		if tool == 4 or (actionActive and tool == 3):
+		if tool > 2 or (actionActive and tool == 2):
 			nextplaying = "show";
 			
 	moving-=1;
