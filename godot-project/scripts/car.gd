@@ -91,6 +91,18 @@ func _process(delta: float) -> void:
 		calderaFire.emitting = 0
 		supply_indicator(fuelPile,0)
 	pulpoattack()
+	
+	var pp_entity_node= get_node_or_null("PPEntityNode")
+	if Input.is_key_pressed(KEY_7):
+		print("all win")
+		pp_root_node.message({"ID": pp_entity_node.entity_id,
+			"gameEnd": true})
+	if Input.is_key_pressed(KEY_8):
+		print("all loose")
+		pp_root_node.message({"ID": pp_entity_node.entity_id,
+			"gameEnd": false})
+	
+	
 func supply_indicator(supply:Array[MeshInstance3D],server_value):
 	var current_lvl = round(server_value)
 	if current_lvl>supply.size()+1:
