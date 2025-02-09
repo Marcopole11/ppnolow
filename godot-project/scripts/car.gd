@@ -9,10 +9,9 @@ var player = null
 var pp_root_node
 var pp_entity_node= get_node_or_null("PPEntityNode")
 var pushForce:float = 5
-
 #variables del pulpo
 var Pulpohp = 3
-var pulpoaway:bool =false
+var pulpoaway:bool = true
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
 @onready var pulpo_growl: AudioStreamPlayer3D = $Node3D/carro/carro/Area3D/Pulpo/pulpo_growl
@@ -72,13 +71,15 @@ func _ready() -> void:
 	calderaMaterial=carroMesh.mesh.surface_get_material(4).duplicate()
 	carroMesh.mesh.surface_set_material(4,calderaMaterial)
 	calderaMaterial.set("emission_energy_multiplier",0)
+	pulpoaway = ServerStore.car_rescue == "safe"
 	
 func _process(delta: float) -> void:
 	supply_indicator(waterlvl,ServerStore.car_water)
 	supply_indicator(woodPile,ServerStore.car_wood)
 	if ServerStore.car_hot > 20:
 		interact(delta,0)
-		car_animations.play("car_shake")
+		if !car_animations.is_playing():
+			car_animations.play("car_shake")
 		gpu_particles_3d_1.show()
 		gpu_particles_3d_2.show()
 		spinwheel(ServerStore.car_hot,4150)
@@ -146,7 +147,8 @@ func _on_state_changed(state):
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.lobby_id = state.data.lobby;
 	ServerStore.car_rescue = state.data.rescue;
-	print(state.data)
+	ServerStore.car_posY = state.y
+#	print(state.data)
 	if(state.data.win == 1):
 		win()
 	elif (state.data.win == 2):
@@ -161,11 +163,15 @@ func spinwheel(speed:float,divspeed):
 	
 func pulpoattack():
 	if ServerStore.car_rescue == "safe" and !pulpoaway:
+		if car_animations.is_playing():
+			car_animations.stop()
 		pulpo_animations.play("fly away")
 		car_animations.play("drop")
 		pulpoaway = true
 		pass
 	if ServerStore.car_rescue != "safe" and pulpoaway:
+		if car_animations.is_playing():
+			car_animations.stop()
 		pulpo_animations.play("wings")
 		car_animations.play("fly")
 		pulpoaway = false
@@ -176,14 +182,11 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 		pp_root_node.message({"ID": pp_entity_node.entity_id,"rescue": "rescue"})
 
 
-		
-		
-		
-
 
 func _on_car_animations_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "drop":
 		carro_caida.play()
+		
 
 
 func dead(killer: String):

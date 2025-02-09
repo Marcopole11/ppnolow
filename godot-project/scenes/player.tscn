@@ -768,6 +768,9 @@ target_position = Vector3(0, 0, -3)
 collision_mask = 2
 collide_with_areas = true
 
+[node name="Enemydetector" type="RayCast3D" parent="Neck/Camera3D/InteractRay"]
+transform = Transform3D(1, 0, 0, 0, -9.00261e-07, -1, 0, 20.5956, -4.37114e-08, 0, 0, 0)
+
 [node name="Axe" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
 visible = false
@@ -864,7 +867,7 @@ mesh = SubResource("ArrayMesh_vnv0t")
 [node name="freqmeter" parent="Neck/Camera3D" instance=ExtResource("5_oe6hh")]
 
 [node name="stalkerArmature2" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.68235, -99.8115)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.269, -0.646127)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Neck/Camera3D/stalkerArmature2"]
 bones/0/name = "Bone.002"
