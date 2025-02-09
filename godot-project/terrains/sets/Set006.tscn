@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj42ehpa7mcqy"]
+
+[ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="1_w0ppq"]
+[ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="2_8ksyp"]
+
+[node name="Set004" type="Node3D"]
+
+[node name="floor1" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -30)
+
+[node name="floor2" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -10)
+
+[node name="floor3" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 10)
+
+[node name="floor4" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 30)
+
+[node name="floor5" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -30)
+
+[node name="floor6" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -10)
+
+[node name="floor7" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 10)
+
+[node name="floor8" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 30)
+
+[node name="floor9" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, -30)
+
+[node name="floor10" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, -10)
+
+[node name="floor11" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, 10)
+
+[node name="floor12" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, 30)
+
+[node name="floor13" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 0, -30)
+
+[node name="floor14" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 0, -10)
+
+[node name="floor15" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 0, 10)
+
+[node name="floor16" parent="." instance=ExtResource("1_w0ppq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 0, 30)
+
+[node name="big tree1" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(1.44417, 0, 1.23466, 0, 1.9, 0, -1.23466, 0, 1.44417, 37.0672, -0.102, 33.4306)
+
+[node name="big tree2" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(0.746817, 0, 1.85533, 0, 2, 0, -1.85533, 0, 0.746817, 24.6836, -0.102, 29.3323)
+
+[node name="big tree3" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-1.0105, 0, 1.9542, 0, 2.2, 0, -1.9542, 0, -1.0105, -35.1864, -0.102, -23.1957)
+
+[node name="big tree4" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(1.55866, 0, 0.900326, 0, 1.8, 0, -0.900326, 0, 1.55866, -6.8812, -0.102, 1.89661)
+
+[node name="big tree5" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-0.42174, 0, 2.46417, 0, 2.5, 0, -2.46417, 0, -0.42174, -34.4447, -0.102, 32.1566)
+
+[node name="big tree6" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(0.999637, 0, 1.73226, 0, 2, 0, -1.73226, 0, 0.999637, -30.0296, -0.102, -37.2929)
+
+[node name="big tree7" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-0.114106, 0, 1.89657, 0, 1.9, 0, -1.89657, 0, -0.114106, -0.261389, -0.102, -7.78029)
+
+[node name="big tree8" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-1.2721, 0, 1.12772, 0, 1.7, 0, -1.12772, 0, -1.2721, 6.4462, -0.102, 5.288)
+
+[node name="big tree9" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-2.3716, 0, -0.790903, 0, 2.5, 0, 0.790903, 0, -2.3716, 0.86306, -0.102, -0.769634)
+
+[node name="big tree10" parent="." instance=ExtResource("2_8ksyp")]
+transform = Transform3D(-2.3716, 0, -0.790903, 0, 2.5, 0, 0.790903, 0, -2.3716, 33.2995, -0.102, -33.6148)

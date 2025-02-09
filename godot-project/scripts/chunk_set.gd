@@ -5,7 +5,13 @@ var terrainSets = [
 	preload("res://terrains/sets/Set001.tscn"),
 	preload("res://terrains/sets/Set002.tscn"),
 	preload("res://terrains/sets/Set003.tscn"),
-	preload("res://terrains/sets/Set004.tscn")
+	preload("res://terrains/sets/Set004.tscn"),
+	preload("res://terrains/sets/Set005.tscn"),
+	preload("res://terrains/sets/Set006.tscn"),
+	preload("res://terrains/sets/Set007.tscn"),
+	preload("res://terrains/sets/Set008.tscn"),
+	preload("res://terrains/sets/Set009.tscn"),
+	preload("res://terrains/sets/Set010.tscn")
 ]
 
 var placed = false;
