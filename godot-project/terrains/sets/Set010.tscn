@@ -243,6 +243,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ty5p6")
 
+[sub_resource type="Animation" id="Animation_uoaxw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("farolillo2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.09625, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("farolillo1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0349066, -3.09621, -0.0872665)]
+}
+
 [sub_resource type="Animation" id="Animation_hjgct"]
 resource_name = "movement"
 length = 2.0
@@ -270,33 +297,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(-2, -2, 1),
 "update": 0,
 "values": [Vector3(-0.0349066, -3.09621, -0.0872665), Vector3(0.0349066, -3.09621, 0.0872665), Vector3(-0.0349066, -3.09621, -0.0872665)]
-}
-
-[sub_resource type="Animation" id="Animation_uoaxw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("farolillo2:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.09625, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("farolillo1:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.0349066, -3.09621, -0.0872665)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pnrfd"]
@@ -400,7 +400,7 @@ transform = Transform3D(0.842351, -0.0167907, -0.538676, 0.0209821, 0.999788, 0.
 shape = SubResource("BoxShape3D_vkqmq")
 
 [node name="farolillo1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.74179, -0.149606, -0.0793369, -0.15243, 1.74228, 0.0610741, 0.0737657, 0.067698, -1.74713, -7.04597, 9.46204, 2.75777)
+transform = Transform3D(-1.74179, -0.149605, -0.0793439, -0.15243, 1.74228, 0.061074, 0.0737729, 0.0676987, -1.74713, -7.04597, 9.46204, 2.75777)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qq4v3")
 skeleton = NodePath("")
@@ -412,7 +412,7 @@ light_energy = 0.5
 omni_range = 15.0
 
 [node name="farolillo2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.7482, 0, -0.079324, 0, 1.75, 0, 0.079324, 0, -1.7482, 8.5013, 9.49107, 1.84488)
+transform = Transform3D(-1.7482, 0, -0.0793223, 0, 1.75, 0, 0.0793223, 0, -1.7482, 8.5013, 9.49107, 1.84488)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qq4v3")
 skeleton = NodePath("")
