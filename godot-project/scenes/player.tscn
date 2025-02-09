@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b6fgwsetflfl8" path="res://audio/axe-slash-1-106748.mp3" id="2_tdb4p"]
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 [ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
-[ext_resource type="PackedScene" uid="uid://dr8p1k4a722hg" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
+[ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://ccny0kotabsxo" path="res://Texture/eyesEffect.png" id="6_87mmr"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="7_72s6l"]

@@ -1690,19 +1690,15 @@ shape = SubResource("ConvexPolygonShape3D_c6eum")
 stream = ExtResource("11_nw6wa")
 
 [node name="waterlvl_001" parent="Node3D/carro" index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_krxuu")
 
 [node name="waterlvl_002" parent="Node3D/carro" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_c14jx")
 
 [node name="waterlvl_003" parent="Node3D/carro" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_5itv6")
 
 [node name="waterlvl_004" parent="Node3D/carro" index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qwtyo")
 
 [node name="Car_animations" type="AnimationPlayer" parent="Node3D"]
