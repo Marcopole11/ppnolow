@@ -37,7 +37,6 @@ func _on_state_changed(state):
 	global_transform.origin = Vector3(state.x, state.z, -state.y) 
 	ID = state.data.id
 	
-
 func _on_tree_area_entered(area: Area3D) -> void:
 	if area.is_in_group("axe") and treehp > 0 :
 		if treehp > 0:

@@ -132,7 +132,6 @@ func _process(delta: float) -> void:
 	woodindicator()
 	waterpumphandle()
 	axeattack()
-	stunattack()
 	swaptool()
 	headbobhandle()
 	staminahandle()
@@ -292,29 +291,8 @@ func woodindicator():
 			tronco_2.show()
 			tronco_3.show()
 
-# handle stun weapon with enemies
-func stunattack():
-	if tool_inhand == 2 and Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-			is_attacking = true
-			taser_animation.play("taser_attack")
-			taser_hitbox.monitoring = true
-			taserattack.pitch_scale = randf_range(.8,1.2)
-			taserattack.play()
-			stamina = stamina -stamina_attack_cap
-func _on_taser_animation_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "taser_attack":
-		taser_animation.play("reset")
-		taser_animation.play("idle_taser")
-		taser_hitbox.monitoring = false
-		is_attacking=false
-		taserattack.stop()
-func _on_taser_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("gato"):
-		print("enemy hitted")
-		
-
 func waterpumphandle():
-	if tool_inhand == 3:
+	if tool_inhand == 2:
 		water_tank_barfiller.scale.x = player_water
 		if fillingwater_player and player_water <1.0:
 			player_water += 0.01
@@ -387,20 +365,16 @@ func swaptool() -> void:
 			freqmeter.hide()
 		2:
 			axe.hide()
-			taser.show()
-			waterpump.hide()
+			if !(ServerStore.car_filling_water > 0):
+				waterpump.show()
 			freqmeter.hide()
 		3:
 			axe.hide()
 			taser.hide()
 			if !(ServerStore.car_filling_water > 0):
 				waterpump.show()
-			freqmeter.hide()
-		4: 	
 			freqmeter.show()
-			taser.hide()
-			waterpump.hide()
-			axe.hide()
+
 
 func dead(killer: String):
 	ServerStore.playerModel = null
