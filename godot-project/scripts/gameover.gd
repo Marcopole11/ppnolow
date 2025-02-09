@@ -6,7 +6,7 @@ var randomizer:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	randomizer = randi_range(0,50)
 	label.show()
 	label_2.hide()

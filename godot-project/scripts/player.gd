@@ -365,15 +365,20 @@ func _on_waterpump_hitbox_body_exited(body: Node3D) -> void:
 func swaptool() -> void:
 	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4 and !is_attacking:
 		tool_inhand += 1
-		#print(tool_inhand)
+
 		is_attacking=false
 		pp_root_node.message({"tool": tool_inhand});
 	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
 		tool_inhand -= 1
-		#print(tool_inhand)
+
 		is_attacking=false
 		pp_root_node.message({"tool": tool_inhand});
-	
+	if Input.is_action_just_pressed("1tool"):
+		tool_inhand=1
+	if Input.is_action_just_pressed("2tool"):
+		tool_inhand=2
+	if Input.is_action_just_pressed("3tool"):
+		tool_inhand=3
 	match tool_inhand:
 		1:
 			axe.show()
