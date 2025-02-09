@@ -308,16 +308,16 @@ _data = {
 [node name="Set004" type="Node3D"]
 
 [node name="path3" parent="." instance=ExtResource("3_0bix5")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 10)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -30)
 
 [node name="path4" parent="." instance=ExtResource("3_0bix5")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -10)
 
 [node name="path7" parent="." instance=ExtResource("3_0bix5")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, 10)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, -30)
 
 [node name="path8" parent="." instance=ExtResource("3_0bix5")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, 30)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -10, 0, -10)
 
 [node name="floor1" parent="." instance=ExtResource("1_wjaaa")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -30)
@@ -332,16 +332,16 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 10)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, 30)
 
 [node name="floor5" parent="." instance=ExtResource("1_wjaaa")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 10)
 
 [node name="floor6" parent="." instance=ExtResource("1_wjaaa")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -10)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 30)
 
 [node name="floor9" parent="." instance=ExtResource("1_wjaaa")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, -30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, 10)
 
 [node name="floor10" parent="." instance=ExtResource("1_wjaaa")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, -10)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0, 30)
 
 [node name="floor13" parent="." instance=ExtResource("1_wjaaa")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 0, -30)
@@ -368,7 +368,7 @@ transform = Transform3D(-1.11953, 0, 1.89385, 0, 2.2, 0, -1.89385, 0, -1.11953, 
 transform = Transform3D(1.55866, 0, 0.900326, 0, 1.8, 0, -0.900326, 0, 1.55866, -30.2435, -0.102, -20.4058)
 
 [node name="big tree5" parent="." instance=ExtResource("2_xxawm")]
-transform = Transform3D(-0.42174, 0, 2.46417, 0, 2.5, 0, -2.46417, 0, -0.42174, -19.99, -0.102, 2.1881)
+transform = Transform3D(1.19715, 0, -2.19473, 0, 2.5, 0, 2.19473, 0, 1.19715, 34.4237, -0.102, 5.35173)
 
 [node name="big tree6" parent="." instance=ExtResource("2_xxawm")]
 transform = Transform3D(-0.125058, 0, 1.99609, 0, 2, 0, -1.99609, 0, -0.125058, -18.1149, -0.102, -35.6295)
@@ -380,7 +380,7 @@ transform = Transform3D(-0.114106, 0, 1.89657, 0, 1.9, 0, -1.89657, 0, -0.114106
 transform = Transform3D(-1.2721, 0, 1.12772, 0, 1.7, 0, -1.12772, 0, -1.2721, 36.8823, -0.102, 0.182587)
 
 [node name="Meta" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.74334, -0.00266188, -0.152499, 0, 1.74973, -0.0305417, 0.152522, -0.0304255, -1.74308, -0.075398, -0.0948284, -9.34536)
+transform = Transform3D(1.74612, 0.00203369, 0.11651, 6.36644e-12, 1.74973, -0.0305417, -0.116528, 0.0304739, 1.74585, 0.834875, -0.220302, 9.49906)
 mesh = SubResource("ArrayMesh_nsssv")
 skeleton = NodePath("")
 
@@ -400,7 +400,7 @@ transform = Transform3D(0.842351, -0.0167907, -0.538676, 0.0209821, 0.999788, 0.
 shape = SubResource("BoxShape3D_vkqmq")
 
 [node name="farolillo1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.74179, -0.149606, -0.0793369, -0.15243, 1.74228, 0.0610741, 0.0737657, 0.067698, -1.74713, -7.04597, 9.46204, 2.75777)
+transform = Transform3D(-1.74179, -0.149606, -0.0793369, -0.15243, 1.74228, 0.0610741, 0.0737657, 0.067698, -1.74713, 7.7674, 9.33656, -2.43942)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qq4v3")
 skeleton = NodePath("")
@@ -412,7 +412,7 @@ light_energy = 0.5
 omni_range = 15.0
 
 [node name="farolillo2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.7482, 0, -0.079324, 0, 1.75, 0, 0.079324, 0, -1.7482, 8.5013, 9.49107, 1.84488)
+transform = Transform3D(-1.7482, 0, -0.079324, 0, 1.75, 0, 0.079324, 0, -1.7482, -7.50916, 9.36559, -1.86572)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qq4v3")
 skeleton = NodePath("")

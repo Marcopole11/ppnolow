@@ -105,7 +105,7 @@ func _on_state_changed(state):
 	ServerStore.colorB = state.data.color.b
 	#ServerStore.car_posY = state.data.car_posY
 	#ServerStore.car_rescue = state.data.car_rescue
-	#print(str(state.data.win)+" "+str(state.data.game))
+	print(str(state.data.win)+" "+str(state.data.game))
 	match state.data.win:
 		1:
 			win()
@@ -126,6 +126,7 @@ func _process(delta: float) -> void:
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
 		if ServerStore.lobby_id != "":
 			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
+			print("lobbyMessage")
 	
 	
 	
