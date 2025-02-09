@@ -103,9 +103,13 @@ func _on_state_changed(state):
 	ServerStore.colorR = state.data.color.r
 	ServerStore.colorG = state.data.color.g
 	ServerStore.colorB = state.data.color.b
-	ServerStore.car_posY = state.data.car_posY
-	ServerStore.car_rescue = state.data.car_rescue
-	pass
+	#ServerStore.car_posY = state.data.car_posY
+	#ServerStore.car_rescue = state.data.car_rescue
+	match state.data.win:
+		1:
+			win()
+		2:
+			dead("pulpo")
 	 
 func _server_failed():
 	get_tree().change_scene_to_file("res://scenes/main.tscn");
@@ -121,7 +125,6 @@ func _process(delta: float) -> void:
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
 		if ServerStore.lobby_id != "":
 			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
-			
 	
 	
 	
@@ -377,3 +380,9 @@ func dead(killer: String):
 	ServerStore.playerModel = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+	
+
+func win():
+	ServerStore.playerModel = null
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().change_scene_to_file("res://scenes/winScreen.tscn")

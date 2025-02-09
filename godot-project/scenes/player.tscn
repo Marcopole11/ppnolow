@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 [ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
 [ext_resource type="AudioStream" uid="uid://dio8iskfjkea7" path="res://audio/Electric Fence Startup Test.ogg" id="4_m5efg"]
-[ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
+[ext_resource type="PackedScene" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
 [ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="10_q4k41"]
