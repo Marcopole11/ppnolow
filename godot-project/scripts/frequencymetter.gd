@@ -17,14 +17,12 @@ var freqmetter_step:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
 	freqmetter_step = edgemap_distance/8
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	freq_indicator(frequencymetter_indicator,cardistance)
 	cardistance = (sqrt(pow((ServerStore.posY - ServerStore.car_posY),2) +pow((ServerStore.posX - 120),2)))
+	freq_indicator(frequencymetter_indicator,cardistance)
 	summonstalker()
 
 func freq_indicator(supply:Array[MeshInstance3D],server_value):

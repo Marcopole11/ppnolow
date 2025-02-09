@@ -21,7 +21,7 @@ var is_attacking : bool = false
 @export var stamina_attack_cap:int = 35
 
 
-var player_wood:int = 3
+var player_wood:int = 0
 var player_water:float = 0
 var fillingwater_player: bool = false
 var waterpumpsound:bool =false
@@ -114,9 +114,9 @@ func _server_failed():
 
 func _process(delta: float) -> void:
 
-	if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-		pp_root_node.authenticate_player("","")
-		print("--- forced reautenticate")
+	#if ServerStore._checkPingNum(ServerStore.ServerPingNum):
+		#pp_root_node.authenticate_player("","")
+		#print("--- forced reautenticate")
 		#_server_failed();
 	if ServerStore._newPingNumCheck():
 		pp_root_node.message({"pingnum": ServerStore.PingNum});
@@ -182,7 +182,6 @@ func _physics_process(delta: float) -> void:
 
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
-		print(target.to_string())
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
 
