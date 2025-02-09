@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://7xc53cwqnt1q"]
+[gd_scene load_steps=5 format=3 uid="uid://7xc53cwqnt1q"]
 
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="1_71s4p"]
 [ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="2_q7ro3"]
 [ext_resource type="PackedScene" uid="uid://cgwf6t4kj4b1q" path="res://terrains/elements/lake.tscn" id="3_a6rm1"]
+[ext_resource type="PackedScene" uid="uid://dp64b0tn6y44u" path="res://scenes/entities/entityEyes.tscn" id="4_qofwb"]
 
 [node name="Set004" type="Node3D"]
 
@@ -98,3 +99,6 @@ transform = Transform3D(-1.96788, 0, 0.983593, 0, 2.2, 0, -0.983593, 0, -1.96788
 
 [node name="lake1" parent="." instance=ExtResource("3_a6rm1")]
 transform = Transform3D(-0.834298, 0, 0.0108077, 0, 0.834368, 0, -0.0108077, 0, -0.834298, 17.1822, 1.252, 13.022)
+
+[node name="Eyes" parent="." instance=ExtResource("4_qofwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.551258)

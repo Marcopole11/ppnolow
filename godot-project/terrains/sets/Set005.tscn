@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkdhgxhemqvln"]
+[gd_scene load_steps=4 format=3 uid="uid://bkdhgxhemqvln"]
 
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="1_qqgod"]
 [ext_resource type="PackedScene" uid="uid://dplyxmtpppox6" path="res://terrains/elements/bigTree.tscn" id="2_87vtb"]
+[ext_resource type="PackedScene" uid="uid://dp64b0tn6y44u" path="res://scenes/entities/entityEyes.tscn" id="3_0pm73"]
 
 [node name="Set004" type="Node3D"]
 
@@ -82,3 +83,6 @@ transform = Transform3D(-2.3716, 0, -0.790903, 0, 2.5, 0, 0.790903, 0, -2.3716, 
 
 [node name="big tree10" parent="." instance=ExtResource("2_87vtb")]
 transform = Transform3D(-2.3716, 0, -0.790903, 0, 2.5, 0, 0.790903, 0, -2.3716, 14.1048, -0.102, -24.9268)
+
+[node name="Eyes" parent="." instance=ExtResource("3_0pm73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.17962)
