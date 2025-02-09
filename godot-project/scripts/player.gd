@@ -37,10 +37,6 @@ var edgemap_distance:int = 240
 @onready var axe: Node3D = $Neck/Camera3D/Axe
 @onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
 @onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
-@onready var taser: Node3D = $Neck/Camera3D/taser
-@onready var taser_animation: AnimationPlayer = $Neck/Camera3D/taser/taser_animation
-@onready var taser_hitbox: Area3D = $Neck/Camera3D/taser/MeshInstance3D/taser_hitbox
-@onready var taserattack: AudioStreamPlayer3D = $Neck/Camera3D/taser/taserattack
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
