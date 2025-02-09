@@ -2,7 +2,7 @@ extends CharacterBody3D
 # create a variable to store the PPRootNode
 var pp_root_node
 # create a variable to handle movement speed
-var speed:float = 20
+var speed:float = 35
 var sprintSpeed:int = 30
 var totalSpeed:int = speed	
 var stamina:float = 100
@@ -40,7 +40,7 @@ var edgemap_distance:int = 240
 @onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
 @onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
-
+@onready var sonido_ojo: AudioStreamPlayer3D = $Sonido_ojo
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
 @onready var enemy_ray: RayCast3D = $Neck/Camera3D/Enemydetector
 @onready var waterpump_hitbox: Area3D = $Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
@@ -51,6 +51,7 @@ var edgemap_distance:int = 240
 @onready var tronco_1: MeshInstance3D = $Neck/Camera3D/Tronco1
 @onready var tronco_2: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2
 @onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
+@onready var textura_tentaculos: TextureRect = $Neck/Camera3D/CanvasLayer/Textura_tentaculos
 
 
 
@@ -59,7 +60,7 @@ var edgemap_distance:int = 240
 func _ready() -> void:
 	add_to_group("player")
 	ServerStore.playerModel = self
-	
+	sonido_ojo.volume_db =-45
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 	assert(pp_root_node, "PPRootNode not found") 
@@ -204,6 +205,7 @@ func _physics_process(delta: float) -> void:
 			watchingDeath = true
 			if timerDeath > 500:
 				dead("Eyes")
+				sonido_ojo.play()
 	else:
 		watchingDeath = false
 	
@@ -397,7 +399,16 @@ func swaptool() -> void:
 func deathTimer():
 	if watchingDeath:
 		timerDeath += 1
-
+		if sonido_ojo.volume_db < 25:
+			sonido_ojo.volume_db +=0.1
+	if !watchingDeath and timerDeath > 0:
+		timerDeath -= 1
+		if sonido_ojo.volume_db > -40:
+			sonido_ojo.volume_db -=1
+	textura_tentaculos.modulate.a = (timerDeath/100)*0.5
+	print("aaaaa",timerDeath," ",sonido_ojo.volume_db )
+		
+	
 func dead(killer: String):
 	ServerStore.playerModel = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
