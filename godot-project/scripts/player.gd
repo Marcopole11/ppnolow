@@ -199,11 +199,12 @@ func _physics_process(delta: float) -> void:
 
 	if enemy_ray.is_colliding():
 		var target = enemy_ray.get_collider()
-		var area = target.to_string().substr(0,target.to_string().find(":"))
-		if area == "AtkArea":
-			watchingDeath = true
-			if timerDeath > 500:
-				dead("Eyes")
+		if target:
+			var area = target.to_string().substr(0,target.to_string().find(":"))
+			if area == "AtkArea":
+				watchingDeath = true
+				if timerDeath > 500:
+					dead("Eyes")
 	else:
 		watchingDeath = false
 	

@@ -75,8 +75,8 @@ func _ready() -> void:
 	pulpoaway = ServerStore.car_rescue == "safe"
 	
 func _process(delta: float) -> void:
-	supply_indicator(waterlvl,ServerStore.car_water)
-	supply_indicator(woodPile,ServerStore.car_wood)
+	supply_indicator(waterlvl,ServerStore.car_water+1)
+	supply_indicator(woodPile,ServerStore.car_wood+1)
 	if ServerStore.car_hot > 20:
 		interact(delta,0)
 		if !car_animations.is_playing():
