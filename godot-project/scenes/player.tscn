@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=52 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://b6fgwsetflfl8" path="res://audio/axe-slash-1-106748.mp3" id="2_tdb4p"]
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 [ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
-[ext_resource type="AudioStream" uid="uid://dio8iskfjkea7" path="res://audio/Electric Fence Startup Test.ogg" id="4_m5efg"]
 [ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
@@ -204,161 +203,6 @@ _data = {
 "RESET": SubResource("Animation_7ww6s"),
 "attack_animation": SubResource("Animation_waixj"),
 "idle_axe_animation": SubResource("Animation_ryp1e")
-}
-
-[sub_resource type="BoxMesh" id="BoxMesh_ngd1i"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ynj16"]
-points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
-
-[sub_resource type="Animation" id="Animation_knaw8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.01881, -0.95552, -1.61832)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.138823, 1.83186e-08, 0.272865)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.49508, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_x0chq"]
-resource_name = "idle_taser"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.235, -0.661, -0.597), Vector3(2.235, -0.756, -0.597), Vector3(2.235, -0.661, -0.597)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.49508, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_r6dw5"]
-resource_name = "taser_attack"
-length = 0.4445
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.3, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(2.23497, -0.66066, -0.597181), Vector3(2.23497, -0.66066, -0.597181)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterBody3D/Neck/Camera3D/taser/MeshInstance3D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.138823, -0.5569, 0.272865), Vector3(0.138823, -0.5569, 0.272865)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterBody3D/Neck/Camera3D/taser:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, -2),
-"update": 0,
-"values": [Vector3(0, 0.49508, 0), Vector3(0, 1.0472, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fihme"]
-_data = {
-"RESET": SubResource("Animation_knaw8"),
-"idle_taser": SubResource("Animation_x0chq"),
-"taser_attack": SubResource("Animation_r6dw5")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_janhg"]
@@ -955,32 +799,6 @@ stream = ExtResource("2_tdb4p")
 volume_db = 32.0
 bus = &"Sfx"
 
-[node name="taser" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(0.879931, 0, 0.475102, 0, 1, 0, -0.475102, 0, 0.879931, 0, 0, 0)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/taser"]
-transform = Transform3D(0.192601, -0.0269491, 5.44271e-09, 0.0533799, 0.0953738, -0.0415133, 0.00745833, 0.0133258, 0.297114, 1.01881, -0.95552, -1.61832)
-mesh = SubResource("BoxMesh_ngd1i")
-
-[node name="taser_hitbox" type="Area3D" parent="Neck/Camera3D/taser/MeshInstance3D"]
-transform = Transform3D(1.32837, 0, -2.02656e-06, -3.57628e-07, 0.369847, 1.19209e-06, -2.08616e-07, 2.42144e-08, 3.12965, 0, 0, 0)
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/taser/MeshInstance3D/taser_hitbox"]
-transform = Transform3D(1, 0, -5.96046e-08, -4.47035e-08, 1, 0, -1.49012e-08, 7.45058e-09, 1, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ynj16")
-
-[node name="taser_animation" type="AnimationPlayer" parent="Neck/Camera3D/taser"]
-root_node = NodePath("../../../../..")
-libraries = {
-"": SubResource("AnimationLibrary_fihme")
-}
-autoplay = "idle_taser"
-
-[node name="taserattack" type="AudioStreamPlayer3D" parent="Neck/Camera3D/taser"]
-stream = ExtResource("4_m5efg")
-
 [node name="waterpump" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
 visible = false
@@ -1123,8 +941,6 @@ texture_progress = ExtResource("7_i5emr")
 [connection signal="area_entered" from="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_area_entered"]
 [connection signal="body_entered" from="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="." method="_on_axe_hitbox_body_entered"]
 [connection signal="animation_finished" from="Neck/Camera3D/Axe/axe_animation" to="." method="_on_axe_animation_animation_finished"]
-[connection signal="area_entered" from="Neck/Camera3D/taser/MeshInstance3D/taser_hitbox" to="." method="_on_taser_hitbox_area_entered"]
-[connection signal="animation_finished" from="Neck/Camera3D/taser/taser_animation" to="." method="_on_taser_animation_animation_finished"]
 [connection signal="area_entered" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_entered"]
 [connection signal="area_exited" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_area_exited"]
 [connection signal="body_entered" from="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" to="." method="_on_waterpump_hitbox_body_entered"]

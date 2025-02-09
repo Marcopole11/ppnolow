@@ -190,7 +190,7 @@ func _physics_process(delta: float) -> void:
 
 			if Input.is_action_just_pressed("interact"):
 				var pp_entity_node= get_node_or_null("PPEntityNode");
-				if tool_inhand == 3 and test == "calderaagua_detector2":
+				if tool_inhand == 2 and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
 				elif test == "caldera_detector" and player_wood > 0 and ServerStore.car_fuel < 3:
 					player_wood = target.interact(player_wood)
@@ -360,7 +360,6 @@ func swaptool() -> void:
 	match tool_inhand:
 		1:
 			axe.show()
-			taser.hide()
 			waterpump.hide()
 			freqmeter.hide()
 		2:
@@ -370,9 +369,7 @@ func swaptool() -> void:
 			freqmeter.hide()
 		3:
 			axe.hide()
-			taser.hide()
-			if !(ServerStore.car_filling_water > 0):
-				waterpump.show()
+			waterpump.hide()
 			freqmeter.show()
 
 
