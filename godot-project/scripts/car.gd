@@ -170,6 +170,8 @@ func pulpoattack():
 		pulpoaway = true
 		pass
 	if ServerStore.car_rescue != "safe" and pulpoaway:
+		if car_animations.is_playing():
+			car_animations.stop()
 		pulpo_animations.play("wings")
 		car_animations.play("fly")
 		pulpoaway = false
