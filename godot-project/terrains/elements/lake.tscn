@@ -105,6 +105,8 @@ transform = Transform3D(-0.152881, -5.16593e-10, -0.195108, -2.32831e-10, 0.2478
 shape = SubResource("BoxShape3D_6py8w")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["pond"]]
+collision_layer = 65
+collision_mask = 65
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(0.682726, 0, -0.730675, 0, 1, 0, 0.730675, 0, 0.682726, 5.48965, -0.0477601, 2.06222)

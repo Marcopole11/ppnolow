@@ -54,6 +54,7 @@ var edgemap_distance:int = 240
 @onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
 @onready var textura_tentaculos: TextureRect = $Neck/Camera3D/CanvasLayer/Textura_tentaculos
 @onready var interactor: Label = $Interactor
+@onready var flash: Area3D = $Flash
 
 
 
@@ -219,7 +220,18 @@ func _physics_process(delta: float) -> void:
 					dead("Eyes")
 	else:
 		watchingDeath = false
-	
+	if Input.is_action_just_pressed("interact") and (flash.has_overlapping_areas() or flash.has_overlapping_bodies()) != null:
+		var movement = Vector3(15, 0, 0) * totalSpeed * delta
+		
+		translate(movement)
+		
+		pp_root_node.message({
+			"x": movement[0],
+			"y": -movement[2], 
+			"z": 0,
+			"rotation":neck.rotation.y
+		});
+		
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

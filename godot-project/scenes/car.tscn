@@ -1400,6 +1400,8 @@ _data = {
 
 [node name="StaticBody3D" type="StaticBody3D"]
 transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 0, 0.53966, 0)
+collision_layer = 65
+collision_mask = 65
 script = ExtResource("1_kbort")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
