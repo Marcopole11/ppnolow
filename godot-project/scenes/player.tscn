@@ -762,14 +762,17 @@ shape = SubResource("CapsuleShape3D_upy28")
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 
+[node name="Enemydetector" type="RayCast3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -1.83066e-06, -1, 0, 41.8806, -4.37114e-08, -0.00132685, -0.00106335, -0.990554)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
 [node name="InteractRay" type="RayCast3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132685, -0.00106335, -0.0256251)
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 collide_with_areas = true
-
-[node name="Enemydetector" type="RayCast3D" parent="Neck/Camera3D/InteractRay"]
-transform = Transform3D(1, 0, 0, 0, -9.00261e-07, -1, 0, 20.5956, -4.37114e-08, 0, 0, 0)
 
 [node name="Axe" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)

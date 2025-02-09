@@ -11,6 +11,8 @@ var staminarate:float = 0.5
 var canRestore:bool = true
 var isRestoring:bool = false
 var gravity = 1
+var timerDeath = 0
+var watchingDeath = false
 
 # create a variable for check if its moving
 var is_moving:bool = false
@@ -40,6 +42,7 @@ var edgemap_distance:int = 240
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
+@onready var enemy_ray: RayCast3D = $Neck/Camera3D/Enemydetector
 @onready var waterpump_hitbox: Area3D = $Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
 @onready var pump_animation: AnimationPlayer = $Neck/Camera3D/waterpump/pump_animation
 @onready var water_tank_barfiller: MeshInstance3D = $Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
@@ -125,7 +128,7 @@ func _process(delta: float) -> void:
 			print("lobbyMessage")
 	
 	
-	
+	deathTimer()
 	openmenu()
 	woodindicator()
 	waterpumphandle()
@@ -193,6 +196,17 @@ func _physics_process(delta: float) -> void:
 					player_wood = target.interact(player_wood)
 				elif test == "madera_detector":
 					player_wood = target.interact(player_wood)
+
+	if enemy_ray.is_colliding():
+		var target = enemy_ray.get_collider()
+		var area = target.to_string().substr(0,target.to_string().find(":"))
+		if area == "AtkArea":
+			watchingDeath = true
+			if timerDeath > 500:
+				dead("Eyes")
+	else:
+		watchingDeath = false
+	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -375,6 +389,9 @@ func swaptool() -> void:
 			waterpump.hide()
 			freqmeter.show()
 
+func deathTimer():
+	if watchingDeath:
+		timerDeath += 1
 
 func dead(killer: String):
 	ServerStore.playerModel = null
