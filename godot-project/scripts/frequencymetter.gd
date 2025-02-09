@@ -13,7 +13,8 @@ var freqmetter_step:float
 	$frequencymetter/frequencyMetter2/frequencyPoint_007,
 	$frequencymetter/frequencyMetter2/frequencyPoint_008,
 	]
-@onready var stalker_armature_2: Node3D = $"../stalkerArmature2"
+@export var stalker_armature_2: Node3D 
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,9 +39,10 @@ func freq_indicator(supply:Array[MeshInstance3D],server_value):
 		supply[lvl].hide()
 
 func summonstalker():
-	if cardistance>edgemap_distance and ServerStore.car_rescue != "lost":
-		stalker=true
-	if stalker and stalker_armature_2.position.y < -1.47:
-		stalker_armature_2.position.y +=0.006
-	if stalker and stalker_armature_2.position.y > -1.47:
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+	if stalker_armature_2:
+		if cardistance>edgemap_distance and ServerStore.car_rescue != "lost":
+			stalker=true
+		if stalker and stalker_armature_2.position.y < -1.47:
+			stalker_armature_2.position.y +=0.006
+		if stalker and stalker_armature_2.position.y > -1.47:
+			get_tree().change_scene_to_file("res://scenes/gameover.tscn")
