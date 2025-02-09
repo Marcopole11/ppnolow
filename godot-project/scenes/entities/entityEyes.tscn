@@ -256,9 +256,12 @@ mesh = SubResource("ArrayMesh_ea1p4")
 skeleton = NodePath("")
 
 [node name="AtkArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AtkArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85888, 0)
 shape = SubResource("CylinderShape3D_xnpix")
 
+[connection signal="area_entered" from="AtkArea" to="." method="_on_atk_area_area_entered"]
 [connection signal="body_entered" from="AtkArea" to="." method="_on_atk_area_body_entered"]
