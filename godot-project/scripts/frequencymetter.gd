@@ -46,5 +46,5 @@ func summonstalker():
 			stalker_armature_2.position.y +=0.006
 		if stalker and stalker_armature_2.position.y > -1.47:
 			get_tree().change_scene_to_file("res://scenes/gameover.tscn")
-	if cardistance <100:
+	if cardistance < 80:
 		trigger = true
