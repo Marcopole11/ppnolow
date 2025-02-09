@@ -53,6 +53,7 @@ var edgemap_distance:int = 240
 @onready var tronco_2: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2
 @onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
 @onready var textura_tentaculos: TextureRect = $Neck/Camera3D/CanvasLayer/Textura_tentaculos
+@onready var interactor: Label = $Interactor
 
 
 
@@ -185,21 +186,29 @@ func _process(delta: float) -> void:
 		});
 
 func _physics_process(delta: float) -> void:
-
+	interactor.text= " "
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
-
 			if Input.is_action_just_pressed("interact"):
 				var pp_entity_node= get_node_or_null("PPEntityNode");
 				if tool_inhand == 2 and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
+					
 				elif test == "caldera_detector" and player_wood > 0 and ServerStore.car_fuel < 3:
 					player_wood = target.interact(player_wood)
+					
 				elif test == "madera_detector":
 					player_wood = target.interact(player_wood)
-
+					
+			if test == "calderaagua_detector2":
+				interactor.text= "Press E to add water"
+			if test == "caldera_detector":
+				interactor.text= "Press E to add wood"
+			if test == "madera_detector":
+				interactor.text= "Press E to add wood"
+				
 	if enemy_ray.is_colliding():
 		var target = enemy_ray.get_collider()
 		if target:
