@@ -10,7 +10,7 @@ var pp_root_node
 var pushForce:float = 5
 
 #variables del pulpo
-var pulpoaway:bool
+var Pulpohp = 3
 
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
@@ -138,6 +138,16 @@ func spinwheel(speed:float,divspeed):
 	rueda_tr.rotate_x(speed/divspeed)
 	
 func pulpoattack():
-	if ServerStore.car_rescue == "safe" and pulpoaway:
+	if ServerStore.car_rescue == "safe":
 		pulpo_animations.play("fly away")
-		pulpoaway = true
+
+	
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area.is_in_group("axe") and Pulpohp == 3:
+		Pulpohp -=1
+	elif area.is_in_group("axe") and Pulpohp == 0:
+		pulpo_animations.play("fly away")
+		car_animations.play("drop")
+		
+		
