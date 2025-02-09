@@ -220,7 +220,7 @@ func _physics_process(delta: float) -> void:
 					dead("Eyes")
 	else:
 		watchingDeath = false
-	if Input.is_action_just_pressed("interact") and (flash.has_overlapping_areas() or flash.has_overlapping_bodies()) != null:
+	if Input.is_action_just_pressed("flash") and (flash.has_overlapping_areas() or flash.has_overlapping_bodies()) != null:
 		var movement = Vector3(15, 0, 0) * totalSpeed * delta
 		
 		translate(movement)
