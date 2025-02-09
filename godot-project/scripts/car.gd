@@ -11,7 +11,7 @@ var pushForce:float = 5
 
 #variables del pulpo
 var Pulpohp = 3
-
+var pulpoaway:bool =false
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
 
@@ -52,7 +52,8 @@ var Pulpohp = 3
 	$Node3D/carro/carro/fuel,
 	$Node3D/carro/carro/fuel/fuel2,
 	$Node3D/carro/carro/fuel/fuel3]
-@onready var pulpo_animations: AnimationPlayer = $Node3D/carro/carro/Pulpo/Pulpo_animations
+@onready var pulpo_animations: AnimationPlayer = $Node3D/carro/carro/Area3D/Pulpo/Pulpo_animations
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -79,7 +80,6 @@ func _process(delta: float) -> void:
 		gpu_particles_3d_2.show()
 		spinwheel(ServerStore.car_hot,4150)
 	if ServerStore.car_hot < 20:
-		car_animations.stop()
 		gpu_particles_3d_1.hide()
 		gpu_particles_3d_2.hide()
 	calderaMaterial.set("emission_energy_multiplier",(ServerStore.car_hot as float)/100)
@@ -150,16 +150,21 @@ func spinwheel(speed:float,divspeed):
 	rueda_tr.rotate_x(speed/divspeed)
 	
 func pulpoattack():
-	if ServerStore.car_rescue == "safe":
-		pulpo_animations.play("fly away")
-
-	
-
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	if area.is_in_group("axe") and Pulpohp == 3:
-		Pulpohp -=1
-	elif area.is_in_group("axe") and Pulpohp == 0:
+	if ServerStore.car_rescue == "safe" and !pulpoaway:
 		pulpo_animations.play("fly away")
 		car_animations.play("drop")
+		pulpoaway = true
+		pass
+	if ServerStore.car_rescue != "safe" and pulpoaway:
+		pulpo_animations.play("wings")
+		car_animations.play("fly")
+		pulpoaway = false
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area.is_in_group("axe"):
+		pass
+
+
+		
 		
 		

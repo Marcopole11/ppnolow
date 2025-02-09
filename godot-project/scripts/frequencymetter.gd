@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	
 	freq_indicator(frequencymetter_indicator,cardistance)
 	cardistance = (sqrt(pow((ServerStore.posY - ServerStore.car_posY),2) +pow((ServerStore.posX - 120),2)))
-	print(ServerStore.car_posY)
+
 
 func freq_indicator(supply:Array[MeshInstance3D],server_value):
 	var current_lvl:int = round((edgemap_distance-cardistance)/freqmetter_step)

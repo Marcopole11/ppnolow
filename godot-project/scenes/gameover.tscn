@@ -828,7 +828,7 @@ offset_top = 502.0
 offset_right = 624.0
 offset_bottom = 533.0
 scale = Vector2(1.37312, 1.56965)
-text = "MAIN MENU"
+text = "Quit"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_ftpxs")
