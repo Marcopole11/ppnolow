@@ -16,6 +16,7 @@ var pulpoaway:bool = true
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
 @onready var pulpo_growl: AudioStreamPlayer3D = $Node3D/carro/carro/Area3D/Pulpo/pulpo_growl
 @onready var carro_caida: AudioStreamPlayer3D = $Node3D/carro/carro/carro_caida
+@onready var car_off: AudioStreamPlayer3D = $Node3D/carro/carro/car_off
 
 
 @onready var car_animations: AnimationPlayer = $Node3D/Car_animations
@@ -84,11 +85,16 @@ func _process(delta: float) -> void:
 		gpu_particles_3d_2.show()
 		spinwheel(ServerStore.car_hot,4150)
 	if ServerStore.car_hot < 20:
+		car_off.play()
 		gpu_particles_3d_1.hide()
 		gpu_particles_3d_2.hide()
 	calderaMaterial.set("emission_energy_multiplier",(ServerStore.car_hot as float)/100)
 	calderalight.set("light_energy",(ServerStore.car_hot as float)/40)
+	if ServerStore.car_hot > 2 and ServerStore.car_hot < 12:
+		car_animations.stop
+
 	if ServerStore.car_fuel>0:
+
 		calderaFire.emitting = ServerStore.car_hot/8
 		supply_indicator(fuelPile,ServerStore.car_fuel+1)
 	else:

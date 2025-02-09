@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://47g86k3flcse"]
+[gd_scene load_steps=53 format=4 uid="uid://47g86k3flcse"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
 [ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
+[ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="7_72s6l"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
 [ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="10_q4k41"]
 
@@ -903,6 +904,17 @@ bones/3/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_enq8f")
 skin = SubResource("Skin_vpjwe")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Neck/Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Neck/Camera3D/CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.0909422, 0.0594648, 1)
+
 [node name="headbob" type="AnimationPlayer" parent="Neck"]
 root_node = NodePath("../..")
 libraries = {
@@ -912,6 +924,11 @@ libraries = {
 [node name="stepgrass" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_84cct")
 bus = &"Sfx"
+
+[node name="ambientsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_72s6l")
+volume_db = -13.715
+autoplay = true
 
 [node name="PPEntityNode" type="Node" parent="."]
 script = ExtResource("1_kmgf1")
