@@ -62,7 +62,7 @@ var edgemap_distance:int = 240
 func _ready() -> void:
 	add_to_group("player")
 	ServerStore.playerModel = self
-
+	textura_tentaculos.modulate.a = 0
 	sonido_ojo.volume_db =-45
 	# access the PPRootNode from the scene's node tree 
 	pp_root_node = get_tree().current_scene.get_node('PPRootNode')

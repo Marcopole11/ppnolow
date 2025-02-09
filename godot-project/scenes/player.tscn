@@ -870,7 +870,8 @@ mesh = SubResource("ArrayMesh_skxlf")
 transform = Transform3D(0.994728, -0.0746258, 0.0703396, 0.0855427, 0.982107, -0.167773, -0.0565607, 0.172906, 0.983313, -0.0334396, -0.0658693, 0.498087)
 mesh = SubResource("ArrayMesh_vnv0t")
 
-[node name="freqmeter" parent="Neck/Camera3D" instance=ExtResource("5_oe6hh")]
+[node name="freqmeter" parent="Neck/Camera3D" node_paths=PackedStringArray("stalker_armature_2") instance=ExtResource("5_oe6hh")]
+stalker_armature_2 = NodePath("../stalkerArmature2")
 
 [node name="stalkerArmature2" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.269, -0.646127)

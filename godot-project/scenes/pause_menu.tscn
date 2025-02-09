@@ -62,19 +62,6 @@ value = 1.0
 script = ExtResource("1_wgsqj")
 bus_name = "Master"
 
-[node name="Sound effects" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Sound effects
-"
-
-[node name="slider_vol_sfx" type="HSlider" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-max_value = 1.0
-step = 0.001
-value = 1.0
-script = ExtResource("1_wgsqj")
-bus_name = "Sfx"
-
 [node name="headbob_checkbox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Disable camera shake"
