@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://b13e6us0ijaxr"]
 
-[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_66sgt"]
+[ext_resource type="Script" path="res://scenes/win_screen.gd" id="1_rjacs"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="3_5nhwd"]
 [ext_resource type="PackedScene" uid="uid://djydtx8o37lri" path="res://terrains/elements/pathTile.tscn" id="4_kefjb"]
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="5_4irau"]
@@ -270,7 +270,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_66sgt")
+script = ExtResource("1_rjacs")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -146,7 +146,7 @@ func _on_state_changed(state):
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.lobby_id = state.data.lobby;
 	ServerStore.car_rescue = state.data.rescue;
-	print(state.data)
+#	print(state.data)
 	if(state.data.win == 1):
 		win()
 	elif (state.data.win == 2):
