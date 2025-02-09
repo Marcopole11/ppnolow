@@ -1511,11 +1511,6 @@ mesh = SubResource("ArrayMesh_5itv6")
 [node name="waterlvl_004" parent="Node3D/carro" index="14"]
 mesh = SubResource("ArrayMesh_qwtyo")
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="Node3D"]
-transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
-aabb = AABB(-1, -1, -1, 2, 6, 2)
-enable_node_path = NodePath("../carro")
-
 [node name="Car_animations" type="AnimationPlayer" parent="Node3D"]
 libraries = {
 "": SubResource("AnimationLibrary_hk3q6")
