@@ -867,7 +867,7 @@ mesh = SubResource("ArrayMesh_vnv0t")
 [node name="freqmeter" parent="Neck/Camera3D" instance=ExtResource("5_oe6hh")]
 
 [node name="stalkerArmature2" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.52589, -3.037)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.269, -0.646127)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Neck/Camera3D/stalkerArmature2"]
 bones/0/name = "Bone.002"
