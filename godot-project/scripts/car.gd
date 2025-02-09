@@ -7,6 +7,7 @@ var obstacle: bool = false
 var calderaMaterial:Material
 var player = null
 var pp_root_node
+var pp_entity_node= get_node_or_null("PPEntityNode")
 var pushForce:float = 5
 
 #variables del pulpo
@@ -14,6 +15,8 @@ var Pulpohp = 3
 var pulpoaway:bool =false
 @onready var caldera_detector: Area3D = $Node3D/carro/carro/caldera_detector
 @onready var calderaagua_detector_2: Area3D = $Node3D/carro/carro/calderaagua_detector2
+@onready var pulpo_growl: AudioStreamPlayer3D = $Node3D/carro/carro/Area3D/Pulpo/pulpo_growl
+@onready var carro_caida: AudioStreamPlayer3D = $Node3D/carro/carro/carro_caida
 
 
 @onready var car_animations: AnimationPlayer = $Node3D/Car_animations
@@ -162,9 +165,14 @@ func pulpoattack():
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.is_in_group("axe"):
-		pass
+		pp_root_node.message({"ID": pp_entity_node.entity_id,"rescue": "rescue"})
 
 
 		
 		
 		
+
+
+func _on_car_animations_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "drop":
+		carro_caida.play()

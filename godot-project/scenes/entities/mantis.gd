@@ -9,3 +9,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+func _on_atk_area_body_entered(target: Node3D) -> void:
+	if target.has_method("dead"):
+		target.dead("Mantis")

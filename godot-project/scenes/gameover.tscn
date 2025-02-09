@@ -794,40 +794,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wdb5n")
 
-[node name="Label" type="Label" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -426.0
-offset_top = 2.0
-offset_right = -278.0
-offset_bottom = 51.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-scale = Vector2(6.02, 2.819)
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "Game over"
 
-[node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -426.0
-offset_top = 2.0
-offset_right = -278.0
-offset_bottom = 51.0
-grow_horizontal = 2
-scale = Vector2(6.02, 2.819)
+[node name="Label2" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "GET STICK BUGGED
            LOSER"
 
-[node name="MainMenu" type="Button" parent="."]
-layout_mode = 0
-offset_left = 520.0
-offset_top = 502.0
-offset_right = 624.0
-offset_bottom = 533.0
-scale = Vector2(1.37312, 1.56965)
+[node name="MainMenu" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 text = "Quit"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
@@ -1702,4 +1694,4 @@ libraries = {
 "": SubResource("AnimationLibrary_4tgr0")
 }
 
-[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/MainMenu" to="." method="_on_main_menu_pressed"]
