@@ -99,11 +99,11 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_7):
 		print("all win")
 		pp_root_node.message({"ID": pp_entity_node.entity_id,
-			"gameEnd": true})
+			"gameEnd": true,"gFinale":"t"})
 	if Input.is_key_pressed(KEY_8):
 		print("all loose")
 		pp_root_node.message({"ID": pp_entity_node.entity_id,
-			"gameEnd": false})
+			"gameEnd": false,"gFinale":"t"})
 	
 	
 func supply_indicator(supply:Array[MeshInstance3D],server_value):
@@ -144,6 +144,7 @@ func _on_state_changed(state):
 	ServerStore.car_filling_water = state.data.filling.fuel > 0;
 	ServerStore.car_hot = state.data.hot;
 	ServerStore.lobby_id = state.data.lobby;
+	ServerStore.car_rescue = state.data.rescue;
 
 
 func spinwheel(speed:float,divspeed):
