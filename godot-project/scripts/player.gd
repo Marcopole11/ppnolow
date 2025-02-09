@@ -265,6 +265,7 @@ func axeattack():
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":
 		axe_animation.play("idle_axe_animation")
+		axe_hitbox.set_collision_layer_value(3,false)
 		axe_hitbox.monitoring = false
 		is_attacking=false
 		axe_hitbox.set_collision_layer_value(3,false)
