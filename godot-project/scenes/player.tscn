@@ -778,8 +778,8 @@ mesh = SubResource("ArrayMesh_tt8bg")
 
 [node name="axe_hitbox" type="Area3D" parent="Neck/Camera3D/Axe/MeshInstance3D" groups=["axe"]]
 transform = Transform3D(0.04053, -1.2191, 0.092915, -1.13771, -0.0504289, -0.0874167, 0.0868928, -0.0916438, -1.18791, -0.0139101, -0.00391805, 0.14038)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
