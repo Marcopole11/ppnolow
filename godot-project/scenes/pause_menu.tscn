@@ -41,8 +41,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -58,7 +56,7 @@ text = "Master sound
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-value = 1.0
+value = 0.05
 script = ExtResource("1_wgsqj")
 bus_name = "Master"
 

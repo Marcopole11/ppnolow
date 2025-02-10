@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://b13e6us0ijaxr"]
 
-[ext_resource type="Script" path="res://scenes/win_screen.gd" id="1_rjacs"]
+[ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_rjacs"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="3_5nhwd"]
 [ext_resource type="PackedScene" uid="uid://djydtx8o37lri" path="res://terrains/elements/pathTile.tscn" id="4_kefjb"]
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="5_4irau"]

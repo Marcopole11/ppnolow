@@ -1,60 +1,56 @@
 extends CharacterBody3D
-# create a variable to store the PPRootNode
-var pp_root_node
-# create a variable to handle movement speed
 
-var speed:float = 35
-var sprintSpeed:int = 30
+var pp_root_node
+@export_category("Movility")
+@export_group("Speed")
+@export var speed:float = 35
+@export var sprintSpeed:int = 30
 var totalSpeed:int = speed	
-var stamina:float = 100
-var maxstamina:float = 100
-var staminarate:float = 0.5
+@export_group("Stamina")
+@export var stamina:float = 100
+@export var maxstamina:float = 100
+@export var staminarate:float = 0.5
 var canRestore:bool = true
 var isRestoring:bool = false
+
 var gravity = 1
-var timerDeath = 0
-var watchingDeath = false
 
-# create a variable for check if its moving
+@export_category("Inventory")
 var is_moving:bool = false
-#variable related to tools
-var tool_inhand:int = 1
-# variables related to attack
+@export var tool_inhand:int = 1
 var is_attacking : bool = false
-@export var stamina_attack_cap:int = 35
+var stamina_attack_cap:int = 35
+
+@export_group("Wood")
+@export var player_wood:int = 0
+@export_group("Water")
+@export var player_water:float = 0
 
 
-var player_wood:int = 0
-var player_water:float = 0
-var fillingwater_player: bool = false
-var waterpumpsound:bool =false
+@export_category("Death conditions")
+@export_group("Stalker")
+@export var edgemap_distance:int = 240
+@export_group("Eye")
+@export var timerDeath:int = 0
+@export var watchingDeath:bool = false
 
-var edgemap_distance:int = 240
+
+
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var headbob: AnimationPlayer = $Neck/headbob
-@onready var stepgrass: AudioStreamPlayer3D = $stepgrass
 @onready var pause_menu: Control = $pause_menu
 @onready var bar_stamina: TextureProgressBar = $bar_stamina
-@onready var axe_animation: AnimationPlayer = $Neck/Camera3D/Axe/axe_animation
 @onready var axe: Node3D = $Neck/Camera3D/Axe
-@onready var axeswing: AudioStreamPlayer3D = $Neck/Camera3D/Axe/axeswing
-@onready var axe_hitbox: Area3D = $Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox
 @onready var waterpump: Node3D = $Neck/Camera3D/waterpump
 @onready var sonido_ojo: AudioStreamPlayer3D = $Sonido_ojo
 @onready var interact_ray: RayCast3D = $Neck/Camera3D/InteractRay
 @onready var enemy_ray: RayCast3D = $Neck/Camera3D/Enemydetector
-@onready var waterpump_hitbox: Area3D = $Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox
-@onready var pump_animation: AnimationPlayer = $Neck/Camera3D/waterpump/pump_animation
-@onready var water_tank_barfiller: MeshInstance3D = $Neck/Camera3D/waterpump/waterTank2/waterTankBar/waterTankBarfiller
-@onready var pumpwater: AudioStreamPlayer3D = $Neck/Camera3D/waterpump/pumpwater
 @onready var freqmeter: Node3D = $Neck/Camera3D/freqmeter
-@onready var tronco_1: MeshInstance3D = $Neck/Camera3D/Tronco1
-@onready var tronco_2: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2
-@onready var tronco_3: MeshInstance3D = $Neck/Camera3D/Tronco1/Tronco2/Tronco3
 @onready var textura_tentaculos: TextureRect = $Neck/Camera3D/CanvasLayer/Textura_tentaculos
 @onready var interactor: Label = $Interactor
 @onready var flash: Area3D = $Flash
+@onready var canvas_layer: CanvasLayer = $Neck/Camera3D/CanvasLayer
 
 
 
@@ -93,12 +89,14 @@ func _ready() -> void:
 	pp_entity_node.multiplayer
 		
 func _on_state_changed(state):
+	
+	## OPTIMIZADO: UTILIZA LERP (INTERPOLACION DE POSICION) EN LUGAR DE HACER TP A LA POSICION ESPECIFICA TUTORIAL MAMALON https://www.youtube.com/watch?v=w2p0ugw3afs
 	# sync the player's position, using the server's values
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	var diff_in_position = (global_transform.origin - Vector3(state.x, state.z, -state.y)).abs() 
-	if diff_in_position > Vector3(5,5,5):
-		global_transform.origin = Vector3(state.x, state.z, -state.y)
+	var server_position = Vector3(state.x, state.z, -state.y)
+	if global_transform.origin.distance_to(server_position) > 5:
+		global_transform.origin = global_transform.origin.lerp(server_position, 0.1)
 
 	ServerStore.ServerPingNum = state.data.pingnum;
 	ServerStore.posX = state.x
@@ -109,7 +107,7 @@ func _on_state_changed(state):
 	ServerStore.colorB = state.data.color.b
 	#ServerStore.car_posY = state.data.car_posY
 	#ServerStore.car_rescue = state.data.car_rescue
-	print(str(state.data.win)+" "+str(state.data.game))
+	#print(str(state.data.win)+" "+str(state.data.game))
 	match state.data.win:
 		1:
 			win()
@@ -121,44 +119,24 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-
-	#if ServerStore._checkPingNum(ServerStore.ServerPingNum):
-		#pp_root_node.authenticate_player("","")
-		#print("--- forced reautenticate")
-		#_server_failed();
-	if ServerStore._newPingNumCheck():
-		pp_root_node.message({"pingnum": ServerStore.PingNum});
-		if ServerStore.lobby_id != "":
-			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
-			print("lobbyMessage")
-	
-	
+	pingCheck()
 	deathTimer()
 	openmenu()
-	woodindicator()
-	waterpumphandle()
-	axeattack()
 	swaptool()
 	headbobhandle()
 	staminahandle()
-	
 	move_and_slide()
-	if !is_on_floor():
-		velocity.y -= gravity * delta
-	else:
-		velocity.y = 0
-		
+	gravityCheck(delta)
+	
 	# get the raw input values
 	var input_direction = Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		0,
 		Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forward") 
-	)
+		)
 	# calculate the input direction
 	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
-	
-	
-	
+
 	# move the player
 	if(Input.is_action_pressed("sprint") and Input.is_action_pressed("move_forward") and !isRestoring):
 		totalSpeed = speed + sprintSpeed
@@ -168,16 +146,15 @@ func _process(delta: float) -> void:
 	else:
 		totalSpeed = speed
 		canRestore = true	
-	
-	
-	
+
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
 	var collide = move_and_collide(movement)
-	
+
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
+	
 	if !collide:
 		pp_root_node.message({
 			"x": movement[0],
@@ -256,7 +233,8 @@ func staminahandle():
 		isRestoring = stamina != maxstamina
 	if(canRestore and stamina < maxstamina): 
 		stamina = stamina + staminarate
-	$bar_stamina.value = stamina	
+	$bar_stamina.value = stamina
+
 #handles menu in game
 func openmenu():
 	if Input.is_action_just_pressed("pause_button"):
@@ -278,165 +256,67 @@ func headbobhandle():
 		
 	else:
 		headbob.pause()
-# made for being called later in the headbob animation so the steps are on time
-func play_step():
-	# stepgrass.pitch_scale = randf_range(.8,1.2)
-	stepgrass.play()
 
-#handles axe attacks
-func axeattack():
-	if tool_inhand == 1:
-
-		if Input.is_action_just_pressed("attack") and not is_attacking and Menusettings.pausemenu_state and stamina > stamina_attack_cap :
-			print(ServerStore.car_posY)
-			is_attacking = true
-			axe_animation.play("attack_animation")
-			axe_hitbox.monitoring = true
-			axe_hitbox.set_collision_layer_value(3,true)
-			axe_hitbox.set_collision_layer_value(6,true)
-			axe_hitbox.set_collision_mask_value(3,true)
-			axe_hitbox.set_collision_mask_value(6,true)
-			axeswing.pitch_scale = randf_range(.8,1.2)
-			axeswing.play()
-			stamina = stamina -stamina_attack_cap
-			pp_root_node.message({"action": 25});
-func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "attack_animation":
-		axe_animation.play("idle_axe_animation")
-		axe_hitbox.monitoring = false
-		is_attacking=false
-		axe_hitbox.set_collision_layer_value(3,false)
-		axe_hitbox.set_collision_layer_value(6,false)
-		axe_hitbox.set_collision_mask_value(3,false)
-		axe_hitbox.set_collision_mask_value(6,false)
-func _on_axe_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("arbol") and player_wood <3:
-		print("Tree hit")
-		player_wood += 1
-
-func woodindicator():
-	match player_wood:
-		0:
-			tronco_1.hide()
-			tronco_2.hide()
-			tronco_3.hide()
-		1:
-			tronco_1.show()
-			tronco_2.hide()
-			tronco_3.hide()
-		2:
-			tronco_1.show()
-			tronco_2.show()
-			tronco_3.hide()
-		3:
-			tronco_1.show()
-			tronco_2.show()
-			tronco_3.show()
-
-func waterpumphandle():
-	if tool_inhand == 2:
-		water_tank_barfiller.scale.x = player_water
-		if fillingwater_player and player_water <1.0:
-			player_water += 0.01
-		if Input.is_action_just_pressed("attack"):
-			print(ServerStore.is_in_watertank)
-			print (player_water > 0.0)
-		if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player_water > 0.0:
-			is_attacking = true
-			waterpump.hide()
-			
-		if Input.is_action_just_pressed("attack") and Menusettings.pausemenu_state and !ServerStore.is_in_watertank:
-			is_attacking = true
-			pump_animation.play("use")
-			waterpumpsound = true
-			waterpump_hitbox.monitoring = true
-			speed=1
-			pp_root_node.message({"action": 15});
-
-		if Input.is_action_just_released("attack"):
-			waterpumpsound = false
-			is_attacking=false
-			fillingwater_player = false
-			waterpump_hitbox.monitoring = false
-			pump_animation.stop()
-			pumpwater.stop()
-			pump_animation.play("idle")
-			waterpump.show()
-			speed = 20
-			
-		if waterpumpsound and !pumpwater.playing:
-			pumpwater.play()
-			
-func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("pond") and is_attacking:
-		print("water pumped")
-		fillingwater_player = true
-		speed=0.7
-		
-func _on_waterpump_hitbox_body_entered(body: Node3D) -> void:
-	if body.is_in_group("pond") and is_attacking:
-		print("water pumped")
-		fillingwater_player = true
-		speed=0.7
-	pass # Replace with function body.
-func _on_waterpump_hitbox_area_exited(area: Area3D) -> void:
-	if area.is_in_group("pond") and !is_attacking:
-		fillingwater_player = false
-func _on_waterpump_hitbox_body_exited(body: Node3D) -> void:
-	if body.is_in_group("pond") and !is_attacking:
-		fillingwater_player = false
-
-#handles tool selection
+##OPTIMIZADO: CAMBIA LA FUNCION CON ELIF PARA NO COMPROBAR 4 VECES LA MISMA COSA JIJIJI + AHORA NO PUEDES CAMBIAR EN EL MENU
+#handles tool selection 
 func swaptool() -> void:
-	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 4 and !is_attacking:
-		tool_inhand += 1
+	var action_pressed = false
+	var new_tool = tool_inhand
+	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3 and !is_attacking and Menusettings.pausemenu_state:
+		new_tool += 1
+		action_pressed = true
+	elif Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1 and Menusettings.pausemenu_state:
+		new_tool -= 1
+		action_pressed = true
+	elif Input.is_action_just_pressed("1tool") and Menusettings.pausemenu_state:
+		new_tool = 1
+		action_pressed = true
+	elif Input.is_action_just_pressed("2tool") and Menusettings.pausemenu_state:
+		new_tool = 2
+		action_pressed = true
+	elif Input.is_action_just_pressed("3tool") and Menusettings.pausemenu_state:
+		new_tool = 3
+		action_pressed = true
+	if action_pressed:
+		tool_inhand = new_tool
+		is_attacking = false
 
-		is_attacking=false
-		pp_root_node.message({"tool": tool_inhand});
-	if Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1:
-		tool_inhand -= 1
 
-		is_attacking=false
-		pp_root_node.message({"tool": tool_inhand});
-	if Input.is_action_just_pressed("1tool"):
-		tool_inhand=1
-	if Input.is_action_just_pressed("2tool"):
-		tool_inhand=2
-	if Input.is_action_just_pressed("3tool"):
-		tool_inhand=3
-	match tool_inhand:
-		1:
-			axe.show()
-			waterpump.hide()
-			freqmeter.hide()
-		2:
-			axe.hide()
-			if !(ServerStore.car_filling_water > 0):
-				waterpump.show()
-			freqmeter.hide()
-		3:
-			axe.hide()
-			waterpump.hide()
-			freqmeter.show()
+	# Tool visibility based on the current tool
+	axe.visible = tool_inhand == 1
+	waterpump.visible = tool_inhand == 2 and ServerStore.car_filling_water <= 0
+	freqmeter.visible = tool_inhand == 3
 
 func deathTimer():
 	if watchingDeath:
+		canvas_layer.show()
 		timerDeath += 1
 		if sonido_ojo.volume_db < 25:
 			sonido_ojo.volume_db +=0.1
 	if !watchingDeath and timerDeath > 0:
+		canvas_layer.hide()
 		timerDeath -= 1
 		if sonido_ojo.volume_db > -40:
 			sonido_ojo.volume_db -=1
 	textura_tentaculos.modulate.a = (timerDeath/100)*0.5
-	print("aaaaa",timerDeath," ",sonido_ojo.volume_db )
-		
-	
+
+func pingCheck():
+	if ServerStore._newPingNumCheck():
+		pp_root_node.message({"pingnum": ServerStore.PingNum});
+		if ServerStore.lobby_id != "":
+			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
+			print("lobbyMessage")
+
+func gravityCheck(x):
+	if !is_on_floor():
+		velocity.y -= gravity * x
+	else:
+		velocity.y = 0
+
 func dead(killer: String):
 	ServerStore.playerModel = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
-	
 
 func win():
 	ServerStore.playerModel = null

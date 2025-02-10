@@ -10,15 +10,22 @@ config_version=5
 
 [application]
 
-config/name="Godot Project"
+config/name="Steam Carriers"
+config/version="1.1"
 run/main_scene="res://scenes/mainmenu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+boot_splash/image="res://icon.png"
+config/icon="res://icon.png"
 
 [autoload]
 
 Menusettings="*res://scripts/menusettings.gd"
 ServerStore="*res://scripts/serverstore.gd"
+
+[display]
+
+window/size/mode=3
 
 [dotnet]
 
