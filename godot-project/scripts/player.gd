@@ -1,11 +1,16 @@
 extends CharacterBody3D
 
-var pp_root_node
+enum Tools {
+	AXE,
+	WATERPUMP,
+	FREQMETER
+}
+
 @export_category("Movility")
 @export_group("Speed")
 @export var speed:float = 35
 @export var sprintSpeed:int = 30
-var totalSpeed:int = speed	
+var totalSpeed:int = speed
 @export_group("Stamina")
 @export var stamina:float = 100
 @export var maxstamina:float = 100
@@ -17,7 +22,7 @@ var gravity = 1
 
 @export_category("Inventory")
 var is_moving:bool = false
-@export var tool_inhand:int = 1
+@export var tool_inhand:Tools = Tools.AXE
 var is_attacking : bool = false
 var stamina_attack_cap:int = 35
 
@@ -52,7 +57,12 @@ var stamina_attack_cap:int = 35
 @onready var flash: Area3D = $Flash
 @onready var canvas_layer: CanvasLayer = $Neck/Camera3D/CanvasLayer
 
+@onready var playerInput: MultiplayerSynchronizer = $PlayerInputSynchronizer
 
+var playerPeerId = 1 :
+	set(value):
+		playerPeerId = value
+		$PlayerInputSynchronizer.set_multiplayer_authority(value)
 
 
 # when the scene is loaded
@@ -61,32 +71,17 @@ func _ready() -> void:
 	ServerStore.playerModel = self
 	textura_tentaculos.modulate.a = 0
 	sonido_ojo.volume_db =-45
-	# access the PPRootNode from the scene's node tree 
-	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
-	assert(pp_root_node, "PPRootNode not found") 
+	
+	if playerPeerId == multiplayer.get_unique_id():
+		camera.current = true
 	
 	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode");
 	if ServerStore.colorR == 0:
 		ServerStore.colorR = randf()/4;
 		ServerStore.colorG = randf()/4;
 		ServerStore.colorB = randf()/4;
-	pp_root_node.message({
-		"x": ServerStore.posX,
-		"y": ServerStore.posY,
-		"dimension": "game",
-		"color": {
-			"r": ServerStore.colorR,
-			"g": ServerStore.colorG, 
-			"b": ServerStore.colorB
-	}});
-	
-	if pp_entity_node:
-		pp_entity_node.state_changed.connect(_on_state_changed)
-	else:
-		print("PPEntityNode not found")
-
-	pp_entity_node.multiplayer
+		
+	#TODO: initilize object on server
 		
 func _on_state_changed(state):
 	
@@ -119,7 +114,6 @@ func _server_failed():
 	pass
 
 func _process(delta: float) -> void:
-	pingCheck()
 	deathTimer()
 	openmenu()
 	swaptool()
@@ -129,23 +123,19 @@ func _process(delta: float) -> void:
 	gravityCheck(delta)
 	
 	# get the raw input values
-	var input_direction = Vector3(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		0,
-		Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forward") 
-		)
+	var input_direction = playerInput.input_direction
 	# calculate the input direction
 	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
 
 	# move the player
-	if(Input.is_action_pressed("sprint") and Input.is_action_pressed("move_forward") and !isRestoring):
+	if(playerInput.sprinting and !isRestoring):
 		totalSpeed = speed + sprintSpeed
 		stamina = stamina - 0.5
 		canRestore = false
 		isRestoring = stamina <= 0
 	else:
 		totalSpeed = speed
-		canRestore = true	
+		canRestore = true
 
 	var movement = input_direction * totalSpeed * delta
 	is_moving = movement.length() > 0.01
@@ -156,12 +146,14 @@ func _process(delta: float) -> void:
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
 	
 	if !collide:
-		pp_root_node.message({
-			"x": movement[0],
-			"y": -movement[2], 
-			"z": movement[1],
-			"rotation":neck.rotation.y
-		});
+		pass
+		#TODO: update position on server
+	
+	if not playerInput.cameraMovement.is_zero_approx():
+		neck.rotate_y(-playerInput.cameraMovement.x * Menusettings.mousesen)
+		camera.rotate_x(-playerInput.cameraMovement.y * Menusettings.mousesen)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+		playerInput.cameraMovement = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	interactor.text= " "
@@ -170,8 +162,7 @@ func _physics_process(delta: float) -> void:
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
 			if Input.is_action_just_pressed("interact"):
-				var pp_entity_node= get_node_or_null("PPEntityNode");
-				if tool_inhand == 2 and test == "calderaagua_detector2":
+				if tool_inhand == Tools.WATERPUMP and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
 					
 				elif test == "caldera_detector" and player_wood > 0 and ServerStore.car_fuel < 3:
@@ -201,16 +192,8 @@ func _physics_process(delta: float) -> void:
 		var movement = Vector3(15, 0, 0) * totalSpeed * delta
 		
 		translate(movement)
-		
-		pp_root_node.message({
-			"x": movement[0],
-			"y": -movement[2], 
-			"z": 0,
-			"rotation":neck.rotation.y
-		});
-		
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if Menusettings.pausemenu_state:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -220,12 +203,6 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	if Input.MOUSE_MODE_CAPTURED and Menusettings.pausemenu_state:
-		if event is InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x*Menusettings.mousesen)
-			camera.rotate_x(-event.relative.y*Menusettings.mousesen)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 #handles stamina stat and value in bar
 func staminahandle():
@@ -262,20 +239,20 @@ func headbobhandle():
 func swaptool() -> void:
 	var action_pressed = false
 	var new_tool = tool_inhand
-	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < 3 and !is_attacking and Menusettings.pausemenu_state:
+	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < Tools.size() - 1 and !is_attacking and Menusettings.pausemenu_state:
 		new_tool += 1
 		action_pressed = true
-	elif Input.is_action_just_pressed("swaptool_down") and tool_inhand > 1 and Menusettings.pausemenu_state:
+	elif Input.is_action_just_pressed("swaptool_down") and tool_inhand > 0 and Menusettings.pausemenu_state:
 		new_tool -= 1
 		action_pressed = true
 	elif Input.is_action_just_pressed("1tool") and Menusettings.pausemenu_state:
-		new_tool = 1
+		new_tool = Tools.AXE
 		action_pressed = true
 	elif Input.is_action_just_pressed("2tool") and Menusettings.pausemenu_state:
-		new_tool = 2
+		new_tool = Tools.WATERPUMP
 		action_pressed = true
 	elif Input.is_action_just_pressed("3tool") and Menusettings.pausemenu_state:
-		new_tool = 3
+		new_tool = Tools.FREQMETER
 		action_pressed = true
 	if action_pressed:
 		tool_inhand = new_tool
@@ -283,9 +260,9 @@ func swaptool() -> void:
 
 
 	# Tool visibility based on the current tool
-	axe.visible = tool_inhand == 1
-	waterpump.visible = tool_inhand == 2 and ServerStore.car_filling_water <= 0
-	freqmeter.visible = tool_inhand == 3
+	axe.visible = tool_inhand == Tools.AXE
+	waterpump.visible = tool_inhand == Tools.WATERPUMP and ServerStore.car_filling_water <= 0
+	freqmeter.visible = tool_inhand == Tools.FREQMETER
 
 func deathTimer():
 	if watchingDeath:
@@ -299,13 +276,6 @@ func deathTimer():
 		if sonido_ojo.volume_db > -40:
 			sonido_ojo.volume_db -=1
 	textura_tentaculos.modulate.a = (timerDeath/100)*0.5
-
-func pingCheck():
-	if ServerStore._newPingNumCheck():
-		pp_root_node.message({"pingnum": ServerStore.PingNum});
-		if ServerStore.lobby_id != "":
-			pp_root_node.message({"getLobbyData": ServerStore.lobby_id});
-			print("lobbyMessage")
 
 func gravityCheck(x):
 	if !is_on_floor():
@@ -322,3 +292,12 @@ func win():
 	ServerStore.playerModel = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/winScreen.tscn")
+
+func hasAxeInHand():
+	return tool_inhand == Tools.AXE
+	
+func hasWaterpumpInHand():
+	return tool_inhand == Tools.WATERPUMP
+	
+func hasFreqmeterInHand():
+	return tool_inhand == Tools.FREQMETER

@@ -1,19 +1,19 @@
-[gd_scene load_steps=55 format=4 uid="uid://47g86k3flcse"]
+[gd_scene format=4 uid="uid://47g86k3flcse"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_b67xe"]
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kmgf1"]
+[ext_resource type="Script" uid="uid://b31clmuucjndl" path="res://scripts/player.gd" id="1_b67xe"]
 [ext_resource type="AudioStream" uid="uid://01qvkmavy2ao" path="res://audio/FEETHmn-GRASS_AUDIOELK-Fs Grass Shoes Outdoors 01_AUDIOELK_AUDIOELK.wav" id="2_84cct"]
-[ext_resource type="Script" path="res://scripts/axe.gd" id="2_lg8qt"]
+[ext_resource type="Script" uid="uid://bqhhywju8f23v" path="res://scripts/axe.gd" id="2_lg8qt"]
 [ext_resource type="AudioStream" uid="uid://b6fgwsetflfl8" path="res://audio/axe-slash-1-106748.mp3" id="2_tdb4p"]
 [ext_resource type="PackedScene" uid="uid://byc66x1wu14km" path="res://scenes/pause_menu.tscn" id="4_0ou1l"]
 [ext_resource type="AudioStream" uid="uid://h114y5i4v68o" path="res://audio/Steady Starting Pump engine.ogg" id="4_a65o0"]
-[ext_resource type="Script" path="res://scripts/waterpump.gd" id="4_dvw83"]
+[ext_resource type="Script" uid="uid://c0ustb22l5w16" path="res://scripts/waterpump.gd" id="4_dvw83"]
 [ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="5_oe6hh"]
 [ext_resource type="Texture2D" uid="uid://d2epnk7w18gf6" path="res://Texture/Texturastaminabg.png" id="6_0c70t"]
 [ext_resource type="Texture2D" uid="uid://ccny0kotabsxo" path="res://Texture/eyesEffect.png" id="6_87mmr"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="7_72s6l"]
 [ext_resource type="Texture2D" uid="uid://c0vi2mdiaw1jq" path="res://Texture/Texturastamina.png" id="7_i5emr"]
 [ext_resource type="AudioStream" uid="uid://cg35oxfci2k3y" path="res://audio/Seraphim_HolyChant.wav" id="9_mna31"]
+[ext_resource type="Script" uid="uid://6p4kpmb0lime" path="res://scripts/multiplayer/player_multiplayer_synchronizer.gd" id="14_f1ej7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_upy28"]
 radius = 0.693717
@@ -204,9 +204,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oo7c"]
 _data = {
-"RESET": SubResource("Animation_7ww6s"),
-"attack_animation": SubResource("Animation_waixj"),
-"idle_axe_animation": SubResource("Animation_ryp1e")
+&"RESET": SubResource("Animation_7ww6s"),
+&"attack_animation": SubResource("Animation_waixj"),
+&"idle_axe_animation": SubResource("Animation_ryp1e")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_janhg"]
@@ -433,9 +433,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2hn1n"]
 _data = {
-"RESET": SubResource("Animation_xj033"),
-"idle": SubResource("Animation_tacip"),
-"use": SubResource("Animation_dopp3")
+&"RESET": SubResource("Animation_xj033"),
+&"idle": SubResource("Animation_tacip"),
+&"use": SubResource("Animation_dopp3")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ns1i1"]
@@ -718,139 +718,169 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjuvx"]
 _data = {
-"RESET": SubResource("Animation_rayom"),
-"headbob": SubResource("Animation_eslvi"),
-"stepsounds": SubResource("Animation_0425j")
+&"RESET": SubResource("Animation_rayom"),
+&"headbob": SubResource("Animation_eslvi"),
+&"stepsounds": SubResource("Animation_0425j")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_f1ej7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Neck:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Neck:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Neck:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Neck/Camera3D:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:tool_inhand")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:player_wood")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:player_water")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jej6c"]
+properties/0/path = NodePath("PlayerInputSynchronizer:input_direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+properties/1/path = NodePath("PlayerInputSynchronizer:sprinting")
+properties/1/spawn = false
+properties/1/replication_mode = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1392907635 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442576, 0)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_b67xe")
 
-[node name="Flash" type="Area3D" parent="."]
+[node name="Flash" type="Area3D" parent="." unique_id=536084714]
 collision_layer = 64
 collision_mask = 64
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flash" groups=["player"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flash" unique_id=1764351348 groups=["player"]]
 transform = Transform3D(1.3, 0, 0, 0, 2, 0, 0, 0, 1.3, 0, 2.94272, 0)
 shape = SubResource("CapsuleShape3D_upy28")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["player"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=360212869 groups=["player"]]
 transform = Transform3D(1.3, 0, 0, 0, 2, 0, 0, 0, 1.3, 0, 2.94272, 0)
 shape = SubResource("CapsuleShape3D_upy28")
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="Neck" type="Node3D" parent="." unique_id=1228672698]
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
+[node name="Camera3D" type="Camera3D" parent="Neck" unique_id=425717283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68235, 0)
 
-[node name="Enemydetector" type="RayCast3D" parent="Neck/Camera3D"]
+[node name="Enemydetector" type="RayCast3D" parent="Neck/Camera3D" unique_id=2019408250]
 transform = Transform3D(1, 0, 0, 0, -1.83066e-06, -1, 0, 41.8806, -4.37114e-08, -0.00132685, -0.00106335, -0.990554)
 collision_mask = 17
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="InteractRay" type="RayCast3D" parent="Neck/Camera3D"]
+[node name="InteractRay" type="RayCast3D" parent="Neck/Camera3D" unique_id=566246801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132685, -0.00106335, -0.0256251)
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="Axe" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(0.101412, 0, 0.692615, 0, 0.7, 0, -0.692615, 0, 0.101412, 0.473715, -0.474713, -0.901513)
+[node name="Axe" type="Node3D" parent="Neck/Camera3D" unique_id=788097640]
+transform = Transform3D(0.101412274, 0, 0.6926151, 0, 0.7, 0, -0.6926151, 0, 0.101412274, 0.473715, -0.474713, -0.901513)
 visible = false
 script = ExtResource("2_lg8qt")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/Axe"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/Axe" unique_id=1906699574]
 transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
 mesh = SubResource("ArrayMesh_tt8bg")
 
-[node name="axe_hitbox" type="Area3D" parent="Neck/Camera3D/Axe/MeshInstance3D" groups=["axe"]]
+[node name="axe_hitbox" type="Area3D" parent="Neck/Camera3D/Axe/MeshInstance3D" unique_id=554049488 groups=["axe"]]
 transform = Transform3D(0.04053, -1.2191, 0.092915, -1.13771, -0.0504289, -0.0874167, 0.0868928, -0.0916438, -1.18791, -0.0139101, -0.00391805, 0.14038)
 collision_layer = 0
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" unique_id=766730634]
 transform = Transform3D(0.0882044, -1.45581, 0.100283, -2.31005, -0.0561856, -0.0920908, 0.184665, -0.102155, -1.25203, -0.0123444, -0.00286555, 0.117491)
 shape = SubResource("ConvexPolygonShape3D_v0c87")
 
-[node name="axe_animation" type="AnimationPlayer" parent="Neck/Camera3D/Axe"]
+[node name="axe_animation" type="AnimationPlayer" parent="Neck/Camera3D/Axe" unique_id=1962095218]
 root_node = NodePath("../../../../..")
-libraries = {
-"": SubResource("AnimationLibrary_2oo7c")
-}
-autoplay = "idle_axe_animation"
+libraries/ = SubResource("AnimationLibrary_2oo7c")
+autoplay = &"idle_axe_animation"
 
-[node name="axeswing" type="AudioStreamPlayer3D" parent="Neck/Camera3D/Axe"]
+[node name="axeswing" type="AudioStreamPlayer3D" parent="Neck/Camera3D/Axe" unique_id=264052602]
 transform = Transform3D(-0.197398, -0.979201, -0.0468898, -0.975355, 0.200983, -0.0910381, 0.0985687, 0.0277635, -0.994743, 1.3, -0.481431, -1.10388)
 stream = ExtResource("2_tdb4p")
 volume_db = 32.0
 bus = &"Sfx"
 
-[node name="waterpump" type="Node3D" parent="Neck/Camera3D"]
-transform = Transform3D(0.499998, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.499998, -0.3, 0, 0)
+[node name="waterpump" type="Node3D" parent="Neck/Camera3D" unique_id=1172296556]
+transform = Transform3D(0.49999768, 0, 0.8660262, 0, 1, 0, -0.8660262, 0, 0.49999768, -0.3, 0, 0)
 script = ExtResource("4_dvw83")
 
-[node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump"]
+[node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump" unique_id=2022517985]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_t86ew")
 skeleton = NodePath("")
 
-[node name="waterTankBar" type="MeshInstance3D" parent="Neck/Camera3D/waterpump/waterTank2"]
+[node name="waterTankBar" type="MeshInstance3D" parent="Neck/Camera3D/waterpump/waterTank2" unique_id=1225624016]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243207, 0, 0.000454187)
 mesh = SubResource("ArrayMesh_mkmtp")
 skeleton = NodePath("")
 
-[node name="waterTankBarfiller" type="MeshInstance3D" parent="Neck/Camera3D/waterpump/waterTank2"]
+[node name="waterTankBarfiller" type="MeshInstance3D" parent="Neck/Camera3D/waterpump/waterTank2" unique_id=1732036606]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1.001, 0, 0, 0, 1.001, 0.243207, 0, 0.000454187)
 material_override = SubResource("StandardMaterial3D_escus")
 mesh = SubResource("ArrayMesh_mkmtp")
 skeleton = NodePath("")
 
-[node name="waterpump_hitbox" type="Area3D" parent="Neck/Camera3D/waterpump/waterTank2"]
+[node name="waterpump_hitbox" type="Area3D" parent="Neck/Camera3D/waterpump/waterTank2" unique_id=1999983674]
 transform = Transform3D(0.0900769, -0.0149259, -1.88249, 0.220288, 0.0824881, -0.266104, 0.790302, -0.0212913, 0.288733, -0.0236304, -0.120767, -0.0122709)
 collision_layer = 8
 collision_mask = 8
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Camera3D/waterpump/waterTank2/waterpump_hitbox" unique_id=1304155858]
 transform = Transform3D(1, -3.08791e-06, -2.96915e-08, 1.0293e-06, 3, 4.96e-09, 4.94858e-08, -2.48002e-08, 0.6, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_r0xvi")
 
-[node name="pump_animation" type="AnimationPlayer" parent="Neck/Camera3D/waterpump"]
-libraries = {
-"": SubResource("AnimationLibrary_2hn1n")
-}
-autoplay = "idle"
+[node name="pump_animation" type="AnimationPlayer" parent="Neck/Camera3D/waterpump" unique_id=711826933]
+libraries/ = SubResource("AnimationLibrary_2hn1n")
+autoplay = &"idle"
 
-[node name="pumpwater" type="AudioStreamPlayer3D" parent="Neck/Camera3D/waterpump"]
+[node name="pumpwater" type="AudioStreamPlayer3D" parent="Neck/Camera3D/waterpump" unique_id=301543358]
 stream = ExtResource("4_a65o0")
 bus = &"Sfx"
 
-[node name="freqmeter" parent="Neck/Camera3D" node_paths=PackedStringArray("stalker_armature_2") instance=ExtResource("5_oe6hh")]
+[node name="freqmeter" parent="Neck/Camera3D" unique_id=1010770749 node_paths=PackedStringArray("stalker_armature_2") instance=ExtResource("5_oe6hh")]
 stalker_armature_2 = NodePath("../stalkerArmature2")
 
-[node name="Tronco1" type="MeshInstance3D" parent="Neck/Camera3D"]
+[node name="Tronco1" type="MeshInstance3D" parent="Neck/Camera3D" unique_id=1387948934]
 transform = Transform3D(0.36528, -0.930034, -0.0400926, 0.92569, 0.358351, 0.121171, -0.0983258, -0.0813746, 0.991822, -1.70165, -1.09678, -1.29944)
 mesh = SubResource("ArrayMesh_pu4qt")
 skeleton = NodePath("../Axe")
 
-[node name="Tronco2" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1"]
+[node name="Tronco2" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1" unique_id=131668069]
 transform = Transform3D(0.994399, 0.0883155, -0.0580587, -0.0767184, 0.980991, 0.17824, 0.0726968, -0.172788, 0.982272, -0.0382531, -0.299922, -0.286082)
 mesh = SubResource("ArrayMesh_skxlf")
 
-[node name="Tronco3" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1/Tronco2"]
+[node name="Tronco3" type="MeshInstance3D" parent="Neck/Camera3D/Tronco1/Tronco2" unique_id=1164503330]
 transform = Transform3D(0.994728, -0.0746258, 0.0703396, 0.0855427, 0.982107, -0.167773, -0.0565607, 0.172906, 0.983313, -0.0334396, -0.0658693, 0.498087)
 mesh = SubResource("ArrayMesh_vnv0t")
 
-[node name="stalkerArmature2" type="Node3D" parent="Neck/Camera3D"]
+[node name="stalkerArmature2" type="Node3D" parent="Neck/Camera3D" unique_id=900054795]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.269, -0.646127)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Neck/Camera3D/stalkerArmature2"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Neck/Camera3D/stalkerArmature2" unique_id=1006259222]
 bones/0/name = "Bone.002"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34326, -0.0177155)
@@ -880,14 +910,14 @@ bones/3/position = Vector3(0, 0, 0)
 bones/3/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 bones/3/scale = Vector3(1, 1, 1)
 
-[node name="stalker" type="MeshInstance3D" parent="Neck/Camera3D/stalkerArmature2/Skeleton3D"]
+[node name="stalker" type="MeshInstance3D" parent="Neck/Camera3D/stalkerArmature2/Skeleton3D" unique_id=2133370316]
 mesh = SubResource("ArrayMesh_enq8f")
 skin = SubResource("Skin_vpjwe")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Neck/Camera3D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Neck/Camera3D" unique_id=861467473]
 visible = false
 
-[node name="Textura_tentaculos" type="TextureRect" parent="Neck/Camera3D/CanvasLayer"]
+[node name="Textura_tentaculos" type="TextureRect" parent="Neck/Camera3D/CanvasLayer" unique_id=1296889113]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -895,43 +925,37 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_87mmr")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Neck/Camera3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Neck/Camera3D" unique_id=541342739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 5)
 light_color = Color(1, 0.658426, 0.636858, 1)
 light_energy = 1.5
 omni_range = 18.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Neck/Camera3D"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Neck/Camera3D" unique_id=387076409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 1)
 light_color = Color(0, 0.330842, 0.642148, 1)
 omni_range = 18.0
 
-[node name="headbob" type="AnimationPlayer" parent="Neck"]
+[node name="headbob" type="AnimationPlayer" parent="Neck" unique_id=1729981855]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_qjuvx")
-}
+libraries/ = SubResource("AnimationLibrary_qjuvx")
 
-[node name="stepgrass" type="AudioStreamPlayer3D" parent="."]
+[node name="stepgrass" type="AudioStreamPlayer3D" parent="." unique_id=34447731]
 bus = &"Sfx"
 
-[node name="ambientsound" type="AudioStreamPlayer3D" parent="."]
+[node name="ambientsound" type="AudioStreamPlayer3D" parent="." unique_id=621950199]
 stream = ExtResource("7_72s6l")
 volume_db = -13.715
 autoplay = true
 
-[node name="Sonido_ojo" type="AudioStreamPlayer3D" parent="."]
+[node name="Sonido_ojo" type="AudioStreamPlayer3D" parent="." unique_id=43000951]
 stream = ExtResource("9_mna31")
 autoplay = true
 
-[node name="PPEntityNode" type="Node" parent="."]
-script = ExtResource("1_kmgf1")
-type = "player"
-
-[node name="pause_menu" parent="." instance=ExtResource("4_0ou1l")]
+[node name="pause_menu" parent="." unique_id=1544517573 instance=ExtResource("4_0ou1l")]
 visible = false
 
-[node name="bar_stamina" type="TextureProgressBar" parent="."]
+[node name="bar_stamina" type="TextureProgressBar" parent="." unique_id=841349895]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -952,7 +976,7 @@ fill_mode = 7
 texture_under = ExtResource("6_0c70t")
 texture_progress = ExtResource("7_i5emr")
 
-[node name="Interactor" type="Label" parent="."]
+[node name="Interactor" type="Label" parent="." unique_id=1966468213]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -965,6 +989,13 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2061221702]
+replication_config = SubResource("SceneReplicationConfig_f1ej7")
+
+[node name="PlayerInputSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2131194830]
+replication_config = SubResource("SceneReplicationConfig_jej6c")
+script = ExtResource("14_f1ej7")
 
 [connection signal="area_entered" from="Neck/Camera3D/Axe/MeshInstance3D/axe_hitbox" to="Neck/Camera3D/Axe" method="_on_axe_hitbox_area_entered"]
 [connection signal="animation_finished" from="Neck/Camera3D/Axe/axe_animation" to="Neck/Camera3D/Axe" method="_on_axe_animation_animation_finished"]

@@ -3,9 +3,6 @@
 # extend the functionality of your root node (here Node3D)
 extends Node3D
 
-# create a variable to store the PPRootNode
-var pp_root_node
-
 # preload all the scenes for use by this script
 var player_scene = preload("res://scenes/player.tscn")
 
@@ -18,6 +15,7 @@ var car_scene = preload("res://scenes/car.tscn")
 var other_player_scene = preload("res://scenes/player_2.tscn")
 var lobby_scene = preload("res://scenes/lobby.tscn")
 
+@onready var multiplayer_spawner: MultiplayerSpawner = $PlayerSpawner
 
 
 
@@ -33,20 +31,41 @@ var scene_map = {
 
 # when the scene is loaded
 func _ready():
-	# access the PPRootNode from the scene's node tree
-	pp_root_node = get_tree().current_scene.get_node_or_null('PPRootNode')
-	assert(pp_root_node, "PPRootNode not found") 
-	await pp_root_node.new_player_entity.connect(_on_new_player_entity)
-	# using signals from the PPRootNode,
-	# trigger functions for entity spawning/despawning/positioning
-	pp_root_node.new_chunk.connect(_on_new_chunk)
-	pp_root_node.remove_chunk.connect(_on_remove_chunk) 
+	pass
+	## access the PPRootNode from the scene's node tree
+	#pp_root_node = get_tree().current_scene.get_node_or_null('PPRootNode')
+	#assert(pp_root_node, "PPRootNode not found") 
+	#await pp_root_node.new_player_entity.connect(_on_new_player_entity)
+	## using signals from the PPRootNode,
+	## trigger functions for entity spawning/despawning/positioning
+	#pp_root_node.new_chunk.connect(_on_new_chunk)
+	#pp_root_node.remove_chunk.connect(_on_remove_chunk) 
+	#
+	#pp_root_node.new_entity.connect(_on_new_entity)
+	#pp_root_node.remove_entity.connect(_on_remove_entity)
+	#
+	#pp_root_node.authenticate_player("","")
+	multiplayer_spawner.spawn_function = _new_player_called
+	if multiplayer.is_server():
+		for index in range(multiplayer.get_peers().size()):
+			multiplayer_spawner.spawn(
+				{
+					peer= multiplayer.get_peers()[index],
+					position = Vector3(-4 + index, 0, 0)
+				}
+			)
 	
-	pp_root_node.new_entity.connect(_on_new_entity)
-	pp_root_node.remove_entity.connect(_on_remove_entity)
-	
-	pp_root_node.authenticate_player("","")
-	
+		multiplayer_spawner.spawn({
+			peer= 1,
+			position = Vector3(-5, 0, 0)
+		})
+
+func _new_player_called(data) -> Node:
+	var scene:PackedScene = load(multiplayer_spawner.get_spawnable_scene(0))
+	var node = scene.instantiate()
+	node.playerPeerId = data.peer
+	node.position = data.position
+	return node
 
 # create a new player instance, and add it as a child node
 func _on_new_player_entity(entity_id, state):
@@ -136,7 +155,7 @@ func _on_new_chunk(chunk_id, state):
 	# position the entity based on its server location
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	chunk_instance.global_transform.origin = Vector3((state.x * pp_root_node.Chunk_Size), 0, -(state.y *  pp_root_node.Chunk_Size))
+	#chunk_instance.global_transform.origin = Vector3((state.x * pp_root_node.Chunk_Size), 0, -(state.y *  pp_root_node.Chunk_Size))
 
 # remove an chunk instance, from the current child nodes
 func _on_remove_chunk(chunk_id):
@@ -164,7 +183,7 @@ func _on_pp_root_node_player_connected():
 
 func _on_pp_root_node_player_disconnected():
 	print("----- Player disconnected")
-	pp_root_node.authenticate_player("","")
+	#pp_root_node.authenticate_player("","")
 	pass # Replace with function body.
 
 

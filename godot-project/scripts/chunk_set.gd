@@ -16,19 +16,6 @@ var terrainSets = [
 
 var placed = false;
 
-# when the scene is loaded
-func _ready():
-	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
-	# pp_entity_node.new_entity.connect(_on_new_entity)
-	
-	# print(pp_entity_node.Data);
-	
-	
-func _on_state_changed(state):
-	pass
-
-
 func _on_pp_entity_node_state_changed(new_state):
 	if !placed:
 		for x in 3:

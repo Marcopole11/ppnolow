@@ -6,8 +6,6 @@ extends StaticBody3D
 var obstacle: bool = false
 var calderaMaterial:Material
 var player = null
-var pp_root_node
-var pp_entity_node= get_node_or_null("PPEntityNode")
 var pushForce:float = 5
 #variables del pulpo
 var Pulpohp = 3
@@ -64,11 +62,9 @@ func _ready() -> void:
 		# connect to the state_changed signal from pp_entity_node
 	var pp_entity_node= get_node_or_null("PPEntityNode")
 	if pp_entity_node:
-		var test = pp_entity_node.get_property_list()
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
 		print("PPEntityNode not found")
-	pp_root_node = get_tree().current_scene.get_node('PPRootNode')
 	calderaMaterial=carroMesh.mesh.surface_get_material(4).duplicate()
 	carroMesh.mesh.surface_set_material(4,calderaMaterial)
 	calderaMaterial.set("emission_energy_multiplier",0)
@@ -102,18 +98,6 @@ func _process(delta: float) -> void:
 		supply_indicator(fuelPile,0)
 	pulpoattack()
 	
-	
-	var pp_entity_node= get_node_or_null("PPEntityNode")
-	if Input.is_key_pressed(KEY_7):
-		print("all win")
-		pp_root_node.message({"ID": pp_entity_node.entity_id,
-			"gameEnd": true,"gFinale":"t"})
-	if Input.is_key_pressed(KEY_8):
-		print("all loose")
-		pp_root_node.message({"ID": pp_entity_node.entity_id,
-			"gameEnd": false,"gFinale":"t"})
-	
-	
 func supply_indicator(supply:Array[MeshInstance3D],server_value):
 	var current_lvl = round(server_value)
 	if current_lvl>supply.size()+1:
@@ -127,15 +111,11 @@ func supply_indicator(supply:Array[MeshInstance3D],server_value):
 func interact(delta: float, strength: float):
 	var movement = Vector3(0,0,strength) * pushForce * delta
 	translate(movement)
-	var pp_entity_node= get_node_or_null("PPEntityNode")
 	var current_position = global_transform.origin
-	pp_root_node.message({"ID": pp_entity_node.entity_id,
-	"move":{
-		"x": current_position[0],
-		"y": current_position[1],
-		"z": 0 - current_position[2],
-  	}})
+	#TODO: Coche se mueve aqui
 
+
+##Data update
 func _on_state_changed(state):
 	# set the entity's position, using the server's valuesw
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
@@ -183,10 +163,9 @@ func pulpoattack():
 		pulpoaway = false
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	pp_entity_node= get_node_or_null("PPEntityNode")
 	if area.is_in_group("axe"):
-		pp_root_node.message({"ID": pp_entity_node.entity_id,"rescue": "rescue"})
-
+		#TODO: El hacha golpea el pulpo
+		pass
 
 
 func _on_car_animations_animation_finished(anim_name: StringName) -> void:

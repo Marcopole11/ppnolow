@@ -1,13 +1,12 @@
-[gd_scene load_steps=75 format=4 uid="uid://by1xajmtjokfw"]
+[gd_scene format=4 uid="uid://by1xajmtjokfw"]
 
-[ext_resource type="Script" path="res://scripts/car.gd" id="1_kbort"]
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="3_348wp"]
+[ext_resource type="Script" uid="uid://cmcf2chc4s72p" path="res://scripts/car.gd" id="1_kbort"]
 [ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_ja2rn"]
-[ext_resource type="Script" path="res://scripts/caldera_detector.gd" id="4_n4ktf"]
-[ext_resource type="Script" path="res://scripts/calderaagua_detector_2.gd" id="4_syip1"]
+[ext_resource type="Script" uid="uid://cqbfe8cymtgd0" path="res://scripts/caldera_detector.gd" id="4_n4ktf"]
+[ext_resource type="Script" uid="uid://3ppj0qqohoty" path="res://scripts/calderaagua_detector_2.gd" id="4_syip1"]
 [ext_resource type="AudioStream" uid="uid://ch2afi7ims17t" path="res://audio/metaldoorcar.ogg" id="5_eyt3r"]
-[ext_resource type="Script" path="res://scripts/calderaStockpile_detector.gd" id="6_6evm5"]
-[ext_resource type="Script" path="res://scripts/facingPlayer.gd" id="8_p84hy"]
+[ext_resource type="Script" uid="uid://dp8ynd1iwke10" path="res://scripts/calderaStockpile_detector.gd" id="6_6evm5"]
+[ext_resource type="Script" uid="uid://y8t8rvoh1pp0" path="res://scripts/facingPlayer.gd" id="8_p84hy"]
 [ext_resource type="Material" uid="uid://dqc0ddjhcdavf" path="res://materials/focus_material.tres" id="9_00bcm"]
 [ext_resource type="AudioStream" uid="uid://bvjiskwnirnhd" path="res://audio/Beast_Warble.wav" id="9_v47fa"]
 [ext_resource type="AudioStream" uid="uid://cf7f0q3vwno6g" path="res://audio/wing-flap-1-6434.mp3" id="10_vdnha"]
@@ -851,9 +850,9 @@ tracks/5/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p3wyr"]
 _data = {
-"RESET": SubResource("Animation_t53fc"),
-"fly away": SubResource("Animation_1k3e7"),
-"wings": SubResource("Animation_uxc4m")
+&"RESET": SubResource("Animation_t53fc"),
+&"fly away": SubResource("Animation_1k3e7"),
+&"wings": SubResource("Animation_uxc4m")
 }
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c6eum"]
@@ -1390,90 +1389,86 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk3q6"]
 _data = {
-"RESET": SubResource("Animation_ynb1b"),
-"car_shake": SubResource("Animation_cp3j7"),
-"drop": SubResource("Animation_dj00w"),
-"fly": SubResource("Animation_7k8sa"),
-"put_wood": SubResource("Animation_yslvr"),
-"waterpump_insert": SubResource("Animation_6dvyk")
+&"RESET": SubResource("Animation_ynb1b"),
+&"car_shake": SubResource("Animation_cp3j7"),
+&"drop": SubResource("Animation_dj00w"),
+&"fly": SubResource("Animation_7k8sa"),
+&"put_wood": SubResource("Animation_yslvr"),
+&"waterpump_insert": SubResource("Animation_6dvyk")
 }
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" unique_id=726225871]
 transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 0, 0.53966, 0)
 collision_layer = 65
 collision_mask = 65
 script = ExtResource("1_kbort")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2051746402]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
 visible = false
 shape = SubResource("ConcavePolygonShape3D_7xo40")
 
-[node name="PPEntityNode" type="Node" parent="."]
-script = ExtResource("3_348wp")
-type = "car"
-
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1402484112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.846, 0)
 
-[node name="carro" parent="Node3D" instance=ExtResource("3_ja2rn")]
+[node name="carro" parent="Node3D" unique_id=39366913 instance=ExtResource("3_ja2rn")]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 0, 0)
 
-[node name="foco" parent="Node3D/carro" index="8"]
+[node name="foco" parent="Node3D/carro" index="8" unique_id=2005904900]
 transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0, -0.140426, 2.92126)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco" index="0"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco" index="0" unique_id=615318643]
 transform = Transform3D(0.278655, 0, 0, 0, -0.249256, 0.0797594, 0, -0.0797372, -0.249521, 0.0229513, -0.0467405, 0.326509)
 shadow_enabled = true
 spot_range = 3.47439
 spot_angle = 81.612
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco/SpotLight3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco/SpotLight3D" unique_id=133402915]
 transform = Transform3D(1, 0, 0, 0, 0.977124, 0.212672, 0, -0.212672, 0.977124, 0, 0.0528088, -0.184275)
 shadow_enabled = true
 spot_range = 109.134
 spot_attenuation = -0.82
 spot_angle = 32.3859
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/carro/foco/SpotLight3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/carro/foco/SpotLight3D" unique_id=251710527]
 transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, 0, 1, 0, -0.482744, -1.06729)
 omni_range = 2.35081
 omni_attenuation = -1.286
 
-[node name="Caldera" parent="Node3D/carro" index="9"]
+[node name="Caldera" parent="Node3D/carro" index="9" unique_id=2047891373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58779, 0.141625, 0.468698)
 
-[node name="carro" parent="Node3D/carro" index="10"]
+[node name="carro" parent="Node3D/carro" index="10" unique_id=1375740252]
 layers = 2
 mesh = SubResource("ArrayMesh_tpkr4")
 
-[node name="madera_detector" type="Area3D" parent="Node3D/carro/carro" index="0"]
+[node name="madera_detector" type="Area3D" parent="Node3D/carro/carro" index="0" unique_id=848020194]
 transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, 1.53661, -1.56873, 1.33879)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("6_6evm5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/madera_detector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/madera_detector" unique_id=910406021]
 transform = Transform3D(1, 0, 0, 0, 1.00011, 0, 0, 0, 1.00008, -2.36428, 3.10389, 0.0762522)
 shape = SubResource("BoxShape3D_xyede")
 
-[node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/madera_detector"]
+[node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/madera_detector" unique_id=1975832543]
 stream = ExtResource("5_eyt3r")
 
-[node name="caldera_detector" type="Area3D" parent="Node3D/carro/carro" index="1"]
+[node name="caldera_detector" type="Area3D" parent="Node3D/carro/carro" index="1" unique_id=1591715851]
 transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, 1.53661, -1.56873, 0.304321)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_n4ktf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/caldera_detector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/caldera_detector" unique_id=67525951]
 transform = Transform3D(1, 0, 0, 0, 1.00008, 0, 0, 0, 1.00008, -2.55953, 3.10389, 0.329743)
 shape = SubResource("BoxShape3D_ygm08")
 
-[node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/caldera_detector"]
+[node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/caldera_detector" unique_id=1184897319]
 stream = ExtResource("5_eyt3r")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D/carro/carro" index="2"]
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D/carro/carro" index="2" unique_id=1010502345]
 transform = Transform3D(-0.04348, -0.9944, -0.0963452, 0.999057, -0.0432772, -0.00419305, 1.13397e-09, -0.0964365, 0.995339, -0.0169668, 1.47381, -0.640323)
 visibility_range_fade_mode = 1
 amount = 15
@@ -1486,7 +1481,7 @@ trail_lifetime = 1.61
 process_material = SubResource("ParticleProcessMaterial_bd7id")
 draw_pass_1 = SubResource("SphereMesh_v1jmb")
 
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D/carro/carro" index="3"]
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D/carro/carro" index="3" unique_id=1667850428]
 transform = Transform3D(-0.04348, -0.9944, -0.0963452, 0.999057, -0.0432772, -0.00419305, 1.13397e-09, -0.0964365, 0.995339, -0.0169668, 1.17076, 0.131134)
 visibility_range_fade_mode = 1
 amount = 15
@@ -1499,44 +1494,44 @@ trail_lifetime = 1.61
 process_material = SubResource("ParticleProcessMaterial_bd7id")
 draw_pass_1 = SubResource("SphereMesh_v1jmb")
 
-[node name="calderaagua_detector2" type="Area3D" parent="Node3D/carro/carro" index="4"]
+[node name="calderaagua_detector2" type="Area3D" parent="Node3D/carro/carro" index="4" unique_id=83651807]
 transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, -1.23102, -1.57822, 0.304321)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_syip1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/calderaagua_detector2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/calderaagua_detector2" unique_id=824181308]
 transform = Transform3D(1, 0, 0, 0, 1.00004, 0, 0, 0, 1.00004, 1.44687, 3.39892, 0.60724)
 shape = SubResource("BoxShape3D_tk8wy")
 
-[node name="waterTank2" type="MeshInstance3D" parent="Node3D/carro/carro" index="5"]
-transform = Transform3D(-0.23736, -0.364255, -0.00392963, -0.364159, 0.23715, 0.0136024, -0.00925248, 0.0107172, -0.434554, -1.16023, -0.127666, 0.322451)
+[node name="waterTank2" type="MeshInstance3D" parent="Node3D/carro/carro" index="5" unique_id=1464807926]
+transform = Transform3D(-0.23736015, -0.3642548, -0.003929628, -0.3641589, 0.23715036, 0.013602408, -0.0092524765, 0.010717199, -0.43455398, -1.16023, -0.127666, 0.322451)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_jfg7y")
 skeleton = NodePath("")
 
-[node name="waterTankBar" type="MeshInstance3D" parent="Node3D/carro/carro/waterTank2"]
+[node name="waterTankBar" type="MeshInstance3D" parent="Node3D/carro/carro/waterTank2" unique_id=1155626133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243207, 0, 0.000454187)
 mesh = SubResource("ArrayMesh_jimsv")
 skeleton = NodePath("")
 
-[node name="waterTankBarfiller" type="MeshInstance3D" parent="Node3D/carro/carro/waterTank2"]
+[node name="waterTankBarfiller" type="MeshInstance3D" parent="Node3D/carro/carro/waterTank2" unique_id=253554134]
 transform = Transform3D(1, 6.98492e-10, 0, -8.14907e-10, 1.001, 1.86265e-09, 0, 0, 1.001, 0.243207, 0, 0.000454172)
 material_override = SubResource("StandardMaterial3D_jkc8l")
 mesh = SubResource("ArrayMesh_jimsv")
 skeleton = NodePath("")
 
-[node name="caldera" type="Node3D" parent="Node3D/carro/carro" index="6"]
+[node name="caldera" type="Node3D" parent="Node3D/carro/carro" index="6" unique_id=2002728303]
 transform = Transform3D(0.278655, 0, 0, 0, 0.261697, 0, 0, 0, 0.261961, 0.219523, -0.412047, 0.446883)
 script = ExtResource("8_p84hy")
 
-[node name="luzCaldera" type="OmniLight3D" parent="Node3D/carro/carro/caldera"]
+[node name="luzCaldera" type="OmniLight3D" parent="Node3D/carro/carro/caldera" unique_id=173543311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.19209e-07)
 light_color = Color(1, 0.434811, 0.366139, 1)
 shadow_enabled = true
 
-[node name="fuegoCaldera" type="GPUParticles3D" parent="Node3D/carro/carro/caldera"]
+[node name="fuegoCaldera" type="GPUParticles3D" parent="Node3D/carro/carro/caldera" unique_id=966073512]
 transform = Transform3D(1.14641e-15, 2.62268e-08, -0.6, 0.6, -2.62268e-08, 0, -2.62268e-08, -0.6, -2.62268e-08, 0.403129, 0.14288, -0.0750884)
 visibility_range_fade_mode = 1
 amount = 20
@@ -1549,164 +1544,160 @@ trail_lifetime = 1.61
 process_material = SubResource("ParticleProcessMaterial_bd7id")
 draw_pass_1 = SubResource("PlaneMesh_1cc2o")
 
-[node name="wood" type="MeshInstance3D" parent="Node3D/carro/carro" index="7"]
+[node name="wood" type="MeshInstance3D" parent="Node3D/carro/carro" index="7" unique_id=1650843219]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.570937, -0.634195, 1.5689)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood2" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood2" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=578251531]
 transform = Transform3D(0.999935, 0.00526837, 0.0101256, 0, 0.887107, -0.461563, -0.0114142, 0.461533, 0.88705, 0, -0.125871, -0.426847)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood3" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood3" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=1253489384]
 transform = Transform3D(1, 0, 0, 0, 0.586316, 0.810082, 0, -0.810082, 0.586316, 0, -0.00516963, -0.768969)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood4" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood4" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=259012199]
 transform = Transform3D(1, 0, 0, 0, -0.919176, 0.393846, 0, -0.393846, -0.919176, 0, 0.285708, -0.582524)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood5" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood5" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=1319774261]
 transform = Transform3D(1, 0, 0, 0, -0.572103, -0.820182, 0, 0.820182, -0.572103, 0, 0.349151, -0.245914)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood6" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood6" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=975280698]
 transform = Transform3D(1, 0, 0, 0, -0.339559, -0.940584, 0, 0.940584, -0.339559, 0, 0.458515, -0.84732)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood7" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood7" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=717388861]
 transform = Transform3D(1, 0, 0, 0, 0.375351, 0.926882, 0, -0.926882, 0.375351, 0, 0.664184, -0.432449)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood8" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood8" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=2138854765]
 transform = Transform3D(1, 0, 0, 0, -0.804385, 0.594107, 0, -0.594106, -0.804385, 0, 0.835089, -0.165724)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood9" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood9" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=2016350644]
 transform = Transform3D(1, 0, 0, 0, 0.993349, -0.115128, 0, 0.115128, 0.993349, 0, 0.887015, -0.645222)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood10" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood10" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=1194796983]
 transform = Transform3D(1, 0, 0, 0, 0.642546, 0.766245, 0, -0.766244, 0.642546, 0, 1.1711, -0.056294)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood11" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood11" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=1273660590]
 transform = Transform3D(0.998762, 0.0462257, 0.0183609, -0.00453476, 0.452235, -0.891885, -0.0495316, 0.890697, 0.451885, 0, 1.11758, -0.435318)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood12" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood12" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=331391229]
 transform = Transform3D(1, 0, 0, 0, -0.990502, 0.137479, 0, -0.137479, -0.990503, 0, 1.52216, -0.313713)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood13" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood13" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=100096718]
 transform = Transform3D(0.999219, -0.034717, 0.018849, 1.75923e-13, -0.477142, -0.878823, 0.039504, 0.878136, -0.47677, 0, 1.36696, -0.880966)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood14" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood14" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=362606104]
 transform = Transform3D(1, 0, 0, 0, -0.316046, -0.948741, 0, 0.94874, -0.316046, 0, 1.67936, -0.583823)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="wood15" type="MeshInstance3D" parent="Node3D/carro/carro/wood"]
+[node name="wood15" type="MeshInstance3D" parent="Node3D/carro/carro/wood" unique_id=1679192145]
 transform = Transform3D(1, 0, 0, 0, 0.421319, 0.906909, 0, -0.906909, 0.42132, 0, 1.84742, -0.761961)
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="fuel" type="MeshInstance3D" parent="Node3D/carro/carro" index="8"]
+[node name="fuel" type="MeshInstance3D" parent="Node3D/carro/carro" index="8" unique_id=1906718513]
 transform = Transform3D(0.159, 0, 0.367041, 0, 0.4, 0, -0.367041, 0, 0.159, 0.449709, -0.465203, 0.535873)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="fuel2" type="MeshInstance3D" parent="Node3D/carro/carro/fuel"]
+[node name="fuel2" type="MeshInstance3D" parent="Node3D/carro/carro/fuel" unique_id=612934900]
 transform = Transform3D(0.78458, 0.578629, -0.222761, 0.54063, -0.46253, 0.702699, 0.303568, -0.671755, -0.675716, 0.166891, 0.0815749, -0.510721)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="fuel3" type="MeshInstance3D" parent="Node3D/carro/carro/fuel"]
+[node name="fuel3" type="MeshInstance3D" parent="Node3D/carro/carro/fuel" unique_id=1910575935]
 transform = Transform3D(0.307936, -0.11251, 0.944731, -0.422151, 0.873723, 0.241654, -0.852622, -0.473234, 0.221555, -0.0588203, 0.372546, -0.264226)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3qbla")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="Node3D/carro/carro" index="9"]
+[node name="Area3D" type="Area3D" parent="Node3D/carro/carro" index="9" unique_id=547108445]
 collision_layer = 33
 collision_mask = 33
 
-[node name="Pulpo" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D"]
+[node name="Pulpo" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D" unique_id=1047451127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
 visible = false
 mesh = SubResource("ArrayMesh_wah3g")
 skeleton = NodePath("")
 
-[node name="PulpoAlaDer" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo"]
-transform = Transform3D(0.967458, 0, 0.253032, 0, 1, 0, -0.253032, 0, 0.967458, 0.69696, 1.84028, -2.09611)
+[node name="PulpoAlaDer" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo" unique_id=641794320]
+transform = Transform3D(0.967458, 0, 0.25303206, 0, 1, 0, -0.25303206, 0, 0.967458, 0.69696, 1.84028, -2.09611)
 mesh = SubResource("ArrayMesh_dug4i")
 skeleton = NodePath("")
 
-[node name="PulpoAlaDerPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo/PulpoAlaDer"]
+[node name="PulpoAlaDerPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo/PulpoAlaDer" unique_id=1953155771]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.483355, -2.93549, 0.494307)
 mesh = SubResource("ArrayMesh_4iypw")
 skeleton = NodePath("")
 
-[node name="PulpoAlaIzq" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo"]
+[node name="PulpoAlaIzq" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo" unique_id=637665127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299812, 1.96426, -2.13262)
 mesh = SubResource("ArrayMesh_awqge")
 skeleton = NodePath("")
 
-[node name="PulpoAlaIzqPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo/PulpoAlaIzq"]
+[node name="PulpoAlaIzqPiel" type="MeshInstance3D" parent="Node3D/carro/carro/Area3D/Pulpo/PulpoAlaIzq" unique_id=1911349219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.513416, -3.05948, 0.530818)
 mesh = SubResource("ArrayMesh_ex5ld")
 skeleton = NodePath("")
 
-[node name="Pulpo_animations" type="AnimationPlayer" parent="Node3D/carro/carro/Area3D/Pulpo"]
-libraries = {
-"": SubResource("AnimationLibrary_p3wyr")
-}
+[node name="Pulpo_animations" type="AnimationPlayer" parent="Node3D/carro/carro/Area3D/Pulpo" unique_id=1318610804]
+libraries/ = SubResource("AnimationLibrary_p3wyr")
 
-[node name="pulpo_growl" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/Area3D/Pulpo"]
+[node name="pulpo_growl" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/Area3D/Pulpo" unique_id=645446927]
 
-[node name="pulpo_alas" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/Area3D/Pulpo"]
+[node name="pulpo_alas" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/Area3D/Pulpo" unique_id=401261832]
 volume_db = 23.736
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/Area3D" unique_id=1791180036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.141992)
 shape = SubResource("ConvexPolygonShape3D_c6eum")
 
-[node name="carro_caida" type="AudioStreamPlayer3D" parent="Node3D/carro/carro" index="10"]
+[node name="carro_caida" type="AudioStreamPlayer3D" parent="Node3D/carro/carro" index="10" unique_id=2031359879]
 
-[node name="car_off" type="AudioStreamPlayer3D" parent="Node3D/carro/carro" index="11"]
+[node name="car_off" type="AudioStreamPlayer3D" parent="Node3D/carro/carro" index="11" unique_id=1203942447]
 stream = ExtResource("11_nw6wa")
 
-[node name="waterlvl_001" parent="Node3D/carro" index="11"]
+[node name="waterlvl_001" parent="Node3D/carro" index="11" unique_id=1223189274]
 mesh = SubResource("ArrayMesh_krxuu")
 
-[node name="waterlvl_002" parent="Node3D/carro" index="12"]
+[node name="waterlvl_002" parent="Node3D/carro" index="12" unique_id=1358827010]
 mesh = SubResource("ArrayMesh_c14jx")
 
-[node name="waterlvl_003" parent="Node3D/carro" index="13"]
+[node name="waterlvl_003" parent="Node3D/carro" index="13" unique_id=1310886784]
 mesh = SubResource("ArrayMesh_5itv6")
 
-[node name="waterlvl_004" parent="Node3D/carro" index="14"]
+[node name="waterlvl_004" parent="Node3D/carro" index="14" unique_id=173453149]
 mesh = SubResource("ArrayMesh_qwtyo")
 
-[node name="Car_animations" type="AnimationPlayer" parent="Node3D"]
-libraries = {
-"": SubResource("AnimationLibrary_hk3q6")
-}
+[node name="Car_animations" type="AnimationPlayer" parent="Node3D" unique_id=434384566]
+libraries/ = SubResource("AnimationLibrary_hk3q6")
 
 [connection signal="body_entered" from="Node3D/carro/carro/madera_detector" to="." method="_on_caldera_detector_body_entered"]
 [connection signal="body_exited" from="Node3D/carro/carro/madera_detector" to="." method="_on_caldera_detector_body_exited"]
