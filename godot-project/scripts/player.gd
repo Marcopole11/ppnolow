@@ -18,7 +18,7 @@ var totalSpeed:int = speed
 var canRestore:bool = true
 var isRestoring:bool = false
 
-var gravity = 1
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export_category("Inventory")
 var is_moving:bool = false
@@ -277,9 +277,9 @@ func deathTimer():
 			sonido_ojo.volume_db -=1
 	textura_tentaculos.modulate.a = (timerDeath/100)*0.5
 
-func gravityCheck(x):
+func gravityCheck(delta):
 	if !is_on_floor():
-		velocity.y -= gravity * x
+		velocity.y -= gravity * delta
 	else:
 		velocity.y = 0
 

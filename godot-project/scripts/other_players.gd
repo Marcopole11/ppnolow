@@ -23,13 +23,6 @@ var moving:int = 0;
 
 # when the scene is loaded
 func _ready():
-	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
-	if pp_entity_node:
-		pp_entity_node.state_changed.connect(_on_state_changed)
-	else:
-		print("PPEntityNode not found")
-		
 	playerLegs.mesh = playerLegs.mesh.duplicate();
 	playerTorso.mesh = playerTorso.mesh.duplicate();
 	playerGoogles.mesh = playerGoogles.mesh.duplicate();

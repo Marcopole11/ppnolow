@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://hluvorfljtqj"]
+[gd_scene format=3 uid="uid://hluvorfljtqj"]
 
-[ext_resource type="Script" path="res://scripts/lobbyEntity.gd" id="1_2b1n7"]
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_mmxbe"]
+[ext_resource type="Script" uid="uid://dtstgtr5bqiba" path="res://scripts/lobbyEntity.gd" id="1_2b1n7"]
 
-[node name="LobbyEntity" type="Node3D"]
+[node name="LobbyEntity" type="Node3D" unique_id=831054077]
 script = ExtResource("1_2b1n7")
-
-[node name="PPEntityNode2" type="Node" parent="."]
-script = ExtResource("1_mmxbe")
-type = "lobby"

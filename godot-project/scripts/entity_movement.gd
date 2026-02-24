@@ -1,34 +1,18 @@
 # entity_movement.gd script
 # extend the functionality of your root node (here Node3D)
 extends Node3D
-var pp_root_node
 
-#var lookX:float = 0
-#var lookY:float = 0
-# when the scene is loaded
 func _ready():
-	# connect to the state_changed signal from pp_entity_node
-	var pp_entity_node= get_node_or_null("PPEntityNode")
-	if pp_entity_node:
-		pp_entity_node.state_changed.connect(_on_state_changed)
-	else:
-		print("PPEntityNode not found")
+	pass
 	
 func _on_state_changed(state):
 	# set the entity's position, using the server's values
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
 	global_transform.origin = Vector3(state.x, state.z, -state.y)
-	#get_node("lookatme").look_at(Vector3(state.data.lookat.x,4,state.data.lookat.y))
-	#hardRot(get_node("lookatme"),Vector3(state.data.lookat.x,4,state.data.lookat.y))
+	
 	var theNode:Node3D = get_node("lookatme")
-	#look_atan2(theNode.global_transform.origin.x,state.data.lookat.x,theNode.global_transform.origin.z,state.data.lookat.y)
 	theNode.look_at(Vector3(state.data.lookat.x,0,state.data.lookat.y) - Vector3(state.x, 0, state.y))
-
-#func rotateToTarget(target, delta):
-#	var theNode:Node3D = get_node("lookatme")
-#	var direction = (target.global_position - global_position)
-#	var angleTo = theNode.transform.x.angle_to(direction)
 
 func look_atan2(x1,x2,y1,y2):
 	var rot = atan2(y2-y1, x2-x1)

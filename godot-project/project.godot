@@ -35,10 +35,6 @@ window/size/mode=2
 
 project/assembly_name="Godot Project"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/planetary_processing/plugin.cfg")
-
 [global_group]
 
 arbol=""

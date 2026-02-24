@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	waterpumphandle()
 
 func waterpumphandle():
-	if player.tool_inhand == 2:
+	if player.hasWaterpumpInHand():
 		water_tank_barfiller.scale.x = player.player_water
 		if fillingwater_player and player.player_water <1.0:
 			player.player_water += 0.01
@@ -30,7 +30,7 @@ func waterpumphandle():
 			waterpumpsound = true
 			waterpump_hitbox.monitoring = true
 			player.speed=1
-			player.pp_root_node.message({"action": 15});
+			#TODO: que es action 15? player.pp_root_node.message({"action": 15});
 		if Input.is_action_just_released("attack"):
 			waterpumpsound = false
 			player.is_attacking= false

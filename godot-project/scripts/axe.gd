@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 	axeattack()
 	woodindicator()
 
-
 func axeattack():
 	if player.hasAxeInHand():
 		if Input.is_action_just_pressed("attack") and not player.is_attacking and Menusettings.pausemenu_state and player.stamina > player.stamina_attack_cap :
@@ -31,7 +30,7 @@ func axeattack():
 			$axeswing.pitch_scale = randf_range(.8,1.2)
 			$axeswing.play()
 			player.stamina = player.stamina - player.stamina_attack_cap
-			player.pp_root_node.message({"action": 25});
+			#TODO: Action 25? player.pp_root_node.message({"action": 25});
 
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":

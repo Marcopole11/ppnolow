@@ -1,24 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://sm23jdcifof0"]
+[gd_scene format=3 uid="uid://sm23jdcifof0"]
 
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_kfw76"]
-[ext_resource type="Script" path="res://scripts/entity_movement.gd" id="1_vhasb"]
-[ext_resource type="PackedScene" uid="uid://4c6c777hvmji" path="res://scenes/entities/mantis.tscn" id="3_a2jbq"]
+[ext_resource type="Script" uid="uid://bppvlnwua2rij" path="res://scripts/entity_movement.gd" id="1_vhasb"]
+[ext_resource type="PackedScene" uid="uid://dsdebbqfr00p4" path="res://scenes/entities/mantis.tscn" id="3_a2jbq"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_0t0y1"]
 
-[node name="tst" type="Node3D"]
+[node name="tst" type="Node3D" unique_id=2141184296]
 script = ExtResource("1_vhasb")
 
-[node name="PPEntityNode" type="Node" parent="."]
-script = ExtResource("1_kfw76")
-type = "tst"
+[node name="lookatme" type="Node3D" parent="." unique_id=1664970402]
 
-[node name="lookatme" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="lookatme"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="lookatme" unique_id=1674989416]
 transform = Transform3D(4.815, 0, 0, 0, -2.1047e-07, 4.815, 0, -4.815, -2.1047e-07, 0, 7.9706, 0)
 visible = false
 mesh = SubResource("PrismMesh_0t0y1")
 
-[node name="Mantis" parent="lookatme" instance=ExtResource("3_a2jbq")]
+[node name="Mantis" parent="lookatme" unique_id=704834963 instance=ExtResource("3_a2jbq")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)

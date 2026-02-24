@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://d3rby1jgfbyd8"]
+[gd_scene format=4 uid="uid://d3rby1jgfbyd8"]
 
-[ext_resource type="Script" path="res://scripts/other_players.gd" id="1_qj4bx"]
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_woqlu"]
+[ext_resource type="Script" uid="uid://2owh1e6ynk0w" path="res://scripts/other_players.gd" id="1_qj4bx"]
 [ext_resource type="PackedScene" uid="uid://cqt56yycfqpw5" path="res://models/player.glb" id="3_uh6io"]
-[ext_resource type="PackedScene" uid="uid://dr8p1k4a722hg" path="res://scenes/frequencymetter.tscn" id="4_bhc2l"]
+[ext_resource type="PackedScene" uid="uid://d4ny332kbgnac" path="res://scenes/frequencymetter.tscn" id="4_bhc2l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lawm4"]
 resource_name = "Material.001"
@@ -233,7 +232,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_j3x3h")
 
-[node name="player2" type="Node3D" node_paths=PackedStringArray("playerModel", "playerLegs", "playerTorso", "playerGoogles", "playerAnimation", "items")]
+[node name="player2" type="Node3D" unique_id=996950212 node_paths=PackedStringArray("playerModel", "playerLegs", "playerTorso", "playerGoogles", "playerAnimation", "items")]
 script = ExtResource("1_qj4bx")
 playerModel = NodePath("player")
 playerLegs = NodePath("player/Armature/Skeleton3D/Cube_001")
@@ -242,19 +241,15 @@ playerGoogles = NodePath("player/Armature/Skeleton3D/Cube_002/Cube_002")
 playerAnimation = NodePath("player/AnimationPlayer")
 items = NodePath("player/Armature/Skeleton3D/holdingItem")
 
-[node name="PPEntityNode" type="Node" parent="."]
-script = ExtResource("1_woqlu")
-type = "player"
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=159427167]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-
-[node name="player" parent="." instance=ExtResource("3_uh6io")]
+[node name="player" parent="." unique_id=1336157918 instance=ExtResource("3_uh6io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.76437, 0)
 
-[node name="Armature" parent="player" index="0"]
+[node name="Armature" parent="player" index="0" unique_id=2063862356]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="player/Armature" index="0"]
+[node name="Skeleton3D" parent="player/Armature" index="0" unique_id=2032278368]
 bones/3/rotation = Quaternion(-0.5, -0.5, 0.5, -0.5)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/scale = Vector3(1, 1, 1)
@@ -286,35 +281,35 @@ bones/29/rotation = Quaternion(-1.8567e-08, -1.19053e-07, -0.0243204, 0.999704)
 bones/29/scale = Vector3(1, 1, 1)
 bones/30/rotation = Quaternion(-3.68915e-08, 2.2111e-07, 0.724095, 0.689701)
 
-[node name="Cube_002" parent="player/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.914126, -0.0477721, -0.402605, 0.0955629, 0.990443, 0.0994548, 0.394006, -0.129388, 0.909955, 0.0715941, 0.0143232, 0.193909)
+[node name="Cube_002" parent="player/Armature/Skeleton3D" index="0" unique_id=636571298]
+transform = Transform3D(0.91412634, -0.047772106, -0.402605, 0.09556285, 0.9904426, 0.099454805, 0.39400595, -0.12938833, 0.9099549, 0.07159414, 0.014323235, 0.19390902)
 
-[node name="holdingItem" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.983536, 0.0764701, 0.163733, 0.175702, 0.616495, 0.767504, -0.0422494, 0.783636, -0.619781, -0.527673, 1.60863, 1.30685)
+[node name="holdingItem" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="3" unique_id=335326875]
+transform = Transform3D(-0.9835362, 0.07647007, 0.1637331, 0.17570202, 0.6164951, 0.76750404, -0.042249437, 0.7836364, -0.6197813, -0.52767336, 1.6086286, 1.3068507)
 bone_name = "hand_R"
 bone_idx = 19
 
-[node name="Fireaxe" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem"]
+[node name="Fireaxe" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem" unique_id=385129738]
 transform = Transform3D(-0.226699, -0.851604, -0.472631, -0.0272605, -0.479526, 0.877105, -0.973584, 0.211723, 0.085493, -0.248619, 0.351391, -0.927468)
 mesh = SubResource("ArrayMesh_cejwd")
 skeleton = NodePath("")
 
-[node name="waterTank2" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem"]
+[node name="waterTank2" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem" unique_id=1168528747]
 transform = Transform3D(-0.195471, 0.243631, 0.949967, 0.0608129, 0.9698, -0.236204, -0.978823, 0.0115992, -0.204384, -0.292015, 0.752764, -0.0672245)
 visible = false
 mesh = SubResource("ArrayMesh_n210x")
 skeleton = NodePath("")
 
-[node name="waterTankBar" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem/waterTank2"]
+[node name="waterTankBar" type="MeshInstance3D" parent="player/Armature/Skeleton3D/holdingItem/waterTank2" unique_id=1549819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243207, 0, 0.000454187)
 mesh = SubResource("ArrayMesh_ccnbs")
 skeleton = NodePath("")
 
-[node name="frequencyMetter" parent="player/Armature/Skeleton3D/holdingItem" instance=ExtResource("4_bhc2l")]
+[node name="frequencyMetter" parent="player/Armature/Skeleton3D/holdingItem" unique_id=563099965 instance=ExtResource("4_bhc2l")]
 transform = Transform3D(-0.919009, -0.106012, -0.379715, -0.390446, 0.111524, 0.913846, -0.0545316, 0.988091, -0.143885, -0.286945, 2.50026, 0.292552)
 visible = false
 
-[node name="AnimationPlayer" parent="player" index="1"]
+[node name="AnimationPlayer" parent="player" index="1" unique_id=1660161131]
 blend_times = [&"Idle animation", &"hit", 0.5, &"Idle animation", &"show", 0.5, &"Idle animation", &"walking", 0.5, &"Idle animation", &"walkshow", 0.5, &"hit", &"Idle animation", 0.5, &"hit", &"hit", 0.5, &"hit", &"show", 0.5, &"hit", &"walking", 0.5, &"hit", &"walkshow", 0.5, &"show", &"Idle animation", 0.5, &"show", &"hit", 0.5, &"show", &"walking", 0.5, &"show", &"walkshow", 0.5, &"walking", &"Idle animation", 0.5, &"walking", &"hit", 0.5, &"walking", &"show", 0.5, &"walking", &"walking", 0.5, &"walking", &"walkshow", 0.5, &"walkshow", &"Idle animation", 0.5, &"walkshow", &"hit", 0.5, &"walkshow", &"show", 0.5, &"walkshow", &"walking", 0.5, &"walkshow", &"walkshow", 0.5]
 
 [editable path="player"]

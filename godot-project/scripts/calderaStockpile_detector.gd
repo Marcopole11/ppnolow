@@ -1,6 +1,4 @@
 extends Area3D
-
-var pp_root_node
 @onready var car_animations: AnimationPlayer = $"../../../Car_animations"
 @onready var audiocaldera: AudioStreamPlayer3D = $audiocaldera
 

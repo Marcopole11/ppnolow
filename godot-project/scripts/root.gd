@@ -31,20 +31,6 @@ var scene_map = {
 
 # when the scene is loaded
 func _ready():
-	pass
-	## access the PPRootNode from the scene's node tree
-	#pp_root_node = get_tree().current_scene.get_node_or_null('PPRootNode')
-	#assert(pp_root_node, "PPRootNode not found") 
-	#await pp_root_node.new_player_entity.connect(_on_new_player_entity)
-	## using signals from the PPRootNode,
-	## trigger functions for entity spawning/despawning/positioning
-	#pp_root_node.new_chunk.connect(_on_new_chunk)
-	#pp_root_node.remove_chunk.connect(_on_remove_chunk) 
-	#
-	#pp_root_node.new_entity.connect(_on_new_entity)
-	#pp_root_node.remove_entity.connect(_on_remove_entity)
-	#
-	#pp_root_node.authenticate_player("","")
 	multiplayer_spawner.spawn_function = _new_player_called
 	if multiplayer.is_server():
 		for index in range(multiplayer.get_peers().size()):

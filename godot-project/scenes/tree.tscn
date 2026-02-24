@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://3qh75gl021vh"]
+[gd_scene format=4 uid="uid://3qh75gl021vh"]
 
-[ext_resource type="Script" path="res://scripts/arbol.gd" id="1_5vajs"]
-[ext_resource type="Script" path="res://addons/planetary_processing/pp_entity_node.gd" id="1_8ekux"]
+[ext_resource type="Script" uid="uid://chylbt7dlvaps" path="res://scripts/arbol.gd" id="1_5vajs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhny5"]
 resource_name = "madera"
@@ -94,40 +93,34 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3pw54"]
 _data = {
-"RESET": SubResource("Animation_o00kl"),
-"hit": SubResource("Animation_o5q5q"),
-"tree_down": SubResource("Animation_o66ny")
+&"RESET": SubResource("Animation_o00kl"),
+&"hit": SubResource("Animation_o5q5q"),
+&"tree_down": SubResource("Animation_o66ny")
 }
 
-[node name="tree" type="StaticBody3D"]
-transform = Transform3D(0.993447, 0.112811, -0.0183583, -0.114295, 0.980548, -0.159569, 6.14673e-08, 0.160622, 0.987016, 0, 0, 0)
+[node name="tree" type="StaticBody3D" unique_id=1549951104]
+transform = Transform3D(0.993447, 0.11281126, -0.018358342, -0.11429528, 0.980548, -0.15956895, 6.14673e-08, 0.16062155, 0.987016, 0, 0, 0)
 collision_layer = 65
 collision_mask = 68
 script = ExtResource("1_5vajs")
 
-[node name="small tree" type="MeshInstance3D" parent="."]
+[node name="small tree" type="MeshInstance3D" parent="." unique_id=1976030109]
 transform = Transform3D(1, 2.42239e-09, -7.98089e-10, 1.07199e-08, 1, 5.96046e-08, 4.40657e-09, 0, 1, 0.00616767, -0.0184983, 0.00338714)
 mesh = SubResource("ArrayMesh_klxnm")
 skeleton = NodePath("")
 
-[node name="PPEntityNode" type="Node" parent="."]
-script = ExtResource("1_8ekux")
-type = "tree"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=482035936]
 transform = Transform3D(1, 2.42239e-09, -2.66073e-09, 2.88493e-09, 1, 4.47035e-08, 3.90686e-09, 0, 1, -0.430629, -0.82377, 0.253752)
 shape = SubResource("ConvexPolygonShape3D_bwdws")
 
-[node name="tree_anim" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3pw54")
-}
+[node name="tree_anim" type="AnimationPlayer" parent="." unique_id=978316853]
+libraries/ = SubResource("AnimationLibrary_3pw54")
 
-[node name="tree" type="Area3D" parent="." groups=["arbol"]]
+[node name="tree" type="Area3D" parent="." unique_id=1783466117 groups=["arbol"]]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tree"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree" unique_id=1966717514]
 transform = Transform3D(1, 2.42239e-09, -2.66073e-09, 2.88493e-09, 1, 4.47035e-08, 3.90686e-09, 0, 1, -0.430629, -0.82377, 0.253752)
 shape = SubResource("ConvexPolygonShape3D_bwdws")
 
