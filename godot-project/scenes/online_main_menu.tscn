@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://dujkdrw7dlw1h"]
+
+[ext_resource type="Script" uid="uid://cakwdk0k28m0b" path="res://scripts/multiplayer/menu/online_mainmenu.gd" id="1_jyn7x"]
+[ext_resource type="Script" uid="uid://coisjiypv8ygv" path="res://scripts/multiplayer/menu/message_handler.gd" id="2_b2v2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2v2p"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="OnlineMainMenu" type="Control" unique_id=937435986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jyn7x")
+
+[node name="JoinCreateLobbyMenu" type="PanelContainer" parent="." unique_id=1823716510]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -238.0
+offset_right = 253.0
+offset_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="JoinCreateLobbyMenu" unique_id=1773662325]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="JoinCreateLobbyMenu/Control" unique_id=905553112]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -81.5
+offset_right = 201.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="CreateVBox" type="VBoxContainer" parent="JoinCreateLobbyMenu/Control/HBoxContainer" unique_id=1029989985]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="PortLabel" type="Label" parent="JoinCreateLobbyMenu/Control/HBoxContainer/CreateVBox" unique_id=342782396]
+layout_mode = 2
+text = "Port:"
+
+[node name="PortEditCreate" type="LineEdit" parent="JoinCreateLobbyMenu/Control/HBoxContainer/CreateVBox" unique_id=930556704]
+layout_mode = 2
+text = "55555"
+
+[node name="CreateLobby" type="Button" parent="JoinCreateLobbyMenu/Control/HBoxContainer/CreateVBox" unique_id=13478692]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Create Lobby"
+
+[node name="JoinVBox" type="VBoxContainer" parent="JoinCreateLobbyMenu/Control/HBoxContainer" unique_id=542537024]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="IPAddresLabel" type="Label" parent="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox" unique_id=892668502]
+layout_mode = 2
+text = "IP Address:"
+
+[node name="IPAddressEdit" type="LineEdit" parent="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox" unique_id=1696683422]
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="PortLabel" type="Label" parent="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox" unique_id=1263344759]
+layout_mode = 2
+text = "Port:"
+
+[node name="PortEditJoin" type="LineEdit" parent="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox" unique_id=635406275]
+layout_mode = 2
+text = "55555"
+
+[node name="JoinLobby" type="Button" parent="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox" unique_id=868613071]
+layout_mode = 2
+text = "Join Lobby"
+
+[node name="ClientConnectingMessage" type="Label" parent="JoinCreateLobbyMenu/Control" unique_id=1004198735]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -11.5
+offset_right = 50.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Connecting..."
+
+[node name="LobbyMenu" type="Control" parent="." unique_id=109552466]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="LobbyMenu" unique_id=390043713]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.032986112
+anchor_top = 0.25617284
+anchor_right = 0.23784722
+anchor_bottom = 0.5771605
+offset_bottom = 1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu/PanelContainer" unique_id=743806470]
+layout_mode = 2
+
+[node name="PlayerListTitle" type="Label" parent="LobbyMenu/PanelContainer/VBoxContainer" unique_id=1762917931]
+layout_mode = 2
+text = "Player List"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerNames" type="VBoxContainer" parent="LobbyMenu/PanelContainer/VBoxContainer" unique_id=394356683]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChangeNameContainer" type="PanelContainer" parent="LobbyMenu" unique_id=1819434237]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.032986112
+anchor_top = 0.6342593
+anchor_right = 0.2673611
+anchor_bottom = 0.72993827
+offset_top = -3.0517578e-05
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu/ChangeNameContainer" unique_id=128583381]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LobbyMenu/ChangeNameContainer/VBoxContainer" unique_id=177586356]
+layout_mode = 2
+text = "Change Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LobbyMenu/ChangeNameContainer/VBoxContainer" unique_id=558672989]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerNameEdit" type="LineEdit" parent="LobbyMenu/ChangeNameContainer/VBoxContainer/HBoxContainer" unique_id=1869118198]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_length = 16
+
+[node name="SubmitNameButton" type="Button" parent="LobbyMenu/ChangeNameContainer/VBoxContainer/HBoxContainer" unique_id=1772380352]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Submit"
+
+[node name="StartGameButton" type="Button" parent="LobbyMenu" unique_id=370732447]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -18.0
+offset_right = 4.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start Game"
+
+[node name="MessageHandler" type="PanelContainer" parent="." unique_id=903078825]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_b2v2p")
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="MessageHandler" unique_id=584631092]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MessageHandler/CenterContainer" unique_id=489139476]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b2v2p")
+
+[node name="MarginContainer" type="MarginContainer" parent="MessageHandler/CenterContainer/PanelContainer" unique_id=1449082168]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MessageHandler/CenterContainer/PanelContainer/MarginContainer" unique_id=1634600937]
+layout_mode = 2
+
+[node name="MessageText" type="Label" parent="MessageHandler/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1246099112]
+layout_mode = 2
+
+[node name="CloseMessageButton" type="Button" parent="MessageHandler/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1736151859]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OK"
+
+[connection signal="pressed" from="JoinCreateLobbyMenu/Control/HBoxContainer/CreateVBox/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="JoinCreateLobbyMenu/Control/HBoxContainer/JoinVBox/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="LobbyMenu/ChangeNameContainer/VBoxContainer/HBoxContainer/SubmitNameButton" to="." method="_on_submit_name_button_pressed"]
+[connection signal="pressed" from="LobbyMenu/StartGameButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MessageHandler/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CloseMessageButton" to="MessageHandler" method="_on_close_message_button_pressed"]

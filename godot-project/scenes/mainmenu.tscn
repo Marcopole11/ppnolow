@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsj4wwg0py7qc" path="res://scripts/mainmenu.gd" id="1_qctb0"]
 [ext_resource type="PackedScene" uid="uid://cdanebebsx27n" path="res://terrains/elements/grassTile.tscn" id="2_ar02b"]
+[ext_resource type="PackedScene" uid="uid://dujkdrw7dlw1h" path="res://scenes/online_main_menu.tscn" id="2_dfy5j"]
 [ext_resource type="PackedScene" uid="uid://djydtx8o37lri" path="res://terrains/elements/pathTile.tscn" id="3_it5a6"]
 [ext_resource type="PackedScene" uid="uid://batqyej78slht" path="res://models/carro.glb" id="3_l1l70"]
 [ext_resource type="AudioStream" uid="uid://cmflm562p5iqb" path="res://audio/Withered_Forest_Loop.wav" id="3_wdpl7"]
@@ -435,17 +436,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qctb0")
-metadata/_edit_vertical_guides_ = [582.0]
 
-[node name="ClientConnectToLineEdit" type="LineEdit" parent="." unique_id=1636202093]
-layout_mode = 0
-offset_left = 482.0
-offset_top = 140.0
-offset_right = 682.0
-offset_bottom = 180.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "127.0.0.1:55555"
-placeholder_text = "IP:PORT"
+[node name="OnlineMainMenu" parent="." unique_id=937435986 instance=ExtResource("2_dfy5j")]
+visible = false
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1098192400]
 layout_mode = 1
@@ -455,21 +449,18 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -48.0
-offset_top = -40.0
+offset_top = -77.0
 offset_right = 48.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=164705460]
 layout_mode = 2
 
-[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1830518836]
+[node name="OnlineButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1477323313]
 layout_mode = 2
-text = "Host Game"
-
-[node name="ClientButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=232315142]
-layout_mode = 2
-text = "Connect to Server"
+text = "Online"
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=251490086]
 layout_mode = 2
@@ -684,6 +675,5 @@ skeleton = NodePath("")
 [node name="Pulpo_animations" type="AnimationPlayer" parent="Node3D/Node3D/Pulpo" unique_id=88765454]
 libraries/ = SubResource("AnimationLibrary_p3wyr")
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ClientButton" to="." method="_on_client_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OnlineButton" to="." method="_on_online_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
