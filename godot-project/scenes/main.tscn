@@ -23,7 +23,7 @@ environment = SubResource("Environment_agl5h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082074404, 0, -0.2388382)
 
 [node name="StaticBody3D" parent="." unique_id=726225871 instance=ExtResource("4_tefeu")]
-transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 1.809269, 0.2777357, -29.023848)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.809269, 0.2777357, -29.023848)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=680971483]
 _spawnable_scenes = PackedStringArray("uid://47g86k3flcse")

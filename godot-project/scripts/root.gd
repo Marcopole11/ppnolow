@@ -37,13 +37,13 @@ func _ready():
 			multiplayer_spawner.spawn(
 				{
 					peer= multiplayer.get_peers()[index],
-					position = Vector3(-4 + index, 0, 0)
+					position = Vector3(-4 + index, 0.2, 0)
 				}
 			)
 	
 		multiplayer_spawner.spawn({
 			peer= 1,
-			position = Vector3(-5, 0, 0)
+			position = Vector3(-5, 0.2, 0)
 		})
 
 func _new_player_called(data) -> Node:

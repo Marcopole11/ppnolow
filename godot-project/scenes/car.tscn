@@ -1398,27 +1398,25 @@ _data = {
 }
 
 [node name="StaticBody3D" type="StaticBody3D" unique_id=726225871]
-transform = Transform3D(1.56029, 0, 0, 0, 1.6614, 0, 0, 0, 1.65972, 0, 0.53966, 0)
 collision_layer = 65
 collision_mask = 65
 script = ExtResource("1_kbort")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2051746402]
-transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 3.59637, -0.699938)
-visible = false
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.729, 0)
 shape = SubResource("ConcavePolygonShape3D_7xo40")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1402484112]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.846, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7287452, 0)
 
 [node name="carro" parent="Node3D" unique_id=39366913 instance=ExtResource("3_ja2rn")]
-transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="foco" parent="Node3D/carro" index="8" unique_id=2005904900]
 transform = Transform3D(1, 0, 0, 0, 0.980756, 0.195236, 0, -0.195236, 0.980756, 0, -0.140426, 2.92126)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Node3D/carro/foco" index="0" unique_id=615318643]
-transform = Transform3D(0.278655, 0, 0, 0, -0.249256, 0.0797594, 0, -0.0797372, -0.249521, 0.0229513, -0.0467405, 0.326509)
+transform = Transform3D(1, 0, 0, 0, -0.9524516, 0.30468997, 0, -0.30468997, -0.9524516, 0.0229513, -0.0467405, 0.326509)
 shadow_enabled = true
 spot_range = 3.47439
 spot_angle = 81.612
@@ -1449,7 +1447,7 @@ collision_mask = 2
 script = ExtResource("6_6evm5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/madera_detector" unique_id=910406021]
-transform = Transform3D(1, 0, 0, 0, 1.00011, 0, 0, 0, 1.00008, -2.36428, 3.10389, 0.0762522)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36428, 3.10389, 0.0762522)
 shape = SubResource("BoxShape3D_xyede")
 
 [node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/madera_detector" unique_id=1975832543]
@@ -1462,7 +1460,7 @@ collision_mask = 2
 script = ExtResource("4_n4ktf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/caldera_detector" unique_id=67525951]
-transform = Transform3D(1, 0, 0, 0, 1.00008, 0, 0, 0, 1.00008, -2.55953, 3.10389, 0.329743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55953, 3.10389, 0.329743)
 shape = SubResource("BoxShape3D_ygm08")
 
 [node name="audiocaldera" type="AudioStreamPlayer3D" parent="Node3D/carro/carro/caldera_detector" unique_id=1184897319]
@@ -1501,11 +1499,11 @@ collision_mask = 2
 script = ExtResource("4_syip1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/carro/carro/calderaagua_detector2" unique_id=824181308]
-transform = Transform3D(1, 0, 0, 0, 1.00004, 0, 0, 0, 1.00004, 1.44687, 3.39892, 0.60724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44687, 3.39892, 0.60724)
 shape = SubResource("BoxShape3D_tk8wy")
 
 [node name="waterTank2" type="MeshInstance3D" parent="Node3D/carro/carro" index="5" unique_id=1464807926]
-transform = Transform3D(-0.23736015, -0.3642548, -0.003929628, -0.3641589, 0.23715036, 0.013602408, -0.0092524765, 0.010717199, -0.43455398, -1.16023, -0.127666, 0.322451)
+transform = Transform3D(-0.23736015, -0.3642548, -0.0039296276, -0.3641589, 0.23715036, 0.013602407, -0.0092524765, 0.010717199, -0.43455395, -1.16023, -0.127666, 0.322451)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_jfg7y")

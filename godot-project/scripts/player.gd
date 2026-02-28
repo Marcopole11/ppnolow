@@ -14,7 +14,7 @@ var totalSpeed:int = speed
 @export_group("Stamina")
 @export var stamina:float = 100
 @export var maxstamina:float = 100
-@export var staminarate:float = 0.5
+@export var staminarate:float = 10
 var canRestore:bool = true
 var isRestoring:bool = false
 
@@ -118,36 +118,9 @@ func _process(delta: float) -> void:
 	openmenu()
 	swaptool()
 	headbobhandle()
-	staminahandle()
-	move_and_slide()
-	gravityCheck(delta)
-	
-	# get the raw input values
-	var input_direction = playerInput.input_direction
-	# calculate the input direction
-	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
-
-	# move the player
-	if(playerInput.sprinting and !isRestoring):
-		totalSpeed = speed + sprintSpeed
-		stamina = stamina - 0.5
-		canRestore = false
-		isRestoring = stamina <= 0
-	else:
-		totalSpeed = speed
-		canRestore = true
-
-	var movement = input_direction * totalSpeed * delta
-	is_moving = movement.length() > 0.01
-	var collide = move_and_collide(movement)
-
 	# message the server to update the player's x and y positions
 	# NOTE: Planetary Processing uses 'y' for depth in 3D games, and 'z' for height. The depth axis is also inverted.
 	# To convert, set Godot's 'y' to negative, then swap 'y' and 'z'.
-	
-	if !collide:
-		pass
-		#TODO: update position on server
 	
 	if not playerInput.cameraMovement.is_zero_approx():
 		neck.rotate_y(-playerInput.cameraMovement.x * Menusettings.mousesen)
@@ -156,6 +129,8 @@ func _process(delta: float) -> void:
 		playerInput.cameraMovement = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
+	staminahandle(delta)
+	
 	interactor.text= " "
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
@@ -192,6 +167,29 @@ func _physics_process(delta: float) -> void:
 		var movement = Vector3(15, 0, 0) * totalSpeed * delta
 		
 		translate(movement)
+	
+	# get the raw input values
+	var input_direction:Vector3 = playerInput.input_direction
+	# calculate the input direction
+	input_direction = (neck.transform.basis * Vector3(input_direction.x, 0, input_direction.z)).normalized()
+
+	# move the player
+	if(playerInput.sprinting and !isRestoring):
+		totalSpeed = speed + sprintSpeed
+		stamina -= 10 * delta
+		canRestore = false
+		isRestoring = stamina <= 0
+	else:
+		totalSpeed = speed
+		canRestore = true
+
+	is_moving = not input_direction.is_zero_approx()
+	
+	input_direction *= totalSpeed
+	input_direction.y = velocity.y
+	velocity = input_direction
+	move_and_slide()
+	gravityCheck(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -205,11 +203,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 #handles stamina stat and value in bar
-func staminahandle():
+func staminahandle(delta):
 	if(isRestoring):
 		isRestoring = stamina != maxstamina
 	if(canRestore and stamina < maxstamina): 
-		stamina = stamina + staminarate
+		stamina += staminarate * delta
 	$bar_stamina.value = stamina
 
 #handles menu in game
