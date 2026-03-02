@@ -760,6 +760,7 @@ properties/1/replication_mode = 1
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_b67xe")
+speed = 20.0
 staminarate = 35.0
 
 [node name="Flash" type="Area3D" parent="." unique_id=536084714]
@@ -791,10 +792,11 @@ target_position = Vector3(0, 0, -3)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="Axe" type="Node3D" parent="Neck/Camera3D" unique_id=788097640 node_paths=PackedStringArray("playerInput")]
+[node name="Axe" type="Node3D" parent="Neck/Camera3D" unique_id=788097640 node_paths=PackedStringArray("playerInput", "player")]
 transform = Transform3D(0.10141228, 0, 0.69261515, 0, 0.7, 0, -0.69261515, 0, 0.10141228, 0.473715, -0.474713, -0.901513)
 script = ExtResource("2_lg8qt")
 playerInput = NodePath("../../../PlayerInputSynchronizer")
+player = NodePath("../../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Camera3D/Axe" unique_id=1906699574]
 transform = Transform3D(0.5, 1.83354e-09, 0, 9.02219e-09, 0.5, 0, 4.65661e-10, 0, 0.5, -0.062541, -0.46754, -0.0321907)
@@ -821,11 +823,12 @@ stream = ExtResource("2_tdb4p")
 volume_db = 32.0
 bus = &"Sfx"
 
-[node name="waterpump" type="Node3D" parent="Neck/Camera3D" unique_id=1172296556 node_paths=PackedStringArray("playerInput")]
+[node name="waterpump" type="Node3D" parent="Neck/Camera3D" unique_id=1172296556 node_paths=PackedStringArray("playerInput", "player")]
 transform = Transform3D(0.49999768, 0, 0.8660262, 0, 1, 0, -0.8660262, 0, 0.49999768, -0.3, 0, 0)
 visible = false
 script = ExtResource("4_dvw83")
 playerInput = NodePath("../../../PlayerInputSynchronizer")
+player = NodePath("../../..")
 
 [node name="waterTank2" type="MeshInstance3D" parent="Neck/Camera3D/waterpump" unique_id=2022517985]
 transform = Transform3D(0.651146, 0, 0.758955, 0, 1, 0, -0.758955, 0, 0.651146, 1.83205, -0.563956, -0.022795)
@@ -958,6 +961,7 @@ autoplay = true
 visible = false
 
 [node name="bar_stamina" type="TextureProgressBar" parent="." unique_id=841349895]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

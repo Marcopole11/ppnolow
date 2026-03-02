@@ -64,7 +64,8 @@ func _ready() -> void:
 	if pp_entity_node:
 		pp_entity_node.state_changed.connect(_on_state_changed)
 	else:
-		print("PPEntityNode not found")
+		#print("PPEntityNode not found")
+		pass
 	calderaMaterial=carroMesh.mesh.surface_get_material(4).duplicate()
 	carroMesh.mesh.surface_set_material(4,calderaMaterial)
 	calderaMaterial.set("emission_energy_multiplier",0)

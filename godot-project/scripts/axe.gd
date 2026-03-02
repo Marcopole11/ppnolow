@@ -2,12 +2,11 @@ extends Node3D
 
 
 @export var playerInput:MultiplayerSynchronizer
-
+@export var player:CharacterBody3D
 @onready var tronco_1: MeshInstance3D = $"../Tronco1"
 @onready var tronco_2: MeshInstance3D = $"../Tronco1/Tronco2"
 @onready var tronco_3: MeshInstance3D = $"../Tronco1/Tronco2/Tronco3"
 
-@onready var player:CharacterBody3D = $"../../.."
 @onready var axe_hitbox: Area3D = $MeshInstance3D/axe_hitbox
 
 # Called when the node enters the scene tree for the first time.
@@ -15,13 +14,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _tool_process(delta: float) -> void:
+func _tool_process(_delta: float) -> void:
 	axeattack()
 	woodindicator()
 
 func axeattack():
-	if playerInput.actionAttack and not player.is_attacking and Menusettings.pausemenu_state and player.stamina > player.stamina_attack_cap :
-		print(ServerStore.car_posY)
+	if playerInput.actionAttack and not player.is_attacking and Menusettings.pausemenu_state and player.stamina > player.stamina_attack_cap:
+		print(player.name)
 		player.is_attacking = true
 		$axe_animation.play("attack_animation")
 		axe_hitbox.monitoring = true

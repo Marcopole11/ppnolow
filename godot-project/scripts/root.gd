@@ -31,6 +31,12 @@ var scene_map = {
 
 # when the scene is loaded
 func _ready():
+	
+	multiplayer.server_disconnected.connect(
+		func():
+			get_tree().change_scene_to_packed(preload("uid://orml0fq755bi"))
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	)
 	multiplayer_spawner.spawn_function = _new_player_called
 	if multiplayer.is_server():
 		for index in range(multiplayer.get_peers().size()):
@@ -45,12 +51,16 @@ func _ready():
 			peer = multiplayer.get_unique_id(),
 			position = Vector3(-5, 0.2, 0)
 		})
+		
+	if get_window().has_focus():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _new_player_called(data) -> Node:
 	var scene:PackedScene = load(multiplayer_spawner.get_spawnable_scene(0))
 	var node = scene.instantiate()
 	node.playerPeerId = data.peer
 	node.position = data.position
+	node.name = "Player" + str(data.peer)
 	return node
 
 # create a new player instance, and add it as a child node

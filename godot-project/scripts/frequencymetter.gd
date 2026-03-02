@@ -23,12 +23,12 @@ func _ready() -> void:
 	freqmetter_step = edgemap_distance/8
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _tool_process(delta: float) -> void:
-	cardistance = (sqrt(pow((ServerStore.posY - ServerStore.car_posY),2) +pow((ServerStore.posX - 120),2)))
-	freq_indicator(frequencymetter_indicator,cardistance)
+func _tool_process(_delta: float) -> void:
+	#cardistance = (sqrt(pow((ServerStore.posY - ServerStore.car_posY),2) +pow((ServerStore.posX - 120),2)))
+	freq_indicator(frequencymetter_indicator)
 	summonstalker()
 
-func freq_indicator(supply:Array[MeshInstance3D],server_value):
+func freq_indicator(supply:Array[MeshInstance3D]):
 	var current_lvl:int = round((edgemap_distance-cardistance)/freqmetter_step)
 	if current_lvl < 0:
 		current_lvl = 0;

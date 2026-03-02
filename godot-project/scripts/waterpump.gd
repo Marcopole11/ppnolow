@@ -1,8 +1,8 @@
 extends Node3D
 
 @export var playerInput:MultiplayerSynchronizer
+@export var player: CharacterBody3D
 
-@onready var player: CharacterBody3D = $"../../.."
 @onready var water_tank_barfiller: MeshInstance3D = $waterTank2/waterTankBarfiller
 @onready var waterpump: Node3D = $"."
 @onready var waterpump_hitbox: Area3D = $waterTank2/waterpump_hitbox
@@ -15,7 +15,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _tool_process(delta: float) -> void:
+func _tool_process(_delta: float) -> void:
 	waterpumphandle()
 
 func waterpumphandle():

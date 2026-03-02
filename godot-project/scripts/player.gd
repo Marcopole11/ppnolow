@@ -74,7 +74,11 @@ func _ready() -> void:
 	
 	if playerPeerId == multiplayer.get_unique_id():
 		camera.current = true
+		bar_stamina.visible = true
 	
+	if multiplayer.is_server():
+		print("Player id: ", playerPeerId)
+		
 	# connect to the state_changed signal from pp_entity_node
 	if ServerStore.colorR == 0:
 		ServerStore.colorR = randf()/4;
@@ -115,7 +119,6 @@ func _server_failed():
 
 func _process(delta: float) -> void:
 	deathTimer()
-	openmenu()
 	swaptool()
 	headbobhandle()
 	# message the server to update the player's x and y positions
@@ -204,15 +207,10 @@ func _physics_process(delta: float) -> void:
 	playerInput.actionAttackRelease = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if Menusettings.pausemenu_state:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		
-	elif event.is_action_pressed("ui_cancel"):
-		if Menusettings.pausemenu_state:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event.is_action_pressed("pause_button"):
+		pause_menu.visible = not pause_menu.visible
+		Menusettings.pausemenu_state = not pause_menu.visible
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if pause_menu.visible else Input.MOUSE_MODE_CAPTURED
 
 #handles stamina stat and value in bar
 func staminahandle(delta):
@@ -221,17 +219,6 @@ func staminahandle(delta):
 	if(canRestore and stamina < maxstamina): 
 		stamina += staminarate * delta
 	$bar_stamina.value = stamina
-
-#handles menu in game
-func openmenu():
-	if Input.is_action_just_pressed("pause_button"):
-		if Menusettings.pausemenu_state:
-			pause_menu.show()
-			print("menu")
-		else:
-			pause_menu.hide()
-			print("nomenu")
-		Menusettings.pausemenu_state = !Menusettings.pausemenu_state
 
 #handles headbob and config of it
 func headbobhandle():
