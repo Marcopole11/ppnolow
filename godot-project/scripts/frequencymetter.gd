@@ -1,8 +1,10 @@
 extends Node3D
+
 var stalker:bool = false
 var cardistance:float
 var edgemap_distance:int = 350
 var freqmetter_step:float
+
 @onready var frequencymetter_indicator:Array[MeshInstance3D]= [
 	$frequencymetter/frequencyMetter2/frequencyPoint_001,
 	$frequencymetter/frequencyMetter2/frequencyPoint_002,
@@ -13,7 +15,7 @@ var freqmetter_step:float
 	$frequencymetter/frequencyMetter2/frequencyPoint_007,
 	$frequencymetter/frequencyMetter2/frequencyPoint_008,
 	]
-@export var stalker_armature_2: Node3D 
+@export var stalker_armature_2: Node3D
 var trigger:bool
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +23,7 @@ func _ready() -> void:
 	freqmetter_step = edgemap_distance/8
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _tool_process(delta: float) -> void:
 	cardistance = (sqrt(pow((ServerStore.posY - ServerStore.car_posY),2) +pow((ServerStore.posX - 120),2)))
 	freq_indicator(frequencymetter_indicator,cardistance)
 	summonstalker()

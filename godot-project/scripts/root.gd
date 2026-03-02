@@ -36,13 +36,13 @@ func _ready():
 		for index in range(multiplayer.get_peers().size()):
 			multiplayer_spawner.spawn(
 				{
-					peer= multiplayer.get_peers()[index],
+					peer = multiplayer.get_peers()[index],
 					position = Vector3(-4 + index, 0.2, 0)
 				}
 			)
 	
 		multiplayer_spawner.spawn({
-			peer= 1,
+			peer = multiplayer.get_unique_id(),
 			position = Vector3(-5, 0.2, 0)
 		})
 

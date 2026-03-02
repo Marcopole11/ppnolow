@@ -10,7 +10,7 @@ enum Tools {
 @export_group("Speed")
 @export var speed:float = 35
 @export var sprintSpeed:int = 30
-var totalSpeed:int = speed
+var totalSpeed:float = speed
 @export_group("Stamina")
 @export var stamina:float = 100
 @export var maxstamina:float = 100
@@ -127,6 +127,15 @@ func _process(delta: float) -> void:
 		camera.rotate_x(-playerInput.cameraMovement.y * Menusettings.mousesen)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 		playerInput.cameraMovement = Vector2.ZERO
+		
+	if hasAxeInHand():
+		axe._tool_process(delta)
+	elif hasWaterpumpInHand():
+		waterpump._tool_process(delta)
+	elif hasFreqmeterInHand():
+		freqmeter._tool_process(delta)
+		
+	playerInput.actionAttack = false
 
 func _physics_process(delta: float) -> void:
 	staminahandle(delta)
@@ -136,7 +145,7 @@ func _physics_process(delta: float) -> void:
 		var target = interact_ray.get_collider()
 		var test = target.to_string().substr(0,target.to_string().find(":"))
 		if target != null and target.has_method("interact"):
-			if Input.is_action_just_pressed("interact"):
+			if playerInput.interact:
 				if tool_inhand == Tools.WATERPUMP and test == "calderaagua_detector2":
 					player_water = target.interact(player_water)
 					
@@ -163,7 +172,7 @@ func _physics_process(delta: float) -> void:
 					dead("Eyes")
 	else:
 		watchingDeath = false
-	if Input.is_action_just_pressed("flash") and (flash.has_overlapping_areas() or flash.has_overlapping_bodies()) != null:
+	if playerInput.actionFlash and (flash.has_overlapping_areas() or flash.has_overlapping_bodies()) != null:
 		var movement = Vector3(15, 0, 0) * totalSpeed * delta
 		
 		translate(movement)
@@ -190,6 +199,9 @@ func _physics_process(delta: float) -> void:
 	velocity = input_direction
 	move_and_slide()
 	gravityCheck(delta)
+	playerInput.interact = false
+	playerInput.actionFlash = false
+	playerInput.actionAttackRelease = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -235,32 +247,29 @@ func headbobhandle():
 ##OPTIMIZADO: CAMBIA LA FUNCION CON ELIF PARA NO COMPROBAR 4 VECES LA MISMA COSA JIJIJI + AHORA NO PUEDES CAMBIAR EN EL MENU
 #handles tool selection 
 func swaptool() -> void:
-	var action_pressed = false
-	var new_tool = tool_inhand
-	if Input.is_action_just_pressed("swaptool_up") and tool_inhand < Tools.size() - 1 and !is_attacking and Menusettings.pausemenu_state:
-		new_tool += 1
-		action_pressed = true
-	elif Input.is_action_just_pressed("swaptool_down") and tool_inhand > 0 and Menusettings.pausemenu_state:
-		new_tool -= 1
-		action_pressed = true
-	elif Input.is_action_just_pressed("1tool") and Menusettings.pausemenu_state:
-		new_tool = Tools.AXE
-		action_pressed = true
-	elif Input.is_action_just_pressed("2tool") and Menusettings.pausemenu_state:
-		new_tool = Tools.WATERPUMP
-		action_pressed = true
-	elif Input.is_action_just_pressed("3tool") and Menusettings.pausemenu_state:
-		new_tool = Tools.FREQMETER
-		action_pressed = true
-	if action_pressed:
-		tool_inhand = new_tool
-		is_attacking = false
-
-
+	if playerInput.itemSwap == "" or is_attacking or not Menusettings.pausemenu_state:
+		return
+	
+	match (playerInput.itemSwap):
+		"UP":
+			if tool_inhand < Tools.size() - 1:
+				tool_inhand += 1
+		"DOWN":
+			if tool_inhand > 0:
+				tool_inhand -= 1
+		"1":
+			tool_inhand = Tools.AXE
+		"2":
+			tool_inhand = Tools.WATERPUMP
+		"3":
+			tool_inhand = Tools.FREQMETER
+	
 	# Tool visibility based on the current tool
 	axe.visible = tool_inhand == Tools.AXE
 	waterpump.visible = tool_inhand == Tools.WATERPUMP and ServerStore.car_filling_water <= 0
 	freqmeter.visible = tool_inhand == Tools.FREQMETER
+	
+	playerInput.itemSwap = ""
 
 func deathTimer():
 	if watchingDeath:

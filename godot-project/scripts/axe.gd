@@ -1,5 +1,8 @@
 extends Node3D
 
+
+@export var playerInput:MultiplayerSynchronizer
+
 @onready var tronco_1: MeshInstance3D = $"../Tronco1"
 @onready var tronco_2: MeshInstance3D = $"../Tronco1/Tronco2"
 @onready var tronco_3: MeshInstance3D = $"../Tronco1/Tronco2/Tronco3"
@@ -12,25 +15,24 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _tool_process(delta: float) -> void:
 	axeattack()
 	woodindicator()
 
 func axeattack():
-	if player.hasAxeInHand():
-		if Input.is_action_just_pressed("attack") and not player.is_attacking and Menusettings.pausemenu_state and player.stamina > player.stamina_attack_cap :
-			print(ServerStore.car_posY)
-			player.is_attacking = true
-			$axe_animation.play("attack_animation")
-			axe_hitbox.monitoring = true
-			axe_hitbox.set_collision_layer_value(3,true)
-			axe_hitbox.set_collision_layer_value(6,true)
-			axe_hitbox.set_collision_mask_value(3,true)
-			axe_hitbox.set_collision_mask_value(6,true)
-			$axeswing.pitch_scale = randf_range(.8,1.2)
-			$axeswing.play()
-			player.stamina = player.stamina - player.stamina_attack_cap
-			#TODO: Action 25? player.pp_root_node.message({"action": 25});
+	if playerInput.actionAttack and not player.is_attacking and Menusettings.pausemenu_state and player.stamina > player.stamina_attack_cap :
+		print(ServerStore.car_posY)
+		player.is_attacking = true
+		$axe_animation.play("attack_animation")
+		axe_hitbox.monitoring = true
+		axe_hitbox.set_collision_layer_value(3,true)
+		axe_hitbox.set_collision_layer_value(6,true)
+		axe_hitbox.set_collision_mask_value(3,true)
+		axe_hitbox.set_collision_mask_value(6,true)
+		$axeswing.pitch_scale = randf_range(.8,1.2)
+		$axeswing.play()
+		player.stamina = player.stamina - player.stamina_attack_cap
+		#TODO: Action 25? player.pp_root_node.message({"action": 25});
 
 func _on_axe_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack_animation":

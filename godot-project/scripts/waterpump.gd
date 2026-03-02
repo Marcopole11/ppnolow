@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var playerInput:MultiplayerSynchronizer
+
 @onready var player: CharacterBody3D = $"../../.."
 @onready var water_tank_barfiller: MeshInstance3D = $waterTank2/waterTankBarfiller
 @onready var waterpump: Node3D = $"."
@@ -13,36 +15,35 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _tool_process(delta: float) -> void:
 	waterpumphandle()
 
 func waterpumphandle():
-	if player.hasWaterpumpInHand():
-		water_tank_barfiller.scale.x = player.player_water
-		if fillingwater_player and player.player_water <1.0:
-			player.player_water += 0.01
-		if Input.is_action_just_pressed("attack") and ServerStore.is_in_watertank and player.player_water > 0.0:
-			player.is_attacking = true
-			waterpump.hide()
-		if Input.is_action_just_pressed("attack") and Menusettings.pausemenu_state and !ServerStore.is_in_watertank:
-			player.is_attacking = true
-			$pump_animation.play("use")
-			waterpumpsound = true
-			waterpump_hitbox.monitoring = true
-			player.speed=1
-			#TODO: que es action 15? player.pp_root_node.message({"action": 15});
-		if Input.is_action_just_released("attack"):
-			waterpumpsound = false
-			player.is_attacking= false
-			fillingwater_player = false
-			waterpump_hitbox.monitoring = false
-			$pump_animation.stop()
-			$pumpwater.stop()
-			$pump_animation.play("idle")
-			waterpump.show()
-			player.speed = 20
-		if waterpumpsound and !$pumpwater.playing:
-			$pumpwater.play()
+	water_tank_barfiller.scale.x = player.player_water
+	if fillingwater_player and player.player_water <1.0:
+		player.player_water += 0.01
+	if playerInput.actionAttack and ServerStore.is_in_watertank and player.player_water > 0.0:
+		player.is_attacking = true
+		waterpump.hide()
+	if playerInput.actionAttack and Menusettings.pausemenu_state and !ServerStore.is_in_watertank:
+		player.is_attacking = true
+		$pump_animation.play("use")
+		waterpumpsound = true
+		waterpump_hitbox.monitoring = true
+		player.speed=1
+		#TODO: que es action 15? player.pp_root_node.message({"action": 15});
+	if playerInput.actionAttackRelease:
+		waterpumpsound = false
+		player.is_attacking= false
+		fillingwater_player = false
+		waterpump_hitbox.monitoring = false
+		$pump_animation.stop()
+		$pumpwater.stop()
+		$pump_animation.play("idle")
+		waterpump.show()
+		player.speed = 20
+	if waterpumpsound and !$pumpwater.playing:
+		$pumpwater.play()
 
 func _on_waterpump_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("pond") and player.is_attacking:
